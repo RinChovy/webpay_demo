@@ -1,0 +1,14 @@
+{
+  "name": "mock",
+  "version": "1.0.0",
+  "description": "世路如今已惯，此心到处悠然！",
+  "main": "index.js",
+  "bin": "./mock.js",
+  "scripts": {},
+  "author": "lujingce",
+  "license": "ISC",
+  "dependencies": {
+    "fs-extra": "^0.30.0",
+    "log4js": "^1.0.1"
+  }
+}

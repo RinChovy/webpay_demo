@@ -1,0 +1,7 @@
+{
+  "collapseWhitespace": "conservative",
+  "removeRedundantAttributes": false,
+  "minifyCss": {
+    "safe": true
+  }
+}

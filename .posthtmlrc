@@ -1,0 +1,10 @@
+{
+  "plugins": {
+    "posthtml-extend": {
+      "root": "./src/layout"
+    },
+    "posthtml-include": {
+      "root": "./src/include"
+    }
+  }
+}
