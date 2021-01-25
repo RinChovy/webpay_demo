@@ -1,8 +1,11 @@
 import React from "react";
 import { Button } from "antd";
-import style from "../home/css/index.css";
+import style from "./css/index.css";
+import {a} from '../../service/api.js'
 
 class Home extends React.Component {
+  componentDidMount() {}
+
   render() {
     return (
       <div>
@@ -12,7 +15,7 @@ class Home extends React.Component {
               <div className="box_on">
                 <img
                   className="img-size"
-                  src={require('../home/image/icon_feishui.png')}
+                  src={require("./image/icon_feishui.png")}
                 />
                 <span className="img-span">一般非税缴款</span>
               </div>
@@ -21,7 +24,7 @@ class Home extends React.Component {
               <div className="box_on">
                 <img
                   className="img-size"
-                  src={require('../home/image/icon_jiaoyu.png')}
+                  src={require("./image/icon_jiaoyu.png")}
                 />
                 <span className="img-span">教育缴费</span>
               </div>
@@ -30,7 +33,7 @@ class Home extends React.Component {
               <div className="box_on">
                 <img
                   className="img-size"
-                  src={require('../home/image/icon_caizheng.png')}
+                  src={require("./image/icon_caizheng.png")}
                 />
                 <span className="img-span">电子票据查询</span>
               </div>
@@ -39,7 +42,7 @@ class Home extends React.Component {
               <div className="box_on">
                 <img
                   className="img-size"
-                  src={require('../home/image/icon_jiaokuan.png')}
+                  src={require("./image/icon_jiaokuan.png")}
                 />
                 <span className="img-span">缴款状态查询</span>
               </div>
