@@ -1,8 +1,8 @@
-const base = "http://www";
+const base = "http://192.168.5.15:8600/webpay_new/";
 
 const api = {
-  a: base + "实际接口A",
-  b: base + "实际接口B",
+  common: base + "common/", //首页接口
+  getCo: base + "common/getCo" //验证码接口
 };
 
 export { api };

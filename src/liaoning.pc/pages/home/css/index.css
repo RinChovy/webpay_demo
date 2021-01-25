@@ -6,6 +6,12 @@
     height:470px;
     margin:0 auto;
 }
+.outForm_pay{
+    position: relative;
+    width:1440px;
+    height:470px;
+    margin:0 auto;
+}
 .onForm{
     position: absolute;
     display: flex;
@@ -13,6 +19,56 @@
     width: 400px;
     right: 10%;
     top: 10%;
+}
+.onForm_pay {
+    margin-bottom: 45px;
+    margin-left: 4px;
+    width: 100%;
+    background: #ffffff;
+    float: left;
+    -webkit-box-shadow: 0 0px 9px rgba(0,0,0,.1);
+}
+.top_pay{
+    margin-top: 20px;
+    width: 92%;
+    height: 52px;
+    border-bottom: 1px solid #e22721;
+    margin-left: auto;
+    margin-right: auto;
+}
+.topSpan_pay{
+    font-size: 22px;
+    color: #e22721;
+    font-weight: bold;
+}
+.middle_pay{
+    width: 92%;
+    margin: 0 auto;
+}
+.middle_pay_left{
+    display: inline-block;
+    vertical-align: top;
+    width: 60%;
+    height: 390px;
+}
+.middle_pay_left_org{
+    margin-top: 6%;
+    margin-left: 7%;
+}
+.middle_pay_right{
+    display: inline-block;
+    vertical-align: top;
+    width: 38%;
+    height: 390px;
+}
+.middle_pay_right_org{
+    margin-top: 6%;
+    margin-left: 7%;
+    width: 86%;
+    height: 74%;
+    color: #eb8500;
+    font-size: 15px;
+    background-color: #fff2de;
 }
 .box{
     padding: 5px;
@@ -44,5 +100,52 @@
     text-align: center;
     font-family: PingFangSCRegular;
     color: #464A4C;
+}
+.img_pay{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.span_pay_top{
+    font-size: 20px;
+    color: #ff9000;
+    font-weight: bold;
+    padding-left: 23px;
+    padding-top: 16px;
+}
+.span_pay{
+    font-size: 18px;
+    padding:20px;
+}
+.button_submit{
+    background-color: #ff9900;
+    color: white;
+    width: 170px;
+    height: 40px;
+    font-size: 18px;
+    font-weight: bold;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+    border-radius: 3px;
+    border: 0px;
+}
+.button_clear{
+    margin-left: 58px;
+    display: inline-block;
+    background-color: #3c76a6;
+    color: white;
+    width: 170px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 18px;
+    font-weight: bold;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+    border-radius: 3px;
+    border: 0px;
+    text-align: center;
 }
 
