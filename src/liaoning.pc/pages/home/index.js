@@ -13,6 +13,7 @@ class Home extends React.Component {
     fetch(api.common, {
       method: "post", //改成post
       mode: "cors", //跨域
+      credentials: 'include',
       headers: {
         "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
         regionCode: 210000,
@@ -34,6 +35,9 @@ class Home extends React.Component {
 
   router = (url) => {
     this.props.history.push({ pathname: `/${url}`, query: "太对了" });
+  };
+  routers = (url) => {
+    this.props.history.push({ pathname: "/index_pay", query: "太对了" });
   };
 
   render() {
@@ -59,6 +63,7 @@ class Home extends React.Component {
         <div className="outForm">
           <div className="onForm">{listModel}</div>
         </div>
+        <button onClick={this.routers}>666</button>
       </div>
     );
   }
