@@ -33,8 +33,9 @@ class Home extends React.Component {
       });
   }
 
-  router = (url) => {
-    this.props.history.push({ pathname: `/${url}`, query: "太对了" });
+  router = (url,code) => {
+    let data={itemCode:code}
+    this.props.history.push({ pathname: `/${url}`, query: data});
   };
   routers = (url) => {
     this.props.history.push({ pathname: "/index_pay", query: "太对了" });
@@ -47,7 +48,7 @@ class Home extends React.Component {
         <div className="box" key={k}>
           <div
             className="box_on"
-            onClick={this.router.bind(this, `${list[k].modelUrl}`, "url")}
+            onClick={this.router.bind(this, `${list[k].modelUrl}`, `${list[k].itemCode}`)}
           >
             <img
               className="img-size"
