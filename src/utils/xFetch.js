@@ -55,26 +55,24 @@ const checkResponse = (response = {}) => {
 
 export default function xFetch(url, options) {
   const defaultOptions = {
-    credentials: 'include',
+    // credentials: 'include',
+    method: 'POST',
   };
   const newOptions = { ...defaultOptions, ...options };
-  if (
-    newOptions.method === 'POST' ||
-    newOptions.method === 'PUT' ||
-    newOptions.method === 'DELETE'
-  ) {
+  if (newOptions.method == 'POST' || newOptions.method == 'PUT') {
     if (!(newOptions.body instanceof FormData)) {
       newOptions.headers = {
         Accept: 'application/json',
+        // 'Access-Control-Allow-Origin': '*',
         'Content-Type': 'application/json; charset=utf-8',
-        auth: Cookies.get('auth') || '',
+        // auth: Cookies.get('auth') || '',
         ...newOptions.headers,
       };
-      newOptions.body = JSON.stringify(newOptions.body);
+      newOptions.body = newOptions.data;
     } else {
       newOptions.headers = {
         Accept: 'application/json',
-        auth: Cookies.get('auth') || '',
+        // 'Access-Control-Allow-Origin': '*',
         ...newOptions.headers,
       };
     }
