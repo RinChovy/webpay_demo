@@ -12,3 +12,15 @@ export async function queryHomelist(params) {
     data: stringify(params),
   });
 }
+
+// 非税缴费提交
+export async function queryPayInfo(params) {
+  return xFetch(api.queryPayInfo, {
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      regionCode: 210000,
+    },
+    data: stringify(params),
+  });
+}
