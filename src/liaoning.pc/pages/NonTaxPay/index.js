@@ -1,8 +1,5 @@
 import React from 'react';
-import { Form, Input, Button, Checkbox, Row, Col, notification, Space } from 'antd';
-import xFetch from '../../../utils/xFetch';
-import { api } from '../../service/api.js';
-
+import { Form, Input, Button, Row, Col, notification } from 'antd';
 import { queryHomelist } from '../../service/services';
 
 class NonTaxPay extends React.Component {
