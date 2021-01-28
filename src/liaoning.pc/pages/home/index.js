@@ -6,6 +6,7 @@ import { api } from "../../service/api.js";
 class Home extends React.Component {
   state = {
     list: [],
+    yunwei: "运维联系方式：024-22835015", //运维信息
   };
 
   componentDidMount() {
@@ -13,7 +14,7 @@ class Home extends React.Component {
     fetch(api.common, {
       method: "post", //改成post
       mode: "cors", //跨域
-      credentials: 'include',
+      credentials: "include",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
         regionCode: 210000,
@@ -33,27 +34,32 @@ class Home extends React.Component {
       });
   }
 
-  router = (url,code) => {
-    let data={itemCode:code}
-    this.props.history.push({ pathname: `/${url}`, query: data});
+  router = (url, code) => {
+    if(code==110){
+      window.location.href = url
+    }else{
+      let data = { itemCode: code };
+      this.props.history.push({ pathname: `/${url}`, query: data });
+    }
   };
   routers = (url) => {
-    this.props.history.push({ pathname: "/index_pay", query: "太对了" });
+    this.props.history.push({ pathname: "/success", query: "太对了" });
   };
 
   render() {
-    const { list } = this.state;
+    const { list,yunwei} = this.state;
     const listModel = list.map((v, k) => {
       return (
         <div className="box" key={k}>
           <div
             className="box_on"
-            onClick={this.router.bind(this, `${list[k].modelUrl}`, `${list[k].itemCode}`)}
+            onClick={this.router.bind(
+              this,
+              `${list[k].modelUrl}`,
+              `${list[k].itemCode}`
+            )}
           >
-            <img
-              className="img-size"
-              src={require(`./image/caiz.png`)}
-            />
+            <img className="img-size" src={list[k].modelPicture} />
             <span className="img-span">{list[k].itemName}</span>
           </div>
         </div>
@@ -62,7 +68,12 @@ class Home extends React.Component {
     return (
       <div>
         <div className="outForm">
-          <div className="onForm">{listModel}</div>
+          <div className="onForm">
+            {listModel}
+            <div className='home_span_warn'>
+              <span>{yunwei}</span>
+            </div>
+          </div>
         </div>
         <button onClick={this.routers}>666</button>
       </div>

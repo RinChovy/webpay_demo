@@ -20,8 +20,18 @@ class school extends React.Component {
     school: [],
     itemCode: "",
     schoolUrl: "",
+    itemCode: "",
   };
   componentDidMount() {
+    //返回上一页做判断
+    this.props.location.query
+      ? this.setState({
+          itemCode: this.props.location.query.itemCode,
+        }) ||
+        localStorage.setItem("itemCode", this.props.location.query.itemCode)
+      : this.setState({
+          itemCode: localStorage.getItem("itemCode"),
+        });
     fetch(api.education, {
       method: "post", //改成post
       mode: "cors", //跨域
@@ -40,7 +50,7 @@ class school extends React.Component {
         let city = res.data.cityData;
         this.setState({
           city: city,
-          itemCode: this.props.location.query.itemCode,
+          itemCode: this.state.itemCode,
         });
       })
       .catch((error) => {
@@ -63,7 +73,10 @@ class school extends React.Component {
       .then((res) => res.json())
       .then((res) => {
         res.code == 500
-          ? this.openNotificationWithIcon("error", res.msg)
+          ? this.openNotificationWithIcon("error", res.msg) ||
+            this.setState({
+              school: [],
+            })
           : console.log(res);
         let school = res.data.schoolList;
         this.setState({
@@ -76,7 +89,7 @@ class school extends React.Component {
   };
   //改变学校事件
   schoolChange = (value) => {
-    let schoolUrl=value.value;
+    let schoolUrl = value.value;
     this.setState({
       schoolUrl: schoolUrl,
     });
@@ -94,7 +107,7 @@ class school extends React.Component {
     let url = this.state.schoolUrl;
     url != ""
       ? (window.location.href = url)
-      : this.openNotificationWithIcon("error","不存在学校地址");
+      : this.openNotificationWithIcon("error", "不存在学校地址");
   };
   render() {
     const { city, school } = this.state;
@@ -146,7 +159,7 @@ class school extends React.Component {
                     </Select>
                   </Form.Item>
                   <Form.Item
-                  style={{marginTop:40}}
+                    style={{ marginTop: 40 }}
                     label={<span style={{ fontSize: 17 }}>学校名称</span>}
                   >
                     <Select

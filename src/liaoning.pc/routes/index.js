@@ -5,6 +5,8 @@ import About from "../pages/about/index.js";
 import NTpay from "../pages/NonTaxPay/index.js";
 import NTpayChange from "../pages/NonTaxPayChange/index.js";
 import school from "../pages/school/index.js";
+import success from "../pages/success/index.js";
+import fail from "../pages/fail/index.js";
 function App() {
   return (
     <Router>
@@ -18,6 +20,10 @@ function App() {
         <Route path="/index_charge" component={NTpayChange}/>
         {/* 教育缴费界面 */}
         <Route path="/education" component={school}/>
+         {/* 回调成功界面 */}
+         <Route path="/success" component={success}/>
+          {/* 回调失败界面 */}
+          <Route path="/fail" component={fail}/>
         
       </Switch>
     </Router>
