@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './css/index.css';
+import style from '../../public/css/index.css';
 
 import { queryHomelist } from '../../service/services';
 
@@ -22,7 +22,7 @@ class Home extends React.Component {
   router = (url, code) => {
     if (code == 110) {
       window.location.href = url;
-    } else {
+    } else {  
       let data = { itemCode: code };
       this.props.history.push({ pathname: `/${url}`, query: data });
     }

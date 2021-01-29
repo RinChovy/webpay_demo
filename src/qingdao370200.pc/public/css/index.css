@@ -9,19 +9,18 @@ textarea {
     bottom: -40px;
     left: 150px;
 }
-.outForm {
-  position: relative;
-  width: 1440px;
-  background: url(../image/background_home.jpg) no-repeat center;
-  background-size: cover;
-  height: 470px;
-  margin: 0 auto;
-}
 .outForm_pay {
   position: relative;
   width: 1440px;
   /* height: 470px; */
   margin: 0 auto;
+}
+.outForm_pay_qingdao {
+  position: relative;
+  width: 100%;
+  height: 600px;
+  background: url(../images/qingdao3.png) no-repeat center;
+  background-size: cover;
 }
 .onForm {
   position: absolute;
@@ -37,7 +36,6 @@ textarea {
   margin-left: 4px;
   width: 100%;
   background: #ffffff;
-  float: left;
   -webkit-box-shadow: 0 0px 9px rgba(0, 0, 0, 0.1);
 }
 .top_pay {
@@ -60,12 +58,17 @@ textarea {
 .middle_pay_left {
   display: inline-block;
   vertical-align: top;
-  width: 60%;
+  width: 55%;
   height: 390px;
 }
-.middle_pay_left_org {
-  margin-top: 6%;
+.middle_pay_right_org {
+  margin-top: 16%;
   margin-left: 7%;
+  width: 450px;
+  height: 405px;
+  background: rgba(255,255,255,1);
+  box-shadow: 0px 4px 18px 0px rgb(0 0 0 / 8%);
+  border-radius: 4px;
 }
 .middle_pay_right {
   display: inline-block;
@@ -73,14 +76,10 @@ textarea {
   width: 38%;
   height: 390px;
 }
-.middle_pay_right_org {
-  margin-top: 6%;
-  margin-left: 7%;
-  width: 86%;
-  height: 74%;
-  color: #eb8500;
-  font-size: 15px;
-  background-color: #fff2de;
+.middle_box{
+  padding-top: 30px;
+  width: 84%;
+  margin: 0 auto;
 }
 .box {
   padding: 5px;
@@ -128,42 +127,21 @@ textarea {
   padding: 20px;
 }
 .button_submit {
-  background-color: #ff9900;
-  color: white;
-  width: 170px;
+  width: 153px;
   height: 40px;
-  font-size: 18px;
-  font-weight: bold;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  -ms-border-radius: 3px;
-  -o-border-radius: 3px;
-  border-radius: 3px;
-  border: 0px;
+
 }
 .button_clear {
   margin-left: 58px;
-  display: inline-block;
-  background-color: #3c76a6;
-  color: white;
-  width: 170px;
+  width: 153px;
   height: 40px;
-  line-height: 40px;
-  font-size: 18px;
-  font-weight: bold;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  -ms-border-radius: 3px;
-  -o-border-radius: 3px;
-  border-radius: 3px;
-  border: 0px;
-  text-align: center;
+
 }
 .verificationCode {
   width: 100px;
   height: 37px;
-  margin-left: -26px;
-  margin-top: 2px;
+  margin-left: 15px;
+  margin-top: 7px;
 }
 p {
   margin-bottom: 4px !important;
@@ -171,7 +149,7 @@ p {
 .middle_payInfo {
   border: 1px solid #ccc;
   background: #eef7fe;
-  background: url(../image/png_template.png);
+  background: url(../images/png_template.png);
   width: 900px;
   height: 430px;
   padding-top: 20px;
@@ -201,37 +179,6 @@ p {
   width: 820px;
   height: 250px;
   margin: 14px auto;
-}
-.school_div {
-  margin: 0 auto;
-  width: 1254px;
-  height: 600px;
-  background-image: url(../image/edu-background.png);
-  position: relative;
-}
-.school_div_on {
-  position: absolute;
-  left: 742px;
-  top: 194px;
-  width: 424px;
-}
-.school_button {
-  cursor: pointer;
-  font-size: 16px;
-  font-family: PingFangSC-Medium, PingFang SC;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 1);
-  line-height: 22px;
-  width: 350px;
-  height: 48px;
-  background: linear-gradient(
-    315deg,
-    rgba(0, 219, 155, 1) 0%,
-    rgba(0, 216, 126, 1) 100%
-  );
-  border: 0px solid #eeeeee;
-  border-radius: 2px;
-  margin-left: 5px;
 }
 .url_button {
   background-color: #3c76a6;

@@ -10,7 +10,7 @@ import {
   Space,
   Select,
 } from "antd";
-import { education } from "../../service/services";
+import { education, schools } from "../../service/services";
 
 const { Option } = Select;
 
@@ -32,7 +32,6 @@ class school extends React.Component {
       : this.setState({
           itemCode: localStorage.getItem("itemCode"),
         });
-
     education().then((res) => {
       if (res.code === 0) {
         console.log(res);
@@ -48,33 +47,22 @@ class school extends React.Component {
   }
   //改变地区事件
   cityChange = (value) => {
-    let data = "cityCode=" + value.value + "&itemCode=" + this.state.itemCode;
-    fetch(api.school, {
-      method: "post", //改成post
-      mode: "cors", //跨域
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-        regionCode: 210000,
-      },
-      body: data, //向服务器发送的数据
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        res.code == 500
-          ? this.openNotificationWithIcon("error", res.msg) ||
-            this.setState({
-              school: [],
-            })
-          : console.log(res);
+    schools({
+      cityCode: value.value,
+      itemCode: this.state.itemCode,
+    }).then((res) => {
+      if (res.code === 0) {
         let school = res.data.schoolList;
         this.setState({
           school: school,
         });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      } else {
+        this.openNotificationWithIcon("error", res.msg);
+        this.setState({
+          school: [],
+        });
+      }
+    });
   };
   //改变学校事件
   schoolChange = (value) => {

@@ -146,13 +146,6 @@ class NonTaxPayChange extends React.Component {
           <Button onClick={this.einvoiceUrl}>电子票查验</Button>
         </div>
       ) : null;
-      // 已交款字段
-    const statusOk =
-    status == 0 ? null: (
-      <div>
-        <img src={require('./image/paiec.png')} />
-      </div>
-    ) ; 
     return (
       <div>
         <div>
@@ -164,7 +157,6 @@ class NonTaxPayChange extends React.Component {
                 </div>
                 <div className="middle_pay">
                   <div className="middle_payInfo">
-                    {statusOk}
                     <p className="title_t">
                       <b>缴款通知书</b>
                     </p>

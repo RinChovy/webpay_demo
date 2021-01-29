@@ -25,30 +25,6 @@ export async function queryPayInfo(params) {
   });
 }
 
-// 教育缴费加载地区
-export async function education(params) {
-  return xFetch(api.education, {
-    credentials: 'include',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-      regionCode: 210000,
-    },
-    data: stringify(params),
-  });
-}
-
-// 教育缴费加载学校
-export async function schools(params) {
-  return xFetch(api.school, {
-    credentials: 'include',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-      regionCode: 210000,
-    },
-    data: stringify(params),
-  });
-}
-
 //加载成功回调接口
 export async function successs(params) {
   return xFetch(api.success, {

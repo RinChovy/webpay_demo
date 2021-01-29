@@ -38,6 +38,7 @@ class NonTaxPay extends React.Component {
     if (url.indexOf('&') >= 0) {
       url = url + '×tamp=' + timestamp;
     } else {
+      // url = url + '?timestamp=' + timestamp;
       url = url + '?timestamp=' + timestamp;
     }
     return url;
