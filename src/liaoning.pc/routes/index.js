@@ -15,16 +15,15 @@ function App() {
         <Route path="/home" exact={true} component={Home} />
         <Route path="/about" component={About} />
         {/* 非税缴款 */}
-        <Route path="/index_pay" component={NTpay}/>
+        <Route path="/index_pay" component={NTpay} />
         {/* 非税缴款缴款书界面 */}
-        <Route path="/index_charge" component={NTpayChange}/>
+        <Route path="/index_charge" component={NTpayChange} />
         {/* 教育缴费界面 */}
-        <Route path="/education" component={school}/>
-         {/* 回调成功界面 */}
-         <Route path="/success" component={success}/>
-          {/* 回调失败界面 */}
-          <Route path="/fail" component={fail}/>
-        
+        <Route path="/education" component={school} />
+        {/* 回调成功界面 */}
+        <Route path="/success" component={success} />
+        {/* 回调失败界面 */}
+        <Route path="/fail" component={fail} />
       </Switch>
     </Router>
   );

@@ -11,7 +11,7 @@ class success extends React.Component {
 
   componentDidMount() {
     let url = this.props.location.search; 
-    let data = "url=" + url;
+    let data = "rsa=" + url;
     fetch(api.common, {
       method: "post", //改成post
       mode: "cors", //跨域

@@ -24,3 +24,15 @@ export async function queryPayInfo(params) {
     data: stringify(params),
   });
 }
+
+// 教育缴费加载地区
+export async function education(params) {
+  return xFetch(api.education, {
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      regionCode: 210000,
+    },
+    data: stringify(params),
+  });
+}

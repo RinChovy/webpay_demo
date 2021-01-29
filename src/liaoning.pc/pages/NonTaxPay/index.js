@@ -1,6 +1,7 @@
 import React from 'react';
 import { Form, Input, Button, Row, Col, notification } from 'antd';
-import { queryHomelist } from '../../service/services';
+import { queryPayInfo } from '../../service/services';
+import { api } from '../../service/api';
 
 class NonTaxPay extends React.Component {
   formRef = React.createRef();
@@ -43,7 +44,7 @@ class NonTaxPay extends React.Component {
   }
   //提交成功
   handleFormSubmit = values => {
-    queryHomelist({
+    queryPayInfo({
       payCode: values.payCode,
       payPeople: values.payName,
       code: values.verificationCode,
@@ -107,6 +108,10 @@ class NonTaxPay extends React.Component {
                                   {
                                     required: true,
                                     message: '请输入缴款码',
+                                  },
+                                  {
+                                    pattern: /^21\d{18}$/,
+                                    message: "缴款码必须等于20位且21开头!",
                                   },
                                 ]}
                               >

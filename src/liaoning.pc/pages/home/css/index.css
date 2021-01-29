@@ -20,7 +20,7 @@ textarea {
 .outForm_pay {
   position: relative;
   width: 1440px;
-  height: 470px;
+  /* height: 470px; */
   margin: 0 auto;
 }
 .onForm {

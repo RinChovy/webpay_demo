@@ -8,6 +8,7 @@ const api = {
   education: base+"common/education",  //选择地区接口
   school: base+"common/school.do",  //选择学校接口
   getSchoolInfo: base+"common/getSchoolInfo",//选择学校后提交接口
+  success: base+"/callback/frontnotice", //成功回调接口
 };
 
 export { api };

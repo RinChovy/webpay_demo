@@ -10,7 +10,7 @@ import {
   Space,
   Select,
 } from "antd";
-import { api } from "../../service/api.js";
+import { education } from "../../service/services";
 
 const { Option } = Select;
 
@@ -32,30 +32,19 @@ class school extends React.Component {
       : this.setState({
           itemCode: localStorage.getItem("itemCode"),
         });
-    fetch(api.education, {
-      method: "post", //改成post
-      mode: "cors", //跨域
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-        regionCode: 210000,
-      },
-      body: "", //向服务器发送的数据
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        res.code == 500
-          ? this.openNotificationWithIcon("error", res.msg)
-          : console.log(res);
+
+    education().then((res) => {
+      if (res.code === 0) {
+        console.log(res);
         let city = res.data.cityData;
         this.setState({
           city: city,
           itemCode: this.state.itemCode,
         });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      } else {
+        this.openNotificationWithIcon("error", res.msg);
+      }
+    });
   }
   //改变地区事件
   cityChange = (value) => {
