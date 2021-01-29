@@ -1,6 +1,6 @@
-import fetch from 'isomorphic-fetch';
+import { extend } from 'umi-request';
 import { notification } from 'antd';
-import Cookies from 'js-cookie';
+// import Cookies from 'js-cookie';
 
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
@@ -20,69 +20,46 @@ const codeMessage = {
   504: '网关超时。',
 };
 
-const checkStatus = response => {
-  if (response.status >= 200 && response.status < 300) {
-    return response;
-  }
-  const errortext = codeMessage[response.status] || response.statusText;
-  notification.error({
-    message: `请求错误 ${response.status}: ${response.url}`,
-    description: errortext,
-  });
-  const error = new Error(errortext);
-  error.name = response.status;
-  error.response = response;
-  throw error;
-};
+const errorHandler = error => {
+  const { response } = error; // response 可能为undefined
 
-const checkResponse = (response = {}) => {
-  if (response.code !== 0) {
-    const errortext = response.message || '未知错误';
+  if (response && response.status) {
+    const errorText = codeMessage[response.status] || response.statusText;
+    const { status } = response;
     notification.error({
-      message: '请求错误',
-      description: errortext,
+      message: `请求错误 ${status}`,
+      description: errorText,
+    });
+  } else {
+    console.log(error);
+    notification.error({
+      description: '您的网络发生异常，无法连接服务器',
+      message: response || 'RequestError',
     });
   }
 
-  response.data = response.data || {};
   return response;
 };
 
-// const cachedAuth = (response) => {
-//   const auth = response.headers.get('auth');
-//   return response;
-// };
+const xFetch = extend({
+  errorHandler,
+  credentials: 'include',
+  method: 'POST',
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json; charset=utf-8',
+  },
+});
 
-export default function xFetch(url, options) {
-  const defaultOptions = {
-    // credentials: 'include',
-    method: 'POST',
-  };
-  const newOptions = { ...defaultOptions, ...options };
-  if (newOptions.method == 'POST' || newOptions.method == 'PUT') {
-    if (!(newOptions.body instanceof FormData)) {
-      newOptions.headers = {
-        Accept: 'application/json',
-        // 'Access-Control-Allow-Origin': '*',
-        'Content-Type': 'application/json; charset=utf-8',
-        // auth: Cookies.get('auth') || '',
-        ...newOptions.headers,
-      };
-      newOptions.body = newOptions.data;
-    } else {
-      newOptions.headers = {
-        Accept: 'application/json',
-        // 'Access-Control-Allow-Origin': '*',
-        ...newOptions.headers,
-      };
-    }
+xFetch.interceptors.response.use((response, options) => {
+  if (response && response.status !== 200) {
+    const errorText = codeMessage[response.status] || response.statusText;
+    return {
+      code: response.status,
+      msg: errorText,
+    };
   }
+  return response;
+});
 
-  return fetch(url, newOptions)
-    .then(checkStatus)
-    .then(response => response.json())
-    .then(checkResponse)
-    .catch(err => {
-      console.log(err);
-    });
-}
+export default xFetch;
