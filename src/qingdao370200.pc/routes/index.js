@@ -1,7 +1,7 @@
 import React from "react";
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "../pages/home/index.js";
-import NTpayChange from "../pages/NonTaxPayChange/index.js";
+import NTpayChange from "../pages/index_charge/index.js";
 import success from "../pages/success/index.js";
 import fail from "../pages/fail/index.js";
 function App() {
