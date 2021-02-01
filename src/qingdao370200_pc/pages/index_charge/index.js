@@ -80,7 +80,7 @@ class NonTaxPayChange extends React.Component {
     // 挂件调用
     thirdpay_widget.init({
       container: "widget", //挂件在当前页面放置的控件ID
-      merchant_no: "2100002019112501", //分配的商户号
+      merchant_no: query.merchant_no, //分配的商户号
       merchant_order_no: guid(), //订单在商户系统中的订单号
       amount: queryJson.totalAmount, //订单价格，单位：人民币 分
       effective_time: "1c",
@@ -149,8 +149,8 @@ class NonTaxPayChange extends React.Component {
       // 已交款字段
     const statusOk =
     status == 0 ? null: (
-      <div>
-        <img src={require('./image/paiec.png')} />
+      <div style={{position: "absolute",right: "18%"}}>
+        <img style={{width:100}} src={require('./image/paiec.png')} />
       </div>
     ) ; 
     return (
@@ -260,7 +260,7 @@ class NonTaxPayChange extends React.Component {
                     </table>
                   </div>
                 </div>
-                <div className="middle_pay">
+                <div className="middle_pay" style={{overflow:"hidden"}}>
                   {status == 0 ? thirdpay : thirdpayOk}
                 </div>
               </div>

@@ -1,4 +1,4 @@
-const base = '//debug.epayservice.cn/webpay_new/';
+const base = "http://192.168.5.15:8701/webpay_new/";
 // const base = "http://debug.epayservice.cn/webpay_new/"
 
 const api = {

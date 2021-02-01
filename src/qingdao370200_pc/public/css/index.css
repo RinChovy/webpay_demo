@@ -40,6 +40,7 @@ textarea {
 }
 .top_pay {
   margin-top: 20px;
+  padding-top: 10px;
   width: 92%;
   height: 52px;
   border-bottom: 1px solid #e22721;
@@ -147,6 +148,7 @@ p {
   margin-bottom: 4px !important;
 }
 .middle_payInfo {
+  position: relative;
   border: 1px solid #ccc;
   background: #eef7fe;
   background: url(../images/png_template.png);

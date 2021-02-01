@@ -7,8 +7,7 @@ import style from "../../public/css/index.css";
 class NonTaxPay extends React.Component {
   formRef = React.createRef();
   state = {
-    spanPayTop: "温馨提示",
-    spanPay: "缴款码为执收单位开具的非税收入一般缴款书上的20位编码。",
+    warnSpan:"“非税缴费技术服务电话 0532-58623183”",
     codeUrl: api.getCo, //验证码
   };
 
@@ -64,7 +63,7 @@ class NonTaxPay extends React.Component {
     console.log("fail:", values);
   };
   render() {
-    const { spanPay, spanPayTop, codeUrl } = this.state;
+    const { spanPay, spanPayTop, codeUrl, warnSpan} = this.state;
     const layout = {
       labelCol: {
         span: 8,
@@ -170,7 +169,7 @@ class NonTaxPay extends React.Component {
                      
                     </div>
 
-                    <Form.Item {...tailLayout} style={{ marginTop: 30 }}>
+                    <Form.Item {...tailLayout} style={{ marginTop: 10 }}>
 
                       <Button
                         className="button_submit"
@@ -190,6 +189,9 @@ class NonTaxPay extends React.Component {
                       </Button>
 
                     </Form.Item>
+                    <div style={{marginTop:"-9px",width:"100%",textAlign:"center",fontWeight: "bold"}}>
+                      <span>{warnSpan}</span>
+                      </div>
                   </Form>
                 </div>
               </div>

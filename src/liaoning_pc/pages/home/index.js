@@ -27,9 +27,9 @@ class Home extends React.Component {
       this.props.history.push({ pathname: `/${url}`, query: data });
     }
   };
-  routers = url => {
-    this.props.history.push({ pathname: '/success', query: '太对了' });
-  };
+  // routers = url => {
+  //   this.props.history.push({ pathname: '/success', query: '太对了' });
+  // };
 
   render() {
     const { list, yunwei } = this.state;
@@ -56,7 +56,6 @@ class Home extends React.Component {
             </div>
           </div>
         </div>
-        <button onClick={this.routers}>666</button>
       </div>
     );
   }
