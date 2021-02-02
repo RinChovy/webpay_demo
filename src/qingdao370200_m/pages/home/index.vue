@@ -17,7 +17,7 @@
           <span>推荐服务</span>
         </div>
         <div class="footer_box">
-          <img src="./images/phone_box_bottom.png" />
+          <img src="../../public/images/phone_box_bottom.png" />
         </div>
       </div>
       <div class="bottom_span">
@@ -49,7 +49,7 @@ export default {
       this.$router.push({
         path: "/index_pay",
         name: "index_pay",
-      });
+       });
     },
   },
 };
@@ -58,7 +58,7 @@ export default {
 <style scoped lang="scss">
 .headern {
   width: 100%;
-  background: url("./images/phone_background.png") no-repeat;
+  background: url("../../public/images/phone_background.png") no-repeat;
   background-size: cover;
   height: 640px;
 }
@@ -69,7 +69,7 @@ export default {
   margin-top: 126px;
 }
 .img {
-  background: url("./images/phone_box.png") no-repeat center;
+  background: url("../../public/images/phone_box.png") no-repeat center;
   background-size: 100%;
   margin: 0 auto;
   width: 374px;
@@ -85,7 +85,7 @@ export default {
   font-size: 17px;
   font-weight: bold;
   color: #464a4c;
-  background: url("./images/span_background.png") no-repeat center bottom;
+  background: url("../../public/images/span_background.png") no-repeat center bottom;
   background-size: 100%;
 }
 .footer_box {
