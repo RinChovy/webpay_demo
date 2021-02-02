@@ -49,6 +49,7 @@
 <script>
 import { Button, Row, Col, Search } from "vant";
 import API from "../../config/api.js";
+import { queryPayInfo } from "../../config/services.js";
 export default {
   name: "index_pay",
   components: {
@@ -59,8 +60,6 @@ export default {
   },
   data() {
     return {
-      good: "value",
-      bottom_span: "主办单位：鹤岗市财政局",
       // 固定地址
       codeUrl: API.code,
       // 时间戳验证码地址
@@ -105,14 +104,18 @@ export default {
         this.payPeopleWarn == "" &&
         this.codeWarn == ""
       ) {
-        let data = {
+        queryPayInfo({
           payCode: this.payCode,
           payPeople: this.payPeople,
           code: this.code,
-        };
-        this.$router.push({
-          path: "/index_charge",
-          name: "index_charge",
+        }).then((res) => {
+          res.code === 0
+            ? this.$router.push({
+                path: "/index_charge",
+                name: "index_charge",
+                params: res,
+              })
+            : console.log(res);
         });
       } else {
       }
