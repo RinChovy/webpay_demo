@@ -35,7 +35,7 @@ class NonTaxPay extends React.Component {
   //验证码时间戳
   chgUrl(url) {
     var timestamp = new Date().valueOf();
-    url = url.substring(0, 50);
+    // url = url.substring(0, 100);
     if (url.indexOf("&") >= 0) {
       url = url + "×tamp=" + timestamp;
     } else {
@@ -203,7 +203,7 @@ class NonTaxPay extends React.Component {
                       {/* <span>{warnSpan}</span> */}
                     </div>
                   </Form>
-                  <div class="bottom_span">
+                  <div className="bottom_span">
                     <span dangerouslySetInnerHTML={{ __html: warnSpan }}></span>
                   </div>
                 </div>

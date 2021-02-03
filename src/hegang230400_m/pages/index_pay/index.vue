@@ -83,7 +83,7 @@ export default {
     //验证码时间戳
     chgUrl(url) {
       var timestamp = new Date().valueOf();
-      url = url.substring(0, 50);
+      // url = url.substring(0, 50);
       if (url.indexOf("&") >= 0) {
         url = url + "×tamp=" + timestamp;
       } else {
