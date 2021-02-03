@@ -3,21 +3,12 @@ import VueRouter from "vue-router";
 
 Vue.use(VueRouter);
 
-<<<<<<< HEAD
 import App from "./index.vue";
-import Entry from "./pages/entry.vue";
-import About from "./pages/about.vue";
 import Home from "./pages/home/index.vue";
 import Index_pay from "./pages/index_pay/index.vue";
 import Index_charge from "./pages/Index_charge/index.vue";
 import Success from "./pages/success/index.vue";
 import Fail from "./pages/fail/index.vue";
-=======
-import App from './index.vue';
-import Home from './pages/home/index.vue';
-import Index_pay from './pages/index_pay/index.vue';
-import Index_charge from './pages/Index_charge/index.vue';
->>>>>>> cd2aa5aedd58041d7a20cde4e83a276ff3c63db5
 
 window.enableDev = true;
 
@@ -27,7 +18,6 @@ const routes = [
     component: Home,
   },
   {
-<<<<<<< HEAD
     path: "/home", //首页
     component: Home,
   },
@@ -52,20 +42,6 @@ const routes = [
     path: "/about",
     component: About,
   },
-=======
-    path: '/home', //首页
-    component: Home,
-  },
-  {
-    path: '/index_pay', //非税缴款界面
-    name: 'index_pay',
-    component: Index_pay,
-  },
-  {
-    path: '/index_charge', //非税缴款界面
-    component: Index_charge,
-  },
->>>>>>> cd2aa5aedd58041d7a20cde4e83a276ff3c63db5
 ];
 const router = new VueRouter({ routes });
 
