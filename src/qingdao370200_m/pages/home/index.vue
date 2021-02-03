@@ -17,7 +17,7 @@
           <span>推荐服务</span>
         </div>
         <div class="footer_box">
-          <img src="../../public/images/phone_box_bottom.png" />
+          <img src="../../public/images/phone_box_bottom.png" alt="" />
         </div>
       </div>
       <div class="bottom_span">

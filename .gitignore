@@ -36,3 +36,5 @@ screenshot
 build.js
 layout
 
+request.js
+mock.js
