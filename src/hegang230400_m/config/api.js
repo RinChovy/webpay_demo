@@ -1,5 +1,6 @@
 // const baseapi = "//debug.epayservice.cn";
-const baseapi = "http://192.168.5.15:8701/webpay_new";
+// const baseapi = 'http://192.168.5.15:8701/webpay_new';
+const baseapi = '//debug.epayservice.cn/webpay_new';
 export default {
   // 导出
   exportInfo: `${baseapi}/record/exportInfo`,
