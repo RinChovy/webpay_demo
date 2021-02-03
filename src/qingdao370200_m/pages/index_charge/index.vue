@@ -118,7 +118,9 @@ export default {
     };
   },
   //加载前生命周期
-  beforeCreate() {},
+  beforeCreate() {
+    console.log(this.$route.params)
+  },
   //初始生命周期
   created() {},
   methods: {
