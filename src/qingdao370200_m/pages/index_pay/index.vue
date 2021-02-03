@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import { Button, Row, Col, Search } from "vant";
+import { Button, Row, Col, Search, Dialog } from "vant";
 import API from "../../config/api.js";
 import { queryPayInfo } from "../../config/services.js";
 export default {
@@ -57,6 +57,7 @@ export default {
     "van-col": Col,
     "van-button": Button,
     "van-search": Search,
+    "van-dialog": Dialog,
   },
   data() {
     return {
@@ -112,10 +113,14 @@ export default {
           res.code === 0
             ? this.$router.push({
                 path: "/index_charge",
-                name: "index_charge",
+                name: "Index_charge",
                 params: res,
               })
-            : console.log(res);
+            : Dialog.alert({
+                message: res.msg,
+              }).then(() => {
+                // on close
+              });
         });
       } else {
       }
@@ -153,7 +158,7 @@ export default {
   }
   span {
     margin-left: 5px;
-    vertical-align: 5px;
+    vertical-align: -3px;
     font-size: 18px;
     font-weight: bold;
   }

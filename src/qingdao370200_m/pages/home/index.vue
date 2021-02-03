@@ -17,7 +17,7 @@
           <span>推荐服务</span>
         </div>
         <div class="footer_box">
-          <img src="../../public/images/phone_box_bottom.png" />
+          <img src="../../public/images/phone_box_bottom.png" alt="" />
         </div>
       </div>
       <div class="bottom_span">
@@ -39,7 +39,7 @@ export default {
   },
   data() {
     return {
-      value:"value",
+      value: "value",
       good: "value",
       bottom_span: "主办单位：鹤岗市财政局",
     };
@@ -48,8 +48,7 @@ export default {
     indexPay() {
       this.$router.push({
         path: "/index_pay",
-        name: "index_pay",
-       });
+      });
     },
   },
 };
@@ -72,8 +71,8 @@ export default {
   background: url("../../public/images/phone_box.png") no-repeat center;
   background-size: 100%;
   margin: 0 auto;
-  width: 374px;
-  height: 192px;
+  width: 100%;
+  height: 100%;
 }
 .footer {
   width: 100%;
@@ -85,16 +84,18 @@ export default {
   font-size: 17px;
   font-weight: bold;
   color: #464a4c;
-  background: url("../../public/images/span_background.png") no-repeat center bottom;
+  background: url("../../public/images/span_background.png") no-repeat center
+    bottom;
   background-size: 100%;
 }
 .footer_box {
   text-align: center;
   padding-top: 20px;
+  img {
+    width: 96%;
+  }
 }
-.footer_box img {
-  width: 96%;
-}
+
 .bottom_span {
   margin-top: 20px;
   font-size: 12px;
