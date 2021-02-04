@@ -78,5 +78,9 @@
   ],
   "engines": {
     "node": ">=10.0.0"
+  },
+  "alias": {
+    "src": "./src",
+    "utils": "./src/utils"
   }
 }
