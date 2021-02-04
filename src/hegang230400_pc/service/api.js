@@ -1,12 +1,24 @@
 // const base = '//192.168.5.15:8701/webpay_new/';
-const base = '//debug.epayservice.cn/webpay_new/';
+const base = "https://debug.epayservice.cn/webpay_new/"; //后台项目地址
+
+const callback = "http://192.168.6.4:8080/#/success"; //传给后台的回调地址
+
+const region = 210000; //区划号
+
+const regular = /^21\d{18}$/; //非税缴款正则表达式
+
+const regularText = "缴款码必须等于20位且21开头"; //非税缴款正则表达式提示信息
 
 const api = {
-  common: base + 'common/', //首页接口
-  getCo: base + 'common/getCo', //验证码接口
-  queryPayInfo: base + 'common/queryPayInfo.do', //缴款书提交接口
-  createCharge: base + 'common/createCharge', //缴费接口
-  success: base + 'callback/frontnotice', //成功回调接口
+  callback: callback, //传给后台的回调地址
+  region: region, //区划号
+  regular: regular, //非税缴款正则表达式
+  regularText: regularText, //非税缴款正则表达式提示信息
+  common: base + "common/", //首页接口
+  getCo: base + "common/getCo", //验证码接口
+  queryPayInfo: base + "common/queryPayInfo.do", //缴款书提交接口
+  createCharge: base + "common/createCharge", //缴费接口
+  success: base + "callback/frontnotice", //成功回调接口
 };
 
 export { api };

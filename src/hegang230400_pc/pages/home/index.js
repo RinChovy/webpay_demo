@@ -111,8 +111,8 @@ class NonTaxPay extends React.Component {
                             message: "请输入缴款码",
                           },
                           {
-                            pattern: /^21\d{18}$/,
-                            message: "缴款码必须等于20位且21开头!",
+                            pattern: api.regular,
+                            message: api.regularText,
                           },
                         ]}
                       >

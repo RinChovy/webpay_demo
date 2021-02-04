@@ -127,11 +127,13 @@ export default {
     },
     //验证方法
     warning() {
+      const regular = API.regular;
+      console.log(regular);
       this.payCode == ""
         ? (this.payCodeWarn = "请输入缴款码")
-        : /^21\d{18}$/.test(this.payCode)
+        : eval(regular).test(this.payCode)
         ? (this.payCodeWarn = "")
-        : (this.payCodeWarn = "缴款码必须等于20位且21开头");
+        : (this.payCodeWarn = API.regularText);
       this.payPeople == ""
         ? (this.payPeopleWarn = "请输入缴款人")
         : (this.payPeopleWarn = "");

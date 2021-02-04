@@ -10,7 +10,7 @@
       <button @click="einvoice_url">查看电子票</button>
     </div>
     <div class="div_button" else>
-      <button @click="fanhui">返回首页</button>
+      <button @click="home">返回首页</button>
     </div>
   </div>
 </template>

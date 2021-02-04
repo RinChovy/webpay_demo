@@ -7,7 +7,7 @@ export async function queryPayInfo(params) {
   return xFetch(Api.queryPayInfo, {
     headers: {
       "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-      regionCode: 210000,
+      regionCode: Api.region,
     },
     data: stringify(params),
   });
@@ -17,7 +17,7 @@ export async function success(params) {
   return xFetch(Api.success, {
     headers: {
       "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-      regionCode: 210000,
+      regionCode: Api.region,
     },
     data: stringify(params),
   });

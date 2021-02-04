@@ -156,8 +156,8 @@ export default {
         charge_param: {
           a: "a",
           b: "b",
-          regionCode: 210000,
-          frontCallBackUrl: "http://192.168.6.4:8080/#/success",
+          regionCode: API.region,
+          frontCallBackUrl: API.callback,
         }, //(可选，用户自定义参数，若存在自定义参数则会通过 POST 方法透传给 charge_url
         version_no: "1.1",
       });
