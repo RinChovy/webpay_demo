@@ -31,7 +31,7 @@
       var ua = navigator.userAgent.toLowerCase();
       var thisUrl = window.location.href;
       if (ua.match(/(ipod|iphone os|midp|ucweb|android|windows ce|windows mobile)/i)) {
-        window.location.href = thisUrl.replace('_pc', '_m');
+        window.location.href = thisUrl.replace('_p', '_m');
       }
     };
     urlredirect()

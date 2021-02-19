@@ -11,7 +11,7 @@
             var ua = navigator.userAgent.toLowerCase();
             var thisUrl = window.location.href;
             if (!ua.match(/(ipod|iphone os|midp|ucweb|android|windows ce|windows mobile)/i)) {
-                window.location.href = thisUrl.replace('_m', '_pc');
+                window.location.href = thisUrl.replace('_m', '_p');
             }
         };
         urlredirect();
