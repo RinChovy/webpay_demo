@@ -1,4 +1,4 @@
-import xFetch from '../../utils/xFetch';
+import xFetch from 'utils/xFetch';
 import { stringify } from 'qs';
 import { api } from './api.js';
 
