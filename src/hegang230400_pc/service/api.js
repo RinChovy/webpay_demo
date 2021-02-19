@@ -1,13 +1,14 @@
-// const base = '//192.168.5.15:8701/webpay_new/';
+// const base = "//192.168.5.15:8080/webpay_new/";
 const base = "https://debug.epayservice.cn/webpay_new/"; //后台项目地址
 
-const callback = "http://192.168.6.4:8080/#/success"; //传给后台的回调地址
+const callback =
+  "https://debug.epayservice.cn/webpay_new/hegang230400_pc/index.html#/success"; //传给后台的回调地址
 
-const region = 210000; //区划号
+const region = 230400; //区划号
 
-const regular = /^21\d{18}$/; //非税缴款正则表达式
+const regular = /^23\d{18}$/; //非税缴款正则表达式
 
-const regularText = "缴款码必须等于20位且21开头"; //非税缴款正则表达式提示信息
+const regularText = "缴款码必须等于20位且23开头"; //非税缴款正则表达式提示信息
 
 const api = {
   callback: callback, //传给后台的回调地址
