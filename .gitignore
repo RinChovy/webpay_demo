@@ -37,3 +37,5 @@ build.js
 
 request.js
 mock.js
+
+/.cache
