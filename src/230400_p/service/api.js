@@ -1,8 +1,8 @@
 // const base = "//192.168.5.15:8080/webpay_new/";
-const base = "https://debug.epayservice.cn/webpay_new/"; //后台项目地址
+const base = "https://api.epayservice.cn/webpay_new/"; //后台项目地址
 
 const callback =
-  "https://debug.epayservice.cn/webpay_new/hegang230400_pc/index.html#/success"; //传给后台的回调地址
+  "https://api.epayservice.cn/webpay_new/230400_p/index.html#/success"; //传给后台的回调地址
 
 const region = 230400; //区划号
 
