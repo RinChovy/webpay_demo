@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <include src="meta.html"></include>
+  <include src="flexible.html"></include>
+  <title>
+    <block name="title">博思致新</block>
+  </title>
+  <include src="m_common.html"></include>
+  <block name="header"></block>
+  <script>
+    function urlredirect() {
+      var ua = navigator.userAgent.toLowerCase();
+      var thisUrl = window.location.href;
+      if (ua.match(/(ipod|iphone os|midp|ucweb|android|windows ce|windows mobile)/i)) {
+        window.location.href = thisUrl.replace('_p', '_m');
+      }
+    };
+    // urlredirect();
+  </script>
+</head>
+
+<body>
+  <block name="content"></block>
+  <block name="footer"></block>
+  <block name="widget">
+    <include src="widget.html"></include>
+  </block>
+</body>
+
+</html>
