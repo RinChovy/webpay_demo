@@ -1,13 +1,8 @@
 import baseapi from 'utils/baseURL';
-// const baseapi = 'http://192.168.5.15:8701/webpay_new'; //
-// const baseapi = "https://api.epayservice.cn/webpay_new"; //后台项目地址
 
 const callback = baseapi + '/230400_m/index.html#/success'; //传给后台的回调地址
-
 const region = 230400; //区划号
-
 const regular = /^23\d{18}$/; //非税缴款正则表达式
-
 const regularText = '缴款码必须等于20位且23开头'; //非税缴款正则表达式提示信息
 
 export default {
