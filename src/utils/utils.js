@@ -1,6 +1,6 @@
 // 金额转换大写
 const Arabia_to_Chinese = Num => {
-  for (let i = Num.length - 1; i >= 0; i--) {
+  for (var i = Num.length - 1; i >= 0; i--) {
     Num = Num.replace(',', ''); //替换tomoney()中的“,”
     Num = Num.replace(' ', ''); //替换tomoney()中的空格
   }
@@ -10,16 +10,16 @@ const Arabia_to_Chinese = Num => {
     return;
   }
   //---字符处理完毕，开始转换，转换采用前后两部分分别转换---//
-  let part = String(Num).split('.');
-  let newchar = '';
+  var part = String(Num).split('.');
+  var newchar = '';
   //小数点前进行转化
   for (i = part[0].length - 1; i >= 0; i--) {
     if (part[0].length > 10) {
       alert('位数过大，无法计算');
       return '';
     } //若数量超过拾亿单位，提示
-    let tmpnewchar = '';
-    let perchar = part[0].charAt(i);
+    var tmpnewchar = '';
+    var perchar = part[0].charAt(i);
     switch (perchar) {
       case '0':
         tmpnewchar = '零' + tmpnewchar;
@@ -143,14 +143,13 @@ const Arabia_to_Chinese = Num => {
 
   if (newchar.charAt(newchar.length - 1) == '元' || newchar.charAt(newchar.length - 1) == '角')
     newchar = newchar + '整';
-  //  document.write(newchar);
   return newchar;
 };
 
 const guid = () => {
   let chars = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
   let res = '';
-  for (let i = 0; i < 3; i++) {
+  for (var i = 0; i < 3; i++) {
     let id = Math.ceil(Math.random() * 9);
     res += chars[id];
   }
@@ -187,9 +186,9 @@ const urlredirect = () => {
   const ua = navigator.userAgent.toLowerCase();
   let thisUrl = window.location.href;
   if (ua.match(/(ipod|iphone os|midp|ucweb|android|windows ce|windows mobile)/i)) {
-    window.location.href = thisUrl.replace('_pc', '_m');
+    window.location.href = thisUrl.replace('_p', '_m');
   }
-  window.location.href = thisUrl.replace('_m', '_pc');
+  window.location.href = thisUrl.replace('_m', '_p');
 };
 
-export { Arabia_to_Chinese as money, guid, urlredirect };
+export { Arabia_to_Chinese, guid, urlredirect };
