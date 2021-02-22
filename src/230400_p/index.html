@@ -1,49 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
+<extends src="pc.html">
+  <block name="title">黑龙江鹤岗市财政局缴费平台</block>
+  <block name="header">
+    <style>
+      #heada {
+        background: url(./public/images/tou.png) no-repeat;
+        width: 100%;
+        height: 196px;
+        background-size: cover;
+        -webkit-background-size: cover;
+        -o-background-size: cover;
+        background-position: center 0;
+      }
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>黑龙江鹤岗市财政局缴费平台</title>
-  <style>
-    #heada {
-      background: url(./public/images/tou.png) no-repeat;
-      width: 100%;
-      height: 196px;
-      background-size: cover;
-      -webkit-background-size: cover;
-      -o-background-size: cover;
-      background-position: center 0;
-    }
-
-    #bottom {
-      background: url(./public/images/wei.png) no-repeat;
-      width: 100%;
-      height: 90px;
-      background-size: cover;
-      -webkit-background-size: cover;
-      -o-background-size: cover;
-      background-position: center 0;
-    }
-  </style>
-</head>
-
-
-<body>
-  <div id="heada">
-
-  </div>
-
-  <div id="root"></div>
-
-  <div id="bottom">
-
-  </div>
-
-</body>
-<script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script type="text/javascript"
-  src="https://api.epayservice.cn/thirdpay/resources/widget/js/thirdpay_widget.js"></script>
-<script src="./index.js"></script>
-
-</html>
+      #bottom {
+        background: url(./public/images/wei.png) no-repeat;
+        width: 100%;
+        height: 90px;
+        background-size: cover;
+        -webkit-background-size: cover;
+        -o-background-size: cover;
+        background-position: center 0;
+      }
+    </style>
+  </block>
+  <block name="content">
+    <div id="heada"></div>
+    <div id="root"></div>
+    <div id="bottom"></div>
+  </block>
+  <block name="footer">
+    <script src="./index.js"></script>
+  </block>
+</extends>
