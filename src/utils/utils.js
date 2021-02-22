@@ -1,154 +1,6 @@
-// 金额转换大写
-const Arabia_to_Chinese = Num => {
-  for (var i = Num.length - 1; i >= 0; i--) {
-    Num = Num.replace(',', ''); //替换tomoney()中的“,”
-    Num = Num.replace(' ', ''); //替换tomoney()中的空格
-  }
-  if (isNaN(Num)) {
-    //验证输入的字符是否为数字
-    alert('请检查小写金额是否正确');
-    return;
-  }
-  //---字符处理完毕，开始转换，转换采用前后两部分分别转换---//
-  var part = String(Num).split('.');
-  var newchar = '';
-  //小数点前进行转化
-  for (i = part[0].length - 1; i >= 0; i--) {
-    if (part[0].length > 10) {
-      alert('位数过大，无法计算');
-      return '';
-    } //若数量超过拾亿单位，提示
-    var tmpnewchar = '';
-    var perchar = part[0].charAt(i);
-    switch (perchar) {
-      case '0':
-        tmpnewchar = '零' + tmpnewchar;
-        break;
-      case '1':
-        tmpnewchar = '壹' + tmpnewchar;
-        break;
-      case '2':
-        tmpnewchar = '贰' + tmpnewchar;
-        break;
-      case '3':
-        tmpnewchar = '叁' + tmpnewchar;
-        break;
-      case '4':
-        tmpnewchar = '肆' + tmpnewchar;
-        break;
-      case '5':
-        tmpnewchar = '伍' + tmpnewchar;
-        break;
-      case '6':
-        tmpnewchar = '陆' + tmpnewchar;
-        break;
-      case '7':
-        tmpnewchar = '柒' + tmpnewchar;
-        break;
-      case '8':
-        tmpnewchar = '捌' + tmpnewchar;
-        break;
-      case '9':
-        tmpnewchar = '玖' + tmpnewchar;
-        break;
-    }
-    switch (part[0].length - i - 1) {
-      case 0:
-        tmpnewchar = tmpnewchar + '元';
-        break;
-      case 1:
-        if (perchar != 0) tmpnewchar = tmpnewchar + '拾';
-        break;
-      case 2:
-        if (perchar != 0) tmpnewchar = tmpnewchar + '佰';
-        break;
-      case 3:
-        if (perchar != 0) tmpnewchar = tmpnewchar + '仟';
-        break;
-      case 4:
-        tmpnewchar = tmpnewchar + '万';
-        break;
-      case 5:
-        if (perchar != 0) tmpnewchar = tmpnewchar + '拾';
-        break;
-      case 6:
-        if (perchar != 0) tmpnewchar = tmpnewchar + '佰';
-        break;
-      case 7:
-        if (perchar != 0) tmpnewchar = tmpnewchar + '仟';
-        break;
-      case 8:
-        tmpnewchar = tmpnewchar + '亿';
-        break;
-      case 9:
-        tmpnewchar = tmpnewchar + '拾';
-        break;
-    }
-    newchar = tmpnewchar + newchar;
-  }
-  //小数点之后进行转化
-  if (String(Num).indexOf('.') != -1) {
-    if (part[1].length > 2) {
-      alert('小数点之后只能保留两位,系统将自动截段');
-      part[1] = part[1].substr(0, 2);
-    }
-    for (i = 0; i < part[1].length; i++) {
-      tmpnewchar = '';
-      perchar = part[1].charAt(i);
-      switch (perchar) {
-        case '0':
-          tmpnewchar = '零' + tmpnewchar;
-          break;
-        case '1':
-          tmpnewchar = '壹' + tmpnewchar;
-          break;
-        case '2':
-          tmpnewchar = '贰' + tmpnewchar;
-          break;
-        case '3':
-          tmpnewchar = '叁' + tmpnewchar;
-          break;
-        case '4':
-          tmpnewchar = '肆' + tmpnewchar;
-          break;
-        case '5':
-          tmpnewchar = '伍' + tmpnewchar;
-          break;
-        case '6':
-          tmpnewchar = '陆' + tmpnewchar;
-          break;
-        case '7':
-          tmpnewchar = '柒' + tmpnewchar;
-          break;
-        case '8':
-          tmpnewchar = '捌' + tmpnewchar;
-          break;
-        case '9':
-          tmpnewchar = '玖' + tmpnewchar;
-          break;
-      }
-      if (i == 0) tmpnewchar = tmpnewchar + '角';
-      if (i == 1) tmpnewchar = tmpnewchar + '分';
-      newchar = newchar + tmpnewchar;
-    }
-  }
-  //替换所有无用汉字
-  while (newchar.search('零零') != -1) newchar = newchar.replace('零零', '零');
-  newchar = newchar.replace('零亿', '亿');
-  newchar = newchar.replace('亿万', '亿');
-  newchar = newchar.replace('零万', '万');
-  newchar = newchar.replace('零元', '元');
-  newchar = newchar.replace('零角', '');
-  newchar = newchar.replace('零分', '');
-
-  if (newchar.charAt(newchar.length - 1) == '元' || newchar.charAt(newchar.length - 1) == '角')
-    newchar = newchar + '整';
-  return newchar;
-};
-
 const guid = () => {
-  let chars = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-  let res = '';
+  let chars = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+  let res = "";
   for (var i = 0; i < 3; i++) {
     let id = Math.ceil(Math.random() * 9);
     res += chars[id];
@@ -161,34 +13,135 @@ const guid = () => {
   let mm = now.getMinutes(); //分
   let ss = now.getSeconds(); //秒
   let hm = now.getMilliseconds(); //毫秒
-  let clock = year + '';
-  if (month < 10) clock += '0';
-  clock += month + '';
-  if (day < 10) clock += '0';
-  clock += day + '';
-  if (hh < 10) clock += '0';
-  clock += hh + '';
-  if (mm < 10) clock += '0';
-  clock += mm + '';
-  if (ss < 10) clock += '0';
-  clock += ss + '';
+  let clock = year + "";
+  if (month < 10) clock += "0";
+  clock += month + "";
+  if (day < 10) clock += "0";
+  clock += day + "";
+  if (hh < 10) clock += "0";
+  clock += hh + "";
+  if (mm < 10) clock += "0";
+  clock += mm + "";
+  if (ss < 10) clock += "0";
+  clock += ss + "";
 
   if (hm < 10) {
-    clock += '00';
+    clock += "00";
   } else if (hm < 100) {
-    clock += '0';
+    clock += "0";
   }
-  clock += hm + '';
+  clock += hm + "";
   return clock + res;
 };
 
 const urlredirect = () => {
   const ua = navigator.userAgent.toLowerCase();
   let thisUrl = window.location.href;
-  if (ua.match(/(ipod|iphone os|midp|ucweb|android|windows ce|windows mobile)/i)) {
-    window.location.href = thisUrl.replace('_p', '_m');
+  if (
+    ua.match(/(ipod|iphone os|midp|ucweb|android|windows ce|windows mobile)/i)
+  ) {
+    window.location.href = thisUrl.replace("_p", "_m");
   }
-  window.location.href = thisUrl.replace('_m', '_p');
+  window.location.href = thisUrl.replace("_m", "_p");
+};
+
+const Arabia_to_Chinese = (money) => {
+  //汉字的数字
+  var cnNums = new Array(
+    "零",
+    "壹",
+    "贰",
+    "叁",
+    "肆",
+    "伍",
+    "陆",
+    "柒",
+    "捌",
+    "玖"
+  );
+  //基本单位
+  var cnIntRadice = new Array("", "拾", "佰", "仟");
+  //对应整数部分扩展单位
+  var cnIntUnits = new Array("", "万", "亿", "兆");
+  //对应小数部分单位
+  var cnDecUnits = new Array("角", "分", "毫", "厘");
+  //整数金额时后面跟的字符
+  var cnInteger = "整";
+  //整型完以后的单位
+  var cnIntLast = "元";
+  //最大处理的数字
+  var maxNum = 999999999999999.9999;
+  //金额整数部分
+  var integerNum;
+  //金额小数部分
+  var decimalNum;
+  //输出的中文金额字符串
+  var chineseStr = "";
+  //分离金额后用的数组，预定义
+  var parts;
+  if (money == "") {
+    return "";
+  }
+  money = parseFloat(money);
+  if (money >= maxNum) {
+    //超出最大处理数字
+    return "";
+  }
+  if (money == 0) {
+    chineseStr = cnNums[0] + cnIntLast + cnInteger;
+    return chineseStr;
+  }
+  //转换为字符串
+  money = money.toString();
+  if (money.indexOf(".") == -1) {
+    integerNum = money;
+    decimalNum = "";
+  } else {
+    parts = money.split(".");
+    integerNum = parts[0];
+    decimalNum = parts[1].substr(0, 4);
+  }
+  //获取整型部分转换
+  if (parseInt(integerNum, 10) > 0) {
+    var zeroCount = 0;
+    var IntLen = integerNum.length;
+    for (var i = 0; i < IntLen; i++) {
+      var n = integerNum.substr(i, 1);
+      var p = IntLen - i - 1;
+      var q = p / 4;
+      var m = p % 4;
+      if (n == "0") {
+        zeroCount++;
+      } else {
+        if (zeroCount > 0) {
+          chineseStr += cnNums[0];
+        }
+        //归零
+        zeroCount = 0;
+        chineseStr += cnNums[parseInt(n)] + cnIntRadice[m];
+      }
+      if (m == 0 && zeroCount < 4) {
+        chineseStr += cnIntUnits[q];
+      }
+    }
+    chineseStr += cnIntLast;
+  }
+  //小数部分
+  if (decimalNum != "") {
+    var decLen = decimalNum.length;
+    for (var i = 0; i < decLen; i++) {
+      var n = decimalNum.substr(i, 1);
+      if (n != "0") {
+        chineseStr += cnNums[Number(n)] + cnDecUnits[i];
+      }
+    }
+  }
+  if (chineseStr == "") {
+    chineseStr += cnNums[0] + cnIntLast + cnInteger;
+  } else if (decimalNum == "") {
+    chineseStr += cnInteger;
+  }
+  return chineseStr;
 };
 
 export { Arabia_to_Chinese, guid, urlredirect };
