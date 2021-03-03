@@ -39,3 +39,4 @@ request.js
 mock.js
 
 /.cache
+baseURL.js
