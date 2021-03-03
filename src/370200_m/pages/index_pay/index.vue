@@ -136,6 +136,8 @@ export default {
             code: code,
           }).then((data) => {
             if (data.code === 0) {
+              localStorage.removeItem("openid");
+              localStorage.setItem("openid", data.data.openid);
               getOpenPlatformUserid({
                 openid: data.data.openid,
               }).then((resData) => {
@@ -144,7 +146,7 @@ export default {
                   localStorage.setItem("userId", resData.data.user_id);
                 } else {
                   Dialog.alert({
-                    message: res.msg,
+                    message: resData.msg,
                   }).then(() => {
                     // on close
                   });
@@ -152,7 +154,7 @@ export default {
               });
             } else {
               Dialog.alert({
-                message: res.msg,
+                message: data.msg,
               }).then(() => {
                 // on close
               });

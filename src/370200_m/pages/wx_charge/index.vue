@@ -6,7 +6,6 @@
         :options="option1"
         :lazy-render="false"
         get-container="body"
-        :title="title1"
         @change="change"
       />
       <!-- 挂载点 -->
@@ -14,7 +13,6 @@
         v-model="value2"
         :options="option2"
         get-container="body"
-        :title="title2"
         @change="change2"
       />
     </van-dropdown-menu>
@@ -69,7 +67,7 @@
 </template>
 
 <script>
-import { DropdownMenu, DropdownItem } from "vant";
+import { DropdownMenu, DropdownItem, Dialog } from "vant";
 import API from "../../config/api.js";
 import {
   queryOrderRecord,
@@ -82,15 +80,17 @@ export default {
   components: {
     "van-dropdown-menu": DropdownMenu,
     "van-dropdown-item": DropdownItem,
+    "van-dialog": Dialog,
   },
   data() {
     return {
-      model: [],
-      title1: "缴款状态",
-      title2: "缴款年份",
-      radio: "1",
-      value1: 0,
-      value2: "a",
+      model: [], //数据状态
+      title1: "缴款状态", //缴款状态title
+      title2: "缴款年份", //缴款年份title
+      titleValue1: "0,1,-1,2,3,4,5,6", //缴款状态value
+      titleValue2: "9999", //缴款年份value
+      value1: "0,1,-1,2,3,4,5,6",
+      value2: "9999",
       option1: [
         { text: "全部状态", value: "0,1,-1,2,3,4,5,6" },
         { text: "缴款成功", value: "1,2,3,4" },
@@ -98,10 +98,10 @@ export default {
         { text: "退款", value: "5,6" },
       ],
       option2: [
-        { text: "全部年份", value: 9999 },
-        { text: "2020", value: 2020 },
-        { text: "2021", value: 2021 },
-        { text: "2022", value: 2022 },
+        { text: "全部年份", value: "9999" },
+        { text: "2020", value: "2020" },
+        { text: "2021", value: "2021" },
+        { text: "2022", value: "2022" },
       ],
     };
   },
@@ -134,7 +134,7 @@ export default {
                   localStorage.setItem("userId", resData.data.user_id);
                 } else {
                   Dialog.alert({
-                    message: res.msg,
+                    message: data.msg,
                   }).then(() => {
                     // on close
                   });
@@ -142,7 +142,7 @@ export default {
               });
             } else {
               Dialog.alert({
-                message: res.msg,
+                message: data.msg,
               }).then(() => {
                 // on close
               });
@@ -160,15 +160,15 @@ export default {
       order_status: "0,1,-1,2,3,4,5,6",
       page_number: 1,
       page_size: "999",
-      // user_id: userId,
-      user_id: "1ea47231118ef8d82554fd04e1b6e8de",
+      user_id: userId,
+      // user_id: "1ea47231118ef8d82554fd04e1b6e8de",
     }).then((data) => {
       if (data.code === 0) {
         let a = JSON.parse(data.data.orderInfos);
         this.model = a.details;
       } else {
         Dialog.alert({
-          message: res.msg,
+          message: data.msg,
         }).then(() => {
           // on close
         });
@@ -177,27 +177,37 @@ export default {
   },
   methods: {
     change(value) {
-      if (value == "0,1,-1,2,3,4,5,6") {
-        this.title1 = "全部状态";
-      } else if (value == "1,2,3,4") {
-        this.title1 = "缴款成功";
-      } else if (value == "0,-1") {
-        this.title1 = "处理中";
-      } else {
-        this.title1 = "退款";
-      }
-      if (value == 2) {
-        this.model = [{ code: "12321", name: "车辆违规" }];
-      } else {
-        this.model = [
-          { code: "123321", name: "交通罚款|停车费|车辆违规" },
-          { code: "3566", name: "交通罚款|停车费|车辆违规" },
-          { code: "12321", name: "车辆违规" },
-        ];
-      }
+      this.titleValue1 = value;
+      this.list();
     },
     change2(value) {
-      this.title2 = value;
+      this.titleValue2 = value;
+      this.list();
+    },
+    list() {
+      let userId = localStorage.getItem("userId");
+      queryOrderRecord({
+        date_end:
+          this.titleValue2 == "9999" ? "20301230" : this.titleValue2 + "1230",
+        date_start:
+          this.titleValue2 == "9999" ? "20200101" : this.titleValue2 + "0101",
+        order_status: this.titleValue1,
+        page_number: 1,
+        page_size: "999",
+        user_id: userId,
+        // user_id: "1ea47231118ef8d82554fd04e1b6e8de",
+      }).then((data) => {
+        if (data.code === 0) {
+          let a = JSON.parse(data.data.orderInfos);
+          this.model = a.details;
+        } else {
+          Dialog.alert({
+            message: data.msg,
+          }).then(() => {
+            // on close
+          });
+        }
+      });
     },
   },
 };

@@ -136,9 +136,6 @@ export default {
   created() {
     console.log(this.$route.params);
   },
-  fanhui() {
-    window.history.go(-1);
-  },
   methods: {
     submit() {
       // 挂件调用
@@ -161,6 +158,9 @@ export default {
         }, //(可选，用户自定义参数，若存在自定义参数则会通过 POST 方法透传给 charge_url
         version_no: "1.1",
       });
+    },
+    fanhui() {
+      window.history.go(-1);
     },
     einvoiceUrl() {
       window.location.href = this.einvoice_url;

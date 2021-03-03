@@ -16,12 +16,12 @@
             <span>电子票<br />输入缴款码缴款</span>
           </div>
         </div>
-        <div class="box" @click="indexUrl">
+        <!-- <div class="box" @click="indexUrl">
           <img src="../../public/images/jiaoyu.png" alt="" />
           <div>
             <span>纸质票<br />输入票号缴款</span>
           </div>
-        </div>
+        </div> -->
       </div>
       <div class="footer">
         <div class="footer_span">
