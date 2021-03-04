@@ -64,106 +64,56 @@ export default {
       bottom_span3: "服务时间：法定工作日，09:00-17:00",
     };
   },
-  mounted() {},
+  mounted() {
+       ap.getAuthCode(
+        {
+          appId: "2019090566921553",
+          scopes: ["auth_base"],
+        },
+        function (res) {
+          getAliUserId({
+            authCode: res.authCode,
+          }).then((data) => {
+            if (data.code === 0) {
+              getOpenPlatformUserid({
+                aliUserId: data.data.aliUserId,
+              }).then((resData) => {
+                if (resData.code === 0) {
+                  localStorage.removeItem("userId");
+                  localStorage.setItem("userId", resData.data.user_id);
+                } else {
+                  Dialog.alert({
+                    message: resData.msg,
+                  }).then(() => {
+                    // on close
+                  });
+                }
+              });
+            } else {
+              Dialog.alert({
+                message: data.msg,
+              }).then(() => {
+                // on close
+              });
+            }
+          });
+        }
+      );
+  },
   methods: {
     indexPay() {
-      ap.getAuthCode(
-        {
-          appId: "2019090566921553",
-          scopes: ["auth_base"],
-        },
-        function (res) {
-          getAliUserId({
-            authCode: res.authCode,
-          }).then((data) => {
-            if (data.code === 0) {
-              getOpenPlatformUserid({
-                aliUserId: data.data.aliUserId,
-              }).then((resData) => {
-                if (resData.code === 0) {
-                  localStorage.removeItem("userId");
-                  localStorage.setItem("userId", resData.data.user_id);
-                  this.$router.push({
-                    path: "/index_pay",
-                    params: resData,
+      this.$router.push({
+                    // path: "/index_pay",
+                    name: "index_pay",
+               
                   });
-                } else {
-                  Dialog.alert({
-                    message: resData.msg,
-                  }).then(() => {
-                    // on close
-                  });
-                }
-              });
-            } else {
-              Dialog.alert({
-                message: data.msg,
-              }).then(() => {
-                // on close
-              });
-            }
-          });
-        }
-      );
     },
     indexUrl() {
-      // getOpenPlatformUserid({
-      //   aliUserId: 2088102241065681,
-      // }).then((resData) => {
-      //   if (resData.code === 0) {
-      //     localStorage.removeItem("userId");
-      //     localStorage.setItem("userId", resData.data.user_id);
-      //     this.$router.push({
-      //       path: "/order_record",
-      //       params: resData,
-      //     });
-      //   } else {
-      //     Dialog.alert({
-      //       message: resData.msg,
-      //     }).then(() => {
-      //       // on close
-      //     });
-      //   }
-      // });
-      ap.getAuthCode(
-        {
-          appId: "2019090566921553",
-          scopes: ["auth_base"],
-        },
-        function (res) {
-          getAliUserId({
-            authCode: res.authCode,
-          }).then((data) => {
-            if (data.code === 0) {
-              getOpenPlatformUserid({
-                aliUserId: data.data.aliUserId,
-              }).then((resData) => {
-                if (resData.code === 0) {
-                  localStorage.removeItem("userId");
-                  localStorage.setItem("userId", resData.data.user_id);
-                  alert("存储userid==" + resData.data.user_id);
-                  this.$router.push({
+   
+      this.$router.push({
                     path: "/order_record",
-                    params: resData,
+                
                   });
-                } else {
-                  Dialog.alert({
-                    message: resData.msg,
-                  }).then(() => {
-                    // on close
-                  });
-                }
-              });
-            } else {
-              Dialog.alert({
-                message: data.msg,
-              }).then(() => {
-                // on close
-              });
-            }
-          });
-        }
-      );
     },
   },
 };
