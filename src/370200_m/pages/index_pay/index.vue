@@ -15,7 +15,7 @@
       </div>
       <div class="form_box">
         <div class="form_label">
-          <img alt=""  src="../../public/images/payname.png" />
+          <img alt="" src="../../public/images/payname.png" />
           <span>缴款人</span>
         </div>
         <div class="form_input">
@@ -27,12 +27,12 @@
       </div>
       <div class="form_box">
         <div class="form_label">
-          <img alt=""  src="../../public/images/code.png" />
+          <img alt="" src="../../public/images/code.png" />
           <span>验证码</span>
         </div>
         <div class="form_input_code">
           <input placeholder="请输入验证码" v-model="code" />
-          <img alt=""  :src="codeUrlT" />
+          <img alt="" :src="codeUrlT" />
           <span style="color: #4690ff; font-size: 12px" @click="changeCode"
             >换一张</span
           >
@@ -138,12 +138,14 @@ export default {
             if (data.code === 0) {
               localStorage.removeItem("openid");
               localStorage.setItem("openid", data.data.openid);
+              alert("存储openid==" + data.data.openid);
               getOpenPlatformUserid({
                 openid: data.data.openid,
               }).then((resData) => {
                 if (resData.code === 0) {
                   localStorage.removeItem("userId");
                   localStorage.setItem("userId", resData.data.user_id);
+                  alert("存储userid==" + resData.data.user_id);
                 } else {
                   Dialog.alert({
                     message: resData.msg,
@@ -216,7 +218,7 @@ export default {
                 // on close
               });
         });
-      } 
+      }
     },
     //验证方法
     warning() {

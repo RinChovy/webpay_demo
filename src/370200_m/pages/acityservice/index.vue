@@ -107,6 +107,24 @@ export default {
       );
     },
     indexUrl() {
+      // getOpenPlatformUserid({
+      //   aliUserId: 2088102241065681,
+      // }).then((resData) => {
+      //   if (resData.code === 0) {
+      //     localStorage.removeItem("userId");
+      //     localStorage.setItem("userId", resData.data.user_id);
+      //     this.$router.push({
+      //       path: "/order_record",
+      //       params: resData,
+      //     });
+      //   } else {
+      //     Dialog.alert({
+      //       message: resData.msg,
+      //     }).then(() => {
+      //       // on close
+      //     });
+      //   }
+      // });
       ap.getAuthCode(
         {
           appId: "2019090566921553",
@@ -123,6 +141,7 @@ export default {
                 if (resData.code === 0) {
                   localStorage.removeItem("userId");
                   localStorage.setItem("userId", resData.data.user_id);
+                  alert("存储userid==" + resData.data.user_id);
                   this.$router.push({
                     path: "/order_record",
                     params: resData,

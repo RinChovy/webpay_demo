@@ -34,8 +34,10 @@
             <img src="../../public/images/phone/shoufeih.png" />
             <span class="left">缴款项目</span>
           </div>
-          <div class="bottom">
-            <span> {{ k.item_name_set }} </span>
+          <div v-for="i in JSON.parse(k.item_name_set)" :key="i">
+            <div class="bottom">
+              <span> {{ i.itemName }} </span>
+            </div>
           </div>
         </div>
         <div class="box_nei">
