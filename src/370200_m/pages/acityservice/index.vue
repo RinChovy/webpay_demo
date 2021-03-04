@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import { Button, Row, Col, Search } from "vant";
+import { Button, Row, Col, Search, Dialog } from "vant";
 import API from "../../config/api.js";
 import { getAliUserId, getOpenPlatformUserid } from "../../config/services.js";
 export default {
@@ -53,6 +53,7 @@ export default {
     "van-col": Col,
     "van-button": Button,
     "van-search": Search,
+    "van-dialog": Dialog,
   },
   data() {
     return {
@@ -66,28 +67,6 @@ export default {
   mounted() {},
   methods: {
     indexPay() {
-      this.$router.push({
-        path: "/index_pay",
-      });
-    },
-    // 6679766879a14dc689221d01c42fYA68
-    indexUrl() {
-      // let a = "6679766879a14dc689221d01c42fYA68";
-      // getAliUserId({
-      //   authCode: a,
-      // }).then((data) => {
-      //   console.log(data);
-      //   getOpenPlatformUserid({
-      //     aliUserId: data.aliUserId,
-      //   }).then((resData) => {
-      //     console.log(resData);
-      //   });
-      // });
-      localStorage.removeItem("userId");
-      localStorage.setItem("userId", "123456");
-      this.$router.push({
-        path: "/order_record",
-      });
       ap.getAuthCode(
         {
           appId: "2019090566921553",
@@ -105,12 +84,12 @@ export default {
                   localStorage.removeItem("userId");
                   localStorage.setItem("userId", resData.data.user_id);
                   this.$router.push({
-                    path: "/wx_charge",
+                    path: "/index_pay",
                     params: resData,
                   });
                 } else {
                   Dialog.alert({
-                    message: res.msg,
+                    message: resData.msg,
                   }).then(() => {
                     // on close
                   });
@@ -118,7 +97,47 @@ export default {
               });
             } else {
               Dialog.alert({
-                message: res.msg,
+                message: data.msg,
+              }).then(() => {
+                // on close
+              });
+            }
+          });
+        }
+      );
+    },
+    indexUrl() {
+      ap.getAuthCode(
+        {
+          appId: "2019090566921553",
+          scopes: ["auth_base"],
+        },
+        function (res) {
+          getAliUserId({
+            authCode: res.authCode,
+          }).then((data) => {
+            if (data.code === 0) {
+              getOpenPlatformUserid({
+                aliUserId: data.data.aliUserId,
+              }).then((resData) => {
+                if (resData.code === 0) {
+                  localStorage.removeItem("userId");
+                  localStorage.setItem("userId", resData.data.user_id);
+                  this.$router.push({
+                    path: "/order_record",
+                    params: resData,
+                  });
+                } else {
+                  Dialog.alert({
+                    message: resData.msg,
+                  }).then(() => {
+                    // on close
+                  });
+                }
+              });
+            } else {
+              Dialog.alert({
+                message: data.msg,
               }).then(() => {
                 // on close
               });
