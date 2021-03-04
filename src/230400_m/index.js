@@ -16,7 +16,6 @@ window.enableDev = true;
 const routes = [
   {
     path: '/',
-    // component: Home,
     redirect: '/home',
   },
   {
