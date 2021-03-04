@@ -207,7 +207,7 @@ export default {
           res.code === 0
             ? this.$router.push({
                 path: "/index_charge",
-                name: "Index_charge",
+                name: "index_charge",
                 params: res,
               })
             : Dialog.alert({
