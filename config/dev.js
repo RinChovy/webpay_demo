@@ -26,7 +26,7 @@ const bundler = new Bundler(file, options);
 app.use(mockMiddleware);
 app.use(bundler.middleware());
 
-getPort({ port: [80] }).then(port => {
+getPort({ port: [8080] }).then(port => {
   app.listen(port, () => {
     opn(`http://localhost:${port}/`);
   });
