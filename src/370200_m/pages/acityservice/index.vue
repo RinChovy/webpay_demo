@@ -86,7 +86,7 @@ export default {
       localStorage.removeItem("userId");
       localStorage.setItem("userId", "123456");
       this.$router.push({
-        path: "/wx_charge",
+        path: "/order_record",
       });
       ap.getAuthCode(
         {

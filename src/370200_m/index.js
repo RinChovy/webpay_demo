@@ -5,12 +5,12 @@ Vue.use(VueRouter);
 
 import App from "./index.vue";
 import Home from "./pages/home/index.vue";
-import Home_ali from "./pages/home_ali/index.vue";
+import Acityservice from "./pages/acityservice/index.vue";
 import Index_pay from "./pages/index_pay/index.vue";
 import Index_charge from "./pages/Index_charge/index.vue";
 import Success from "./pages/success/index.vue";
 import Fail from "./pages/fail/index.vue";
-import Wx_charge from "./pages/wx_charge";
+import Order_record from "./pages/order_record/index.vue";
 
 window.enableDev = true;
 
@@ -41,12 +41,12 @@ const routes = [
     component: Fail,
   },
   {
-    path: "/wx_charge", //微信小程序页
-    component: Wx_charge,
+    path: "/order_record", //微信小程序页
+    component: Order_record,
   },
   {
-    path: "/home_ali", //支付宝小程序页
-    component: Home_ali,
+    path: "/acityservice", //支付宝小程序页
+    component: Acityservice,
   },
 ];
 const router = new VueRouter({
