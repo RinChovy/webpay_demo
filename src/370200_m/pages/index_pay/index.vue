@@ -3,7 +3,7 @@
     <div class="form">
       <div class="form_box">
         <div class="form_label">
-          <img src="../../public/images/paycode.png" />
+          <img alt="" src="../../public/images/paycode.png" />
           <span>缴款码</span>
         </div>
         <div class="form_input">
@@ -15,7 +15,7 @@
       </div>
       <div class="form_box">
         <div class="form_label">
-          <img src="../../public/images/payname.png" />
+          <img alt=""  src="../../public/images/payname.png" />
           <span>缴款人</span>
         </div>
         <div class="form_input">
@@ -27,12 +27,12 @@
       </div>
       <div class="form_box">
         <div class="form_label">
-          <img src="../../public/images/code.png" />
+          <img alt=""  src="../../public/images/code.png" />
           <span>验证码</span>
         </div>
         <div class="form_input_code">
           <input placeholder="请输入验证码" v-model="code" />
-          <img :src="codeUrlT" />
+          <img alt=""  :src="codeUrlT" />
           <span style="color: #4690ff; font-size: 12px" @click="changeCode"
             >换一张</span
           >
@@ -216,8 +216,7 @@ export default {
                 // on close
               });
         });
-      } else {
-      }
+      } 
     },
     //验证方法
     warning() {
