@@ -18,7 +18,7 @@ window.enableDev = true;
 const routes = [
   {
     path: '/',
-    redirect: '/home',
+    redirect: '/phone_index',
   },
   {
     path: '/home', //首页
@@ -54,6 +54,11 @@ const routes = [
     path: '/acityservice', //支付宝小程序页
     name: '/acityservice',
     component: Acityservice,
+  },
+  {
+    path: '/phone_index', //首页
+    name: 'phone_index',
+    component: Home,
   },
   {
     path: '*',
