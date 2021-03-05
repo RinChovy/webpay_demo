@@ -36,7 +36,7 @@ export default {
   },
   //加载生命周期
   created() {
-    const url = location.hash;
+    const url = location.href;
     console.log("url为" + url);
     const rsa = url.substring(url.indexOf("=") + 1);
     console.log("rsa为" + rsa);
@@ -66,9 +66,22 @@ export default {
       window.location.href = this.url;
     },
     home() {
-      this.$router.push({
-        path: "/home",
-      });
+      const userId = localStorage.getItem("userId");
+      if (userId) {
+        if (navigator.userAgent.toLowerCase().indexOf("micromessenger") != -1) {
+          this.$router.push({
+            path: "/index_pay",
+          });
+        } else {
+          this.$router.push({
+            path: "/acityservice",
+          });
+        }
+      } else {
+        this.$router.push({
+          path: "/home",
+        });
+      }
     },
   },
 };

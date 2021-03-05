@@ -317,7 +317,7 @@ export default {
   }
 }
 .footerc {
-  font-size: 0.22px;
+  font-size: 14px;
   color: #999ea0;
   text-align: center;
   // height:0.92rem;
