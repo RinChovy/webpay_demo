@@ -60,10 +60,10 @@ const routes = [
     name: 'phone_index',
     component: Home,
   },
-  {
-    path: '*',
-    component: Error404,
-  },
+  // {
+  //   path: '*',
+  //   component: Error404,
+  // },
 ];
 const router = new VueRouter({
   mode: 'history',
