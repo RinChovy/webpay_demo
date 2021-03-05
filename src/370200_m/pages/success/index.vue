@@ -36,10 +36,10 @@ export default {
   },
   //加载生命周期
   created() {
-    let url = location.hash;
-    console.log(url);
-    let rsa = url.substring(url.indexOf("=") + 1);
-    console.log(rsa);
+    const url = location.hash;
+    console.log("url为" + url);
+    const rsa = url.substring(url.indexOf("=") + 1);
+    console.log("rsa为" + rsa);
     success({
       rsa: rsa,
     }).then((res) => {
