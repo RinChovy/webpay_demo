@@ -65,7 +65,9 @@ export default {
     };
   },
   mounted() {
-       ap.getAuthCode(
+    const user_id = localStorage.getItem("userId");
+    if (!user_id) {
+      ap.getAuthCode(
         {
           appId: "2019090566921553",
           scopes: ["auth_base"],
@@ -99,21 +101,19 @@ export default {
           });
         }
       );
+    }
   },
   methods: {
     indexPay() {
       this.$router.push({
-                    // path: "/index_pay",
-                    name: "index_pay",
-               
-                  });
+        // path: "/index_pay",
+        name: "index_pay",
+      });
     },
     indexUrl() {
-   
       this.$router.push({
-                    path: "/order_record",
-                
-                  });
+        path: "/order_record",
+      });
     },
   },
 };

@@ -91,77 +91,67 @@ export default {
     };
   },
   mounted() {
-    // getOpenid({
-    //   code: "041Gx5Ga1yjoBA0WerGa1Ideo13Gx5Gt",
-    // }).then((data) => {
-    //   if (data.code === 0) {
-    //     getOpenPlatformUserid({
-    //       openid: data.data.openid,
-    //     }).then((resData) => {
-    //       if (resData.code === 0) {
-    //         localStorage.removeItem("userId");
-    //         localStorage.setItem("userId", resData.data.user_id);
-    //       } else {
-    //         Dialog.alert({
-    //           message: res.msg,
-    //         }).then(() => {
-    //           // on close
-    //         });
-    //       }
-    //     });
-    //   } else {
-    //     Dialog.alert({
-    //       message: res.msg,
-    //     }).then(() => {
-    //       // on close
-    //     });
-    //   }
-    // });
     if (navigator.userAgent.toLowerCase().indexOf("micromessenger") != -1) {
       // 否则就是在微信中 引入微信js
       // document.writeln('<script src="https://res.wx.qq.com/open/js/jweixin-1.3.2.js"' + '>' + '<' + '/' + 'script>');
       // util.loadScript("https://res.wx.qq.com/open/js/jweixin-1.3.2.js");
       //  处理微信小程序内 webview 页面监听状态的方法
-      var url = location.href.split("#")[0];
-      let state = this.GetQueryValue("state");
-      console.log("url" + url);
-      console.log("start" + state);
-      if (typeof state != "undefined" && "" != typeof state) {
-        if (state == "cityService") {
-          // 验证是城市服务
-          // 获取code
-          let code = this.GetQueryValue("code");
-          console.log("code" + code);
-          getOpenid({
-            code: code,
-          }).then((data) => {
-            if (data.code === 0) {
-              localStorage.removeItem("openid");
-              localStorage.setItem("openid", data.data.openid);
-              alert("存储openid==" + data.data.openid);
-              getOpenPlatformUserid({
-                openid: data.data.openid,
-              }).then((resData) => {
-                if (resData.code === 0) {
-                  localStorage.removeItem("userId");
-                  localStorage.setItem("userId", resData.data.user_id);
-                  alert("存储userid==" + resData.data.user_id);
-                } else {
-                  Dialog.alert({
-                    message: resData.msg,
-                  }).then(() => {
-                    // on close
-                  });
-                }
-              });
-            } else {
-              Dialog.alert({
-                message: data.msg,
-              }).then(() => {
-                // on close
-              });
-            }
-          });
+      const openid = localStorage.getItem("openid");
+      if (openid) {
+        getOpenPlatformUserid({
+          openid: openid,
+        }).then((resData) => {
+          if (resData.code === 0) {
+            localStorage.removeItem("userId");
+            localStorage.setItem("userId", resData.data.user_id);
+          } else {
+            Dialog.alert({
+              message: resData.msg,
+            }).then(() => {
+              // on close
+            });
+          }
+        });
+      } else {
+        var url = location.href.split("#")[0];
+        let state = this.GetQueryValue("state");
+        console.log("url" + url);
+        console.log("start" + state);
+        if (typeof state != "undefined" && "" != typeof state) {
+          if (state == "cityService") {
+            // 验证是城市服务
+            // 获取code
+            let code = this.GetQueryValue("code");
+            console.log("code" + code);
+            getOpenid({
+              code: code,
+            }).then((data) => {
+              if (data.code === 0) {
+                localStorage.removeItem("openid");
+                localStorage.setItem("openid", data.data.openid);
+                getOpenPlatformUserid({
+                  openid: data.data.openid,
+                }).then((resData) => {
+                  if (resData.code === 0) {
+                    localStorage.removeItem("userId");
+                    localStorage.setItem("userId", resData.data.user_id);
+                  } else {
+                    Dialog.alert({
+                      message: resData.msg,
+                    }).then(() => {
+                      // on close
+                    });
+                  }
+                });
+              } else {
+                Dialog.alert({
+                  message: data.msg,
+                }).then(() => {
+                  // on close
+                });
+              }
+            });
+          }
         }
       }
     }

@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { Button, Row, Col, Search } from "vant";
+import { Button, Row, Col, Search, Dialog } from "vant";
 import { success } from "../../config/services.js";
 export default {
   name: "success",
@@ -25,6 +25,7 @@ export default {
     "van-col": Col,
     "van-button": Button,
     "van-search": Search,
+    "van-dialog": Dialog,
   },
   data() {
     return {
@@ -36,6 +37,7 @@ export default {
   //加载生命周期
   created() {
     let url = location.hash;
+    console.log(url);
     let rsa = url.substring(url.indexOf("=") + 1);
     console.log(rsa);
     success({
