@@ -17,49 +17,47 @@
       />
     </van-dropdown-menu>
     <div>
-      <div v-for="k in model" class="box" :key="k">
-        <div class="box_nei">
-          <div class="top">
-            <img src="../../public/images/phone/paycode.png" />
-            <span class="left">缴款码</span>
-            <span class="right" v-if="k.order_status == '3'">未缴款</span>
-            <span class="right" style="color: #00d414" v-else>已缴款</span>
-          </div>
-          <div class="bottom">
-            <span> {{ k.order_no }} </span>
-          </div>
-        </div>
-        <div class="box_nei">
-          <div class="top">
-            <img src="../../public/images/phone/shoufeih.png" />
-            <span class="left">缴款项目</span>
-          </div>
-          <div v-for="i in JSON.parse(k.item_name_set)" :key="i">
-            <div class="bottom">
-              <span> {{ i.itemName }} </span>
-            </div>
-          </div>
-        </div>
-        <div class="box_nei">
-          <div class="top">
-            <img src="../../public/images/phone/bianzhih.png" />
-            <span class="left">缴款时间</span>
-          </div>
-          <div class="bottom">
-            <span> {{ k.create_time }} </span>
-          </div>
-        </div>
-        <div class="box_bottom">
-          <div class="box_bottom_nei">
+      <div v-for="(k, index) in model" class="box" :key="index">
+        <div @click="details" :data-item="JSON.stringify(k)">
+          <div class="box_nei">
             <div class="top">
-              <img src="../../public/images/phone/jiaonah.png" />
-              <span class="left">缴款金额</span>
+              <span class="left"
+                ><span
+                  class="left_two_ts"
+                  v-for="(m, n) in JSON.parse(k.item_name_set)"
+                  :key="n"
+                >
+                  <span>{{ JSON.parse(k.item_name_set)[0].itemName }}...</span>
+                </span></span
+              >
+
+              <span class="left_two" style="color: #333333; font-weight: 600"
+                >￥{{ k.fmat }}</span
+              >
             </div>
-            <div class="bottom" style="height: 50px">
-              <span style="color: #ff2400" v-if="k.order_status == '3'">
-                {{ k.fmat }}元
-              </span>
-              <span style="color: #00d414" v-else> {{ k.fmat }}元 </span>
+          </div>
+          <div class="box_nei">
+            <div class="top">
+              <span class="left">{{ k.create_time }}</span>
+              <span
+                class="left_two"
+                style="color: #00d414"
+                v-if="
+                  k.order_status == '1' ||
+                  k.order_status == '2' ||
+                  k.order_status == '3' ||
+                  k.order_status == '4'
+                "
+                >已缴款</span
+              >
+              <span
+                class="left_two"
+                style="color: #00d414"
+                v-else-if="k.order_status == '5' || k.order_status == '6'"
+                ||
+                >已缴款</span
+              >
+              <span class="left_two" style="color: red" v-else>处理中</span>
             </div>
           </div>
         </div>
@@ -109,53 +107,55 @@ export default {
   },
   mounted() {
     //加载完成执行
-    if (navigator.userAgent.toLowerCase().indexOf("micromessenger") != -1) {
-      // 否则就是在微信中 引入微信js
-      // document.writeln('<script src="https://res.wx.qq.com/open/js/jweixin-1.3.2.js"' + '>' + '<' + '/' + 'script>');
-      // util.loadScript("https://res.wx.qq.com/open/js/jweixin-1.3.2.js");
-      //  处理微信小程序内 webview 页面监听状态的方法
-      var url = location.href.split("#")[0];
-      let state = this.GetQueryValue("state");
-      console.log("url" + url);
-      console.log("start" + state);
-      if (typeof state != "undefined" && "" != typeof state) {
-        if (state == "cityService") {
-          // 验证是城市服务
-          // 获取code
-          let code = this.GetQueryValue("code");
-          console.log("code" + code);
-          getOpenid({
-            code: code,
-          }).then((data) => {
-            if (data.code === 0) {
-              getOpenPlatformUserid({
-                openid: data.data.openid,
-              }).then((resData) => {
-                if (resData.code === 0) {
-                  localStorage.removeItem("userId");
-                  localStorage.setItem("userId", resData.data.user_id);
-                } else {
-                  Dialog.alert({
-                    message: data.msg,
-                  }).then(() => {
-                    // on close
-                  });
-                }
-              });
-            } else {
-              Dialog.alert({
-                message: data.msg,
-              }).then(() => {
-                // on close
-              });
-            }
-          });
+    var userId = localStorage.getItem("userId");
+    if (userId) {
+    } else {
+      if (navigator.userAgent.toLowerCase().indexOf("micromessenger") != -1) {
+        // 否则就是在微信中 引入微信js
+        // document.writeln('<script src="https://res.wx.qq.com/open/js/jweixin-1.3.2.js"' + '>' + '<' + '/' + 'script>');
+        // util.loadScript("https://res.wx.qq.com/open/js/jweixin-1.3.2.js");
+        //  处理微信小程序内 webview 页面监听状态的方法
+        var url = location.href.split("#")[0];
+        let state = this.GetQueryValue("state");
+        console.log("url" + url);
+        console.log("start" + state);
+        if (typeof state != "undefined" && "" != typeof state) {
+          if (state == "cityService") {
+            // 验证是城市服务
+            // 获取code
+            let code = this.GetQueryValue("code");
+            console.log("code" + code);
+            getOpenid({
+              code: code,
+            }).then((data) => {
+              if (data.code === 0) {
+                getOpenPlatformUserid({
+                  openid: data.data.openid,
+                }).then((resData) => {
+                  if (resData.code === 0) {
+                    localStorage.removeItem("userId");
+                    localStorage.setItem("userId", resData.data.user_id);
+                    userId = resData.data.user_id;
+                  } else {
+                    Dialog.alert({
+                      message: data.msg,
+                    }).then(() => {
+                      // on close
+                    });
+                  }
+                });
+              } else {
+                Dialog.alert({
+                  message: data.msg,
+                }).then(() => {
+                  // on close
+                });
+              }
+            });
+          }
         }
       }
     }
-    //完毕######
-    // alert(localStorage.getItem("userId"));
-    let userId = localStorage.getItem("userId");
     queryOrderRecord({
       date_end: "20300101",
       date_start: "20200101",
@@ -163,7 +163,7 @@ export default {
       page_number: 1,
       page_size: "999",
       user_id: userId,
-      // user_id: "1ea47231118ef8d82554fd04e1b6e8de",
+      // user_id: "fb1457e5680e1c80a97076976fae0764",
     }).then((data) => {
       if (data.code === 0) {
         let a = JSON.parse(data.data.orderInfos);
@@ -185,6 +185,14 @@ export default {
     change2(value) {
       this.titleValue2 = value;
       this.list();
+    },
+    // 获取dataitem
+    details(e) {
+      const item = e.currentTarget.dataset.item;
+      this.$router.push({
+        name: "order_record_details",
+        params: { item: item },
+      });
     },
     list() {
       let userId = localStorage.getItem("userId");
@@ -215,42 +223,45 @@ export default {
 };
 </script>
 <style scoped lang="scss">
+.left_two_ts {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 3;
+  font-size: 16px;
+  font-family: PingFang SC;
+  color: #464a4c;
+}
 .box {
-  width: 90%;
-  margin: 20px auto 0;
+  width: 100%;
+  border-bottom: 1px solid #e4e4e4;
   background: #ffffff;
-  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
-  border-radius: 14px;
+  // border-radius: 14px;
   .box_nei {
     width: 92%;
     margin: 0 auto;
     .top {
-      position: relative;
+      display: flex;
+      padding-top: 10px;
+      align-items: baseline;
       width: 100%;
-      height: 40px;
+      min-height: 40px;
       img {
         position: absolute;
-        top: 13px;
-        width: 25px;
+        top: 18px;
+        width: 20px;
       }
       .left {
-        position: absolute;
-        top: 15px;
-        left: 30px;
+        flex: 4;
         font-size: 16px;
         font-family: PingFang SC;
-        font-weight: bold;
         color: #464a4c;
       }
-
-      .right {
-        position: absolute;
-        top: 15px;
-        right: 0px;
+      .left_two {
+        flex: 3;
         font-size: 16px;
+        text-align: right;
         font-family: PingFang SC;
-        font-weight: bold;
-        color: #ff2400;
+        color: #999999;
       }
     }
     .bottom {
@@ -264,48 +275,7 @@ export default {
         font-size: 16px;
         font-family: PingFang SC;
         font-weight: 400;
-        color: #4690ff;
-      }
-    }
-  }
-  .box_bottom {
-    width: 100%;
-    border-top: 1px dashed #e4e4e4;
-    .box_bottom_nei {
-      width: 92%;
-      margin: 0 auto;
-    }
-    .top {
-      position: relative;
-      width: 100%;
-      height: 40px;
-      img {
-        position: absolute;
-        top: 13px;
-        width: 25px;
-      }
-      .left {
-        position: absolute;
-        top: 15px;
-        left: 30px;
-        font-size: 16px;
-        font-family: PingFang SC;
-        font-weight: bold;
         color: #464a4c;
-      }
-    }
-    .bottom {
-      position: relative;
-      width: 100%;
-      height: 40px;
-      span {
-        position: absolute;
-        top: 10px;
-        left: 0;
-        font-size: 16px;
-        font-family: PingFang SC;
-        font-weight: 400;
-        color: #4690ff;
       }
     }
   }
