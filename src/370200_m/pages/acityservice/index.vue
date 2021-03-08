@@ -67,7 +67,7 @@ export default {
   mounted() {
     const user_id = localStorage.getItem("userId");
     if (!user_id) {
-      ap.getAuthCode(
+      ap && ap.getAuthCode(
         {
           appId: "2019090566921553",
           scopes: ["auth_base"],
