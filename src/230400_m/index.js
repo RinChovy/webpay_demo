@@ -28,6 +28,12 @@ const routes = [
     name: 'index_pay',
     component: Index_pay,
   },
+
+  {
+    path: '/index_pay.do', //非税缴款界面
+    name: 'index_pay.do',
+    component: Index_pay,
+  },
   {
     path: '/index_charge', //缴款书界面
     name: 'index_charge',
@@ -43,13 +49,13 @@ const routes = [
     name: 'fail',
     component: Fail,
   },
-  {
-    path: '*',
-    component: Error404,
-  },
+  // {
+  //   path: '*',
+  //   component: Error404,
+  // },
 ];
 const router = new VueRouter({
-  mode: 'history',
+  // mode: 'history',
   base: '/230400_m',
   routes,
 });
