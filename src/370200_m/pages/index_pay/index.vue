@@ -44,7 +44,7 @@
       <div class="button_box">
         <button @click="submit">下一步</button>
       </div>
-      <div class="footerc" style="line-height: 0.42rem; margin-top: 2.4rem">
+      <div class="footerc" style="line-height: 20px; margin-top: 24px">
         <span style="display: block">版本所有：青岛市财政局</span>
         <span style="display: block">技术支持：福建博思软件股份有限公司</span>
         <span style="display: block">支持电话：010-53520976</span>

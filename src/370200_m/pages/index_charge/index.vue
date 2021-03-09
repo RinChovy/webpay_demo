@@ -139,9 +139,7 @@ export default {
   methods: {
     submit() {
       let userId = localStorage.getItem("userId");
-      alert("存储userId==" + userId);
       let openid = localStorage.getItem("openid");
-      alert("存储openid==" + openid);
       // 挂件调用
       if (
         "" != typeof userId &&

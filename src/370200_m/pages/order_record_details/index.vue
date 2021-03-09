@@ -73,14 +73,6 @@
             <span class="left">{{ i.itemName }}</span>
             <span class="right">{{ i.amt }}元</span>
           </div>
-          <div
-            class="item_box"
-            v-for="i in JSON.parse(model.item_name_set)"
-            :key="i"
-          >
-            <span class="left">{{ i.itemName }}</span>
-            <span class="right">{{ i.amt }}元</span>
-          </div>
         </div>
       </div>
       <!-- <div class="box_bottom">
