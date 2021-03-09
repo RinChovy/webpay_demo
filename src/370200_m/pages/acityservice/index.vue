@@ -60,47 +60,48 @@ export default {
       value: "value",
       good: "value",
       bottom_span: "主办单位：青岛市财政局",
-      bottom_span2: "服务电话：0532-58623183",
+      bottom_span2: "服务电话：010-53520976",
       bottom_span3: "服务时间：法定工作日，09:00-17:00",
     };
   },
   mounted() {
     const user_id = localStorage.getItem("userId");
     if (!user_id) {
-      ap && ap.getAuthCode(
-        {
-          appId: "2019090566921553",
-          scopes: ["auth_base"],
-        },
-        function (res) {
-          getAliUserId({
-            authCode: res.authCode,
-          }).then((data) => {
-            if (data.code === 0) {
-              getOpenPlatformUserid({
-                aliUserId: data.data.aliUserId,
-              }).then((resData) => {
-                if (resData.code === 0) {
-                  localStorage.removeItem("userId");
-                  localStorage.setItem("userId", resData.data.user_id);
-                } else {
-                  Dialog.alert({
-                    message: resData.msg,
-                  }).then(() => {
-                    // on close
-                  });
-                }
-              });
-            } else {
-              Dialog.alert({
-                message: data.msg,
-              }).then(() => {
-                // on close
-              });
-            }
-          });
-        }
-      );
+      ap &&
+        ap.getAuthCode(
+          {
+            appId: "2019090566921553",
+            scopes: ["auth_base"],
+          },
+          function (res) {
+            getAliUserId({
+              authCode: res.authCode,
+            }).then((data) => {
+              if (data.code === 0) {
+                getOpenPlatformUserid({
+                  aliUserId: data.data.aliUserId,
+                }).then((resData) => {
+                  if (resData.code === 0) {
+                    localStorage.removeItem("userId");
+                    localStorage.setItem("userId", resData.data.user_id);
+                  } else {
+                    Dialog.alert({
+                      message: resData.msg,
+                    }).then(() => {
+                      // on close
+                    });
+                  }
+                });
+              } else {
+                Dialog.alert({
+                  message: data.msg,
+                }).then(() => {
+                  // on close
+                });
+              }
+            });
+          }
+        );
     }
   },
   methods: {
