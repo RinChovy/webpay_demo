@@ -3,7 +3,7 @@
     <div class="form">
       <div class="form_box">
         <div class="form_label">
-          <img src="../../public/images/phone/paycode.png" />
+          <img alt='' src="../../public/images/phone/paycode.png" />
           <span>缴款码</span>
         </div>
         <div class="form_span">
@@ -12,7 +12,7 @@
       </div>
       <div class="form_box">
         <div class="form_label">
-          <img src="../../public/images/phone/paypeople.png" />
+          <img alt='' src="../../public/images/phone/paypeople.png" />
           <span>缴款人</span>
         </div>
         <div class="form_span">
@@ -21,7 +21,7 @@
       </div>
       <div class="form_box">
         <div class="form_label">
-          <img src="../../public/images/phone/danwei.png" />
+          <img alt='' src="../../public/images/phone/danwei.png" />
           <span>执收单位名称</span>
         </div>
         <div class="form_span">
@@ -30,7 +30,7 @@
       </div>
       <div class="form_box" style="height: auto">
         <div class="form_label">
-          <img src="../../public/images/phone/xiangmu.png" />
+          <img alt='' src="../../public/images/phone/xiangmu.png" />
           <span>收费项目</span>
         </div>
         <div v-for="(v, k) in queryItem" :key="k">
@@ -42,7 +42,7 @@
       </div>
       <div class="form_box">
         <div class="form_label">
-          <img src="../../public/images/phone/bianzhih.png" />
+          <img alt='' src="../../public/images/phone/bianzhih.png" />
           <span>编制日期</span>
         </div>
         <div class="form_span">
@@ -51,7 +51,7 @@
       </div>
       <div class="form_box">
         <div class="form_label">
-          <img src="../../public/images/phone/jiaonah.png" />
+          <img alt='' src="../../public/images/phone/jiaonah.png" />
           <span>缴纳金额</span>
         </div>
         <div class="form_span">
@@ -60,7 +60,7 @@
       </div>
       <div class="form_box">
         <div class="form_label">
-          <img src="../../public/images/phone/beizhuh.png" />
+          <img alt='' src="../../public/images/phone/beizhuh.png" />
           <span>备注</span>
         </div>
         <div class="form_span">
@@ -77,7 +77,7 @@
         <button @click="fanhui">返回</button>
       </div>
     </div>
-    <img
+    <img alt=''
       class="paied"
       src="../../public/images/phone/paied.png"
       v-if="status != 0"
