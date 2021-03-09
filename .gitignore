@@ -34,6 +34,14 @@ screenshot
 .eslintcache
 
 build.js
-layout
-vue
 
+# dev test
+request.js
+mock.js
+dev-history.js
+
+/.cache
+
+webpay_370200
+webpay_370200pc
+test
