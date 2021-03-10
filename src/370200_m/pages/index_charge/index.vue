@@ -141,6 +141,7 @@ export default {
     this.payer = dateString.data.payBook.payer;
     this.exeAgencyName = dateString.data.payBook.exeAgencyName;
     this.queryItem = JSON.parse(dateString.data.itemDetails);
+    this.fillDate = this.time(dateString.data.payBook.fillDate);
     this.totalAmount = parseFloat(
       dateString.data.payBook.totalAmount / 100
     ).toFixed(2);

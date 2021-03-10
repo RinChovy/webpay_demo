@@ -60,7 +60,7 @@ export default {
       value: "value",
       good: "value",
       bottom_span: "主办单位：青岛市财政局",
-      bottom_span2: "服务电话：010-53520976",
+      bottom_span2: "服务电话：0532-85856831",
       bottom_span3: "服务时间：法定工作日，09:00-17:00",
     };
   },
