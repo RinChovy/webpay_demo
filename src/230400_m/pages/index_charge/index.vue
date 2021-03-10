@@ -105,36 +105,46 @@ export default {
   data() {
     return {
       //商户号
-      merchant_no: localStorage.getItem("data").data.merchant_no,
+      merchant_no: "",
       //缴款码
-      payCode: localStorage.getItem("data").data.payBook.payCode,
+      payCode: "",
       //缴款人
-      payer: localStorage.getItem("data").data.payBook.payer,
+      payer: "",
       //执收单位名称
-      exeAgencyName: localStorage.getItem("data").data.payBook.exeAgencyName,
+      exeAgencyName: "",
       //收费项目
-      queryItem: JSON.parse(localStorage.getItem("data").data.itemDetails),
+      queryItem: [],
       //编制日期
-      fillDate: this.time(localStorage.getItem("data").data.payBook.fillDate),
+      fillDate: "",
       //缴纳金额
-      totalAmount: parseFloat(
-        localStorage.getItem("data").data.payBook.totalAmount / 100
-      ).toFixed(2),
+      totalAmount: "",
+      //缴纳金额化为分
+      totalAmount_fen: "",
       //备注
       remarks: "无",
       //缴款书状态
-      status: localStorage.getItem("data").data.status,
+      status: "",
       //电子票地址
-      einvoice_url: localStorage.getItem("data").data.einvoice_url,
+      einvoice_url: "",
     };
   },
   //加载前生命周期
-  beforeCreate() {
-    console.log(localStorage.getItem("data"));
-  },
+  beforeCreate() {},
   //初始生命周期
   created() {
-    console.log(localStorage.getItem("data"));
+    console.log("加载后" + localStorage.getItem("data"));
+    const dateString = JSON.parse(localStorage.getItem("data"));
+    this.merchant_no = dateString.data.merchant_no;
+    this.payCode = dateString.data.payBook.payCode;
+    this.payer = dateString.data.payBook.payer;
+    this.exeAgencyName = dateString.data.payBook.exeAgencyName;
+    this.queryItem = JSON.parse(dateString.data.itemDetails);
+    this.totalAmount = parseFloat(
+      dateString.data.payBook.totalAmount / 100
+    ).toFixed(2);
+    this.totalAmount_fen = dateString.data.payBook.totalAmount;
+    this.status = dateString.data.status;
+    this.einvoice_url = dateString.data.einvoice_url;
   },
   methods: {
     submit() {
@@ -143,7 +153,7 @@ export default {
         container: "widget", //挂件在当前页面放置的控件ID
         merchant_no: this.merchant_no, //分配的商户号
         merchant_order_no: guid(), //订单在商户系统中的订单号
-        amount: localStorage.getItem("data").data.payBook.totalAmount, //订单价格，单位：人民币 分
+        amount: this.totalAmount_fen, //订单价格，单位：人民币 分
         effective_time: "1c",
         device_type: "phone", //设备类型
         widget_param: {

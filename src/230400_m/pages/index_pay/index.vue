@@ -117,7 +117,7 @@ export default {
     },
     // 提交成功
     handleSuccess(data) {
-      localStorage.setItem("data", data);
+      localStorage.setItem("data", JSON.stringify(data));
       this.$router.push({
         path: "/index_charge",
         name: "index_charge",

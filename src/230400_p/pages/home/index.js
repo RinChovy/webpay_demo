@@ -56,7 +56,7 @@ class NonTaxPay extends React.Component {
   };
   // 提交成功
   handleSuccess = (data) => {
-    localStorage.setItem("data", data);
+    localStorage.setItem("data", JSON.stringify(data));
     this.props.history.push({
       pathname: "/index_charge",
       // query: res.data,

@@ -37,7 +37,7 @@ class NonTaxPayChange extends React.Component {
     window.location.href = this.state.einvoice_url;
   };
   componentDidMount() {
-    const query = localStorage.getItem("data");
+    const query = JSON.parse(localStorage.getItem("data"));
     const queryJson = query.payBook;
     const queryItem = JSON.parse(query.itemDetails);
     let status = query.status; //缴款状态
@@ -73,25 +73,28 @@ class NonTaxPayChange extends React.Component {
       einvoice_url: einvoice_url,
     });
     // 挂件调用
-    thirdpay_widget.init({
-      container: "widget", //挂件在当前页面放置的控件ID
-      merchant_no: query.merchant_no, //分配的商户号
-      merchant_order_no: guid(), //订单在商户系统中的订单号
-      amount: queryJson.totalAmount, //订单价格，单位：人民币 分
-      effective_time: "1c",
-      device_type: "pc", //设备类型
-      widget_param: {
-        paycode: payCode,
-      }, //控件参数，常用来传递缴款服务所需定义的内容，如，非税paycode直缴或传入相关缴费信息生成缴款书
-      charge_url: api.createCharge, //商户服务端创建charge时的controller地址
-      charge_param: {
-        a: "a",
-        b: "b",
-        regionCode: api.region,
-        frontCallBackUrl: api.callback,
-      }, //(可选，用户自定义参数，若存在自定义参数则会通过 POST 方法透传给 charge_url
-      version_no: "1.1",
-    });
+    setTimeout(() => {
+      thirdpay_widget &&
+        thirdpay_widget.init({
+          container: "widget", //挂件在当前页面放置的控件ID
+          merchant_no: query.merchant_no, //分配的商户号
+          merchant_order_no: guid(), //订单在商户系统中的订单号
+          amount: queryJson.totalAmount, //订单价格，单位：人民币 分
+          effective_time: "1c",
+          device_type: "pc", //设备类型
+          widget_param: {
+            paycode: payCode,
+          }, //控件参数，常用来传递缴款服务所需定义的内容，如，非税paycode直缴或传入相关缴费信息生成缴款书
+          charge_url: api.createCharge, //商户服务端创建charge时的controller地址
+          charge_param: {
+            a: "a",
+            b: "b",
+            regionCode: api.region,
+            frontCallBackUrl: api.callback,
+          }, //(可选，用户自定义参数，若存在自定义参数则会通过 POST 方法透传给 charge_url
+          version_no: "1.1",
+        });
+    }, 100);
   }
 
   render() {

@@ -7,7 +7,7 @@ import style from "../../public/css/index.css";
 class NonTaxPay extends React.Component {
   formRef = React.createRef();
   state = {
-    warnSpan: "“非税缴费技术服务电话 0532-58623183”",
+    warnSpan: "“非税缴费技术服务电话 010-53520976”",
     codeUrl: api.getCo, //验证码
   };
 
@@ -54,7 +54,7 @@ class NonTaxPay extends React.Component {
   };
   // 提交成功
   handleSuccess = (data) => {
-    localStorage.setItem("data", data);
+    localStorage.setItem("data", JSON.stringify(data));
     this.props.history.push({
       pathname: "/index_charge",
       // query: res.data,
