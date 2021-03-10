@@ -196,19 +196,26 @@ export default {
           payPeople: this.payPeople,
           code: this.code,
         }).then((res) => {
-          res.code === 0
-            ? this.$router.push({
-                path: "/index_charge",
-                name: "index_charge",
-                params: res,
-              })
-            : Dialog.alert({
-                message: res.msg,
-              }).then(() => {
-                // on close
-              });
+          res.code === 0 ? this.handleSuccess(res) : this.handleError(res.msg);
         });
       }
+    },
+    // 提交成功
+    handleSuccess(data) {
+      localStorage.setItem("data", data);
+      this.$router.push({
+        path: "/index_charge",
+        name: "index_charge",
+      });
+    },
+    // 提交失败1
+    handleError(err) {
+      localStorage.removeItem("data");
+      Dialog.alert({
+        message: err.msg,
+      }).then(() => {
+        // on close
+      });
     },
     //验证方法
     warning() {

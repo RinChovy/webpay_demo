@@ -105,36 +105,36 @@ export default {
   data() {
     return {
       //商户号
-      merchant_no: this.$route.params.data.merchant_no,
+      merchant_no: localStorage.getItem("data").data.merchant_no,
       //缴款码
-      payCode: this.$route.params.data.payBook.payCode,
+      payCode: localStorage.getItem("data").data.payBook.payCode,
       //缴款人
-      payer: this.$route.params.data.payBook.payer,
+      payer: localStorage.getItem("data").data.payBook.payer,
       //执收单位名称
-      exeAgencyName: this.$route.params.data.payBook.exeAgencyName,
+      exeAgencyName: localStorage.getItem("data").data.payBook.exeAgencyName,
       //收费项目
-      queryItem: JSON.parse(this.$route.params.data.itemDetails),
+      queryItem: JSON.parse(localStorage.getItem("data").data.itemDetails),
       //编制日期
-      fillDate: this.time(this.$route.params.data.payBook.fillDate),
+      fillDate: this.time(localStorage.getItem("data").data.payBook.fillDate),
       //缴纳金额
       totalAmount: parseFloat(
-        this.$route.params.data.payBook.totalAmount / 100
+        localStorage.getItem("data").data.payBook.totalAmount / 100
       ).toFixed(2),
       //备注
       remarks: "无",
       //缴款书状态
-      status: this.$route.params.data.status,
+      status: localStorage.getItem("data").data.status,
       //电子票地址
-      einvoice_url: this.$route.params.data.einvoice_url,
+      einvoice_url: localStorage.getItem("data").data.einvoice_url,
     };
   },
   //加载前生命周期
   beforeCreate() {
-    console.log(this.$route.params);
+    console.log(localStorage.getItem("data"));
   },
   //初始生命周期
   created() {
-    console.log(this.$route.params);
+    console.log(localStorage.getItem("data"));
   },
   methods: {
     submit() {
@@ -150,7 +150,7 @@ export default {
           container: "widget", //挂件在当前页面放置的控件ID
           merchant_no: this.merchant_no, //分配的商户号
           merchant_order_no: guid(), //订单在商户系统中的订单号
-          amount: this.$route.params.data.payBook.totalAmount, //订单价格，单位：人民币 分
+          amount: localStorage.getItem("data").data.payBook.totalAmount, //订单价格，单位：人民币 分
           effective_time: "1c",
           device_type: "phone", //设备类型
           widget_param: {
@@ -174,7 +174,7 @@ export default {
           container: "widget", //挂件在当前页面放置的控件ID
           merchant_no: this.merchant_no, //分配的商户号
           merchant_order_no: guid(), //订单在商户系统中的订单号
-          amount: this.$route.params.data.payBook.totalAmount, //订单价格，单位：人民币 分
+          amount: localStorage.getItem("data").data.payBook.totalAmount, //订单价格，单位：人民币 分
           effective_time: "1c",
           device_type: "phone", //设备类型
           widget_param: {

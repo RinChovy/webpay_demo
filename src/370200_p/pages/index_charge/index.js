@@ -37,12 +37,9 @@ class NonTaxPayChange extends React.Component {
     window.location.href = this.state.einvoice_url;
   };
   componentDidMount() {
-    const query = this.props.location.query;
-    // console.log(query);
+    const query = localStorage.getItem("data");
     const queryJson = query.payBook;
     const queryItem = JSON.parse(query.itemDetails);
-    // console.log(666);
-    // console.log(queryItem);
     let status = query.status; //缴款状态
     let exeAgencyCode = queryJson.exeAgencyCode; //执收单位编码
     let exeAgencyName = queryJson.exeAgencyName; //执收单位名称

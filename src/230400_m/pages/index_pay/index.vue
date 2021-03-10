@@ -100,26 +100,37 @@ export default {
     //提交下一步
     submit() {
       this.warning();
-      if (this.payCodeWarn == "" && this.payPeopleWarn == "" && this.codeWarn == "") {
+      if (
+        this.payCodeWarn == "" &&
+        this.payPeopleWarn == "" &&
+        this.codeWarn == ""
+      ) {
         queryPayInfo({
           payCode: this.payCode,
           payPeople: this.payPeople,
           code: this.code,
         }).then((res) => {
-          res.code === 0
-            ? this.$router.push({
-                path: "/index_charge",
-                name: "index_charge",
-                params: res,
-              })
-            : Dialog.alert({
-                message: res.msg,
-              }).then(() => {
-                // on close
-              });
+          res.code === 0 ? this.handleSuccess(res) : this.handleError(res.msg);
         });
       } else {
       }
+    },
+    // 提交成功
+    handleSuccess(data) {
+      localStorage.setItem("data", data);
+      this.$router.push({
+        path: "/index_charge",
+        name: "index_charge",
+      });
+    },
+    // 提交失败1
+    handleError(err) {
+      localStorage.removeItem("data");
+      Dialog.alert({
+        message: err.msg,
+      }).then(() => {
+        // on close
+      });
     },
     //验证方法
     warning() {

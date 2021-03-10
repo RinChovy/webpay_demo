@@ -51,15 +51,23 @@ class NonTaxPay extends React.Component {
       payPeople: values.payName,
       code: values.verificationCode,
     }).then((res) => {
-      res.code === 0
-        ? this.props.history.push({
-            pathname: "/index_charge",
-            query: res.data,
-          })
-        : this.openNotificationWithIcon("error", res.msg);
+      res.code === 0 ? this.handleSuccess(res.data) : this.handleError(res.msg);
     });
   };
-  //提交失败
+  // 提交成功
+  handleSuccess = (data) => {
+    localStorage.setItem("data", data);
+    this.props.history.push({
+      pathname: "/index_charge",
+      // query: res.data,
+    });
+  };
+  // 提交失败1
+  handleError = (err) => {
+    localStorage.removeItem("data");
+    this.openNotificationWithIcon("error", err);
+  };
+  //提交失败2
   onFinishFailed = (values) => {
     console.log("fail:", values);
   };
