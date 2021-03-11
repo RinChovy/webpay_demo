@@ -47,7 +47,7 @@
       <div class="footerc" style="line-height: 20px; margin-top: 24px">
         <span style="display: block">版本所有：青岛市财政局</span>
         <span style="display: block">技术支持：福建博思软件股份有限公司</span>
-        <span style="display: block">支持电话：010-53520976</span>
+        <span style="display: block">支持电话：0532-85856831</span>
       </div>
     </div>
   </div>
@@ -196,19 +196,27 @@ export default {
           payPeople: this.payPeople,
           code: this.code,
         }).then((res) => {
-          res.code === 0
-            ? this.$router.push({
-                path: "/index_charge",
-                name: "index_charge",
-                params: res,
-              })
-            : Dialog.alert({
-                message: res.msg,
-              }).then(() => {
-                // on close
-              });
+          res.code === 0 ? this.handleSuccess(res) : this.handleError(res.msg);
         });
       }
+    },
+    // 提交成功
+
+    handleSuccess(data) {
+      localStorage.setItem("data", JSON.stringify(data));
+      this.$router.push({
+        path: "/index_charge",
+        name: "index_charge",
+      });
+    },
+    // 提交失败1
+    handleError(err) {
+      localStorage.removeItem("data");
+      Dialog.alert({
+        message: err.msg,
+      }).then(() => {
+        // on close
+      });
     },
     //验证方法
     warning() {

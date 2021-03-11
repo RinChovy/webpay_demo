@@ -1,13 +1,13 @@
-import React from 'react';
-import { Form, Input, Button, Row, Col, notification } from 'antd';
-import { queryPayInfo } from '../../service/services';
-import { api } from '../../service/api';
-import style from '../../public/css/index.css';
+import React from "react";
+import { Form, Input, Button, Row, Col, notification } from "antd";
+import { queryPayInfo } from "../../service/services";
+import { api } from "../../service/api";
+import style from "../../public/css/index.css";
 
 class NonTaxPay extends React.Component {
   formRef = React.createRef();
   state = {
-    warnSpan: '“非税缴费技术服务电话 0532-58623183”',
+    warnSpan: "“非税缴费技术服务电话 0532-85856831”",
     codeUrl: api.getCo, //验证码
   };
 
@@ -15,7 +15,7 @@ class NonTaxPay extends React.Component {
   // 提示信息方法
   openNotificationWithIcon = (type, msg) => {
     notification[type]({
-      message: '查询错误',
+      message: "查询错误",
       description: msg,
     });
   };
@@ -34,32 +34,40 @@ class NonTaxPay extends React.Component {
   //验证码时间戳
   chgUrl(url) {
     var timestamp = new Date().valueOf();
-    if (url.indexOf('&') >= 0) {
-      url = url + '×tamp=' + timestamp;
+    if (url.indexOf("&") >= 0) {
+      url = url + "×tamp=" + timestamp;
     } else {
       // url = url + '?timestamp=' + timestamp;
-      url = url + '?timestamp=' + timestamp;
+      url = url + "?timestamp=" + timestamp;
     }
     return url;
   }
   //提交成功
-  handleFormSubmit = values => {
+  handleFormSubmit = (values) => {
     queryPayInfo({
       payCode: values.payCode,
       payPeople: values.payName,
       code: values.verificationCode,
-    }).then(res => {
-      res.code === 0
-        ? this.props.history.push({
-            pathname: '/index_charge',
-            query: res.data,
-          })
-        : this.openNotificationWithIcon('error', res.msg);
+    }).then((res) => {
+      res.code === 0 ? this.handleSuccess(res.data) : this.handleError(res.msg);
     });
   };
+  // 提交成功
+  handleSuccess = (data) => {
+    localStorage.setItem("data", JSON.stringify(data));
+    this.props.history.push({
+      pathname: "/index_charge",
+      // query: res.data,
+    });
+  };
+  // 提交失败1
+  handleError = (err) => {
+    localStorage.removeItem("data");
+    this.openNotificationWithIcon("error", err);
+  };
   //提交失败
-  onFinishFailed = values => {
-    console.log('fail:', values);
+  onFinishFailed = (values) => {
+    console.log("fail:", values);
   };
   render() {
     const { codeUrl, warnSpan } = this.state;
@@ -80,14 +88,14 @@ class NonTaxPay extends React.Component {
     return (
       <div>
         <div>
-          <div className='outForm_pay_qingdao'>
-            <div className='middle_pay'>
-              <div className='middle_pay_left'></div>
-              <div className='middle_pay_right'>
-                <div className='middle_pay_right_org'>
+          <div className="outForm_pay_qingdao">
+            <div className="middle_pay">
+              <div className="middle_pay_left"></div>
+              <div className="middle_pay_right">
+                <div className="middle_pay_right_org">
                   <Form
                     {...layout}
-                    name='basic'
+                    name="basic"
                     initialValues={{
                       remember: true,
                     }}
@@ -95,17 +103,21 @@ class NonTaxPay extends React.Component {
                     onFinish={this.handleFormSubmit}
                     onFinishFailed={this.onFinishFailed}
                   >
-                    <div className='middle_box'>
-                      <span style={{ fontSize: 15, color: '#787584' }}>缴款通知书编号</span>
-                      <span style={{ fontSize: 15, color: 'red' }}>或</span>
-                      <span style={{ fontSize: 15, color: '#787584' }}>交罚决定书编号:</span>
+                    <div className="middle_box">
+                      <span style={{ fontSize: 15, color: "#787584" }}>
+                        缴款通知书编号
+                      </span>
+                      <span style={{ fontSize: 15, color: "red" }}>或</span>
+                      <span style={{ fontSize: 15, color: "#787584" }}>
+                        交罚决定书编号:
+                      </span>
                       <Form.Item
                         style={{ marginTop: 6 }}
-                        name='payCode'
+                        name="payCode"
                         rules={[
                           {
                             required: true,
-                            message: '请输入缴款码',
+                            message: "请输入缴款码",
                           },
                           // {
                           //   pattern: api.regular,
@@ -113,47 +125,55 @@ class NonTaxPay extends React.Component {
                           // },
                         ]}
                       >
-                        <Input size='large' style={{ width: 376 }} />
+                        <Input size="large" style={{ width: 376 }} />
                       </Form.Item>
 
-                      <span style={{ fontSize: 15, color: '#787584' }}>缴款人：</span>
+                      <span style={{ fontSize: 15, color: "#787584" }}>
+                        缴款人：
+                      </span>
 
                       <Form.Item
                         style={{ marginTop: 6 }}
-                        name='payName'
+                        name="payName"
                         rules={[
                           {
                             required: true,
-                            message: '请输入缴款人',
+                            message: "请输入缴款人",
                           },
                         ]}
                       >
-                        <Input size='large' style={{ width: 376 }} />
+                        <Input size="large" style={{ width: 376 }} />
                       </Form.Item>
 
-                      <span style={{ fontSize: 15, color: '#787584' }}>验证码：</span>
+                      <span style={{ fontSize: 15, color: "#787584" }}>
+                        验证码：
+                      </span>
                       <Row gutter={8}>
                         <Col span={12}>
                           <Form.Item
                             style={{ marginTop: 6 }}
-                            name='verificationCode'
+                            name="verificationCode"
                             rules={[
                               {
                                 required: true,
-                                message: '请输入验证码',
+                                message: "请输入验证码",
                               },
                             ]}
                           >
-                            <Input size='large' style={{ width: 180 }} />
+                            <Input size="large" style={{ width: 180 }} />
                           </Form.Item>
                         </Col>
                         <Col span={12}>
-                          <img className='verificationCode' alt='验证码' src={codeUrl} />
+                          <img
+                            className="verificationCode"
+                            alt="验证码"
+                            src={codeUrl}
+                          />
                           <span
                             style={{
                               marginLeft: 20,
-                              cursor: 'pointer',
-                              color: '#1890ff',
+                              cursor: "pointer",
+                              color: "#1890ff",
                             }}
                             onClick={this.changeImg}
                           >
@@ -165,24 +185,28 @@ class NonTaxPay extends React.Component {
 
                     <Form.Item {...tailLayout} style={{ marginTop: 10 }}>
                       <Button
-                        className='button_submit'
-                        size='large'
-                        type='primary'
-                        htmlType='submit'
+                        className="button_submit"
+                        size="large"
+                        type="primary"
+                        htmlType="submit"
                       >
                         下一步
                       </Button>
 
-                      <Button className='button_clear' size='large' onClick={this.onReset}>
+                      <Button
+                        className="button_clear"
+                        size="large"
+                        onClick={this.onReset}
+                      >
                         清空
                       </Button>
                     </Form.Item>
                     <div
                       style={{
-                        marginTop: '-9px',
-                        width: '100%',
-                        textAlign: 'center',
-                        fontWeight: 'bold',
+                        marginTop: "-9px",
+                        width: "100%",
+                        textAlign: "center",
+                        fontWeight: "bold",
                       }}
                     >
                       <span>{warnSpan}</span>
