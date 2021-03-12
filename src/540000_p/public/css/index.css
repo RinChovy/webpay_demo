@@ -9,6 +9,15 @@ textarea {
   bottom: -40px;
   left: 150px;
 }
+.body {
+  padding: 5px;
+  width: 100%;
+  background: url(../images/xizang/background.png);
+}
+.body_icon {
+  width: 1440px;
+  margin: 0 auto;
+}
 .outForm_pay {
   position: relative;
   width: 1440px;

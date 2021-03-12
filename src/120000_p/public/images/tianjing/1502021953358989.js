@@ -72,7 +72,7 @@ document.writeln(
 
 // <!-- add by 2017-09-05 -->
 document.writeln(
-  "<tr><td align='left' style='padding-right:50px;'><a href='http://114.55.181.28/errorInfo/jcInfo/5d62e772-2660-44d2-9ec6-df31a87fc8cd-3096322264' target='_blank'><image src='./resources/images/tianjing/picture/1709051140202282682.png'></a></td>"
+  "<tr><td align='left' style='padding-right:50px;'><a href='http://114.55.181.28/errorInfo/jcInfo/5d62e772-2660-44d2-9ec6-df31a87fc8cd-3096322264' target='_blank'><image src='http://www.tj.gov.cn/images/jiucuo.png'></a></td>"
 );
 // <!-- add end -->
 
@@ -86,7 +86,7 @@ document.writeln("主办单位：天津市财政局<br>");
 document.writeln("地址：和平区曲阜道4号 电话：23303740（总机）<br>");
 document.writeln("网站标识码：12BM010001  津ICP备05005594号-1");
 document.writeln(
-  "<a target='_blank' href='http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=12010102000168' style='display:inline-block;text-decoration:none;height:20px;line-height:20px;'><img src='./resources/images/tianjing/picture/1709121500158758294.png' style='float:left;'/><p style='float:left;height:20px;line-height:20px;margin: 5px 0px 0px 5px; color:#ffffff;'>津公网安备 12010302000991号</p></a>"
+  "<a target='_blank' href='http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=12010102000168' style='display:inline-block;text-decoration:none;height:20px;line-height:20px;'><img src='http://www.tj.gov.cn/images/P020191221473156890042.png' style='float:left;'/><p style='float:left;height:20px;line-height:20px;margin: 5px 0px 0px 5px; color:#ffffff;'>津公网安备 12010302000991号</p></a>"
 );
 document.writeln("</td>");
 document.writeln("</tr></table>");
