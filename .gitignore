@@ -33,8 +33,6 @@ screenshot
 .firebase
 .eslintcache
 
-build.js
-
 # dev test
 request.js
 mock.js
