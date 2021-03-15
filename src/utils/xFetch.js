@@ -62,4 +62,52 @@ xFetch.interceptors.response.use((response, options) => {
   return response;
 });
 
+/**
+ * 
+ * @param {*} url 
+ * @param {*} options 
+ * @returns 
+ 
+const xFetchIE9 = (url, options = {}) => {
+  if (window.XDomainRequest) {
+    return new Promise((resolve, reject) => {
+      const method = options.method || 'POST';
+      const timeout = options.timeout || 30000;
+      let data = options.body || options.params || options.data || {};
+
+      const XDR = new XDomainRequest();
+      XDR.open(method, url);
+      XDR.timeout = timeout;
+      XDR.onload = () => {
+        try {
+          const json = JSON.parse(XDR.responseText);
+          return resolve(json.data);
+        } catch (e) {
+          reject(e);
+        }
+        return reject({});
+      };
+      XDR.onprogress = () => {};
+      XDR.ontimeout = () => reject('XDomainRequest timeout');
+      XDR.onerror = () => reject('XDomainRequest error');
+      setTimeout(() => {
+        XDR.send(data);
+      }, 0);
+    });
+  } else {
+    // 
+  }
+};
+
+const isIE9 =
+  navigator.appName == 'Microsoft Internet Explorer' &&
+  navigator.appVersion.match(/9./i) == '9.' &&
+  !('placeholder' in document.createElement('input')) &&
+  !!document.all;
+
+const request = isIE9 ? xFetchIE9 : xFetch;
+
+export default request;
+
+*/
 export default xFetch;
