@@ -18,7 +18,7 @@ class Home extends React.Component {
   left = () => {
     this.setState({
       topLeft: "home_right_topLeft active",
-      rightLeft: "home_right_topRight",
+      topRight: "home_right_topRight",
       leftOrRight: "left",
     });
   };
@@ -26,7 +26,7 @@ class Home extends React.Component {
   right = () => {
     this.setState({
       topLeft: "home_right_topLeft",
-      rightLeft: "home_right_topRight active",
+      topRight: "home_right_topRight active",
       leftOrRight: "right",
     });
   };
@@ -78,9 +78,9 @@ class Home extends React.Component {
                     <div className={topLeft} onClick={this.left}>
                       <span>缴款</span>
                     </div>
-                    <div className={rightLeft} onClick={this.right}>
+                    {/* <div className={topRight} onClick={this.right}>
                       <span>缴款</span>
-                    </div>
+                    </div> */}
                     {leftOrRight === "left" && (
                       <div className="box_wai">
                         <div className="box" onClick={this.NTpay}>
@@ -101,7 +101,7 @@ class Home extends React.Component {
                         </div>
                       </div>
                     )}
-                    {leftOrRight === "right" && (
+                    {/* {leftOrRight === "right" && (
                       <div className="box_wai">
                         <div className="box">
                           <img
@@ -112,7 +112,7 @@ class Home extends React.Component {
                           </div>
                         </div>
                       </div>
-                    )}
+                    )} */}
                   </div>
                   <div {...center}>
                     <span>{spanPay}</span>
