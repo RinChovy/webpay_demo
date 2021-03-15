@@ -87,153 +87,161 @@ class NonTaxPay extends React.Component {
       },
     };
     return (
-      <div className="outForm_pay">
-        <div className="img_pay">
-          <div className="onForm_pay">
-            <div className="top_pay">
-              <span className="topSpan_pay">非税缴款</span>
-            </div>
-            <div>
+      <div className="body">
+        <div className="body_icon">
+          <img src={require("../../public/images/icon_top.png")} />
+        </div>
+        <div className="outForm_pay">
+          <div className="img_pay">
+            <div className="onForm_pay">
+              <div className="top_pay">
+                <span className="topSpan_pay">非税缴款</span>
+              </div>
               <div>
-                <div className="outForm_pay_qingdao">
-                  <div className="middle_pay">
-                    <div className="middle_pay_left">
-                      <div className="middle_pay_left_org">
-                        <Form
-                          {...layout}
-                          name="basic"
-                          initialValues={{
-                            remember: true,
-                          }}
-                          ref={this.formRef}
-                          onFinish={this.handleFormSubmit}
-                          onFinishFailed={this.onFinishFailed}
-                        >
-                          <div className="middle_box">
-                            <Form.Item
-                              label={
-                                <span style={{ fontSize: 17 }}>缴款码</span>
-                              }
-                            >
-                              <Row gutter={8}>
-                                <Col span={12}>
-                                  <Form.Item
-                                    name="payCode"
-                                    rules={[
-                                      {
-                                        required: true,
-                                        message: "请输入缴款码",
-                                      },
-                                      {
-                                        pattern: api.regular,
-                                        message: api.regularText,
-                                      },
-                                    ]}
-                                  >
-                                    <Input
-                                      size="large"
-                                      style={{ width: 400 }}
+                <div>
+                  <div className="outForm_pay_qingdao">
+                    <div className="middle_pay">
+                      <div className="middle_pay_left">
+                        <div className="middle_pay_left_org">
+                          <Form
+                            {...layout}
+                            name="basic"
+                            initialValues={{
+                              remember: true,
+                            }}
+                            ref={this.formRef}
+                            onFinish={this.handleFormSubmit}
+                            onFinishFailed={this.onFinishFailed}
+                          >
+                            <div className="middle_box">
+                              <Form.Item
+                                label={
+                                  <span style={{ fontSize: 17 }}>缴款码</span>
+                                }
+                              >
+                                <Row gutter={8}>
+                                  <Col span={12}>
+                                    <Form.Item
+                                      name="payCode"
+                                      rules={[
+                                        {
+                                          required: true,
+                                          message: "请输入缴款码",
+                                        },
+                                        {
+                                          pattern: api.regular,
+                                          message: api.regularText,
+                                        },
+                                      ]}
+                                    >
+                                      <Input
+                                        size="large"
+                                        style={{ width: 400 }}
+                                      />
+                                    </Form.Item>
+                                  </Col>
+                                  <Col span={12}></Col>
+                                </Row>
+                              </Form.Item>
+
+                              <Form.Item
+                                style={{ marginTop: -20 }}
+                                label={
+                                  <span style={{ fontSize: 17 }}>缴款人</span>
+                                }
+                              >
+                                <Row gutter={8}>
+                                  <Col span={12}>
+                                    <Form.Item
+                                      name="payName"
+                                      rules={[
+                                        {
+                                          required: true,
+                                          message: "请输入缴款人",
+                                        },
+                                      ]}
+                                    >
+                                      <Input
+                                        size="large"
+                                        style={{ width: 400 }}
+                                      />
+                                    </Form.Item>
+                                  </Col>
+                                  <Col span={12}></Col>
+                                </Row>
+                              </Form.Item>
+                              <Form.Item
+                                style={{ marginTop: -20 }}
+                                label={
+                                  <span style={{ fontSize: 17 }}>验证码</span>
+                                }
+                              >
+                                <Row gutter={8}>
+                                  <Col span={12}>
+                                    <Form.Item
+                                      name="verificationCode"
+                                      rules={[
+                                        {
+                                          required: true,
+                                          message: "请输入验证码",
+                                        },
+                                      ]}
+                                    >
+                                      <Input
+                                        size="large"
+                                        style={{ width: 200 }}
+                                      />
+                                    </Form.Item>
+                                  </Col>
+                                  <Col span={12}>
+                                    <img
+                                      className="verificationCode"
+                                      alt="验证码"
+                                      src={codeUrl}
                                     />
-                                  </Form.Item>
-                                </Col>
-                                <Col span={12}></Col>
-                              </Row>
-                            </Form.Item>
+                                    <span
+                                      style={{
+                                        marginLeft: 20,
+                                        cursor: "pointer",
+                                        color: "#1890ff",
+                                      }}
+                                      onClick={this.changeImg}
+                                    >
+                                      换一张
+                                    </span>
+                                  </Col>
+                                </Row>
+                              </Form.Item>
+                            </div>
 
                             <Form.Item
-                              style={{ marginTop: -20 }}
-                              label={
-                                <span style={{ fontSize: 17 }}>缴款人</span>
-                              }
+                              {...tailLayout}
+                              style={{ marginTop: 40 }}
                             >
-                              <Row gutter={8}>
-                                <Col span={12}>
-                                  <Form.Item
-                                    name="payName"
-                                    rules={[
-                                      {
-                                        required: true,
-                                        message: "请输入缴款人",
-                                      },
-                                    ]}
-                                  >
-                                    <Input
-                                      size="large"
-                                      style={{ width: 400 }}
-                                    />
-                                  </Form.Item>
-                                </Col>
-                                <Col span={12}></Col>
-                              </Row>
+                              <Button
+                                className="button_submit"
+                                size="large"
+                                type="primary"
+                                htmlType="submit"
+                              >
+                                下一步
+                              </Button>
+                              <Button
+                                className="button_clear"
+                                size="large"
+                                onClick={this.onReset}
+                              >
+                                清空
+                              </Button>
                             </Form.Item>
-                            <Form.Item
-                              style={{ marginTop: -20 }}
-                              label={
-                                <span style={{ fontSize: 17 }}>验证码</span>
-                              }
-                            >
-                              <Row gutter={8}>
-                                <Col span={12}>
-                                  <Form.Item
-                                    name="verificationCode"
-                                    rules={[
-                                      {
-                                        required: true,
-                                        message: "请输入验证码",
-                                      },
-                                    ]}
-                                  >
-                                    <Input
-                                      size="large"
-                                      style={{ width: 200 }}
-                                    />
-                                  </Form.Item>
-                                </Col>
-                                <Col span={12}>
-                                  <img
-                                    className="verificationCode"
-                                    alt="验证码"
-                                    src={codeUrl}
-                                  />
-                                  <span
-                                    style={{
-                                      marginLeft: 20,
-                                      cursor: "pointer",
-                                      color: "#1890ff",
-                                    }}
-                                    onClick={this.changeImg}
-                                  >
-                                    换一张
-                                  </span>
-                                </Col>
-                              </Row>
-                            </Form.Item>
-                          </div>
-
-                          <Form.Item {...tailLayout} style={{ marginTop: 40 }}>
-                            <Button
-                              className="button_submit"
-                              size="large"
-                              type="primary"
-                              htmlType="submit"
-                            >
-                              下一步
-                            </Button>
-                            <Button
-                              className="button_clear"
-                              size="large"
-                              onClick={this.onReset}
-                            >
-                              清空
-                            </Button>
-                          </Form.Item>
-                        </Form>
+                          </Form>
+                        </div>
                       </div>
-                    </div>
-                    <div className="middle_pay_right">
-                      <div className="middle_pay_right_org">
-                        <div className="span_pay_top">{spanPayTop}</div>
-                        <div className="span_pay">{spanPay}</div>
+                      <div className="middle_pay_right">
+                        <div className="middle_pay_right_org">
+                          <div className="span_pay_top">{spanPayTop}</div>
+                          <div className="span_pay">{spanPay}</div>
+                        </div>
                       </div>
                     </div>
                   </div>
