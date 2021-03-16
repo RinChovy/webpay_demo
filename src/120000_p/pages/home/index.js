@@ -119,6 +119,7 @@ class NonTaxPay extends React.Component {
                                 <Col span={12}>
                                   <Form.Item
                                     name="payCode"
+                                    style={{ width: 400 }}
                                     rules={[
                                       {
                                         required: true,
@@ -136,7 +137,6 @@ class NonTaxPay extends React.Component {
                                     />
                                   </Form.Item>
                                 </Col>
-                                <Col span={12}></Col>
                               </Row>
                             </Form.Item>
 
@@ -150,6 +150,7 @@ class NonTaxPay extends React.Component {
                                 <Col span={12}>
                                   <Form.Item
                                     name="payName"
+                                    style={{ width: 400 }}
                                     rules={[
                                       {
                                         required: true,
@@ -163,7 +164,6 @@ class NonTaxPay extends React.Component {
                                     />
                                   </Form.Item>
                                 </Col>
-                                <Col span={12}></Col>
                               </Row>
                             </Form.Item>
                             <Form.Item

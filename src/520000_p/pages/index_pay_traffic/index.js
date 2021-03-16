@@ -8,7 +8,8 @@ class NonTaxPay extends React.Component {
   formRef = React.createRef();
   state = {
     spanPayTop: "温馨提示",
-    spanPay: "缴款码为执收单位开具的非税收入一般缴款书上的20位编码。",
+    spanPay:
+      "处罚决定书编号为执收单位开具的非税收入电子缴款通知书上的16位处罚决定书编号",
     codeUrl: api.getCo, //验证码
   };
 
@@ -86,6 +87,11 @@ class NonTaxPay extends React.Component {
         span: 16,
       },
     };
+    const marTop = {
+      style: {
+        marginTop: "10%",
+      },
+    };
     return (
       <div>
         <div className="body_icon">
@@ -95,14 +101,14 @@ class NonTaxPay extends React.Component {
           <div className="img_pay">
             <div className="onForm_pay">
               <div className="top_pay">
-                <span className="topSpan_pay">非税缴款</span>
+                <span className="topSpan_pay">交罚缴款</span>
               </div>
               <div>
                 <div>
                   <div className="outForm_pay_qingdao">
                     <div className="middle_pay">
                       <div className="middle_pay_left">
-                        <div className="middle_pay_left_org">
+                        <div className="middle_pay_left_org" {...marTop}>
                           <Form
                             {...layout}
                             name="basic"
@@ -116,21 +122,20 @@ class NonTaxPay extends React.Component {
                             <div className="middle_box">
                               <Form.Item
                                 label={
-                                  <span style={{ fontSize: 17 }}>缴款码</span>
+                                  <span style={{ fontSize: 17 }}>
+                                    处罚决定书编号
+                                  </span>
                                 }
                               >
                                 <Row gutter={8}>
                                   <Col span={12}>
                                     <Form.Item
                                       name="payCode"
+                                      style={{ width: 400 }}
                                       rules={[
                                         {
                                           required: true,
-                                          message: "请输入缴款码",
-                                        },
-                                        {
-                                          pattern: api.regular,
-                                          message: api.regularText,
+                                          message: "请输入处罚决定书编号",
                                         },
                                       ]}
                                     >
@@ -140,36 +145,9 @@ class NonTaxPay extends React.Component {
                                       />
                                     </Form.Item>
                                   </Col>
-                                  <Col span={12}></Col>
                                 </Row>
                               </Form.Item>
 
-                              <Form.Item
-                                style={{ marginTop: -20 }}
-                                label={
-                                  <span style={{ fontSize: 17 }}>缴款人</span>
-                                }
-                              >
-                                <Row gutter={8}>
-                                  <Col span={12}>
-                                    <Form.Item
-                                      name="payName"
-                                      rules={[
-                                        {
-                                          required: true,
-                                          message: "请输入缴款人",
-                                        },
-                                      ]}
-                                    >
-                                      <Input
-                                        size="large"
-                                        style={{ width: 400 }}
-                                      />
-                                    </Form.Item>
-                                  </Col>
-                                  <Col span={12}></Col>
-                                </Row>
-                              </Form.Item>
                               <Form.Item
                                 style={{ marginTop: -20 }}
                                 label={
