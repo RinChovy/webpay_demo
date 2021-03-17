@@ -44,7 +44,7 @@ class success extends React.Component {
         <div>
           <div className="outForm_pay">
             <div className="img_pay">
-              <img src={require("./image/icon_top.png")} />
+              <img src={require("../../public/images/icon_top.png")} />
             </div>
             <div className="onForm_pay">
               <div className="top_pay">
@@ -54,7 +54,7 @@ class success extends React.Component {
                 <div className="row">
                   <img
                     style={{ marginTop: 40 }}
-                    src={require("./image/successn.png")}
+                    src={require("../../public/images/successn.png")}
                   />
                   <p className="row_p">
                     缴款成功,建议保存商户订单号{merchant_order_no}

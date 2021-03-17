@@ -65,22 +65,10 @@ export default {
     };
   },
   methods: {
-    //验证码时间戳
-    chgUrl(url) {
-      var timestamp = new Date().valueOf();
-      // url = url.substring(0, 50);
-      if (url.indexOf("&") >= 0) {
-        url = url + "×tamp=" + timestamp;
-      } else {
-        // url = url + '?timestamp=' + timestamp;
-        url = url + "?timestamp=" + timestamp;
-      }
-      return url;
-    },
     // 改变验证码
     changeCode() {
-      let newCode = this.chgUrl(this.codeUrl);
-      this.codeUrlT = newCode;
+      let timestamp = new Date().valueOf();
+      this.codeUrlT = this.codeUrl.split("?")[0] + "?timestamp=" + timestamp;
     },
     //提交下一步
     submit() {
@@ -90,7 +78,7 @@ export default {
           payCode: this.payCode,
           code: this.code,
         }).then((res) => {
-          res.code === 0 ? this.handleSuccess(res) : this.handleError(res.msg);
+          res.code === 0 ? this.handleSuccess(res) : this.handleError(res);
         });
       } else {
       }

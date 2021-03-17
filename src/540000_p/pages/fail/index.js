@@ -5,23 +5,21 @@ import { api } from "../../service/api.js";
 class fail extends React.Component {
   state = {
     spanPay: "缴款失败",
-    
   };
 
-  componentDidMount() {
-  }
+  componentDidMount() {}
   // 返回
-  cencel=()=>{
+  cencel = () => {
     this.props.history.push({ pathname: "/home", query: "" });
-  }
+  };
   render() {
-    const { spanPay} = this.state;
+    const { spanPay } = this.state;
     return (
       <div>
         <div>
           <div className="outForm_pay">
             <div className="img_pay">
-              <img src={require("./image/icon_top.png")} />
+              <img src={require("../../public/images/icon_top.png")} />
             </div>
             <div className="onForm_pay">
               <div className="top_pay">
@@ -29,14 +27,17 @@ class fail extends React.Component {
               </div>
               <div className="middle_pay">
                 <div className="row">
-                  <img style={{marginTop:40}}src={require("./image/failn.png")} />
-                  <p className="row_p" style={{color:"#e22721"}}>
+                  <img
+                    style={{ marginTop: 40 }}
+                    src={require("../../public/images/failn.png")}
+                  />
+                  <p className="row_p" style={{ color: "#e22721" }}>
                     {spanPay}
                   </p>
-                  <div style={{marginTop:10}}>
+                  <div style={{ marginTop: 10 }}>
                     <input
                       className="url_button_clear"
-                      style={{marginLeft:0}}
+                      style={{ marginLeft: 0 }}
                       type="button"
                       value="返回"
                       onClick={this.cencel}

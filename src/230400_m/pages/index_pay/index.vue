@@ -110,7 +110,7 @@ export default {
           payPeople: this.payPeople,
           code: this.code,
         }).then((res) => {
-          res.code === 0 ? this.handleSuccess(res) : this.handleError(res.msg);
+          res.code === 0 ? this.handleSuccess(res) : this.handleError(res);
         });
       } else {
       }

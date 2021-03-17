@@ -28,22 +28,11 @@ class NonTaxPay extends React.Component {
   // 验证码换一张
   changeImg = () => {
     const { codeUrl } = this.state;
-    let newCode = this.chgUrl(codeUrl);
+    const timestamp = new Date().valueOf();
     this.setState({
-      codeUrl: newCode,
+      codeUrl: codeUrl.split("?")[0] + "?timestamp=" + timestamp,
     });
   };
-  //验证码时间戳
-  chgUrl(url) {
-    var timestamp = new Date().valueOf();
-    if (url.indexOf("&") >= 0) {
-      url = url + "×tamp=" + timestamp;
-    } else {
-      // url = url + '?timestamp=' + timestamp;
-      url = url + "?timestamp=" + timestamp;
-    }
-    return url;
-  }
   //提交成功
   handleFormSubmit = (values) => {
     queryPayInfo({

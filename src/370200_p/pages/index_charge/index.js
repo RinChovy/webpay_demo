@@ -156,7 +156,10 @@ class NonTaxPayChange extends React.Component {
     const statusOk =
       status == 0 ? null : (
         <div style={{ position: "absolute", right: "18%" }}>
-          <img style={{ width: 100 }} src={require("./image/paiec.png")} />
+          <img
+            style={{ width: 100 }}
+            src={require("../../public/images/paiec.png")}
+          />
         </div>
       );
     return (
