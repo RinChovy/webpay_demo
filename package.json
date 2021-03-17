@@ -8,6 +8,7 @@
   "main": "index.js",
   "scripts": {
     "start": "cross-env NODE_ENV=development node ./config/dev.js",
+    "start:dev": "cross-env NODE_ENV=development node ./config/dev-history.js",
     "build": "rm -rf ./dist && cross-env NODE_ENV=development node ./config/build.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
