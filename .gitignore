@@ -36,7 +36,6 @@ screenshot
 # dev test
 request.js
 mock.js
-dev-history.js
 
 /.cache
 
