@@ -96,7 +96,10 @@ class NonTaxPayChange extends React.Component {
         });
     }, 100);
   }
-
+  // 页面销毁生命周期
+  componentWillUnmount() {
+    window.location.reload();
+  }
   render() {
     const {
       span,

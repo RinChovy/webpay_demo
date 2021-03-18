@@ -3,6 +3,7 @@ import { Form, Input, Button, Checkbox } from "antd";
 import { api } from "../../service/api.js";
 import { Arabia_to_Chinese as money, guid } from "utils/utils";
 
+// let tt = null;
 class NonTaxPayChange extends React.Component {
   state = {
     billDate: "", //填制日期
@@ -38,7 +39,6 @@ class NonTaxPayChange extends React.Component {
   };
   componentDidMount() {
     const query = JSON.parse(localStorage.getItem("data"));
-    console.log(query);
     const queryJson = query.payBook;
     const queryItem = JSON.parse(query.itemDetails);
     let status = query.status; //缴款状态
@@ -55,7 +55,7 @@ class NonTaxPayChange extends React.Component {
     let amtZ = money(amt); //金额大写
     let billDate = this.time(queryJson.fillDate); //填制日期
     let einvoice_url = query.einvoice_url; //电子票地址
-    console.log(query.einvoice_url);
+
     this.setState({
       billDate: billDate,
       exeAgencyCode: exeAgencyCode,
@@ -98,6 +98,10 @@ class NonTaxPayChange extends React.Component {
           version_no: "1.1",
         });
     }, 100);
+  }
+
+  componentWillUnmount() {
+    window.location.reload();
   }
 
   render() {
