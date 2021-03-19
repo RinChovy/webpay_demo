@@ -16,75 +16,72 @@
 </template>
 
 <script>
-import { Button, Row, Col, Search, Dialog } from "vant";
-import { success } from "../../config/services.js";
+import { Button, Row, Col, Search, Dialog } from 'vant'
+import { success } from '../../config/services.js'
 export default {
-  name: "success",
+  name: 'success',
   components: {
-    "van-row": Row,
-    "van-col": Col,
-    "van-button": Button,
-    "van-search": Search,
-    "van-dialog": Dialog,
+    'van-row': Row,
+    'van-col': Col,
+    'van-button': Button,
+    'van-search': Search,
+    'van-dialog': Dialog,
   },
   data() {
     return {
-      merchant_order_no: "",
-      spanPay: "缴款成功",
-      url: "", //电子票地址
-    };
+      merchant_order_no: '',
+      spanPay: '缴款成功',
+      url: '', //电子票地址
+    }
   },
   //加载生命周期
   created() {
-    const url = location.href;
-    console.log("url为" + url);
-    const rsa = url.substring(url.indexOf("=") + 1);
-    console.log("rsa为" + rsa);
+    const url = location.href
+    console.log('url为' + url)
+    const rsa = url.substring(url.indexOf('=') + 1)
+    console.log('rsa为' + rsa)
     success({
       rsa: rsa,
     }).then((res) => {
       if (res.code === 0) {
-        console.log(res);
-        (this.url = res.data.einvoice_url),
-          (this.merchant_order_no = res.data.merchant_order_no);
+        console.log(res)
+        ;(this.url = res.data.einvoice_url), (this.merchant_order_no = res.data.merchant_order_no)
       } else {
-        Dialog.alert({
-          message: res.msg,
-        }).then(() => {
-          // on close
-        });
+        this.$router.push({
+          path: '/fail',
+        })
       }
-    });
+    })
   },
   methods: {
     indexPay() {
       this.$router.push({
-        path: "/index_pay",
-      });
+        path: '/index_pay',
+      })
     },
     einvoice_url() {
-      window.location.href = this.url;
+      window.location.href = this.url
     },
     home() {
-      const userId = localStorage.getItem("userId");
+      const userId = localStorage.getItem('userId')
       if (userId) {
-        if (navigator.userAgent.toLowerCase().indexOf("micromessenger") != -1) {
+        if (navigator.userAgent.toLowerCase().indexOf('micromessenger') != -1) {
           this.$router.push({
-            path: "/index_pay",
-          });
+            path: '/index_pay',
+          })
         } else {
           this.$router.push({
-            path: "/acityservice",
-          });
+            path: '/acityservice',
+          })
         }
       } else {
         this.$router.push({
-          path: "/home",
-        });
+          path: '/home',
+        })
       }
     },
   },
-};
+}
 </script>
 
 <style scoped lang="scss">

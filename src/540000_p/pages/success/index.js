@@ -22,10 +22,7 @@ class success extends React.Component {
           merchant_order_no: res.data.merchant_order_no,
         });
       } else {
-        this.openNotificationWithIcon("error", res.msg);
-        this.setState({
-          school: [],
-        });
+        this.props.history.push({ pathname: "/fail", query: "" });
       }
     });
   }
