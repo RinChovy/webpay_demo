@@ -40,24 +40,25 @@
         </div>
       </div>
       <div class="button_box">
-        <button @click="submit">下一步</button>
+        <button @click="submit" v-if="disabled == true">下一步</button>
+        <button @click="submit" disabled="disabled" v-else>下一步</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { Button, Row, Col, Search, Dialog } from "vant";
-import API from "../../config/api.js";
-import { queryPayInfo } from "../../config/services.js";
+import { Button, Row, Col, Search, Dialog } from 'vant'
+import API from '../../config/api.js'
+import { queryPayInfo } from '../../config/services.js'
 export default {
-  name: "index_pay",
+  name: 'index_pay',
   components: {
-    "van-row": Row,
-    "van-col": Col,
-    "van-button": Button,
-    "van-search": Search,
-    "van-dialog": Dialog,
+    'van-row': Row,
+    'van-col': Col,
+    'van-button': Button,
+    'van-search': Search,
+    'van-dialog': Dialog,
   },
   data() {
     return {
@@ -66,76 +67,75 @@ export default {
       // 时间戳验证码地址
       codeUrlT: API.code,
       // 绑定缴款码
-      payCode: "",
+      payCode: '',
       // 绑定缴款码验证语言
-      payCodeWarn: "",
+      payCodeWarn: '',
       // 绑定缴款人
-      payPeople: "",
+      payPeople: '',
       // 绑定缴款人验证语言
-      payPeopleWarn: "",
+      payPeopleWarn: '',
       // 绑定验证码
-      code: "",
+      code: '',
       // 绑定缴款码验证语言
-      codeWarn: "",
-    };
+      codeWarn: '',
+      //按钮失效
+      disabled: true,
+    }
   },
   methods: {
     // 改变验证码
     changeCode() {
-      let timestamp = new Date().valueOf();
-      this.codeUrlT = this.codeUrl.split("?")[0] + "?timestamp=" + timestamp;
+      let timestamp = new Date().valueOf()
+      this.codeUrlT = this.codeUrl.split('?')[0] + '?timestamp=' + timestamp
     },
     //提交下一步
     submit() {
-      this.warning();
-      if (
-        this.payCodeWarn == "" &&
-        this.payPeopleWarn == "" &&
-        this.codeWarn == ""
-      ) {
+      let that = this
+      this.warning()
+      if (this.payCodeWarn == '' && this.payPeopleWarn == '' && this.codeWarn == '') {
+        that.disabled = false
         queryPayInfo({
           payCode: this.payCode,
           payPeople: this.payPeople,
           code: this.code,
         }).then((res) => {
-          res.code === 0 ? this.handleSuccess(res) : this.handleError(res);
-        });
+          res.code === 0 ? this.handleSuccess(res) : this.handleError(res)
+        })
       } else {
       }
     },
     // 提交成功
     handleSuccess(data) {
-      localStorage.setItem("data", JSON.stringify(data));
+      localStorage.setItem('data', JSON.stringify(data))
       this.$router.push({
-        path: "/index_charge",
-        name: "index_charge",
-      });
+        path: '/index_charge',
+        name: 'index_charge',
+      })
     },
     // 提交失败1
     handleError(err) {
-      localStorage.removeItem("data");
+      this.disabled = true
+      localStorage.removeItem('data')
       Dialog.alert({
         message: err.msg,
       }).then(() => {
         // on close
-      });
+      })
     },
     //验证方法
     warning() {
-      const regular = API.regular;
-      console.log(regular);
-      this.payCode == ""
-        ? (this.payCodeWarn = "请输入缴款码")
+      const regular = API.regular
+      console.log(regular)
+      this.payCode == ''
+        ? (this.payCodeWarn = '请输入缴款码')
         : eval(regular).test(this.payCode)
-        ? (this.payCodeWarn = "")
-        : (this.payCodeWarn = API.regularText);
-      this.payPeople == ""
-        ? (this.payPeopleWarn = "请输入缴款人")
-        : (this.payPeopleWarn = "");
-      this.code == "" ? (this.codeWarn = "请输入验证码") : (this.codeWarn = "");
+        ? (this.payCodeWarn = '')
+        : (this.payCodeWarn = API.regularText)
+      this.payPeople == '' ? (this.payPeopleWarn = '请输入缴款人') : (this.payPeopleWarn = '')
+      this.code == '' ? (this.codeWarn = '请输入验证码') : (this.codeWarn = '')
     },
   },
-};
+}
 </script>
 
 <style scoped lang="scss">
@@ -213,13 +213,7 @@ export default {
   button {
     width: 94%;
     height: 44px;
-    background: -webkit-gradient(
-      linear,
-      left top,
-      left bottom,
-      color-stop(0%, #4690ff),
-      color-stop(100%, #556ffe)
-    );
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #4690ff), color-stop(100%, #556ffe));
     border-radius: 4px;
     border: 0px;
     color: white;

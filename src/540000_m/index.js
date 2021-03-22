@@ -6,6 +6,7 @@ Vue.use(VueRouter);
 
 import App from "./index.vue";
 import Home from "./pages/home/index.vue";
+import Phone_index from "./pages/home/index.vue";
 import Index_pay from "./pages/index_pay/index.vue";
 import Index_charge from "./pages/Index_charge/index.vue";
 import Success from "./pages/success/index.vue";
@@ -23,6 +24,11 @@ const routes = [
     path: "/home", //首页
     name: "home",
     component: Home,
+  },
+  {
+    path: "/phone_index", //首页另一个地址
+    name: "phone_index",
+    component: Phone_index,
   },
   {
     path: "/index_pay", //非税缴款界面

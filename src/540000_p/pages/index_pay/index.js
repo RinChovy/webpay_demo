@@ -10,6 +10,7 @@ class NonTaxPay extends React.Component {
     spanPayTop: "温馨提示",
     spanPay: "缴款码为执收单位开具的非税收入一般缴款书上的20位编码。",
     codeUrl: api.getCo, //验证码
+    loadings: [], //等待时间
   };
 
   componentDidMount() {}
@@ -34,6 +35,15 @@ class NonTaxPay extends React.Component {
   };
   //提交成功
   handleFormSubmit = (values) => {
+    //防止重复点击
+    const { loadings } = this.state;
+    this.setState(({ loadings }) => {
+      const newLoadings = [...loadings];
+      newLoadings[1] = true;
+      return {
+        loadings: newLoadings,
+      };
+    });
     queryPayInfo({
       payCode: values.payCode,
       payPeople: values.payName,
@@ -54,13 +64,21 @@ class NonTaxPay extends React.Component {
   handleError = (err) => {
     localStorage.removeItem("data");
     this.openNotificationWithIcon("error", err);
+    //防止重复点击解开按钮限制
+    this.setState(({ loadings }) => {
+      const newLoadings = [...loadings];
+      newLoadings[1] = false;
+      return {
+        loadings: newLoadings,
+      };
+    });
   };
   //提交失败
   onFinishFailed = (values) => {
     console.log("fail:", values);
   };
   render() {
-    const { spanPay, spanPayTop, codeUrl } = this.state;
+    const { spanPay, spanPayTop, codeUrl, loadings } = this.state;
     const layout = {
       labelCol: {
         span: 8,
@@ -212,6 +230,7 @@ class NonTaxPay extends React.Component {
                                 size="large"
                                 type="primary"
                                 htmlType="submit"
+                                loading={loadings[1]}
                               >
                                 下一步
                               </Button>

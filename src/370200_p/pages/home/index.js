@@ -9,6 +9,7 @@ class NonTaxPay extends React.Component {
   state = {
     warnSpan: "“非税缴费技术服务电话 0532-85856831”",
     codeUrl: api.getCo, //验证码
+    loadings: [], //等待时间
   };
 
   componentDidMount() {
@@ -39,6 +40,15 @@ class NonTaxPay extends React.Component {
 
   //提交
   handleFormSubmit = (values) => {
+    //防止重复点击
+    const { loadings } = this.state;
+    this.setState(({ loadings }) => {
+      const newLoadings = [...loadings];
+      newLoadings[1] = true;
+      return {
+        loadings: newLoadings,
+      };
+    });
     queryPayInfo({
       payCode: values.payCode,
       payPeople: values.payName,
@@ -60,13 +70,22 @@ class NonTaxPay extends React.Component {
   handleError = (err) => {
     localStorage.removeItem("data");
     this.openNotificationWithIcon("error", err);
+    const { loadings } = this.state;
+    //防止重复点击解开按钮限制
+    this.setState(({ loadings }) => {
+      const newLoadings = [...loadings];
+      newLoadings[1] = false;
+      return {
+        loadings: newLoadings,
+      };
+    });
   };
   //提交失败
   onFinishFailed = (values) => {
     console.log("fail:", values);
   };
   render() {
-    const { codeUrl, warnSpan } = this.state;
+    const { codeUrl, warnSpan, loadings } = this.state;
     const layout = {
       labelCol: {
         span: 8,
@@ -185,6 +204,7 @@ class NonTaxPay extends React.Component {
                         size="large"
                         type="primary"
                         htmlType="submit"
+                        loading={loadings[1]}
                       >
                         下一步
                       </Button>
