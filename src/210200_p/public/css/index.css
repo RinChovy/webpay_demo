@@ -12,7 +12,7 @@ textarea {
 .outForm {
   position: relative;
   width: 1440px;
-  /* background: url(../images/background_home.png) no-repeat center; */
+  background: url(../images/background_home.png) no-repeat center;
   background-size: cover;
   height: 470px;
   margin: 0 auto;

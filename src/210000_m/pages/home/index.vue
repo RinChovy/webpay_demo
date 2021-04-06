@@ -27,7 +27,7 @@
   <div v-if="areaList_Button==true">
     <div class="filterbg"></div>
     <div class="list">
-      <van-area :area-list="areaList" :columns-num="2" @cancel="cancel" @confirm="confirm"/>
+      <van-area :area-list="areaList" :columns-num="2" @cancel="cancel" @confirm="confirm"/> 
     </div>
   </div>
 </template>

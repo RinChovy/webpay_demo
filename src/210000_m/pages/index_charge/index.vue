@@ -155,31 +155,12 @@ export default {
 
     //  处理微信小程序内 webview 页面监听状态的方法
     if (document.addEventListener) {
-      document.addEventListener('WeixinJSBridgeReady', sendMessage, false)
+      document.addEventListener('WeixinJSBridgeReady', this.sendMessage(), false)
     } else if (document.attachEvent) {
-      document.attachEvent('WeixinJSBridgeReady', sendMessage)
-      document.attachEvent('onWeixinJSBridgeReady', sendMessage)
+      document.attachEvent('WeixinJSBridgeReady', this.sendMessage())
+      document.attachEvent('onWeixinJSBridgeReady', this.sendMessage())
     }
 
-    function sendMessage() {
-      const { miniProgramMark } = this
-      WeixinJSBridge.on('onPageStateChange', function (res) {
-        if (res.active === 'true') {
-          console.log('进来了')
-          console.log('' + miniProgramMark)
-          if (!miniProgramMark) {
-            return
-          }
-          // 查询订单支付状态
-          this.$router.push({
-            name: 'success_wx',
-            query: { merchant_order_no: order_no },
-          })
-          // window.location.href = '<%=path%>/query/queryRealTime.do?' + 'merchant_order_no=' + order_no
-        }
-        console.log(res)
-      })
-    }
     console.log('加载后' + localStorage.getItem('data'))
     const dateString = JSON.parse(localStorage.getItem('data'))
     this.merchant_no = dateString.data.merchant_no
@@ -194,6 +175,28 @@ export default {
     this.einvoice_url = dateString.data.einvoice_url
   },
   methods: {
+    sendMessage() {
+      const { miniProgramMark } = this
+      WeixinJSBridge.on('onPageStateChange', function (res) {
+        alert('准备跳转0')
+        if (res.active === 'true') {
+          console.log('进来了')
+          console.log('' + miniProgramMark)
+          if (!miniProgramMark) {
+            return
+          }
+          alert('准备跳转1')
+          // 查询订单支付状态
+          this.$router.push({
+            path: '/success_wx',
+            name: 'success_wx',
+            query: { merchant_order_no: order_no },
+          })
+          // window.location.href = '<%=path%>/query/queryRealTime.do?' + 'merchant_order_no=' + order_no
+        }
+        console.log(res)
+      })
+    },
     submit() {
       let that = this
       const { order_no, merchant_no, totalAmount_fen, payCode } = this
@@ -273,6 +276,7 @@ export default {
                 $('.zhebg').show()
               } else if (e.flag === 'paySuccess') {
                 // todo 接受成功后 需要处理回调页面
+                alert('准备跳转2')
                 this.$router.push({
                   path: '/success_wx',
                   name: 'success_wx',

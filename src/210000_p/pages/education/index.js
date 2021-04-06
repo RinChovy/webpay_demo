@@ -24,10 +24,9 @@ class school extends React.Component {
   };
   componentDidMount() {
     //返回上一页做判断
-    const { itemCode } = this.state;
-    const data = JSON.parse(localStorage.getItem("data", data));
+    const itemCode = localStorage.getItem("itemCode");
     this.setState({
-      itemCode: data.itemCode,
+      itemCode: itemCode,
     });
     education().then((res) => {
       if (res.code === 0) {
@@ -44,7 +43,7 @@ class school extends React.Component {
   }
   //改变地区事件
   cityChange = (value) => {
-    const { itemCode } = this.state;
+    const itemCode = localStorage.getItem("itemCode");
     schools({
       cityCode: value.value,
       itemCode: itemCode,
@@ -129,6 +128,7 @@ class school extends React.Component {
                       placeholder="请选择学校区域"
                       size="large"
                       onChange={this.cityChange}
+                      notFoundContent={<span>对不起,暂无学校区域信息</span>}
                     >
                       {cityModel}
                     </Select>
@@ -142,6 +142,9 @@ class school extends React.Component {
                       onChange={this.schoolChange}
                       placeholder="请选择学校"
                       size="large"
+                      notFoundContent={
+                        <span>对不起,您选择的区域暂无学校信息</span>
+                      }
                     >
                       {schoolModel}
                     </Select>

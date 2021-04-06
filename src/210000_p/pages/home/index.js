@@ -23,8 +23,7 @@ class Home extends React.Component {
     if (code == 110) {
       window.location.href = url;
     } else {
-      let data = { itemCode: code };
-      localStorage.setItem("data", JSON.stringify(data));
+      localStorage.setItem("itemCode", code);
       this.props.history.push({ pathname: `/${url}` });
     }
   };
