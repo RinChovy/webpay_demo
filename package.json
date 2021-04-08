@@ -59,8 +59,6 @@
     "@vue/component-compiler-utils": "^1.1.0",
     "autoprefixer": "^8.3.0",
     "babel-plugin-import": "^1.13.3",
-    "babel-plugin-syntax-jsx": "^6.18.0",
-    "babel-plugin-transform-vue-jsx": "^3.7.0",
     "chalk": "^4.1.0",
     "cross-env": "^7.0.3",
     "es6-promise": "^4.2.8",
