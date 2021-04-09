@@ -1,12 +1,12 @@
-import xFetch from "../../utils/xFetch";
-import { stringify } from "qs";
-import Api from "./api.js";
+import xFetch from '../../utils/xFetch';
+import { stringify } from 'qs';
+import Api from './api.js';
 
 // 非税缴费提交
 export async function queryPayInfo(params) {
   return xFetch(Api.queryPayInfo, {
     headers: {
-      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       regionCode: Api.region,
     },
     data: stringify(params),
@@ -16,7 +16,7 @@ export async function queryPayInfo(params) {
 export async function success(params) {
   return xFetch(Api.success, {
     headers: {
-      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       regionCode: Api.region,
     },
     data: stringify(params),
@@ -26,7 +26,7 @@ export async function success(params) {
 export async function getAliUserId(params) {
   return xFetch(Api.getAliUserId, {
     headers: {
-      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       regionCode: Api.region,
     },
     data: stringify(params),
@@ -36,7 +36,7 @@ export async function getAliUserId(params) {
 export async function getOpenPlatformUserid(params) {
   return xFetch(Api.getOpenPlatformUserid, {
     headers: {
-      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       regionCode: Api.region,
     },
     data: stringify(params),
@@ -46,7 +46,7 @@ export async function getOpenPlatformUserid(params) {
 export async function getOpenid(params) {
   return xFetch(Api.getOpenid, {
     headers: {
-      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       regionCode: Api.region,
     },
     data: stringify(params),
@@ -56,7 +56,7 @@ export async function getOpenid(params) {
 export async function queryOrderRecord(params) {
   return xFetch(Api.queryOrderRecord, {
     headers: {
-      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       regionCode: Api.region,
     },
     data: stringify(params),
@@ -67,7 +67,7 @@ export async function queryOrderRecord(params) {
 export async function getCityData(params) {
   return xFetch(Api.getCityData, {
     headers: {
-      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       regionCode: Api.region,
     },
     data: stringify(params),
@@ -77,7 +77,7 @@ export async function getCityData(params) {
 export async function homeConfigInfo(params) {
   return xFetch(Api.homeConfigInfo, {
     headers: {
-      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       regionCode: Api.region,
     },
     data: stringify(params),
@@ -88,7 +88,7 @@ export async function homeConfigInfo(params) {
 export async function queryRealTime(params) {
   return xFetch(Api.queryRealTime, {
     headers: {
-      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       regionCode: Api.region,
     },
     data: stringify(params),
@@ -99,7 +99,29 @@ export async function queryRealTime(params) {
 export async function school(params) {
   return xFetch(Api.school, {
     headers: {
-      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      regionCode: Api.region,
+    },
+    data: stringify(params),
+  });
+}
+
+//get获取学校信息
+export async function getSchoolInfo(params) {
+  return xFetch(Api.getSchoolInfo, {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      regionCode: Api.region,
+    },
+    data: stringify(params),
+  });
+}
+
+// get获取非税信息
+export async function nontaxPage(params) {
+  return xFetch(Api.nontaxPage, {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       regionCode: Api.region,
     },
     data: stringify(params),

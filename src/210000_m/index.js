@@ -7,19 +7,20 @@ Vue.use(VueRouter);
 import App from './index.vue';
 import Home from './pages/home/index.vue';
 import Education from './pages/education/index.vue';
+import Education_wx from './pages/education_wx/index.vue';
 import Index_pay from './pages/index_pay/index.vue';
 import Index_charge from './pages/Index_charge/index.vue';
 import Success from './pages/success/index.vue';
 import Success_wx from './pages/success_wx/index.vue';
 import Fail from './pages/fail/index.vue';
 // import Error404 from './pages/error404.vue';
-
-// import VConsole from 'vconsole';
+//////////////小程序日志插件/////////////////////////////
+import VConsole from 'vconsole';
 
 // if (process.env.NODE_ENV === 'production') {
-//   new VConsole();
+new VConsole();
 // }
-
+//////////////小程序日志插件/////////////////////////////
 window.enableDev = true;
 
 const routes = [
@@ -77,6 +78,11 @@ const routes = [
     name: 'education',
     component: Education,
   },
+  {
+    path: '/getSchoolInfo', //教育缴费选择学校_wx
+    name: 'getSchoolInfo',
+    component: Education_wx,
+  },
   // {
   //   path: '*',
   //   component: Error404,
@@ -90,5 +96,5 @@ const router = new VueRouter({
 
 new Vue({
   router,
-  render: h => h(App),
+  render: (h) => h(App),
 }).$mount('#app');

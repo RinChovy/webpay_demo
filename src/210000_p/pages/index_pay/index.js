@@ -1,23 +1,35 @@
-import React from "react";
-import { Form, Input, Button, Row, Col, notification } from "antd";
-import { queryPayInfo } from "../../service/services";
-import { api } from "../../service/api";
-import style from "../../public/css/index.css";
+import React from 'react';
+import { Form, Input, Button, Row, Col, notification } from 'antd';
+import { queryPayInfo } from '../../service/services';
+import { api } from '../../service/api';
+import style from '../../public/css/index.css';
 
 class NonTaxPay extends React.Component {
   formRef = React.createRef();
   state = {
-    spanPayTop: "温馨提示",
-    spanPay: "缴款码为执收单位开具的非税收入一般缴款书上的20位编码。",
+    spanPayTop: '温馨提示',
+    spanPay: '缴款码为执收单位开具的非税收入一般缴款书上的20位编码。',
     codeUrl: api.getCo, //验证码
     loadings: [], //等待时间
   };
 
-  componentDidMount() {}
+  componentDidMount() {
+    const url = location.href;
+    if (url.search('areaId') != -1) {
+      const areaId = url.substring(url.indexOf('areaId=') + 7);
+      nontaxPage({
+        areaId: areaId,
+      }).then((res) => {
+        res.code === 0
+          ? console.log(res.msg)
+          : this.openNotificationWithIcon('error', res.msg);
+      });
+    }
+  }
   // 提示信息方法
   openNotificationWithIcon = (type, msg) => {
     notification[type]({
-      message: "查询错误",
+      message: '查询错误',
       description: msg,
     });
   };
@@ -30,7 +42,7 @@ class NonTaxPay extends React.Component {
     const { codeUrl } = this.state;
     const timestamp = new Date().valueOf();
     this.setState({
-      codeUrl: codeUrl.split("?")[0] + "?timestamp=" + timestamp,
+      codeUrl: codeUrl.split('?')[0] + '?timestamp=' + timestamp,
     });
   };
 
@@ -55,16 +67,16 @@ class NonTaxPay extends React.Component {
   };
   // 提交成功
   handleSuccess = (data) => {
-    localStorage.setItem("data", JSON.stringify(data));
+    localStorage.setItem('data', JSON.stringify(data));
     this.props.history.push({
-      pathname: "/index_charge",
+      pathname: '/index_charge',
       // query: res.data,
     });
   };
   // 提交失败1
   handleError = (err) => {
-    localStorage.removeItem("data");
-    this.openNotificationWithIcon("error", err);
+    localStorage.removeItem('data');
+    this.openNotificationWithIcon('error', err);
     const { loadings } = this.state;
     //防止重复点击解开按钮限制
     this.setState(({ loadings }) => {
@@ -77,7 +89,7 @@ class NonTaxPay extends React.Component {
   };
   // 提交失败
   onFinishFailed = (values) => {
-    console.log("fail:", values);
+    console.log('fail:', values);
   };
   render() {
     const { spanPay, spanPayTop, codeUrl, loadings } = this.state;
@@ -100,7 +112,7 @@ class NonTaxPay extends React.Component {
         <div>
           <div className="outForm_pay">
             <div className="img_pay">
-              <img src={require("../../public/images/icon_top.png")} />
+              <img src={require('../../public/images/icon_top.png')} />
             </div>
             <div className="onForm_pay">
               <div className="top_pay">
@@ -131,7 +143,7 @@ class NonTaxPay extends React.Component {
                                 rules={[
                                   {
                                     required: true,
-                                    message: "请输入缴款码",
+                                    message: '请输入缴款码',
                                   },
                                   {
                                     pattern: api.regular,
@@ -156,7 +168,7 @@ class NonTaxPay extends React.Component {
                                 rules={[
                                   {
                                     required: true,
-                                    message: "请输入缴款人",
+                                    message: '请输入缴款人',
                                   },
                                 ]}
                               >
@@ -176,7 +188,7 @@ class NonTaxPay extends React.Component {
                                 rules={[
                                   {
                                     required: true,
-                                    message: "请输入验证码",
+                                    message: '请输入验证码',
                                   },
                                 ]}
                               >
@@ -192,8 +204,8 @@ class NonTaxPay extends React.Component {
                               <span
                                 style={{
                                   marginLeft: 20,
-                                  cursor: "pointer",
-                                  color: "#1890ff",
+                                  cursor: 'pointer',
+                                  color: '#1890ff',
                                 }}
                                 onClick={this.changeImg}
                               >

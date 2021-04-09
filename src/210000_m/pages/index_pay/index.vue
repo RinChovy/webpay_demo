@@ -55,7 +55,7 @@
 <script>
 import { Button, Row, Col, Search, Dialog } from 'vant'
 import API from '../../config/api.js'
-import { queryPayInfo, getOpenid, getOpenPlatformUserid } from '../../config/services.js'
+import { queryPayInfo, nontaxPage } from '../../config/services.js'
 export default {
   name: 'index_pay',
   components: {
@@ -98,6 +98,20 @@ export default {
         localStorage.removeItem('openId')
         localStorage.setItem('openId', openId)
       }
+    }
+    if (url.search('areaId') != -1) {
+      const areaId = url.substring(url.indexOf('areaId=') + 7)
+      nontaxPage({
+        areaId: areaId,
+      }).then((res) => {
+        res.code === 0
+          ? console.log(res.msg)
+          : Dialog.alert({
+              message: res.msg,
+            }).then(() => {
+              // on close
+            })
+      })
     }
   },
   methods: {

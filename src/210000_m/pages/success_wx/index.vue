@@ -60,17 +60,25 @@ export default {
       window.location.href = this.url
     },
     home() {
-      const userId = localStorage.getItem('userId')
-      if (userId) {
-        if (navigator.userAgent.toLowerCase().indexOf('micromessenger') != -1) {
-          this.$router.push({
-            path: '/index_pay',
-          })
-        } else {
-          this.$router.push({
-            path: '/acityservice',
-          })
-        }
+      const ua = window.navigator.userAgent.toLowerCase()
+      //通过正则表达式匹配ua中是否含有MicroMessenger字符串
+      if (ua.indexOf('alipay') != -1) {
+        my.getEnv(function (res) {
+          console.log(res.miniprogram) //true
+          if (res.miniprogram) {
+            my.switchTab({
+              url: '/pages/index/index',
+            })
+          }
+        })
+      } else if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+        wx.miniProgram.getEnv(function (res) {
+          if (res.miniprogram) {
+            wx.miniProgram.switchTab({
+              url: '/pages/index/index',
+            })
+          }
+        })
       } else {
         this.$router.push({
           path: '/home',

@@ -1,12 +1,12 @@
-import xFetch from "utils/xFetch";
-import { stringify } from "qs";
-import { api } from "./api.js";
+import xFetch from 'utils/xFetch';
+import { stringify } from 'qs';
+import { api } from './api.js';
 
 // home request
 export async function queryHomelist(params) {
   return xFetch(api.common, {
     headers: {
-      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       regionCode: api.region,
     },
     data: stringify(params),
@@ -17,7 +17,7 @@ export async function queryHomelist(params) {
 export async function queryPayInfo(params) {
   return xFetch(api.queryPayInfo, {
     headers: {
-      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       regionCode: api.region,
     },
     data: stringify(params),
@@ -28,7 +28,7 @@ export async function queryPayInfo(params) {
 export async function education(params) {
   return xFetch(api.education, {
     headers: {
-      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       regionCode: api.region,
     },
     data: stringify(params),
@@ -39,7 +39,7 @@ export async function education(params) {
 export async function schools(params) {
   return xFetch(api.school, {
     headers: {
-      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       regionCode: api.region,
     },
     data: stringify(params),
@@ -50,7 +50,27 @@ export async function schools(params) {
 export async function successs(params) {
   return xFetch(api.success, {
     headers: {
-      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      regionCode: api.region,
+    },
+    data: stringify(params),
+  });
+}
+//加载成功回调接口
+export async function getSchoolInfo(params) {
+  return xFetch(api.getSchoolInfo, {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      regionCode: api.region,
+    },
+    data: stringify(params),
+  });
+}
+//加载成功回调接口2
+export async function nontaxPage(params) {
+  return xFetch(api.nontaxPage, {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       regionCode: api.region,
     },
     data: stringify(params),

@@ -139,6 +139,7 @@ export default {
   //初始生命周期
   created() {
     const { order_no } = this
+    const ua = window.navigator.userAgent.toLowerCase()
     console.log(order_no)
     // if (navigator.userAgent.indexOf('AlipayClient') > -1) {
     //   // 如果是支付宝则引入 支付宝js
@@ -154,11 +155,17 @@ export default {
     // }
 
     //  处理微信小程序内 webview 页面监听状态的方法
-    if (document.addEventListener) {
-      document.addEventListener('WeixinJSBridgeReady', this.sendMessage(), false)
-    } else if (document.attachEvent) {
-      document.attachEvent('WeixinJSBridgeReady', this.sendMessage())
-      document.attachEvent('onWeixinJSBridgeReady', this.sendMessage())
+    if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+      wx.miniProgram.getEnv(function (res) {
+        if (res.miniprogram) {
+          if (document.addEventListener) {
+            document.addEventListener('WeixinJSBridgeReady', this.sendMessage(), false)
+          } else if (document.attachEvent) {
+            document.attachEvent('WeixinJSBridgeReady', this.sendMessage())
+            document.attachEvent('onWeixinJSBridgeReady', this.sendMessage())
+          }
+        }
+      })
     }
 
     console.log('加载后' + localStorage.getItem('data'))
@@ -176,18 +183,15 @@ export default {
   },
   methods: {
     sendMessage() {
-      const { miniProgramMark } = this
+      const { order_no } = this
+      let that = this
       WeixinJSBridge.on('onPageStateChange', function (res) {
-        alert('准备跳转0')
-        if (res.active === 'true') {
-          console.log('进来了')
-          console.log('' + miniProgramMark)
-          if (!miniProgramMark) {
+        if (res.active == true || res.active == 'true') {
+          if (!that.miniProgramMark) {
             return
           }
-          alert('准备跳转1')
           // 查询订单支付状态
-          this.$router.push({
+          that.$router.push({
             path: '/success_wx',
             name: 'success_wx',
             query: { merchant_order_no: order_no },
@@ -255,10 +259,10 @@ export default {
             // 接收来自小程序的消息。
             my.onMessage = function (e) {
               if (e.flag === 'authCode') {
-                this.miniProgramMark = true
+                that.miniProgramMark = true
                 thirdpay_widget.init({
                   container: 'widget', //挂件在当前页面放置的控件ID
-                  merchant_no: this.merchant_no, //分配的商户号
+                  merchant_no: merchant_no, //分配的商户号
                   merchant_order_no: order_no, //订单在商户系统中的订单号
                   amount: this.totalAmount_fen, //订单价格，单位：人民币 分
                   effective_time: '1c',
@@ -276,8 +280,8 @@ export default {
                 $('.zhebg').show()
               } else if (e.flag === 'paySuccess') {
                 // todo 接受成功后 需要处理回调页面
-                alert('准备跳转2')
-                this.$router.push({
+
+                that.$router.push({
                   path: '/success_wx',
                   name: 'success_wx',
                   query: { merchant_order_no: order_no },

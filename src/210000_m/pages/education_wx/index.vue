@@ -1,4 +1,4 @@
-<template>
+ <template>
   <div class="mainwrap">
     <div>
       <van-search v-model="value" placeholder="请输入学校名称" @input="selectSchool" background="#efefef" />
@@ -26,9 +26,9 @@
     <div class="bottom"><button class="button" @click="sumbit">确定</button></div>
   </div>
 </template>
-<script>
+ <script>
 import { school, getSchoolInfo } from '../../config/services.js'
-import { Search, Dialog } from 'vant'
+import { Search, Dialog, Button } from 'vant'
 export default {
   name: 'home',
   components: {
@@ -46,15 +46,14 @@ export default {
   },
   created() {},
   mounted() {
-    let that = this
-    // 初始化城市列表
+    let that = this // 初始化城市列表
     const itemCode = localStorage.getItem('itemCode')
     const cityCode = localStorage.getItem('cityCode')
-    school({
-      cityCode: cityCode,
-      itemCode: itemCode,
+    const url = location.href
+    const areaId = url.substring(url.indexOf('areaId=') + 7)
+    getSchoolInfo({
+      areaId: areaId,
     }).then((res) => {
-      console.log(res.data.schoolList)
       res.code === 0
         ? res.data.schoolList.length > 0
           ? ((that.homeListConst = res.data.schoolList), (that.homeList = res.data.schoolList))
@@ -62,7 +61,7 @@ export default {
               message: '当前城市无学校',
             }).then(() => {})
         : Dialog.alert({
-            message: '查询学校失败',
+            message: res.msg,
           }).then(() => {})
     })
   },
@@ -89,8 +88,8 @@ export default {
   },
 }
 </script>
-
-<style scoped lang="scss">
+ 
+ <style scoped lang="scss">
 // .mainwrap {
 //   background: #efefef;
 // }

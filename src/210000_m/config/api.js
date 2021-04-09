@@ -1,9 +1,9 @@
-import baseapi from "utils/baseURL";
+import baseapi from 'utils/baseURL';
 
-const callback = "https://210000.epayservice.cn/success"; //传给后台的回调地址
-const region = "210000"; //区划号
+const callback = 'https://210000.epayservice.cn/success'; //传给后台的回调地址
+const region = '210000'; //区划号
 const regular = /^21\d{18}$/; //非税缴款正则表达式
-const regularText = "缴款码必须等于20位且21开头"; //非税缴款正则表达式提示信息
+const regularText = '缴款码必须等于20位且21开头'; //非税缴款正则表达式提示信息
 
 export default {
   //非税缴款正则表达式
@@ -42,4 +42,8 @@ export default {
   queryRealTime: `${baseapi}/common/queryRealTime.do`,
   //学校列表接口
   school: `${baseapi}//common/school.do`,
+  //get获取学校信息
+  getSchoolInfo: `${baseapi}/210000/getSchoolInfo`,
+  //get获取非税信息
+  nontaxPage: `${baseapi}/210000/nontaxPage`,
 };
