@@ -30,8 +30,6 @@ app.use(mockMiddleware);
 
 getPort({ port: [8080] }).then(port => {
   app.listen(port, () => {
-    bundler.on('buildEnd', () => {
-      opn(`http://localhost:${port}/`);
-    });
+    opn(`http://localhost:${port}/`);
   });
 });
