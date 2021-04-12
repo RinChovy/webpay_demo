@@ -49,6 +49,11 @@ const routes = [
     component: Index_pay,
   },
   {
+    path: '/nontaxPage', //非税缴款界面
+    name: 'nontaxPage',
+    component: Index_pay,
+  },
+  {
     path: '/index_charge', //缴款书界面
     name: 'index_charge',
     component: Index_charge,
@@ -90,7 +95,7 @@ const routes = [
 ];
 const router = new VueRouter({
   mode: 'history',
-  base: '/webpay_210000',
+  base: '/210000',
   routes,
 });
 

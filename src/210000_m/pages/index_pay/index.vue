@@ -43,11 +43,6 @@
         <button @click="submit" v-if="disabled == true">下一步</button>
         <button @click="submit" disabled="disabled" v-else>下一步</button>
       </div>
-      <div class="footerc" style="line-height: 20px; margin-top: 24px">
-        <span style="display: block">版本所有：青岛市财政局</span>
-        <span style="display: block">技术支持：福建博思软件股份有限公司</span>
-        <span style="display: block">支持电话：0532-85856831</span>
-      </div>
     </div>
   </div>
 </template>
