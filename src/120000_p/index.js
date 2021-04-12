@@ -1,5 +1,5 @@
 import 'es6-promise/auto';
-import 'babel-polyfill';
+import '@babel/polyfill';
 import 'matchmedia-polyfill';
 import 'matchmedia-polyfill/matchMedia.addListener';
 import React from 'react';

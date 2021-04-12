@@ -10,12 +10,14 @@ import fail from '../pages/fail/index.js';
 
 function App() {
   return (
-    <Router basename="210000_p">
+    <Router basename="210000">
       <Switch>
         <Route path="/" exact={true} component={Home} />
         <Route path="/home" component={Home} />
         {/* 非税缴款 */}
         <Route path="/index_pay" component={index_pay} />
+        {/* 非税缴款 */}
+        <Route path="/nontaxPage" component={index_pay} />
         {/* 非税缴款缴款书界面 */}
         <Route path="/index_charge" component={index_charge} />
         {/* 教育缴费界面 */}
