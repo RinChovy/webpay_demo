@@ -14,6 +14,8 @@ function App() {
       <Switch>
         <Route path="/" exact={true} component={Home} />
         <Route path="/home" component={Home} />
+        {/* 首页 */}
+        <Route path="/index_door" component={Home} />
         {/* 非税缴款 */}
         <Route path="/index_pay" component={index_pay} />
         {/* 非税缴款 */}
