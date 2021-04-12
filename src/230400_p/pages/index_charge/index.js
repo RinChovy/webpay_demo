@@ -96,7 +96,10 @@ class NonTaxPayChange extends React.Component {
         });
     }, 100);
   }
-
+  // 页面销毁生命周期
+  componentWillUnmount() {
+    window.location.reload();
+  }
   render() {
     const {
       span,
@@ -153,7 +156,10 @@ class NonTaxPayChange extends React.Component {
     const statusOk =
       status == 0 ? null : (
         <div style={{ position: "absolute", right: "18%" }}>
-          <img style={{ width: 100 }} src={require("./image/paiec.png")} />
+          <img
+            style={{ width: 100 }}
+            src={require("../../public/images/paiec.png")}
+          />
         </div>
       );
     return (

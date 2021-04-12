@@ -1,14 +1,6 @@
 <template>
   <div class="mainwrap">
     <div class="headern">
-      <div>
-        <van-search
-          style="opacity: 0.8"
-          shape="round"
-          background="transparent"
-          placeholder="查找服务"
-        />
-      </div>
       <div class="middle">
         <div class="box" @click="indexPay">
           <img src="../../public/images/feisui.png" alt="" />
@@ -28,7 +20,7 @@
           <span>推荐服务</span>
         </div>
         <div class="footer_box">
-          <img src="../../public/images/phone_box_bottom.png" alt="" />
+          <img @click="indexPay" src="../../public/images/phone_box_bottom.png" alt="" />
         </div>
       </div>
       <div class="bottom_span">
@@ -43,35 +35,35 @@
 </template>
 
 <script>
-import { Button, Row, Col, Search, Dialog } from "vant";
-import API from "../../config/api.js";
-import { getAliUserId, getOpenPlatformUserid } from "../../config/services.js";
+import { Button, Row, Col, Search, Dialog } from 'vant'
+import API from '../../config/api.js'
+import { getAliUserId, getOpenPlatformUserid } from '../../config/services.js'
 export default {
-  name: "home",
+  name: 'home',
   components: {
-    "van-row": Row,
-    "van-col": Col,
-    "van-button": Button,
-    "van-search": Search,
-    "van-dialog": Dialog,
+    'van-row': Row,
+    'van-col': Col,
+    'van-button': Button,
+    'van-search': Search,
+    'van-dialog': Dialog,
   },
   data() {
     return {
-      value: "value",
-      good: "value",
-      bottom_span: "主办单位：青岛市财政局",
-      bottom_span2: "服务电话：0532-85856831",
-      bottom_span3: "服务时间：法定工作日，09:00-17:00",
-    };
+      value: 'value',
+      good: 'value',
+      bottom_span: '主办单位：青岛市财政局',
+      bottom_span2: '服务电话：0532-85856831',
+      bottom_span3: '服务时间：法定工作日，09:00-17:00',
+    }
   },
   mounted() {
-    const user_id = localStorage.getItem("userId");
+    const user_id = localStorage.getItem('userId')
     if (!user_id) {
       ap &&
         ap.getAuthCode(
           {
-            appId: "2019090566921553",
-            scopes: ["auth_base"],
+            appId: '2019090566921553',
+            scopes: ['auth_base'],
           },
           function (res) {
             getAliUserId({
@@ -82,63 +74,64 @@ export default {
                   aliUserId: data.data.aliUserId,
                 }).then((resData) => {
                   if (resData.code === 0) {
-                    localStorage.removeItem("userId");
-                    localStorage.setItem("userId", resData.data.user_id);
+                    localStorage.removeItem('userId')
+                    localStorage.setItem('userId', resData.data.user_id)
                   } else {
                     Dialog.alert({
                       message: resData.msg,
                     }).then(() => {
                       // on close
-                    });
+                    })
                   }
-                });
+                })
               } else {
                 Dialog.alert({
                   message: data.msg,
                 }).then(() => {
                   // on close
-                });
+                })
               }
-            });
+            })
           }
-        );
+        )
     }
   },
   methods: {
     indexPay() {
       this.$router.push({
         // path: "/index_pay",
-        name: "index_pay",
-      });
+        name: 'index_pay',
+      })
     },
     indexUrl() {
       this.$router.push({
-        path: "/order_record",
-      });
+        path: '/order_record',
+      })
     },
   },
-};
+}
 </script>
 
 <style scoped lang="scss">
 .headern {
   width: 100%;
-  background: url("../../public/images/phone_background.png") no-repeat;
+  background: url('../../public/images/phone_background.png') no-repeat;
   background-size: cover;
   height: 640px;
+  padding-top: 52%;
 }
 .middle {
   width: 90%;
   height: 200px;
   background: white;
-  margin: 126px auto 0;
+  margin: 0 auto 0;
   border-radius: 20px;
   box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.15);
   display: flex;
   justify-content: space-around;
 }
 .img {
-  background: url("../../public/images/phone_box.png") no-repeat center;
+  background: url('../../public/images/phone_box.png') no-repeat center;
   background-size: 100%;
   margin: 0 auto;
   width: 100%;
@@ -154,8 +147,7 @@ export default {
   font-size: 17px;
   font-weight: bold;
   color: #464a4c;
-  background: url("../../public/images/span_background.png") no-repeat center
-    bottom;
+  background: url('../../public/images/span_background.png') no-repeat center bottom;
   background-size: 100%;
 }
 .footer_box {

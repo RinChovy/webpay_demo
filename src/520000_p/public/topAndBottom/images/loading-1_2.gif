@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			a{text-decoration: none;}
+			body{background:#ecfaff;}
+			p{margin: 5px 0;padding: 0;}
+			.main-error{margin:0 auto;width: 600px;padding: 20px;}
+			.txt{ line-height: 30px; font-size: 16px; text-align: center; color:#000;}
+			.pic{text-align: center; padding-top: 50px;}
+			.btns{background: #005AAB;padding: 10px 20px; border-radius: 5px;}
+			.btns a{ color: #fff;}
+		</style>
+	</head>
+	<body>
+		<div class="main-error">
+			<div class="pic">
+				<img src="/404/images/error.png" width="110"/>
+			</div>
+			<div class="txt">
+				<p>您访问的页面已撤稿或删除</p>
+				<p>如您是在地址栏输入网址的，请确认其拼写正确，并注意网址的大小写字母区分。</p>
+				<p style=" margin-top: 20px;"><span class="btns"><a href="/">返回首页</a></span></p>
+			</div>
+		</div>
+	</body>
+</html>

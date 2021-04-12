@@ -10,6 +10,7 @@ class NonTaxPay extends React.Component {
     warnSpan:
       "1.博思软件技术支持联系人：王岷峰 电话：15776139000;</br>2.业务范围（场景）只支持直缴业务，暂不支持交罚以及汇缴业务;</br>3.如预算单位需要使用汇缴业务，或者需要与自身业务系统对接，可联系上述软件技术支持人员。",
     codeUrl: api.getCo, //验证码
+    loadings: [], //等待时间
   };
 
   componentDidMount() {}
@@ -27,25 +28,22 @@ class NonTaxPay extends React.Component {
   // 验证码换一张
   changeImg = () => {
     const { codeUrl } = this.state;
-    let newCode = this.chgUrl(codeUrl);
+    const timestamp = new Date().valueOf();
     this.setState({
-      codeUrl: newCode,
+      codeUrl: codeUrl.split("?")[0] + "?timestamp=" + timestamp,
     });
   };
-  //验证码时间戳
-  chgUrl(url) {
-    var timestamp = new Date().valueOf();
-    // url = url.substring(0, 100);
-    if (url.indexOf("&") >= 0) {
-      url = url + "×tamp=" + timestamp;
-    } else {
-      // url = url + '?timestamp=' + timestamp;
-      url = url + "?timestamp=" + timestamp;
-    }
-    return url;
-  }
   //提交成功
   handleFormSubmit = (values) => {
+    //防止重复点击
+    const { loadings } = this.state;
+    this.setState(({ loadings }) => {
+      const newLoadings = [...loadings];
+      newLoadings[1] = true;
+      return {
+        loadings: newLoadings,
+      };
+    });
     queryPayInfo({
       payCode: values.payCode,
       payPeople: values.payName,
@@ -66,13 +64,22 @@ class NonTaxPay extends React.Component {
   handleError = (err) => {
     localStorage.removeItem("data");
     this.openNotificationWithIcon("error", err);
+    const { loadings } = this.state;
+    //防止重复点击解开按钮限制
+    this.setState(({ loadings }) => {
+      const newLoadings = [...loadings];
+      newLoadings[1] = false;
+      return {
+        loadings: newLoadings,
+      };
+    });
   };
   //提交失败2
   onFinishFailed = (values) => {
     console.log("fail:", values);
   };
   render() {
-    const { spanPay, spanPayTop, codeUrl, warnSpan } = this.state;
+    const { spanPay, spanPayTop, codeUrl, warnSpan, loadings } = this.state;
     const layout = {
       labelCol: {
         span: 8,
@@ -188,6 +195,7 @@ class NonTaxPay extends React.Component {
                         size="large"
                         type="primary"
                         htmlType="submit"
+                        loading={loadings[1]}
                       >
                         下一步
                       </Button>

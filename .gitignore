@@ -33,17 +33,17 @@ screenshot
 .firebase
 .eslintcache
 
-build.js
-
 # dev test
 request.js
 mock.js
-dev-history.js
 
 /.cache
 
-webpay_370200
 webpay_370200pc
+webpay_370200-1
 test
 
 pro-build
+ailjctest
+
+ailjc-service

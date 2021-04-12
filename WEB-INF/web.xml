@@ -6,12 +6,12 @@
   version="3.0"
   metadata-complete="true">
 
-  <display-name>webapp</display-name>
-  <description>
+   <display-name>webapp</display-name>
+   <description>
      webapp
-  </description>
-  <error-page>  
-   <error-code>404</error-code>  
-   <location>/</location>  
-</error-page>  
+   </description>
+   <error-page>  
+      <error-code>404</error-code>  
+      <location>/</location>  
+   </error-page>  
 </web-app>
