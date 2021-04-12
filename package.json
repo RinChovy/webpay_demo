@@ -7,10 +7,9 @@
   "description": "webpay fe",
   "main": "index.js",
   "scripts": {
-    "dev": "NODE_ENV=development ailjc-service server",
-    "start": "cross-env NODE_ENV=development node ./config/dev.js",
-    "build": "rimraf ./dist && cross-env NODE_ENV=development node ./config/build.js",
-    "build:pro": "rimraf ./dist && cross-env NODE_ENV=production node ./config/prod.js",
+    "start": "cross-env NODE_ENV=development ailjc-service server",
+    "build": "rimraf ./dist && cross-env NODE_ENV=development ailjc-service build",
+    "build:pro": "rimraf ./dist && cross-env NODE_ENV=production ailjc-service build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "license": "ISC",
