@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Form,
   Input,
@@ -9,8 +9,8 @@ import {
   notification,
   Space,
   Select,
-} from "antd";
-import { education, schools } from "../../service/services";
+} from 'antd';
+import { education, schools } from '../../service/services';
 
 const { Option } = Select;
 
@@ -18,13 +18,12 @@ class school extends React.Component {
   state = {
     city: [],
     school: [],
-    itemCode: "",
-    schoolUrl: "",
-    itemCode: "",
+    itemCode: '',
+    schoolUrl: '',
   };
   componentDidMount() {
     //返回上一页做判断
-    const itemCode = localStorage.getItem("itemCode");
+    const itemCode = localStorage.getItem('itemCode');
     this.setState({
       itemCode: itemCode,
     });
@@ -37,13 +36,13 @@ class school extends React.Component {
           itemCode: itemCode,
         });
       } else {
-        this.openNotificationWithIcon("error", res.msg);
+        this.openNotificationWithIcon('error', res.msg);
       }
     });
   }
   //改变地区事件
   cityChange = (value) => {
-    const itemCode = localStorage.getItem("itemCode");
+    const itemCode = localStorage.getItem('itemCode');
     schools({
       cityCode: value.value,
       itemCode: itemCode,
@@ -54,7 +53,7 @@ class school extends React.Component {
           school: school,
         });
       } else {
-        this.openNotificationWithIcon("error", res.msg);
+        this.openNotificationWithIcon('error', res.msg);
         this.setState({
           school: [],
         });
@@ -71,7 +70,7 @@ class school extends React.Component {
   // 提示信息方法
   openNotificationWithIcon = (type, msg) => {
     notification[type]({
-      message: "查询错误",
+      message: '查询错误',
       description: msg,
     });
   };
@@ -79,9 +78,9 @@ class school extends React.Component {
   //跳转下一步
   submit = () => {
     let url = this.state.schoolUrl;
-    url != ""
+    url != ''
       ? (window.location.href = url)
-      : this.openNotificationWithIcon("error", "不存在学校地址");
+      : this.openNotificationWithIcon('error', '不存在学校地址');
   };
   render() {
     const { city, school } = this.state;

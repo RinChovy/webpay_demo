@@ -9,7 +9,7 @@
     <div class="div_button" v-if="url != null">
       <button @click="einvoice_url">查看电子票</button>
     </div>
-    <div class="div_button" else>
+    <div class="div_button" v-else-if="areaId == ''">
       <button @click="home">返回首页</button>
     </div>
   </div>
@@ -32,6 +32,7 @@ export default {
       merchant_order_no: '',
       spanPay: '缴款成功',
       url: '', //电子票地址
+      areaId: '', //判断返回页
     }
   },
   //加载生命周期
@@ -52,6 +53,8 @@ export default {
         })
       }
     })
+    const areaId = localStorage.getItem('areaId')
+    this.areaId = areaId
   },
   methods: {
     indexPay() {
