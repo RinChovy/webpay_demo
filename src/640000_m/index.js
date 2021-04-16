@@ -8,6 +8,7 @@ import App from './index.vue';
 import Home from './pages/home/index.vue';
 import Phone_index from './pages/home/index.vue';
 import Index_pay from './pages/index_pay/index.vue';
+import Education from './pages/index_pay_education/index.vue';
 import Index_charge from './pages/Index_charge/index.vue';
 import Success from './pages/success/index.vue';
 import Fail from './pages/fail/index.vue';
@@ -42,10 +43,16 @@ const routes = [
     component: Index_pay,
   },
   {
+    path: '/education', //教育缴费页面
+    name: 'education',
+    component: Education,
+  },
+  {
     path: '/index_charge', //缴款书界面
     name: 'index_charge',
     component: Index_charge,
   },
+
   {
     path: '/success', //成功回调页
     name: 'success',

@@ -17,11 +17,7 @@
             "
             >已缴款</span
           >
-          <span
-            style="color: #00d414"
-            v-else-if="model.order_status == '5' || model.order_status == '6'"
-            >退款</span
-          >
+          <span style="color: #00d414" v-else-if="model.order_status == '5' || model.order_status == '6'">退款</span>
           <span style="color: #ee8835" v-else>处理中</span>
         </div>
       </div>
@@ -65,63 +61,38 @@
           </div>
         </div>
         <div class="box_nei" style="padding-bottom: 10px">
-          <div
-            class="item_box"
-            v-for="i in JSON.parse(model.item_name_set)"
-            :key="i"
-          >
+          <div class="item_box" v-for="i in JSON.parse(model.item_name_set)" :key="i">
             <span class="left">{{ i.itemName }}</span>
             <span class="right">{{ i.amt }}元</span>
           </div>
         </div>
       </div>
-      <!-- <div class="box_bottom">
-        <div class="box_bottom_nei">
-          <div class="top">
-            <span
-              class="left_two"
-              style="color: #ff2400"
-              v-if="model.order_status == '3'"
-            >
-              ￥{{ model.fmat }}
-            </span>
-            <span class="left" style="color: red" v-else>
-              ￥{{ model.fmat }}
-            </span>
-            <span class="right">未缴款</span>
-          </div>
-        </div>
-      </div> -->
     </div>
   </div>
 </template>
 
 <script>
-import { DropdownMenu, DropdownItem, Dialog } from "vant";
-import API from "../../config/api.js";
-import {
-  queryOrderRecord,
-  getOpenid,
-  getOpenPlatformUserid,
-} from "../../config/services.js";
+import { DropdownMenu, DropdownItem, Dialog } from 'vant'
+import API from '../../config/api.js'
+import { queryOrderRecord, getOpenid, getOpenPlatformUserid } from '../../config/services.js'
 
 export default {
   //   name: "wx_charge",
   components: {
-    "van-dropdown-menu": DropdownMenu,
-    "van-dropdown-item": DropdownItem,
-    "van-dialog": Dialog,
+    'van-dropdown-menu': DropdownMenu,
+    'van-dropdown-item': DropdownItem,
+    'van-dialog': Dialog,
   },
   data() {
     return {
       model: JSON.parse(this.$route.params.item), //数据状态
-    };
+    }
   },
   mounted() {
-    console.log(this.model);
+    console.log(this.model)
   },
   methods: {},
-};
+}
 </script>
 <style scoped lang="scss">
 .box {

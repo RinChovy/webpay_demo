@@ -1,7 +1,7 @@
 import baseapi from 'utils/baseURL';
 
 const callback = 'https://210200.epayservice.cn/success'; //传给后台的回调地址
-const region = '210200'; //区划号
+const region = '000000'; //区划号
 const regular = /^21\d{18}$/; //非税缴款正则表达式
 const regularText = '缴款码必须等于20位且21开头'; //非税缴款正则表达式提示信息
 

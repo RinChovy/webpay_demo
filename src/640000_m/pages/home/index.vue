@@ -10,7 +10,7 @@
             <img src="../../public/images/icon/feisui.png" alt="" />
             <div><span>一般非税缴款</span></div>
           </div>
-          <div class="box" @click="indexUrl">
+          <div class="box" @click="indexPayEducation">
             <img src="../../public/images/icon/jiaoyu.png" alt="" />
             <div><span>教育缴费</span></div>
           </div>
@@ -62,6 +62,11 @@ export default {
     indexPay() {
       this.$router.push({
         path: '/index_pay',
+      })
+    },
+    indexPayEducation() {
+      this.$router.push({
+        path: '/education',
       })
     },
     indexUrl() {

@@ -1,12 +1,12 @@
-import React from "react";
-import { api } from "../../service/api";
-import style from "../../public/css/index.css";
-import { queryHomelist } from "../../service/services";
+import React from 'react';
+import { api } from '../../service/api';
+import style from '../../public/css/index.css';
+import { queryHomelist } from '../../service/services';
 
 class Home extends React.Component {
   state = {
     list: [],
-    yunwei: "运维联系方式：024-22835015", //运维信息
+    yunwei: '运维联系方式：024-22835015', //运维信息
   };
 
   componentDidMount() {
@@ -20,10 +20,10 @@ class Home extends React.Component {
   }
 
   router = (url, code) => {
-    if (code == 110) {
+    if (url.startsWith('http')) {
       window.location.href = url;
     } else {
-      localStorage.setItem("itemCode", code);
+      localStorage.setItem('itemCode', code);
       this.props.history.push({ pathname: `/${url}` });
     }
   };
