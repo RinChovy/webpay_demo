@@ -21,10 +21,14 @@ class NonTaxPay extends React.Component {
         areaId: areaId,
       }).then((res) => {
         res.code === 0
-          ? console.log(res.msg)
+          ? localStorage.setItem('areaId', areaId)
           : this.openNotificationWithIcon('error', res.msg);
       });
     }
+  }
+  // 页面销毁生命周期
+  componentWillUnmount() {
+    window.location.reload();
   }
   // 提示信息方法
   openNotificationWithIcon = (type, msg) => {

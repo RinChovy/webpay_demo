@@ -1,17 +1,17 @@
-import React from "react";
-import { Button } from "antd";
-import { successs } from "../../service/services";
+import React from 'react';
+import { Button } from 'antd';
+import { successs } from '../../service/services';
 
 class success extends React.Component {
   state = {
-    merchant_order_no: "",
-    spanPay: "缴款成功",
-    url: "", //电子票地址
+    merchant_order_no: '',
+    spanPay: '缴款成功',
+    url: '', //电子票地址
   };
 
   componentDidMount() {
     let url = this.props.location.search;
-    let rsa = url.substring(url.indexOf("=") + 1);
+    let rsa = url.substring(url.indexOf('=') + 1);
     successs({
       rsa: rsa,
     }).then((res) => {
@@ -22,10 +22,7 @@ class success extends React.Component {
           merchant_order_no: res.data.merchant_order_no,
         });
       } else {
-        this.openNotificationWithIcon("error", res.msg);
-        this.setState({
-          school: [],
-        });
+        this.props.history.push({ pathname: '/fail', query: '' });
       }
     });
   }
@@ -35,7 +32,7 @@ class success extends React.Component {
   };
   // 返回
   cencel = () => {
-    this.props.history.push({ pathname: "/home", query: "" });
+    this.props.history.push({ pathname: '/home', query: '' });
   };
   render() {
     const { spanPay, url, merchant_order_no } = this.state;
@@ -44,7 +41,7 @@ class success extends React.Component {
         <div>
           <div className="outForm_pay">
             <div className="img_pay">
-              <img src={require("../../public/images/icon_top.png")} />
+              <img src={require('../../public/images/icon_top.png')} />
             </div>
             <div className="onForm_pay">
               <div className="top_pay">
@@ -54,7 +51,7 @@ class success extends React.Component {
                 <div className="row">
                   <img
                     style={{ marginTop: 40 }}
-                    src={require("../../public/images/successn.png")}
+                    src={require('../../public/images/successn.png')}
                   />
                   <p className="row_p">
                     缴款成功,建议保存商户订单号{merchant_order_no}

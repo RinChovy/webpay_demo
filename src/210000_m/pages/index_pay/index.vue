@@ -100,7 +100,7 @@ export default {
         areaId: areaId,
       }).then((res) => {
         res.code === 0
-          ? console.log(res.msg)
+          ? localStorage.setItem('areaId', areaId)
           : Dialog.alert({
               message: res.msg,
             }).then(() => {
@@ -109,6 +109,10 @@ export default {
       })
     }
   },
+  // 销毁生命周期
+  // beforeDestroy() {1
+  // window.location.reload()
+  // },
   methods: {
     GetQueryValue(queryName) {
       var reg = new RegExp('(^|&)' + queryName + '=([^&]*)(&|$)', 'i')

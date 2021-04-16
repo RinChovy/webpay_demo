@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Home from '../pages/home/index.js';
 import Index_pay from '../pages/index_pay/index.js';
 import Index_pay_traffic from '../pages/Index_pay_traffic/index.js';
@@ -8,7 +8,7 @@ import Success from '../pages/success/index.js';
 import Fail from '../pages/fail/index.js';
 function App() {
   return (
-    <Router>
+    <Router basename="210200">
       <Switch>
         <Route path="/" exact={true} component={Home} />
         {/* 非税缴款 */}

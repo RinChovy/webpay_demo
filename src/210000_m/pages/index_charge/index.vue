@@ -155,14 +155,15 @@ export default {
     // }
 
     //  处理微信小程序内 webview 页面监听状态的方法
+    let that = this
     if (ua.match(/MicroMessenger/i) == 'micromessenger') {
       wx.miniProgram.getEnv(function (res) {
         if (res.miniprogram) {
           if (document.addEventListener) {
-            document.addEventListener('WeixinJSBridgeReady', this.sendMessage(), false)
+            document.addEventListener('WeixinJSBridgeReady', that.sendMessage(), false)
           } else if (document.attachEvent) {
-            document.attachEvent('WeixinJSBridgeReady', this.sendMessage())
-            document.attachEvent('onWeixinJSBridgeReady', this.sendMessage())
+            document.attachEvent('WeixinJSBridgeReady', that.sendMessage())
+            document.attachEvent('onWeixinJSBridgeReady', that.sendMessage())
           }
         }
       })
@@ -204,6 +205,7 @@ export default {
     submit() {
       let that = this
       const { order_no, merchant_no, totalAmount_fen, payCode } = this
+
       // 挂件调用
       var ua = window.navigator.userAgent.toLowerCase()
       var openid = localStorage.getItem('openId')
@@ -211,7 +213,7 @@ export default {
       if (ua.match(/MicroMessenger/i) == 'micromessenger') {
         wx.miniProgram.getEnv(function (res) {
           if (res.miniprogram) {
-            // 走在小程序的逻辑\
+            // 走在小程序的逻辑
             // 微信小程序 监听页面变化
             that.miniProgramMark = true
             thirdpay_widget.init({
@@ -303,58 +305,13 @@ export default {
           effective_time: '1c',
           device_type: 'phone',
           widget_param: {
-            paycode: paycode,
+            paycode: payCode,
           },
           charge_url: API.createCharge, //商户服务端创建charge时的controller地址
           charge_param: { a: 'a', b: 'b', regionCode: API.region, frontCallBackUrl: API.callback }, //(可选，用户自定义参数，若存在自定义参数则会通过 POST 方法透传给 charge_url
           version_no: '1.1',
         })
       }
-      // if ('' != typeof userId && typeof userId != 'undefined' && 'null' != typeof userId) {
-      //   thirdpay_widget.init({
-      //     container: 'widget', //挂件在当前页面放置的控件ID
-      //     merchant_no: this.merchant_no, //分配的商户号
-      //     merchant_order_no: guid(), //订单在商户系统中的订单号
-      //     amount: this.totalAmount_fen, //订单价格，单位：人民币 分
-      //     effective_time: '1c',
-      //     device_type: 'phone', //设备类型
-      //     widget_param: {
-      //       paycode: this.payCode,
-      //     }, //控件参数，常用来传递缴款服务所需定义的内容，如，非税paycode直缴或传入相关缴费信息生成缴款书
-      //     charge_url: API.createCharge, //商户服务端创建charge时的controller地址
-      //     //适用于开放平台的订单字段
-      //     userId: userId,
-      //     paymentName: this.exeAgencyName,
-      //     itemNameSet: this.queryItem,
-      //     charge_param: {
-      //       openid: openid,
-      //       b: 'b',
-      //       regionCode: API.region,
-      //       frontCallBackUrl: API.callback,
-      //     }, //(可选，用户自定义参数，若存在自定义参数则会通过 POST 方法透传给 charge_url
-      //     version_no: '1.1',
-      //   })
-      // } else {
-      //   thirdpay_widget.init({
-      //     container: 'widget', //挂件在当前页面放置的控件ID
-      //     merchant_no: this.merchant_no, //分配的商户号
-      //     merchant_order_no: guid(), //订单在商户系统中的订单号
-      //     amount: this.totalAmount_fen, //订单价格，单位：人民币 分
-      //     effective_time: '1c',
-      //     device_type: 'phone', //设备类型
-      //     widget_param: {
-      //       paycode: this.payCode,
-      //     }, //控件参数，常用来传递缴款服务所需定义的内容，如，非税paycode直缴或传入相关缴费信息生成缴款书
-      //     charge_url: API.createCharge, //商户服务端创建charge时的controller地址
-      //     charge_param: {
-      //       a: 'a',
-      //       b: 'b',
-      //       regionCode: API.region,
-      //       frontCallBackUrl: API.callback,
-      //     }, //(可选，用户自定义参数，若存在自定义参数则会通过 POST 方法透传给 charge_url
-      //     version_no: '1.1',
-      //   })
-      // }
     },
     fanhui() {
       window.history.go(-1)
