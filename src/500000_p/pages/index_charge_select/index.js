@@ -5,7 +5,7 @@ import { createCashier } from '../../service/services';
 import { Arabia_to_Chinese as money, guid } from 'utils/utils';
 import Left from '../components/left';
 
-class NonTaxPayChange extends React.Component {
+class NonTaxPayChangeSelect extends React.Component {
   state = {
     billDate: '', //填制日期
     exeAgencyCode: '', //执收单位编码
@@ -37,43 +37,6 @@ class NonTaxPayChange extends React.Component {
   //电子票地址跳转
   einvoiceUrl = () => {
     window.location.href = this.state.einvoice_url;
-  };
-  //收银台逻辑
-  goCashier = () => {
-    let that = this;
-    const query = JSON.parse(localStorage.getItem('data'));
-    const queryJson = query.payBook;
-    //收银台参数定义
-    const widget_param = {
-      paycode: queryJson.payCode,
-    };
-    const widget_content = {
-      merchant_no: query.merchant_no,
-      merchant_order_no: guid(),
-      amount: queryJson.totalAmount,
-      effective_time: '1c',
-      version_no: '1.1',
-      subject: 'subject',
-      body: 'body',
-      device_type: 'pc',
-      widget_param: widget_param,
-    };
-    const charge_param = { a: 'a', b: 'b' };
-    createCashier({
-      charge_param: JSON.stringify(charge_param),
-      widget_content: JSON.stringify(widget_content),
-      frontCallBackUrl: api.callback,
-    }).then((res) => {
-      res.code === 0 ? that.showCashier(res.msg) : that.handleError(res.msg);
-    });
-  };
-  showCashier = (pageParams) => {
-    document.write(pageParams);
-  };
-  handleError = (err) => {
-    localStorage.removeItem('data');
-    this.openNotificationWithIcon('error', err);
-    //防止重复点击解开按钮限制
   };
   componentDidMount() {
     const query = JSON.parse(localStorage.getItem('data'));
@@ -162,9 +125,7 @@ class NonTaxPayChange extends React.Component {
     // 挂件
     const thirdpay = (
       <div className="bottom_payInfo">
-        <Button onClick={this.goCashier} className="button_dianzi">
-          收银台支付
-        </Button>
+        <span style={{ color: 'red' }}>未缴款</span>
       </div>
     );
 
@@ -191,7 +152,7 @@ class NonTaxPayChange extends React.Component {
       <div className="body">
         <div className="body_icon">
           <span>
-            个人办事{'>'}统一支付平台{'>'}非税缴款
+            个人办事{'>'}统一支付平台{'>'}缴款状态查询
           </span>
         </div>
         <div className="outForm_pay">
@@ -201,7 +162,7 @@ class NonTaxPayChange extends React.Component {
                 <div className="outForm_pay_qingdao">
                   <div className="middle_pay">
                     <div className="middle_pay_left">
-                      <Left history={this.props.history} over="1" />
+                      <Left history={this.props.history} over="2" />
                     </div>
                     <div className="middle_pay_right">
                       <div className="middle_pay_right_org">
@@ -322,4 +283,4 @@ class NonTaxPayChange extends React.Component {
   }
 }
 
-export default NonTaxPayChange;
+export default NonTaxPayChangeSelect;

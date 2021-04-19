@@ -70,14 +70,14 @@ textarea {
   display: inline-block;
   vertical-align: top;
   flex: 4;
-  height: 390px;
+  height: 500px;
 }
 .middle_pay_right_org {
   background: rgba(255, 255, 255, 1);
 }
 
 .middle_box {
-  padding-top: 76px;
+  padding-top: 100px;
   width: 84%;
   margin: 0 auto;
 }
@@ -198,7 +198,6 @@ p {
 }
 .middle_payInfo {
   position: relative;
-  border: 1px solid #ccc;
   background: #eef7fe;
   background: url(../images/png_template.png);
   width: 900px;
@@ -209,7 +208,7 @@ p {
 .bottom_payInfo {
   /* border: 1px solid #ccc; */
   width: 900px;
-  padding-top: 20px;
+  padding-top: 8px;
   margin: 10px auto;
   text-align: center;
 }
@@ -232,27 +231,27 @@ p {
   margin: 14px auto;
 }
 .url_button {
-  background-color: #3c76a6;
-  color: white;
-  width: 140px;
-  height: 35px;
-  font-size: 16px;
-  font-weight: bold;
-  border-radius: 5px;
-  margin-top: 20px;
-  border: 0px;
+  width: 148px;
+  height: 36px;
+  border: 1px solid #375ea1;
+  background: white;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: PingFang SC;
+  font-weight: 500;
+  color: #375ea1;
 }
 .url_button_clear {
   margin-left: 20px;
-  background-color: #3c76a6;
-  color: white;
-  width: 140px;
-  height: 35px;
-  font-size: 16px;
-  font-weight: bold;
-  border-radius: 5px;
-  margin-top: 20px;
-  border: 0px;
+  width: 148px;
+  height: 36px;
+  border: 1px solid #375ea1;
+  background: white;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: PingFang SC;
+  font-weight: 500;
+  color: #375ea1;
 }
 .row {
   height: 300px;
@@ -262,7 +261,6 @@ p {
 .row_p {
   font-size: 18px;
   text-align: center;
-  color: green;
   margin-top: 30px;
 }
 /* .heada {
@@ -311,4 +309,8 @@ p {
   width: 153px;
   border: 1px solid #375ea1;
   background: #375ea1;
+}
+.button_dianzi {
+  color: #375ea1;
+  border: 1px solid #375ea1;
 }

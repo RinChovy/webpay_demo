@@ -14,7 +14,13 @@ class NonTaxPay extends React.Component {
     loadings: [], //等待时间
   };
 
-  componentDidMount() {}
+  componentDidMount() {
+    const { codeUrl } = this.state;
+    const timestamp = new Date().valueOf();
+    this.setState({
+      codeUrl: codeUrl.split('?')[0] + '?timestamp=' + timestamp,
+    });
+  }
   // 提示信息方法
   openNotificationWithIcon = (type, msg) => {
     notification[type]({
@@ -79,7 +85,7 @@ class NonTaxPay extends React.Component {
     console.log('fail:', values);
   };
   render() {
-    const { spanPay, spanPayTop, codeUrl, loadings } = this.state;
+    const { codeUrl, loadings } = this.state;
     const layout = {
       labelCol: {
         span: 8,
@@ -97,7 +103,9 @@ class NonTaxPay extends React.Component {
     return (
       <div className="body">
         <div className="body_icon">
-          <span>个人办事——统一支付平台——非税缴款</span>
+          <span>
+            个人办事{'>'}统一支付平台{'>'}非税缴款
+          </span>
         </div>
         <div className="outForm_pay">
           <div className="onForm_pay">

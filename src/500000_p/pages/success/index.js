@@ -22,7 +22,7 @@ class success extends React.Component {
           merchant_order_no: res.data.merchant_order_no,
         });
       } else {
-        this.props.history.push({ pathname: '/fail', query: '' });
+        // this.props.history.push({ pathname: '/fail', query: '' });
       }
     });
   }
@@ -37,41 +37,45 @@ class success extends React.Component {
   render() {
     const { spanPay, url, merchant_order_no } = this.state;
     return (
-      <div>
-        <div>
-          <div className="outForm_pay">
-            <div className="img_pay">
-              <img src={require('../../public/images/icon_top.png')} />
-            </div>
-            <div className="onForm_pay">
-              <div className="top_pay">
-                <span className="topSpan_pay">非税缴款</span>
-              </div>
-              <div className="middle_pay">
-                <div className="row">
-                  <img
-                    style={{ marginTop: 40 }}
-                    src={require('../../public/images/successn.png')}
-                  />
-                  <p className="row_p">
-                    缴款成功,建议保存商户订单号{merchant_order_no}
-                    ，以便后续核对查询使用
-                  </p>
-                  <div style={{ marginTop: 10 }}>
-                    {url != null && (
-                      <input
-                        className="url_button"
-                        type="button"
-                        value="查看打印财政票据"
-                        onClick={this.url}
-                      />
-                    )}
-                    <input
-                      className="url_button_clear"
-                      type="button"
-                      value="返回"
-                      onClick={this.cencel}
-                    />
+      <div className="body">
+        <div className="body_icon">
+          <span>个人办事{'>'}统一支付平台</span>
+        </div>
+        <div className="outForm_pay">
+          <div className="onForm_pay">
+            <div>
+              <div>
+                <div className="outForm_pay_qingdao">
+                  <div className="middle_pay">
+                    <div className="middle_pay">
+                      <div className="row">
+                        <img
+                          style={{ marginTop: 40 }}
+                          src={require('../../public/images/successn.png')}
+                        />
+                        <p className="row_p">
+                          缴款成功,如需换开纸质票据，请联系执收单位
+                        </p>
+                        <div style={{ marginTop: 10 }}>
+                          {url != '' && (
+                            <input
+                              className="url_button"
+                              type="button"
+                              value="查看电子票"
+                              onClick={this.url}
+                            />
+                          )}
+                          <input
+                            className={
+                              url != '' ? 'url_button_clear' : 'url_button'
+                            }
+                            type="button"
+                            value="返回"
+                            onClick={this.cencel}
+                          />
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
