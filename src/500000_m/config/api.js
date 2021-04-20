@@ -19,9 +19,11 @@ export default {
   // 验证码
   code: `${baseapi}/common/getCo`,
   // 提交缴款书
-  queryPayInfo: `${baseapi}/common/queryPenaltyDecisionInfo.do`,
+  queryPayInfo: `${baseapi}/common/queryNontaxPortal`,
   // 缴费接口
   createCharge: `${baseapi}/common/createCharge`,
   //成功回调接口
   success: `${baseapi}/callback/frontnotice`,
+  //收银台接口
+  createCashier: `${baseapi}/common/createCashier`,
 };

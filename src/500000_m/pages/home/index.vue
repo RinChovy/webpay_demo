@@ -10,7 +10,7 @@
           </div>
           <div class="box" @click="indexPay">
             <img src="../../public/images/icon/ping.png" alt="" />
-            <div><span>缴款状态 查询</span></div>
+            <div><span>缴款状态查询</span></div>
           </div>
         </div>
       </div>
