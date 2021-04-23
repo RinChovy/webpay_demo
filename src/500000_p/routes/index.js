@@ -8,8 +8,8 @@ import Success from '../pages/success/index.js';
 import Fail from '../pages/fail/index.js';
 function App() {
   return (
-    <Router>
-      {/* <Router basename="500000"> */}
+    // <Router>
+    <Router basename="webpay_500000">
       <Switch>
         <Route path="/" exact={true} component={Index_pay} />
         {/* 非税缴款 */}
@@ -23,6 +23,7 @@ function App() {
         <Route path="/index_charge" component={NTpayChange} />
         <Route path="/index_charge_select" component={NTpayChange_select} />
         {/* 回调成功界面 */}
+
         <Route path="/success" component={Success} />
         {/* 回调失败界面 */}
         <Route path="/fail" component={Fail} />
