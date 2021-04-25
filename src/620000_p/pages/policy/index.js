@@ -4,6 +4,7 @@ import reqwest from 'reqwest';
 import { queryPayInfo } from '../../service/services';
 import { api } from '../../service/api';
 import style from '../../public/css/index.css';
+import Model from '../components/model';
 
 class Policy extends React.Component {
   state = {
@@ -39,7 +40,7 @@ class Policy extends React.Component {
           { id: '2', name: '财综〔2007〕4号' },
           { id: '3', name: '财综〔2007〕4号' },
           { id: '3', name: '财综〔2007〕4号' },
-          { id: '3', name: '财综〔2007〕4号' },
+          { id: '3', name: '财综〔2007〕4号财综〔2007〕4号' },
           { id: '3', name: '财综〔2007〕4号' },
           { id: '3', name: '财综〔2007〕4号' },
           { id: '3', name: '财综〔2007〕4号' },
@@ -50,6 +51,8 @@ class Policy extends React.Component {
       },
     ],
   };
+  // 列表table点击弹出组件
+  click_table = () => {};
 
   componentDidMount() {}
   // 查询方法
@@ -85,10 +88,16 @@ class Policy extends React.Component {
         dataIndex: 'item',
         key: 'item',
         align: 'left',
+        width: '600px',
         render: (v) => (
           <>
             {v.map((item) => (
-              <Tag color="blue" key={item}>
+              <Tag
+                color="blue"
+                key={item}
+                style={{ marginTop: 20 }}
+                onClick={this.click_table}
+              >
                 {item.name}
               </Tag>
             ))}
@@ -99,6 +108,7 @@ class Policy extends React.Component {
     const { data, pagination, loading } = this.state;
     return (
       <div className="body">
+        <Model model={true} />
         <div className="outForm_pay">
           <div className="img_pay">
             <div className="onForm_pay">

@@ -45,10 +45,8 @@ export default {
         console.log(res)
         ;(this.url = res.data.einvoice_url), (this.merchant_order_no = res.data.merchant_order_no)
       } else {
-        Dialog.alert({
-          message: res.msg,
-        }).then(() => {
-          // on close
+        this.$router.push({
+          path: '/fail',
         })
       }
     })

@@ -62,8 +62,8 @@ const routes = [
   // },
 ];
 const router = new VueRouter({
-  // mode: 'history',
-  base: '/webpay_520000',
+  mode: 'history',
+  base: '/520000',
   routes,
 });
 
