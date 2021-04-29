@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Home from '../pages/home/index.js';
 import NTpay from '../pages/index_pay/index.js';
 import NTpayChange from '../pages/index_charge/index.js';
@@ -9,7 +9,7 @@ import Policy from '../pages/policy/index.js';
 function App() {
   return (
     <Router>
-      <Switch>
+      <Switch baseName="webpay_620000">
         <Route path="/" exact={true} component={Home} />
         {/* 非税缴款 */}
 

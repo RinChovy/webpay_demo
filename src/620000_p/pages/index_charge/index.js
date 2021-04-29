@@ -125,20 +125,16 @@ class NonTaxPayChange extends React.Component {
     // 项目遍历
     const itemModel = queryItem.map((v, k) => {
       return (
-        <tr key={k}>
-          <td colSpan="2">&nbsp;{v.itemIdCode}</td>
-          <td>&nbsp;{v.itemCode}</td>
-          <td>&nbsp;{v.itemName}</td>
-          <td colSpan="2">
-            <center>{v.units}</center>
+        <tr key={k} height="28">
+          <td style={{ fontSize: 14, fontWeight: 'bold', textAlign: 'center' }}>
+            {v.itemIdCode}
           </td>
-          <td>
-            <center>{v.number}</center>
+          <td style={{ fontSize: 14, fontWeight: 'bold', textAlign: 'center' }}>
+            {v.itemName}
           </td>
-          <td>
-            <center>{v.std}</center>
+          <td style={{ fontSize: 14, fontWeight: 'bold', textAlign: 'right' }}>
+            ￥{parseFloat(v.amt).toFixed(2)}
           </td>
-          <td>{parseFloat(v.amt).toFixed(2)}</td>
         </tr>
       );
     });
@@ -178,175 +174,167 @@ class NonTaxPayChange extends React.Component {
                   <div className="middle_payInfo">
                     {statusOk}
                     <p className="title_t">
-                      <b>缴款通知书</b>
-                    </p>
-                    <p className="title-ti">
-                      <span>填制日期：{billDate}</span>
+                      <b>甘肃省政府非税收入电子缴款通知书</b>
                     </p>
                     <p className="title-ti">
                       <span>执收单位编码：{exeAgencyCode}</span>
-                      <span style={{ marginLeft: 50 }}>
-                        执收单位名称：{exeAgencyName}
-                      </span>
                     </p>
                     <p className="title-ti">
-                      <span>缴款码：{payCode}</span>
+                      <span> 执收单位名称：{exeAgencyName}</span>
                     </p>
-                    {/* <table cellspacing="0" cellpadding="0" border="1" bordercolor="black" style="width: 100%;">
-                            <tbody>
-                            <tr height="28" >
-                                <td width="6%" rowspan="2"style="border-bottom:1px;text-align: center;">
-                                    缴</br>款</br>人
-                                </td>
-                                <td width="15%"style="text-align: center;">全 &nbsp; &nbsp; &nbsp; &nbsp;称</td>
 
-                                <td width="32%">
-                                    <c:out value="${paypeople}"/>
-                                </td>
-                                <td width="15%"style="text-align: center;">邮 &nbsp; &nbsp; &nbsp; &nbsp;箱</td>
-                                <td width="32%"> 
-
-                                </td>
-                            </tr>
-                            <tr height="28" >
-
-                                <td width="15%"style="border-bottom:1px;text-align: center;">手 &nbsp; &nbsp; &nbsp; &nbsp;机</td>
-
-                                <td width=""style="border-bottom:1px;">
-
-                                </td>
-                                <td width="15%"style="border-bottom:1px;text-align: center;">备 &nbsp; &nbsp; &nbsp; &nbsp;注</td>
-                                <td width=""style="border-bottom:1px;">
-
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <table cellspacing="0" cellpadding="0" border="1"bordercolor="black"style="width: 100%;">
-                                <tr height="28" style="border-top:2px;">
-
-                                    <td width="13%"style={{borderBottom:"1px",borderTop:"0px",textAlign: "center"}}>金额（大写）</td>
-
-                                    <td width="50%"id="daxie"style={{borderBottom:"1px",borderTop:"0px",textAlign: "right"}}>
-
-                                    </td>
-                                    <td width="13%"style={{borderBottom:"1px",borderTop:"1px",textAlign: "center"}}>
-                                        小写
-                                    </td>
-                                    <td width="24%"style="border-bottom:1px;border-top:1px;text-align:right;font-size:18px;font-weight:bold;">
-                                        ￥<fmt:formatNumber value="${payBook.totalAmount/100}" pattern="0.00"/>&nbsp;
-                                    </td>
-                                </tr>
-                        </table>
-                        <table cellspacing="0" cellpadding="0" border="1"bordercolor="black" style={{width: "100%""}}>
-                            <tr height="28" style="border-top:2px;background-color: aliceblue;">
-                                <th width="24%"style={{borderTop:"0px",textAlign: "center"}}>项目识别码</td>
-                                <th width=""style={{borderTop:"0px",textAlign: "center"}}>项目名称</td>
-                                <th width="24%"style={{borderTop:"0px",textAlign: "center"}}>金 &nbsp; &nbsp; &nbsp;额</td>
-                            </tr>
-                            <tr height="28">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr height="28">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr height="28">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr height="28">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr height="28">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                        </table> */}
-                    <table border="1" className="form_f">
+                    <p className="title-ti">
+                      <span>业务生成日期：{billDate}</span>
+                      <span style={{ marginLeft: 450 }}>
+                        缴款识别码：
+                        {payCode}
+                      </span>
+                    </p>
+                    <table
+                      cellspacing="0"
+                      cellpadding="0"
+                      border="1"
+                      bordercolor="black"
+                      style={{ width: '91%', margin: '0 auto' }}
+                    >
                       <tbody>
-                        <tr>
-                          <td width="23" rowSpan="3">
-                            <center>付款人</center>
+                        <tr height="28">
+                          <td
+                            width="6%"
+                            rowspan="2"
+                            style={{ borderBottom: 1, textAlign: 'center' }}
+                          >
+                            缴{<br />}款{<br />}人
                           </td>
-                          <td width="73">
-                            <center>全&nbsp;&nbsp;称</center>
-                          </td>
-                          <td width="230" colSpan="2">
-                            &nbsp;{payerName}
-                          </td>
-
-                          <td width="23" rowSpan="3">
-                            <center>收款人</center>
-                          </td>
-                          <td width="73">
-                            <center>全&nbsp;&nbsp;称</center>
+                          <td width="15%" style={{ textAlign: 'center' }}>
+                            全 &nbsp; &nbsp; &nbsp; &nbsp;称
                           </td>
 
-                          <td colSpan="3">{recName}</td>
+                          <td width="32%">{payerName}</td>
+                          <td width="15%" style={{ textAlign: 'center' }}>
+                            邮 &nbsp; &nbsp; &nbsp; &nbsp;箱
+                          </td>
+                          <td width="32%"></td>
                         </tr>
-                        <tr>
-                          <td>
-                            <center>账&nbsp;&nbsp;号</center>
+                        <tr height="28">
+                          <td
+                            width="15%"
+                            style={{ bordeBottom: 1, textAlign: 'center' }}
+                          >
+                            手 &nbsp; &nbsp; &nbsp; &nbsp;机
                           </td>
-                          <td colSpan="2">&nbsp;{payerAcct}</td>
-                          <td>
-                            <center>账&nbsp;&nbsp;号</center>
+
+                          <td width="" style={{ borderBottom: 1 }}></td>
+                          <td
+                            width="15%"
+                            style={{ borderBottom: 1, textAlign: 'center' }}
+                          >
+                            备 &nbsp; &nbsp; &nbsp; &nbsp;注
                           </td>
-                          <td colSpan="3">&nbsp;{recAcct}</td>
+                          <td width="" style={{ borderBottom: 1 }}></td>
                         </tr>
-                        <tr>
-                          <td>
-                            <center>开户银行</center>
-                          </td>
-                          <td colSpan="2">&nbsp;{payerOpBk}</td>
-                          <td>
-                            <center>开户银行</center>
-                          </td>
-                          <td colSpan="3">&nbsp;{recOpBk}</td>
-                        </tr>
-                        <tr>
-                          <td colSpan="2">
-                            <center>金额（小写）</center>
-                          </td>
-                          <td colSpan="2">&nbsp;￥{amt}</td>
-                          <td colSpan="2">
-                            <center>金额（大写）</center>
-                          </td>
-                          <td colSpan="3">&nbsp;{amtZ}</td>
-                        </tr>
-                        <tr>
-                          <td colSpan="2">
-                            <center>项目识别码</center>
-                          </td>
-                          <td width="120">
-                            <center>收入项目编码</center>
-                          </td>
-                          <td width="160">
-                            <center>收入项目名称</center>
-                          </td>
-                          <td colSpan="2">
-                            <center>单位</center>
-                          </td>
-                          <td width="100">
-                            <center>数量</center>
-                          </td>
-                          <td width="100">
-                            <center>收缴标准</center>
-                          </td>
-                          <td width="100">
-                            <center>金额</center>
-                          </td>
-                        </tr>
-                        {itemModel}
                       </tbody>
+                    </table>
+                    <table
+                      cellspacing="0"
+                      cellpadding="0"
+                      border="1"
+                      bordercolor="black"
+                      style={{ width: '91%', margin: '0 auto' }}
+                    >
+                      <tr height="28" style={{ borderTop: 2 }}>
+                        <td
+                          width="13%"
+                          style={{
+                            borderBottom: '1px',
+                            borderTop: '0px',
+                            textAlign: 'center',
+                          }}
+                        >
+                          金额（大写）
+                        </td>
+
+                        <td
+                          width="50%"
+                          id="daxie"
+                          style={{
+                            borderBottom: '1px',
+                            borderTop: '0px',
+                            textAlign: 'right',
+                          }}
+                        >
+                          &nbsp;{amtZ}
+                        </td>
+                        <td
+                          width="13%"
+                          style={{
+                            borderBottom: '1px',
+                            borderTop: '1px',
+                            textAlign: 'center',
+                          }}
+                        >
+                          小写
+                        </td>
+                        <td
+                          width="24%"
+                          style={{
+                            borderBottom: 1,
+                            borderTop: 1,
+                            textAlign: 'right',
+                            fontSize: 14,
+                            fontWeight: 'bold',
+                          }}
+                        >
+                          &nbsp;￥{amt}
+                        </td>
+                      </tr>
+                    </table>
+                    <table
+                      cellspacing="0"
+                      cellpadding="0"
+                      border="1"
+                      bordercolor="black"
+                      style={{ width: '91%', margin: '0 auto' }}
+                    >
+                      <tr
+                        height="28"
+                        style={{ bordertop: 2, backgroundColor: 'aliceblue' }}
+                      >
+                        <th
+                          width="24%"
+                          style={{ borderTop: '0px', textAlign: 'center' }}
+                        >
+                          项目识别码
+                        </th>
+                        <th
+                          width=""
+                          style={{ borderTop: '0px', textAlign: 'center' }}
+                        >
+                          项目名称
+                        </th>
+                        <th
+                          width="24%"
+                          style={{ borderTop: '0px', textAlign: 'center' }}
+                        >
+                          金 &nbsp; &nbsp; &nbsp;额
+                        </th>
+                      </tr>
+                      {itemModel}
+                      <tr height="28">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr height="28">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr height="28">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
                     </table>
                   </div>
                 </div>

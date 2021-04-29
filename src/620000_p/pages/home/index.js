@@ -1,8 +1,5 @@
 import React from 'react';
-import { Form, Input, Button, Row, Col, notification } from 'antd';
-import { queryPayInfo } from '../../service/services';
-import { api } from '../../service/api';
-import style from '../../public/css/index.css';
+import pdf from '../../public/jk.pdf';
 
 class Home extends React.Component {
   state = {
@@ -46,6 +43,7 @@ class Home extends React.Component {
       pathname: '/policy',
     });
   };
+
   render() {
     const { spanPay, topLeft, topRight, leftOrRight } = this.state;
     const span1 = {
@@ -102,6 +100,9 @@ class Home extends React.Component {
                 </div>
                 <div className="home_right">
                   <div className="home_right_nei">
+                    <a href={pdf} target="_blank">
+                      <button className="buttonWaring">帮助</button>
+                    </a>
                     <div className={topLeft} onClick={this.left}>
                       <span>缴款</span>
                     </div>

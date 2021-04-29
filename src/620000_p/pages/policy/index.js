@@ -1,7 +1,7 @@
 import React from 'react';
 import { Input, Button, Table, Tag, Space } from 'antd';
 import reqwest from 'reqwest';
-import { queryPayInfo } from '../../service/services';
+import { searchItemInfo, searchPolicyDocument } from '../../service/services';
 import { api } from '../../service/api';
 import style from '../../public/css/index.css';
 import Model from '../components/model';
@@ -9,106 +9,153 @@ import Model from '../components/model';
 class Policy extends React.Component {
   state = {
     spanPayTop: '温馨提示',
-    data: [
-      {
-        key: '1',
-        name: 'John Brown',
-        money: '￥300,000.00',
-        address: 'New York No. 1 Lake Park',
-        item: [
-          { id: '1', name: '财综〔2007〕3号' },
-          { id: '2', name: '财综〔2007〕4号' },
-        ],
-      },
-      {
-        key: '2',
-        name: 'Jim Green',
-        money: '￥1,256,000.00',
-        address: 'London No. 1 Lake Park',
-        item: [
-          { id: '1', name: '财综〔2007〕3号' },
-          { id: '2', name: '财综〔2007〕4号' },
-        ],
-      },
-      {
-        key: '3',
-        name: 'Joe Black',
-        money: '￥120,000.00',
-        address: 'Sidney No. 1 Lake Park',
-        item: [
-          { id: '1', name: '财综〔2007〕3号' },
-          { id: '2', name: '财综〔2007〕4号' },
-          { id: '3', name: '财综〔2007〕4号' },
-          { id: '3', name: '财综〔2007〕4号' },
-          { id: '3', name: '财综〔2007〕4号财综〔2007〕4号' },
-          { id: '3', name: '财综〔2007〕4号' },
-          { id: '3', name: '财综〔2007〕4号' },
-          { id: '3', name: '财综〔2007〕4号' },
-          { id: '3', name: '财综〔2007〕4号' },
-          { id: '3', name: '财综〔2007〕4号' },
-          { id: '3', name: '财综〔2007〕4号' },
-        ],
-      },
-    ],
+    model: false, //控制遮罩层显示隐藏属性
+    pagination: {
+      position: ['bottomCenter'],
+      showSizeChanger: false,
+      current: 1,
+      pageSize: 10,
+      total: '',
+    }, //分页方面设置
+    data: [], //table数据
+    dataModel: {}, //遮罩参数
+    loading: false, //等待参数
+    selectModel: {
+      itemStdIDCode: '',
+      itemCode: '',
+      itemName: '',
+    }, //查询参数
   };
   // 列表table点击弹出组件
-  click_table = () => {};
+  click_table = (value) => {
+    searchPolicyDocument({
+      title: value,
+    }).then((res) => {
+      if (res.code === 0) {
+        this.setState({
+          dataModel: res.data,
+          model: true,
+        });
+      } else {
+        this.openNotificationWithIcon('error', res.msg);
+      }
+    });
+  };
 
-  componentDidMount() {}
+  componentDidMount() {
+    const { pagination } = this.state;
+    this.tableList(pagination);
+  }
+  // 页面方法
+  tableList = (page, bool) => {
+    let { pagination, selectModel } = this.state;
+    let that = this;
+    this.setState({ loading: true });
+    searchItemInfo({
+      pageNo: bool == true ? 1 : page.current,
+      pageSize: 10,
+      ...selectModel,
+    }).then((res) => {
+      if (res.code === 0) {
+        const listArr = res.data.itemList.map((item, i) => {
+          return { ...item, index: i + 1 };
+        });
+        pagination.current = page.current;
+        pagination.total = res.data.totalPage * 10;
+        that.setState({
+          loading: false,
+          data: listArr,
+          pagination: pagination,
+        });
+      } else {
+        this.openNotificationWithIcon('error', res.msg);
+      }
+    });
+  };
+  handleTableChange = (pagination, filters, sorter) => {
+    this.tableList(pagination);
+  };
   // 查询方法
   select = () => {
-    alert('这是查询方法');
+    debugger;
+    const { pagination } = this.state;
+    this.tableList(pagination, true);
+  };
+  //绑定事件
+  change = (title, value) => {
+    let arry = this.state.selectModel;
+    title == 'itemStdIDCode'
+      ? (arry.itemStdIDCode = value)
+      : title == 'itemCode'
+      ? (arry.itemCode = value)
+      : (arry.itemName = value);
+    this.setState({
+      selectModel: arry,
+    });
+  };
+  cencel = () => {
+    this.setState({
+      model: false,
+    });
   };
   render() {
     const columns = [
       {
         title: '序号',
-        dataIndex: 'key',
+        dataIndex: 'index',
         align: 'center',
+        width: '100px',
       },
       {
         title: '全国项目识别码',
-        dataIndex: 'name',
+        dataIndex: 'itemStdIDCode',
         align: 'center',
-        render: (text) => <a>{text}</a>,
       },
       {
         title: '项目编码',
-        className: 'column-money',
-        dataIndex: 'money',
+        dataIndex: 'itemCode',
         align: 'center',
       },
       {
         title: '项目名称',
-        dataIndex: 'address',
+        dataIndex: 'itemName',
         align: 'left',
       },
       {
         title: '政策依据',
-        dataIndex: 'item',
-        key: 'item',
+        dataIndex: 'docNos',
+        key: 'docNos',
         align: 'left',
-        width: '600px',
+        width: '500px',
         render: (v) => (
           <>
-            {v.map((item) => (
+            {v.map((i, k) => (
               <Tag
-                color="blue"
-                key={item}
-                style={{ marginTop: 20 }}
-                onClick={this.click_table}
+                color="default"
+                key={k}
+                style={{ marginBottom: 4 }}
+                onClick={() => this.click_table(i)}
               >
-                {item.name}
+                {i}
               </Tag>
             ))}
           </>
         ),
       },
     ];
-    const { data, pagination, loading } = this.state;
+    const {
+      data,
+      pagination,
+      loading,
+      model,
+      dataModel,
+      selectModel,
+    } = this.state;
     return (
       <div className="body">
-        <Model model={true} />
+        {model == true && (
+          <Model model={model} dataModel={dataModel} cencel={this.cencel} />
+        )}
         <div className="outForm_pay">
           <div className="img_pay">
             <div className="onForm_pay">
@@ -128,11 +175,26 @@ class Policy extends React.Component {
               </div>
               <div className="policy_top_input">
                 <label>全国项目识别码:</label>
-                <Input size="large" style={{ marginLeft: 20, width: 130 }} />
+                <Input
+                  size="large"
+                  style={{ marginLeft: 20, width: 130 }}
+                  value={selectModel.itemStdIDCode}
+                  onChange={(e) => this.change('itemStdIDCode', e.target.value)}
+                />
                 <label>项目编码:</label>
-                <Input size="large" style={{ marginLeft: 20, width: 130 }} />
+                <Input
+                  size="large"
+                  style={{ marginLeft: 20, width: 130 }}
+                  value={selectModel.itemCode}
+                  onChange={(e) => this.change('itemCode', e.target.value)}
+                />
                 <label>项目名称:</label>
-                <Input size="large" style={{ marginLeft: 20, width: 130 }} />
+                <Input
+                  size="large"
+                  style={{ marginLeft: 20, width: 130 }}
+                  value={selectModel.itemName}
+                  onChange={(e) => this.change('itemName', e.target.value)}
+                />
                 <Button
                   style={{
                     position: 'absolute',
@@ -147,7 +209,16 @@ class Policy extends React.Component {
                 </Button>
               </div>
               <div className="policy_table">
-                <Table columns={columns} dataSource={data} bordered />,
+                <Table
+                  rowKey={(record) => record.index}
+                  columns={columns}
+                  dataSource={data}
+                  pagination={pagination}
+                  loading={loading}
+                  onChange={this.handleTableChange}
+                  bordered
+                />
+                ,
               </div>
             </div>
           </div>

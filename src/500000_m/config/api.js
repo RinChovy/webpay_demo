@@ -19,7 +19,7 @@ export default {
   // 验证码
   code: `${baseapi}/common/getCo`,
   // 提交缴款书
-  queryPayInfo: `${baseapi}/common/queryNontaxPortal`,
+  queryPayInfo: `${baseapi}/common/queryPayInfoNotVaildPayer.do`,
   // 缴费接口
   createCharge: `${baseapi}/common/createCharge`,
   //成功回调接口
