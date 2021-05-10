@@ -98,7 +98,7 @@
 <script>
 import { Button, Row, Col, Search, Dialog } from 'vant'
 import API from '../../config/api.js'
-import { queryPayInfo } from '../../config/services.js'
+import { queryPayInfo, queryPayInfoByIdentityCard } from '../../config/services.js'
 export default {
   name: 'index_pay',
   components: {
@@ -152,6 +152,8 @@ export default {
       ///////////////////////////////////////////以上为身份证号缴款
     }
   },
+  //初始生命周期
+  created() {},
   methods: {
     //左右按钮
     leftButton() {
@@ -191,22 +193,31 @@ export default {
       this.card_warning()
       if (this.card_payCodeWarn == '' && this.card_payPeopleWarn == '' && this.card_codeWarn == '') {
         that.card_disabled = false
-        queryPayInfo({
-          card_payCode: this.card_payCode,
-          card_payPeople: this.card_payPeople,
-          card_code: this.card_code,
+        queryPayInfoByIdentityCard({
+          idNumber: this.card_payCode,
+          payPeople: this.card_payPeople,
+          code: this.card_code,
         }).then((res) => {
-          res.code === 0 ? this.handleSuccess(res) : this.handleError(res)
+          res.code === 0 ? this.handleSuccess2(res) : this.handleError(res)
         })
       } else {
       }
     },
+
     // 提交成功
     handleSuccess(data) {
       localStorage.setItem('data', JSON.stringify(data))
       this.$router.push({
         path: '/index_charge',
         name: 'index_charge',
+      })
+    },
+    // 提交成功
+    handleSuccess2(data) {
+      localStorage.setItem('dataList', JSON.stringify(data))
+      this.$router.push({
+        path: '/index_pay_idcard',
+        name: 'index_pay_idcard',
       })
     },
     // 提交失败1

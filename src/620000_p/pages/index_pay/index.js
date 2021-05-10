@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, Input, Button, Row, Col, notification } from 'antd';
-import { queryPayInfo } from '../../service/services';
+import { queryPayInfo, getCo } from '../../service/services';
 import { api } from '../../service/api';
 import style from '../../public/css/index.css';
 
@@ -38,7 +38,7 @@ class NonTaxPay extends React.Component {
   //提交成功
   handleFormSubmit = (values) => {
     //防止重复点击
-    const { loadings } = this.state;
+    const { loadings, uuid } = this.state;
     this.setState(({ loadings }) => {
       const newLoadings = [...loadings];
       newLoadings[1] = true;

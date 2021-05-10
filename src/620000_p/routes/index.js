@@ -8,11 +8,11 @@ import Fail from '../pages/fail/index.js';
 import Policy from '../pages/policy/index.js';
 function App() {
   return (
-    <Router>
-      <Switch baseName="webpay_620000">
+    <Router basename="620000">
+      <Switch>
         <Route path="/" exact={true} component={Home} />
         {/* 非税缴款 */}
-
+        <Route path="/index_door" component={Home} />
         <Route path="/home" component={Home} />
         <Route path="/index_pay" component={NTpay} />
         <Route path="/index_pay.do" component={NTpay} />

@@ -90,7 +90,8 @@ export default {
     border-radius: 20px;
     display: flex;
     flex-wrap: wrap;
-    box-shadow: 0 4px 18px 0 rgb(0 0 0 / 8%);
+    // box-shadow: 0 4px 18px 0 rgb(0, 0, 0 / 8%);
+    box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.13);
     .box {
       text-align: center;
       width: 33%;

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Input, Button } from 'antd';
 import { api } from '../../service/api';
+import { downLoadPolicyDocument } from '../../service/services';
 export default class model extends React.Component {
   state = {
     //   判断遮罩亮起元素
@@ -16,10 +17,33 @@ export default class model extends React.Component {
   }
   down = () => {
     const { dataModel } = this.state;
-    window.location.href =
-      api.downLoadPolicyDocument +
-      '?title=' +
-      encodeURIComponent(dataModel.docNo);
+    const mimeMap = {
+      xlsx: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      zip: 'application/zip',
+    };
+    downLoadPolicyDocument({
+      title: dataModel.docNo,
+      fileStr: dataModel.file,
+    }).then((res) => {
+      this.resolveBlob(res, mimeMap.zip);
+    });
+  };
+  resolveBlob = (res, mimeType) => {
+    console.log(res);
+    console.log(res.headers);
+    const aLink = document.createElement('a');
+    var blob = new Blob([res.data], { type: mimeType });
+    // //从response的headers中获取filename, 后端response.setHeader("Content-disposition", "attachment; filename=xxxx.docx") 设置的文件名;
+    var patt = new RegExp('filename=([^;]+\\.[^\\.;]+);*');
+    var contentDisposition = decodeURI(res.headers['Content-Disposition']);
+    var result = patt.exec(contentDisposition);
+    var fileName = result[1];
+    fileName = fileName.replace(/\"/g, '');
+    aLink.href = URL.createObjectURL(blob);
+    aLink.setAttribute('download', fileName); // 设置下载文件名称
+    document.body.appendChild(aLink);
+    aLink.click();
+    document.body.removeChild(aLink);
   };
   render() {
     const { dataModel } = this.state;

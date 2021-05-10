@@ -20,6 +20,7 @@
 
 <script>
 import Api from '../../config/api'
+import { downLoadPolicyDocument } from '../../config/services.js'
 export default {
   name: 'policy',
   components: {},
@@ -30,6 +31,7 @@ export default {
       docNo: '',
       issDate: '',
       year: '',
+      file: '',
     }
   },
   //加载前生命周期
@@ -41,12 +43,39 @@ export default {
     this.docNo = policyData.docNo
     this.year = policyData.year
     this.issDate = policyData.issDate
+    this.file = policyData.file
   },
   methods: {
     // 刷新页面方法
     down() {
-      const { docNo } = this
-      window.location.href = Api.downLoadPolicyDocument + '?title=' + encodeURIComponent(docNo)
+      const { docNo, file } = this
+      const mimeMap = {
+        xlsx: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        zip: 'application/zip',
+      }
+      downLoadPolicyDocument({
+        title: docNo,
+        fileStr: file,
+      }).then((res) => {
+        this.resolveBlob(res, mimeMap.zip)
+      })
+    },
+    resolveBlob(res, mimeType) {
+      console.log(res)
+      console.log(res.headers)
+      const aLink = document.createElement('a')
+      var blob = new Blob([res.data], { type: mimeType })
+      // //从response的headers中获取filename, 后端response.setHeader("Content-disposition", "attachment; filename=xxxx.docx") 设置的文件名;
+      var patt = new RegExp('filename=([^;]+\\.[^\\.;]+);*')
+      var contentDisposition = decodeURI(res.headers['Content-Disposition'])
+      var result = patt.exec(contentDisposition)
+      var fileName = result[1]
+      fileName = fileName.replace(/\"/g, '')
+      aLink.href = URL.createObjectURL(blob)
+      aLink.setAttribute('download', fileName) // 设置下载文件名称
+      document.body.appendChild(aLink)
+      aLink.click()
+      document.body.removeChild(aLink)
     },
   },
 }
@@ -73,7 +102,7 @@ export default {
     border-radius: 50px;
     border: 0px;
     color: white;
-    font-size: 0.18px;
+    font-size: 18px;
   }
 }
 </style>

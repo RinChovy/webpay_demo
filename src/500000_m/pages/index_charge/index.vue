@@ -183,7 +183,7 @@ export default {
     // 失败提示
     handleError(err) {
       Dialog.alert({
-        message: err.msg,
+        message: err,
       }).then(() => {})
     },
     fanhui() {

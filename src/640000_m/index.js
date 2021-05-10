@@ -9,7 +9,8 @@ import Home from './pages/home/index.vue';
 import Phone_index from './pages/home/index.vue';
 import Index_pay from './pages/index_pay/index.vue';
 import Education from './pages/index_pay_education/index.vue';
-import Index_charge from './pages/Index_charge/index.vue';
+import Index_charge from './pages/index_charge/index.vue';
+import Index_pay_idcard from './pages/index_pay_idcard/index.vue';
 import Success from './pages/success/index.vue';
 import Fail from './pages/fail/index.vue';
 import Error404 from './pages/error404.vue';
@@ -48,11 +49,15 @@ const routes = [
     component: Education,
   },
   {
+    path: '/index_pay_idcard', //身份证查询页面
+    name: 'index_pay_idcard',
+    component: Index_pay_idcard,
+  },
+  {
     path: '/index_charge', //缴款书界面
     name: 'index_charge',
     component: Index_charge,
   },
-
   {
     path: '/success', //成功回调页
     name: 'success',
@@ -70,7 +75,7 @@ const routes = [
 ];
 const router = new VueRouter({
   mode: 'history',
-  base: '/210200',
+  base: '/640000',
   routes,
 });
 

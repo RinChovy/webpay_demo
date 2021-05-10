@@ -1,4 +1,5 @@
 import xFetch from '../../utils/xFetch';
+import request from '../../utils/requestStream';
 import { stringify } from 'qs';
 import { api } from './api.js';
 
@@ -52,6 +53,17 @@ export async function searchItemInfo(params) {
 export async function searchPolicyDocument(params) {
   return xFetch(api.searchPolicyDocument, {
     credentials: 'include',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      regionCode: api.region,
+    },
+    data: stringify(params),
+  });
+}
+//下载政策文件
+export async function downLoadPolicyDocument(params) {
+  return request(api.downLoadPolicyDocument, {
+    method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       regionCode: api.region,

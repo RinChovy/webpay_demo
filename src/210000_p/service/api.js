@@ -3,7 +3,7 @@ import base from 'utils/baseURL';
 // const callback = "https://120000.epayservice.cn/120000_p/index.html#/success"; //传给后台的回调地址
 const callback = 'https://210000.epayservice.cn/success'; //传给后台的回调地址
 
-const region = '210000'; //区划号
+const region = '000000'; //区划号
 
 const regular = /^21\d{18}$/; //非税缴款正则表达式
 

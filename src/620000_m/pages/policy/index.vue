@@ -36,7 +36,7 @@
         </div>
       </div>
     </div>
-    <van-pagination v-model="currentPage" :total-items="24" :page-count="page_count" @change="change" />
+    <van-pagination v-model="currentPage" :page-count="page_count" @change="change" />
   </div>
 </template>
 
@@ -128,7 +128,7 @@ export default {
 .div_middle {
   width: 94%;
   margin: 10px auto;
-  box-shadow: rgb(0 0 0 / 20%) 0px 0px 0.3rem;
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
 }
 .paied {

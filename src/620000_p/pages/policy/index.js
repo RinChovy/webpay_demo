@@ -216,6 +216,9 @@ class Policy extends React.Component {
                   pagination={pagination}
                   loading={loading}
                   onChange={this.handleTableChange}
+                  locale={{
+                    emptyText: '未查询到相关数据',
+                  }}
                   bordered
                 />
                 ,
