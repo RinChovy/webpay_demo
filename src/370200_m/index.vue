@@ -1,6 +1,8 @@
 <template>
   <div id="wrapper">
-    <router-view v-if="isAlive"></router-view>
+    <keep-alive>
+      <router-view v-if="this.isAlive"></router-view>
+    </keep-alive>
   </div>
 </template>
 
