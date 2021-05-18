@@ -30,4 +30,6 @@ export default {
   createCashier: `${baseapi}/common/createCashier`,
   //身份证验证列表
   queryPayInfoNoCode: `${baseapi}/common/queryPayInfoNoCode.do`,
+  //直接进的接口
+  checkBankQRCode: `${baseapi}/640000/checkBankQRCode.do`,
 };

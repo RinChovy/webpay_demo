@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, Input, Button, Row, Col, notification } from 'antd';
-import { queryPayInfo } from '../../service/services';
+import { queryPayInfo, getCo } from '../../service/services';
 import { api } from '../../service/api';
 import style from '../../public/css/index.css';
 
@@ -9,11 +9,21 @@ class NonTaxPay extends React.Component {
   state = {
     spanPayTop: '温馨提示',
     spanPay: '缴款码为执收单位开具的非税收入一般缴款书上的19位编码。',
-    codeUrl: api.getCo, //验证码
+    codeUrl: '', //验证码
+    uuid: '', //uuid
     loadings: [], //等待时间
   };
 
-  componentDidMount() {}
+  componentDidMount() {
+    getCo().then((res) => {
+      res.code === 0
+        ? this.setState({
+            codeUrl: 'data:image/gif;base64,' + res.data.img,
+            uuid: res.data.uuid,
+          })
+        : this.handleError(res.msg);
+    });
+  }
   // 提示信息方法
   openNotificationWithIcon = (type, msg) => {
     notification[type]({
@@ -27,16 +37,20 @@ class NonTaxPay extends React.Component {
   };
   // 验证码换一张
   changeImg = () => {
-    const { codeUrl } = this.state;
     const timestamp = new Date().valueOf();
-    this.setState({
-      codeUrl: codeUrl.split('?')[0] + '?timestamp=' + timestamp,
+    getCo({ timestamp: timestamp }).then((res) => {
+      res.code === 0
+        ? this.setState({
+            codeUrl: 'data:image/gif;base64,' + res.data.img,
+            uuid: res.data.uuid,
+          })
+        : this.handleError(res.msg);
     });
   };
   //提交成功
   handleFormSubmit = (values) => {
     //防止重复点击
-    const { loadings } = this.state;
+    const { loadings, uuid } = this.state;
     this.setState(({ loadings }) => {
       const newLoadings = [...loadings];
       newLoadings[1] = true;
@@ -48,6 +62,7 @@ class NonTaxPay extends React.Component {
       payCode: values.payCode,
       payPeople: values.payName,
       code: values.verificationCode,
+      uuid: uuid,
     }).then((res) => {
       res.code === 0 ? this.handleSuccess(res.data) : this.handleError(res.msg);
     });

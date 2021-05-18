@@ -13,6 +13,7 @@ import Index_charge from './pages/index_charge/index.vue';
 import Index_pay_idcard from './pages/index_pay_idcard/index.vue';
 import Success from './pages/success/index.vue';
 import Fail from './pages/fail/index.vue';
+import CheckBankQRCode from './pages/out/index.vue';
 import Error404 from './pages/error404.vue';
 
 window.enableDev = true;
@@ -26,6 +27,11 @@ const routes = [
     path: '/home', //首页
     name: 'home',
     component: Home,
+  },
+  {
+    path: '/checkBankQRCode.do', //out
+    name: 'checkBankQRCode.do',
+    component: CheckBankQRCode,
   },
   {
     path: '/phone_index', //首页另一个地址

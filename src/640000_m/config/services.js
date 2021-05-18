@@ -1,6 +1,7 @@
 import xFetch from '../../utils/xFetch';
 import { stringify } from 'qs';
 import Api from './api.js';
+import { get } from 'vant/es/utils';
 
 // 非税缴费提交
 export async function queryPayInfo(params) {
@@ -45,6 +46,16 @@ export async function queryPayInfoByIdentityCard(params) {
 // 身份证传递接口
 export async function queryPayInfoNoCode(params) {
   return xFetch(Api.queryPayInfoNoCode, {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      regionCode: Api.region,
+    },
+    data: stringify(params),
+  });
+}
+// out接口
+export async function checkBankQRCode(params) {
+  return xFetch(Api.checkBankQRCode, {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       regionCode: Api.region,

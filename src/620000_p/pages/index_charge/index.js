@@ -90,8 +90,8 @@ class NonTaxPayChange extends React.Component {
           }, //控件参数，常用来传递缴款服务所需定义的内容，如，非税paycode直缴或传入相关缴费信息生成缴款书
           charge_url: api.createCharge, //商户服务端创建charge时的controller地址
           charge_param: {
-            a: 'a',
-            b: 'b',
+            payCode: queryJson.payCode,
+            paymentName: queryJson.payer,
             regionCode: api.region,
             frontCallBackUrl: api.callback,
           }, //(可选，用户自定义参数，若存在自定义参数则会通过 POST 方法透传给 charge_url

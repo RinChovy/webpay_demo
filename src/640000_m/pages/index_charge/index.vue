@@ -78,8 +78,6 @@
 <script>
 import { Button, Row, Col, Search, Dialog } from 'vant'
 import { createCashier } from '../../config/services.js'
-// 大写金额
-import { Arabia_to_Chinese } from '../../public/js/money'
 // 自动生成商户订单号
 import { guid } from '../../public/js/orderNo'
 import API from '../../config/api.js'
@@ -146,9 +144,10 @@ export default {
       const widget_param = {
         paycode: queryJson.payCode,
       }
+      const merchant_order_no = guid()
       const widget_content = {
         merchant_no: query.merchant_no,
-        merchant_order_no: guid(),
+        merchant_order_no: merchant_order_no,
         amount: queryJson.totalAmount,
         effective_time: '1c',
         version_no: '1.1',
@@ -157,11 +156,12 @@ export default {
         device_type: 'phone',
         widget_param: widget_param,
       }
-      const charge_param = { a: 'a', b: 'b' }
+      const charge_param = { payCode: this.payCode, paymentName: this.payer }
       createCashier({
         charge_param: JSON.stringify(charge_param),
         widget_content: JSON.stringify(widget_content),
         frontCallBackUrl: API.callback,
+        merchantOrderNo: merchant_order_no,
       }).then((res) => {
         res.code === 0 ? that.showCashier(res.msg) : that.handleError(res.msg)
       })
