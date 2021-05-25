@@ -60,11 +60,29 @@ export default {
     einvoice_url() {
       window.location.href = this.url
     },
+    // home() {
+    //   this.$router.push({
+    //     path: '/home',
+    //   })
+    // },
     home() {
-      this.$router.push({
-        path: '/home',
-      })
-    },
+      const userId = localStorage.getItem('userId')
+      if (userId) {
+        if (navigator.userAgent.toLowerCase().indexOf('micromessenger') != -1) {
+          this.$router.push({
+            path: '/index_pay',
+          })
+        } else {
+          this.$router.push({
+            path: '/acityservice',
+          })
+        }
+      } else {
+        this.$router.push({
+          path: '/home',
+        })
+      }
+    }
   },
 }
 </script>
