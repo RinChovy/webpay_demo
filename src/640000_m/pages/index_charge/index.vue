@@ -200,10 +200,10 @@ export default {
   margin-top: 30px;
   text-align: center;
   button {
-    width: 70%;
-    height: 44px;
+    width: 80%;
+    height: 46px;
     background: linear-gradient(90deg, #df9d8b, #e8bb99);
-    border-radius: 17px;
+    border-radius: 35px;
     font-size: 16px;
     font-family: PingFang SC;
     font-weight: 500;
@@ -236,7 +236,6 @@ export default {
       span {
         font-size: 16px;
         font-family: PingFang SC;
-        font-weight: 600;
       }
     }
     .top {

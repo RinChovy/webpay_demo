@@ -1,24 +1,32 @@
 import React from 'react';
-import { Form, Input, Button, Row, Col, notification } from 'antd';
-import { queryPayInfo } from '../../service/services';
+import { Form, Input, Button, Row, Col, notification, Popover } from 'antd';
+import { queryPayInfo, getCo } from '../../service/services';
 import { api } from '../../service/api';
 import style from '../../public/css/index.css';
-import Left from '../components/left';
 
 class NonTaxPay extends React.Component {
   formRef = React.createRef();
   state = {
+    blurInput: {
+      paycode: false,
+      payname: false,
+      code: false,
+    },
     spanPayTop: '温馨提示',
-    spanPay: '缴款码为执收单位开具的非税收入一般缴款书上的19位编码。',
-    codeUrl: api.getCo, //验证码
+    spanPay: '缴款码为执收单位开具的非税收入一般缴款书上的20位编码。',
+    codeUrl: '', //验证码
+    uuid: '', //uuid
     loadings: [], //等待时间
   };
 
   componentDidMount() {
-    const { codeUrl } = this.state;
-    const timestamp = new Date().valueOf();
-    this.setState({
-      codeUrl: codeUrl.split('?')[0] + '?timestamp=' + timestamp,
+    getCo().then((res) => {
+      res.code === 0
+        ? this.setState({
+            codeUrl: 'data:image/gif;base64,' + res.data.img,
+            uuid: res.data.uuid,
+          })
+        : this.handleError(res.msg);
     });
   }
   // 提示信息方法
@@ -34,10 +42,14 @@ class NonTaxPay extends React.Component {
   };
   // 验证码换一张
   changeImg = () => {
-    const { codeUrl } = this.state;
     const timestamp = new Date().valueOf();
-    this.setState({
-      codeUrl: codeUrl.split('?')[0] + '?timestamp=' + timestamp,
+    getCo({ timestamp: timestamp }).then((res) => {
+      res.code === 0
+        ? this.setState({
+            codeUrl: 'data:image/gif;base64,' + res.data.img,
+            uuid: res.data.uuid,
+          })
+        : this.handleError(res.msg);
     });
   };
   //提交成功
@@ -55,12 +67,14 @@ class NonTaxPay extends React.Component {
       payCode: values.payCode,
       payPeople: values.payName,
       code: values.verificationCode,
+      uuid: this.state.uuid,
     }).then((res) => {
       res.code === 0 ? this.handleSuccess(res.data) : this.handleError(res.msg);
     });
   };
   // 提交成功
   handleSuccess = (data) => {
+    localStorage.setItem('spanTop', '非税缴款');
     localStorage.setItem('data', JSON.stringify(data));
     this.props.history.push({
       pathname: '/index_charge',
@@ -84,8 +98,28 @@ class NonTaxPay extends React.Component {
   onFinishFailed = (values) => {
     console.log('fail:', values);
   };
+  //焦点获取
+  focusInput = (e) => {
+    this.setState(({ blurInput }) => {
+      let newJson = blurInput;
+      newJson[e] = true;
+      return {
+        blurInput: newJson,
+      };
+    });
+  };
+  //焦点丢失
+  blurInput = (e) => {
+    this.setState(({ blurInput }) => {
+      let newJson = blurInput;
+      newJson[e] = false;
+      return {
+        blurInput: newJson,
+      };
+    });
+  };
   render() {
-    const { codeUrl, loadings } = this.state;
+    const { codeUrl, loadings, spanPay, blurInput } = this.state;
     const layout = {
       labelCol: {
         span: 8,
@@ -96,138 +130,230 @@ class NonTaxPay extends React.Component {
     };
     const tailLayout = {
       wrapperCol: {
-        offset: 8,
+        offset: 4,
         span: 16,
       },
     };
     return (
       <div className="body">
-        <div className="body_icon">
-          <span>
-            个人办事{'>'}统一支付平台{'>'}非税缴款
-          </span>
-        </div>
-        <div className="outForm_pay">
+        <div className="outForm_pay_ningxia">
           <div className="onForm_pay">
-            <div>
-              <div>
-                <div className="outForm_pay_qingdao">
-                  <div className="middle_pay">
-                    <div className="middle_pay_left">
-                      <Left history={this.props.history} over="1" />
-                    </div>
-                    <div className="middle_pay_right">
-                      <div className="div2">
-                        <div className="div2_top">
-                          <div>
-                            <span>非税缴款</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="middle_pay_right_org">
-                        <Form
-                          {...layout}
-                          name="basic"
-                          initialValues={{
-                            remember: true,
-                          }}
-                          ref={this.formRef}
-                          onFinish={this.handleFormSubmit}
-                          onFinishFailed={this.onFinishFailed}
-                        >
-                          <div className="middle_box">
-                            <Form.Item
-                              label={
-                                <span style={{ fontSize: 17 }}>缴款码</span>
-                              }
-                            >
-                              <Row gutter={8}>
-                                <Col span={12}>
-                                  <Form.Item
-                                    name="payCode"
-                                    style={{ width: 400 }}
-                                    rules={[
-                                      {
-                                        required: true,
-                                        message: '请输入缴款码',
-                                      },
-                                    ]}
-                                  >
-                                    <Input
-                                      className="input_chongqing"
-                                      size="large"
-                                      style={{ width: 400 }}
-                                    />
-                                  </Form.Item>
-                                </Col>
-                              </Row>
-                            </Form.Item>
-                            <Form.Item
-                              style={{ marginTop: -20 }}
-                              label={
-                                <span style={{ fontSize: 17 }}>验证码</span>
-                              }
-                            >
-                              <Row gutter={8}>
-                                <Col span={9}>
-                                  <Form.Item
-                                    name="verificationCode"
-                                    rules={[
-                                      {
-                                        required: true,
-                                        message: '请输入验证码',
-                                      },
-                                    ]}
-                                  >
-                                    <Input
-                                      className="input_chongqing"
-                                      size="large"
-                                      style={{ width: 200 }}
-                                    />
-                                  </Form.Item>
-                                </Col>
-                                <Col span={12}>
-                                  <img
-                                    className="verificationCode"
-                                    alt="验证码"
-                                    src={codeUrl}
-                                  />
-                                  <span
-                                    style={{
-                                      marginLeft: 10,
-                                      cursor: 'pointer',
-                                      color: '#1890ff',
-                                    }}
-                                    onClick={this.changeImg}
-                                  >
-                                    换一张
-                                  </span>
-                                </Col>
-                              </Row>
-                            </Form.Item>
-                          </div>
+            <div className="onForm_pay_top">
+              <span>非税缴款</span>
+            </div>
 
-                          <Form.Item {...tailLayout} style={{ marginTop: 40 }}>
-                            <Button
-                              className="button_chongqing"
-                              size="large"
-                              type="primary"
-                              htmlType="submit"
-                              loading={loadings[1]}
-                            >
-                              下一步
-                            </Button>
-                            <Button
-                              className="button_clear"
-                              size="large"
-                              onClick={this.onReset}
-                            >
-                              清空
-                            </Button>
-                          </Form.Item>
-                        </Form>
+            <div className="outForm_pay_qingdao">
+              <div className="middle_pay">
+                <div className="middle_pay_left">
+                  <img src={require('../../public/images/paycode.png')} />
+                </div>
+                <div className="middle_pay_right">
+                  <div className="middle_pay_right_org_e">
+                    <div
+                      className="middle_pay_right_org_top"
+                      style={{ width: 130 }}
+                    >
+                      <div className="classHover">
+                        <span>按缴款码查询</span>
                       </div>
                     </div>
+                    <Form
+                      {...layout}
+                      name="basic"
+                      initialValues={{
+                        remember: true,
+                      }}
+                      ref={this.formRef}
+                      onFinish={this.handleFormSubmit}
+                      onFinishFailed={this.onFinishFailed}
+                    >
+                      <div className="middle_box">
+                        <Form.Item style={{ marginBottom: 11 }}>
+                          <Row gutter={8}>
+                            <Col span={12}>
+                              <Form.Item
+                                name="payCode"
+                                style={{ width: 420, marginLeft: '-5px' }}
+                                rules={[
+                                  {
+                                    required: true,
+                                    message: '请输入缴款码',
+                                  },
+                                ]}
+                              >
+                                <Input
+                                  prefix={
+                                    blurInput.paycode == true ? (
+                                      <div className="input_icon_2">
+                                        <img
+                                          src={require('../../public/images/paycode_1.png')}
+                                        />
+                                      </div>
+                                    ) : (
+                                      <div className="input_icon">
+                                        <img
+                                          src={require('../../public/images/paycode_1_hover.png')}
+                                        />
+                                      </div>
+                                    )
+                                  }
+                                  onFocus={() => this.focusInput('paycode')}
+                                  onBlur={() => this.blurInput('paycode')}
+                                  placeholder="请输入缴款码"
+                                  className={
+                                    blurInput.paycode == true
+                                      ? 'input_ningxia_hover'
+                                      : 'input_ningxia'
+                                  }
+                                  size="large"
+                                  style={{ width: 420, borderRadius: 0 }}
+                                />
+                              </Form.Item>
+                              <Popover
+                                placement="bottomLeft"
+                                content={spanPay}
+                                trigger="click"
+                              >
+                                <img
+                                  style={{
+                                    position: 'absolute',
+                                    right: -272,
+                                    top: 10,
+                                    width: 20,
+                                    height: 20,
+                                  }}
+                                  src={require('../../public/images/warning.png')}
+                                />
+                              </Popover>
+                            </Col>
+                          </Row>
+                        </Form.Item>
+                        <Form.Item style={{ marginBottom: 11 }}>
+                          <Row gutter={8}>
+                            <Col span={12}>
+                              <Form.Item
+                                name="payName"
+                                style={{ width: 420, marginLeft: '-5px' }}
+                                rules={[
+                                  {
+                                    required: true,
+                                    message: '请输入缴款人',
+                                  },
+                                ]}
+                              >
+                                <Input
+                                  prefix={
+                                    blurInput.payname == true ? (
+                                      <div className="input_icon_2">
+                                        <img
+                                          src={require('../../public/images/paycode_2.png')}
+                                        />
+                                      </div>
+                                    ) : (
+                                      <div className="input_icon">
+                                        <img
+                                          src={require('../../public/images/paycode_2_hover.png')}
+                                        />
+                                      </div>
+                                    )
+                                  }
+                                  onFocus={() => this.focusInput('payname')}
+                                  onBlur={() => this.blurInput('payname')}
+                                  placeholder="请输入缴款人"
+                                  className={
+                                    blurInput.payname == true
+                                      ? 'input_ningxia_hover'
+                                      : 'input_ningxia'
+                                  }
+                                  size="large"
+                                  style={{ width: 420, borderRadius: 0 }}
+                                />
+                              </Form.Item>
+                            </Col>
+                          </Row>
+                        </Form.Item>
+                        <Form.Item style={{ width: 630 }}>
+                          <Row gutter={8}>
+                            <Col span={12}>
+                              <Form.Item
+                                name="verificationCode"
+                                style={{ marginLeft: '-5px' }}
+                                rules={[
+                                  {
+                                    required: true,
+                                    message: '请输入验证码',
+                                  },
+                                ]}
+                              >
+                                <Input
+                                  prefix={
+                                    blurInput.code == true ? (
+                                      <div className="input_icon_2">
+                                        <img
+                                          src={require('../../public/images/paycode_3.png')}
+                                        />
+                                      </div>
+                                    ) : (
+                                      <div className="input_icon">
+                                        <img
+                                          src={require('../../public/images/paycode_3_hover.png')}
+                                        />
+                                      </div>
+                                    )
+                                  }
+                                  onFocus={() => this.focusInput('code')}
+                                  onBlur={() => this.blurInput('code')}
+                                  placeholder="请输入验证码"
+                                  className={
+                                    blurInput.code == true
+                                      ? 'input_ningxia_hover'
+                                      : 'input_ningxia'
+                                  }
+                                  size="large"
+                                  style={{ width: 230 }}
+                                />
+                              </Form.Item>
+                            </Col>
+                            <Col span={12}>
+                              <img
+                                className="verificationCode"
+                                alt="验证码"
+                                src={codeUrl}
+                              />
+                              <span
+                                style={{
+                                  marginLeft: 10,
+                                  cursor: 'pointer',
+                                  color: '#1890ff',
+                                }}
+                                onClick={this.changeImg}
+                              >
+                                换一张
+                              </span>
+                            </Col>
+                          </Row>
+                        </Form.Item>
+                      </div>
+
+                      <Form.Item {...tailLayout} style={{ marginTop: 40 }}>
+                        <Button
+                          className="button_ningxia"
+                          size="large"
+                          type="primary"
+                          htmlType="submit"
+                          loading={loadings[1]}
+                        >
+                          下一步
+                        </Button>
+                        <Button
+                          className="button_clear"
+                          size="large"
+                          onClick={this.onReset}
+                        >
+                          清空
+                        </Button>
+                      </Form.Item>
+                    </Form>
                   </div>
                 </div>
               </div>

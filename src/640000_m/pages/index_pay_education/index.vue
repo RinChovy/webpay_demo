@@ -98,7 +98,7 @@
 <script>
 import { Button, Row, Col, Search, Dialog } from 'vant'
 import API from '../../config/api.js'
-import { queryPayInfo, queryPayInfoByIdentityCard } from '../../config/services.js'
+import { queryPayInfo, queryPayInfoByIdentityCard, code } from '../../config/services.js'
 export default {
   name: 'index_pay',
   components: {
@@ -115,7 +115,7 @@ export default {
       // 固定地址
       codeUrl: API.code,
       // 时间戳验证码地址
-      codeUrlT: API.code,
+      codeUrlT: '',
       // 绑定缴款码
       payCode: '',
       // 绑定缴款码验证语言
@@ -134,7 +134,7 @@ export default {
       // 固定地址
       card_codeUrl: API.code,
       // 时间戳验证码地址
-      card_codeUrlT: API.code,
+      card_codeUrlT: '',
       // 绑定缴款码
       card_payCode: '',
       // 绑定缴款码验证语言
@@ -149,11 +149,24 @@ export default {
       card_codeWarn: '',
       //按钮失效
       card_disabled: true,
+      //uuid
+      uuid: '',
+      //uuid
+      card_uuid: '',
       ///////////////////////////////////////////以上为身份证号缴款
     }
   },
   //初始生命周期
-  created() {},
+  created() {
+    code().then((res) => {
+      res.code === 0
+        ? ((this.codeUrlT = 'data:image/gif;base64,' + res.data.img),
+          (this.card_codeUrlT = 'data:image/gif;base64,' + res.data.img),
+          (this.uuid = res.data.uuid),
+          (this.card_uuid = res.data.uuid))
+        : this.handleError(res)
+    })
+  },
   methods: {
     //左右按钮
     leftButton() {
@@ -164,12 +177,20 @@ export default {
     },
     // 改变验证码
     changeCode() {
-      let timestamp = new Date().valueOf()
-      this.codeUrlT = this.codeUrl.split('?')[0] + '?timestamp=' + timestamp
+      var timestamp = new Date().valueOf()
+      code({ timestamp: timestamp }).then((res) => {
+        res.code === 0
+          ? ((this.codeUrlT = 'data:image/gif;base64,' + res.data.img), (this.uuid = res.data.uuid))
+          : this.handleError(res)
+      })
     },
     card_changeCode() {
-      let timestamp = new Date().valueOf()
-      this.card_codeUrlT = this.card_codeUrl.split('?')[0] + '?timestamp=' + timestamp
+      var timestamp = new Date().valueOf()
+      code({ timestamp: timestamp }).then((res) => {
+        res.code === 0
+          ? ((this.card_codeUrlT = 'data:image/gif;base64,' + res.data.img), (this.card_uuid = res.data.uuid))
+          : this.handleError(res)
+      })
     },
     //提交下一步_缴款码
     submit() {
@@ -181,6 +202,7 @@ export default {
           payCode: this.payCode,
           payPeople: this.payPeople,
           code: this.code,
+          uuid: this.uuid,
         }).then((res) => {
           res.code === 0 ? this.handleSuccess(res) : this.handleError(res)
         })
@@ -197,6 +219,7 @@ export default {
           idNumber: this.card_payCode,
           payPeople: this.card_payPeople,
           code: this.card_code,
+          uuid: this.card_uuid,
         }).then((res) => {
           res.code === 0 ? this.handleSuccess2(res) : this.handleError(res)
         })
@@ -402,7 +425,7 @@ export default {
   button {
     width: 94%;
     height: 48px;
-    background: #e7d2be;
+    background: #e7b382;
     border-radius: 4px;
     border: 0px;
     color: white;

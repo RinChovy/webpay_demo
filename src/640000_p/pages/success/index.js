@@ -22,7 +22,7 @@ class success extends React.Component {
           merchant_order_no: res.data.merchant_order_no,
         });
       } else {
-        // this.props.history.push({ pathname: '/fail', query: '' });
+        this.props.history.push({ pathname: '/fail', query: '' });
       }
     });
   }
@@ -38,43 +38,38 @@ class success extends React.Component {
     const { spanPay, url, merchant_order_no } = this.state;
     return (
       <div className="body">
-        <div className="body_icon">
-          <span>个人办事{'>'}统一支付平台</span>
-        </div>
-        <div className="outForm_pay">
+        <div className="outForm_pay_ningxia">
           <div className="onForm_pay">
-            <div>
-              <div>
-                <div className="outForm_pay_qingdao">
-                  <div className="middle_pay">
-                    <div className="middle_pay">
-                      <div className="row">
-                        <img
-                          style={{ marginTop: 40 }}
-                          src={require('../../public/images/successn.png')}
+            <div className="onForm_pay_top">
+              <span>缴费成功</span>
+            </div>
+            <div className="outForm_pay_qingdao">
+              <div className="middle_pay">
+                <div className="middle_pay">
+                  <div className="row">
+                    <img
+                      style={{ marginTop: 100 }}
+                      src={require('../../public/images/successn.png')}
+                    />
+                    <p className="row_p">缴款成功</p>
+                    <p className="row_w">如需换开纸质票据，请联系执收单位</p>
+                    <div style={{ marginTop: 30 }}>
+                      {url != '' && (
+                        <input
+                          className="url_button"
+                          type="button"
+                          value="查看电子票"
+                          onClick={this.url}
                         />
-                        <p className="row_p">
-                          缴款成功,如需换开纸质票据，请联系执收单位
-                        </p>
-                        <div style={{ marginTop: 10 }}>
-                          {url != '' && (
-                            <input
-                              className="url_button"
-                              type="button"
-                              value="查看电子票"
-                              onClick={this.url}
-                            />
-                          )}
-                          <input
-                            className={
-                              url != '' ? 'url_button_clear' : 'url_button'
-                            }
-                            type="button"
-                            value="返回"
-                            onClick={this.cencel}
-                          />
-                        </div>
-                      </div>
+                      )}
+                      <input
+                        className={
+                          url != '' ? 'url_button_clear' : 'url_button'
+                        }
+                        type="button"
+                        value="返回"
+                        onClick={this.cencel}
+                      />
                     </div>
                   </div>
                 </div>

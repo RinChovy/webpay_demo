@@ -20,6 +20,7 @@ export async function queryPayInfo(params) {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       regionCode: api.region,
+      codeUId: params.uuid,
     },
     data: stringify(params),
   });
@@ -48,6 +49,30 @@ export async function createCashier(params) {
   });
 }
 //教育缴费身份证接口
+export async function queryPayInfoByIdentityCard(params) {
+  return xFetch(api.queryPayInfoByIdentityCard, {
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      regionCode: api.region,
+      codeUId: params.uuid,
+    },
+    data: stringify(params),
+  });
+}
+//验证码接口接口
+export async function getCo(params) {
+  return xFetch(api.getCo, {
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      regionCode: api.region,
+    },
+    data: stringify(params),
+  });
+}
+
+//教育缴费查看详情缴款
 export async function queryPayInfoNoCode(params) {
   return xFetch(api.queryPayInfoNoCode, {
     credentials: 'include',

@@ -9,6 +9,7 @@ export async function queryPayInfo(params) {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       regionCode: Api.region,
+      codeUId: params.uuid,
     },
     data: stringify(params),
   });
@@ -39,6 +40,7 @@ export async function queryPayInfoByIdentityCard(params) {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       regionCode: Api.region,
+      codeUId: params.uuid,
     },
     data: stringify(params),
   });
@@ -56,6 +58,16 @@ export async function queryPayInfoNoCode(params) {
 // out接口
 export async function checkBankQRCode(params) {
   return xFetch(Api.checkBankQRCode, {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      regionCode: Api.region,
+    },
+    data: stringify(params),
+  });
+}
+// 验证码
+export async function code(params) {
+  return xFetch(Api.code, {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       regionCode: Api.region,
