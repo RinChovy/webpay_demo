@@ -10,7 +10,7 @@ import fail from '../pages/fail/index.js';
 
 function App() {
   return (
-    <Router basename="210000">
+    <Router>
       <Switch>
         <Route path="/" exact={true} component={Home} />
         <Route path="/home" component={Home} />
