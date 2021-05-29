@@ -1,34 +1,34 @@
-import React from "react";
-import { Button } from "antd";
-import { api } from "../../service/api.js";
-import { Arabia_to_Chinese as money, guid } from "utils/utils";
+import React from 'react';
+import { Button } from 'antd';
+import { api } from '../../service/api.js';
+import { Arabia_to_Chinese as money, guid } from 'utils/utils';
 
 class NonTaxPayChange extends React.Component {
   state = {
-    billDate: "", //填制日期
-    exeAgencyCode: "", //执收单位编码
-    exeAgencyName: "", //执收单位名称
-    payCode: "", //缴款码
-    payerName: "", //付款人全称
-    recName: "", //收款人全称
-    payerAcct: "", //付款人账号
-    recAcct: "", //收款人账号
-    payerOpBk: "", //付款人开户银行
-    recOpBk: "", //收款人开户银行
-    amt: "", //金额小写
-    amtZ: "", //金额大写
+    billDate: '', //填制日期
+    exeAgencyCode: '', //执收单位编码
+    exeAgencyName: '', //执收单位名称
+    payCode: '', //缴款码
+    payerName: '', //付款人全称
+    recName: '', //收款人全称
+    payerAcct: '', //付款人账号
+    recAcct: '', //收款人账号
+    payerOpBk: '', //付款人开户银行
+    recOpBk: '', //收款人开户银行
+    amt: '', //金额小写
+    amtZ: '', //金额大写
     queryItem: [], //项目信息
-    status: "", //缴款状态
-    einvoice_url: "", //电子票查验地址
+    status: '', //缴款状态
+    einvoice_url: '', //电子票查验地址
   };
   // 填制日期格式化
   time = (date) => {
     var fillDate = date;
     var fillDateStr =
       fillDate.substr(0, 4) +
-      "-" +
+      '-' +
       fillDate.substr(4, 2) +
-      "-" +
+      '-' +
       fillDate.substr(6, 2);
     return fillDateStr;
   };
@@ -37,7 +37,7 @@ class NonTaxPayChange extends React.Component {
     window.location.href = this.state.einvoice_url;
   };
   componentDidMount() {
-    const query = JSON.parse(localStorage.getItem("data"));
+    const query = JSON.parse(localStorage.getItem('data'));
     const queryJson = query.payBook;
     const queryItem = JSON.parse(query.itemDetails);
     let status = query.status; //缴款状态
@@ -76,27 +76,30 @@ class NonTaxPayChange extends React.Component {
     setTimeout(() => {
       thirdpay_widget &&
         thirdpay_widget.init({
-          container: "widget", //挂件在当前页面放置的控件ID
+          container: 'widget', //挂件在当前页面放置的控件ID
           merchant_no: query.merchant_no, //分配的商户号
           merchant_order_no: guid(), //订单在商户系统中的订单号
           amount: queryJson.totalAmount, //订单价格，单位：人民币 分
-          effective_time: "1c",
-          device_type: "pc", //设备类型
+          effective_time: '1c',
+          device_type: 'pc', //设备类型
           widget_param: {
             paycode: payCode,
           }, //控件参数，常用来传递缴款服务所需定义的内容，如，非税paycode直缴或传入相关缴费信息生成缴款书
           charge_url: api.createCharge, //商户服务端创建charge时的controller地址
           charge_param: {
-            a: "a",
-            b: "b",
+            payCode: queryJson.payCode,
+            paymentName: queryJson.payer,
             regionCode: api.region,
             frontCallBackUrl: api.callback,
           }, //(可选，用户自定义参数，若存在自定义参数则会通过 POST 方法透传给 charge_url
-          version_no: "1.1",
+          version_no: '1.1',
         });
     }, 100);
   }
-
+  // 页面销毁生命周期
+  componentWillUnmount() {
+    window.location.reload();
+  }
   render() {
     const {
       span,
@@ -144,7 +147,7 @@ class NonTaxPayChange extends React.Component {
     );
     // 电子票查验地址
     const thirdpayOk =
-      einvoice_url != "" && einvoice_url != null ? (
+      einvoice_url != '' && einvoice_url != null ? (
         <div className="bottom_payInfo">
           <Button onClick={this.einvoiceUrl}>电子票查验</Button>
         </div>
@@ -152,8 +155,11 @@ class NonTaxPayChange extends React.Component {
     // 已交款字段
     const statusOk =
       status == 0 ? null : (
-        <div style={{ position: "absolute", right: "18%" }}>
-          <img style={{ width: 100 }} src={require("./image/paiec.png")} />
+        <div style={{ position: 'absolute', right: '18%' }}>
+          <img
+            style={{ width: 100 }}
+            src={require('../../public/images/paiec.png')}
+          />
         </div>
       );
     return (
@@ -263,7 +269,7 @@ class NonTaxPayChange extends React.Component {
                     </table>
                   </div>
                 </div>
-                <div className="middle_pay" style={{ overflow: "hidden" }}>
+                <div className="middle_pay" style={{ overflow: 'hidden' }}>
                   {status == 0 ? thirdpay : thirdpayOk}
                 </div>
               </div>

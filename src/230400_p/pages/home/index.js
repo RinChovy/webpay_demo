@@ -1,22 +1,32 @@
-import React from "react";
-import { Form, Input, Button, Row, Col, notification } from "antd";
-import { queryPayInfo } from "../../service/services";
-import { api } from "../../service/api";
-import style from "../../public/css/index.css";
+import React from 'react';
+import { Form, Input, Button, Row, Col, notification } from 'antd';
+import { queryPayInfo, getCo } from '../../service/services';
+import { api } from '../../service/api';
+import style from '../../public/css/index.css';
 
 class NonTaxPay extends React.Component {
   formRef = React.createRef();
   state = {
     warnSpan:
-      "1.博思软件技术支持联系人：王岷峰 电话：15776139000;</br>2.业务范围（场景）只支持直缴业务，暂不支持交罚以及汇缴业务;</br>3.如预算单位需要使用汇缴业务，或者需要与自身业务系统对接，可联系上述软件技术支持人员。",
-    codeUrl: api.getCo, //验证码
+      '1.博思软件技术支持联系人：王岷峰 电话：15776139000;</br>2.业务范围（场景）只支持直缴业务，暂不支持交罚以及汇缴业务;</br>3.如预算单位需要使用汇缴业务，或者需要与自身业务系统对接，可联系上述软件技术支持人员。',
+    codeUrl: '', //验证码
+    uuid: '', //uuid
+    loadings: [], //等待时间
   };
-
-  componentDidMount() {}
+  componentDidMount() {
+    getCo().then((res) => {
+      res.code === 0
+        ? this.setState({
+            codeUrl: 'data:image/gif;base64,' + res.data.img,
+            uuid: res.data.uuid,
+          })
+        : this.handleError(res.msg);
+    });
+  }
   // 提示信息方法
   openNotificationWithIcon = (type, msg) => {
     notification[type]({
-      message: "查询错误",
+      message: '查询错误',
       description: msg,
     });
   };
@@ -26,53 +36,64 @@ class NonTaxPay extends React.Component {
   };
   // 验证码换一张
   changeImg = () => {
-    const { codeUrl } = this.state;
-    let newCode = this.chgUrl(codeUrl);
-    this.setState({
-      codeUrl: newCode,
+    const timestamp = new Date().valueOf();
+    getCo({ timestamp: timestamp }).then((res) => {
+      res.code === 0
+        ? this.setState({
+            codeUrl: 'data:image/gif;base64,' + res.data.img,
+            uuid: res.data.uuid,
+          })
+        : this.handleError(res.msg);
     });
   };
-  //验证码时间戳
-  chgUrl(url) {
-    var timestamp = new Date().valueOf();
-    // url = url.substring(0, 100);
-    if (url.indexOf("&") >= 0) {
-      url = url + "×tamp=" + timestamp;
-    } else {
-      // url = url + '?timestamp=' + timestamp;
-      url = url + "?timestamp=" + timestamp;
-    }
-    return url;
-  }
   //提交成功
   handleFormSubmit = (values) => {
+    //防止重复点击
+    const { loadings, uuid } = this.state;
+    this.setState(({ loadings }) => {
+      const newLoadings = [...loadings];
+      newLoadings[1] = true;
+      return {
+        loadings: newLoadings,
+      };
+    });
     queryPayInfo({
       payCode: values.payCode,
       payPeople: values.payName,
       code: values.verificationCode,
+      uuid: uuid,
     }).then((res) => {
       res.code === 0 ? this.handleSuccess(res.data) : this.handleError(res.msg);
     });
   };
   // 提交成功
   handleSuccess = (data) => {
-    localStorage.setItem("data", JSON.stringify(data));
+    localStorage.setItem('data', JSON.stringify(data));
     this.props.history.push({
-      pathname: "/index_charge",
+      pathname: '/index_charge',
       // query: res.data,
     });
   };
   // 提交失败1
   handleError = (err) => {
-    localStorage.removeItem("data");
-    this.openNotificationWithIcon("error", err);
+    localStorage.removeItem('data');
+    this.openNotificationWithIcon('error', err);
+    const { loadings } = this.state;
+    //防止重复点击解开按钮限制
+    this.setState(({ loadings }) => {
+      const newLoadings = [...loadings];
+      newLoadings[1] = false;
+      return {
+        loadings: newLoadings,
+      };
+    });
   };
   //提交失败2
   onFinishFailed = (values) => {
-    console.log("fail:", values);
+    console.log('fail:', values);
   };
   render() {
-    const { spanPay, spanPayTop, codeUrl, warnSpan } = this.state;
+    const { spanPay, spanPayTop, codeUrl, warnSpan, loadings } = this.state;
     const layout = {
       labelCol: {
         span: 8,
@@ -106,7 +127,7 @@ class NonTaxPay extends React.Component {
                     onFinishFailed={this.onFinishFailed}
                   >
                     <div className="middle_box">
-                      <span style={{ fontSize: 15, color: "#787584" }}>
+                      <span style={{ fontSize: 15, color: '#787584' }}>
                         缴款通知书编号：
                       </span>
 
@@ -116,7 +137,7 @@ class NonTaxPay extends React.Component {
                         rules={[
                           {
                             required: true,
-                            message: "请输入缴款码",
+                            message: '请输入缴款码',
                           },
                           {
                             pattern: api.regular,
@@ -127,7 +148,7 @@ class NonTaxPay extends React.Component {
                         <Input size="large" style={{ width: 376 }} />
                       </Form.Item>
 
-                      <span style={{ fontSize: 15, color: "#787584" }}>
+                      <span style={{ fontSize: 15, color: '#787584' }}>
                         缴款人：
                       </span>
 
@@ -137,14 +158,14 @@ class NonTaxPay extends React.Component {
                         rules={[
                           {
                             required: true,
-                            message: "请输入缴款人",
+                            message: '请输入缴款人',
                           },
                         ]}
                       >
                         <Input size="large" style={{ width: 376 }} />
                       </Form.Item>
 
-                      <span style={{ fontSize: 15, color: "#787584" }}>
+                      <span style={{ fontSize: 15, color: '#787584' }}>
                         验证码：
                       </span>
                       <Row gutter={8}>
@@ -155,7 +176,7 @@ class NonTaxPay extends React.Component {
                             rules={[
                               {
                                 required: true,
-                                message: "请输入验证码",
+                                message: '请输入验证码',
                               },
                             ]}
                           >
@@ -171,8 +192,8 @@ class NonTaxPay extends React.Component {
                           <span
                             style={{
                               marginLeft: 20,
-                              cursor: "pointer",
-                              color: "#1890ff",
+                              cursor: 'pointer',
+                              color: '#1890ff',
                             }}
                             onClick={this.changeImg}
                           >
@@ -188,6 +209,7 @@ class NonTaxPay extends React.Component {
                         size="large"
                         type="primary"
                         htmlType="submit"
+                        loading={loadings[1]}
                       >
                         下一步
                       </Button>
@@ -202,10 +224,10 @@ class NonTaxPay extends React.Component {
                     </Form.Item>
                     <div
                       style={{
-                        marginTop: "-9px",
-                        width: "100%",
-                        textAlign: "center",
-                        fontWeight: "bold",
+                        marginTop: '-9px',
+                        width: '100%',
+                        textAlign: 'center',
+                        fontWeight: 'bold',
                       }}
                     >
                       {/* <span>{warnSpan}</span> */}

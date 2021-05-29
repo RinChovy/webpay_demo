@@ -2,12 +2,7 @@
   <div class="mainwrap">
     <div class="headern">
       <div>
-        <van-search
-          style="opacity: 0.8"
-          shape="round"
-          background="transparent"
-          placeholder="查找服务"
-        />
+        <van-search style="opacity: 0.8" shape="round" background="transparent" placeholder="项目名称" />
       </div>
       <div class="middle">
         <div class="img" @click="indexPay"></div>
@@ -28,36 +23,36 @@
 </template>
 
 <script>
-import { Button, Row, Col, Search } from "vant";
+import { Button, Row, Col, Search } from 'vant'
 export default {
-  name: "home",
+  name: 'home',
   components: {
-    "van-row": Row,
-    "van-col": Col,
-    "van-button": Button,
-    "van-search": Search,
+    'van-row': Row,
+    'van-col': Col,
+    'van-button': Button,
+    'van-search': Search,
   },
   data() {
     return {
-      value: "value",
-      good: "value",
-      bottom_span: "主办单位：鹤岗市财政局",
-    };
+      value: 'value',
+      good: 'value',
+      bottom_span: '主办单位：鹤岗市财政局',
+    }
   },
   methods: {
     indexPay() {
       this.$router.push({
-        path: "/index_pay",
-      });
+        path: '/index_pay',
+      })
     },
   },
-};
+}
 </script>
 
 <style scoped lang="scss">
 .headern {
   width: 100%;
-  background: url("../../public/images/phone_background.png") no-repeat;
+  background: url('../../public/images/phone_background.png') no-repeat;
   background-size: cover;
   height: 640px;
 }
@@ -68,7 +63,7 @@ export default {
   margin-top: 126px;
 }
 .img {
-  background: url("../../public/images/phone_box.png") no-repeat center;
+  background: url('../../public/images/phone_box.png') no-repeat center;
   background-size: 100%;
   margin: 0 auto;
   width: 100%;
@@ -84,8 +79,7 @@ export default {
   font-size: 17px;
   font-weight: bold;
   color: #464a4c;
-  background: url("../../public/images/span_background.png") no-repeat center
-    bottom;
+  background: url('../../public/images/span_background.png') no-repeat center bottom;
   background-size: 100%;
 }
 .footer_box {

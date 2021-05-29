@@ -1,34 +1,39 @@
 module.exports = {
   presets: [
     [
-      'env',
+      '@babel/env',
       {
-        modules: false,
         targets: {
-          browsers: ['> 1%', 'last 2 versions', 'not ie <= 8'],
+          edge: '17',
+          firefox: '60',
+          chrome: '58',
+          safari: '10',
         },
+        useBuiltIns: 'usage',
+        corejs: '3.6.5',
       },
     ],
-    'stage-0',
-    'react',
+    '@babel/preset-react',
   ],
   plugins: [
-    'transform-class-properties',
-    'transform-object-assign',
+    '@babel/plugin-transform-runtime',
+    // 'transform-vue-jsx',
     [
       'import',
-      [
-        {
-          libraryName: 'antd',
-          libraryDirectory: 'es',
-          style: 'css',
-        },
-        {
-          libraryName: 'vant',
-          libraryDirectory: 'es',
-          style: true,
-        },
-      ],
+      {
+        libraryName: 'antd',
+        libraryDirectory: 'es',
+        style: 'css',
+      },
+    ],
+    [
+      'import',
+      {
+        libraryName: 'vant',
+        libraryDirectory: 'es',
+        style: true,
+      },
+      'vant',
     ],
   ],
 };

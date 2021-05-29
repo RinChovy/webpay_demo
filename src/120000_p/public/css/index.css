@@ -1,0 +1,235 @@
+input,
+button,
+select,
+textarea {
+  outline: none;
+}
+.home_span_warn {
+  position: absolute;
+  bottom: -40px;
+  left: 150px;
+}
+.outForm_pay {
+  position: relative;
+  width: 1440px;
+  /* height: 470px; */
+  margin: 0 auto;
+}
+.outForm_pay_qingdao {
+  position: relative;
+  width: 100%;
+  /* height: 600px; */
+  /* background: url(../images/qingdao3.png) no-repeat center; */
+  margin: 0 auto;
+  background-size: cover;
+}
+.onForm {
+  position: absolute;
+  display: flex;
+  flex-wrap: wrap;
+  width: 400px;
+  right: 10%;
+  top: 10%;
+}
+.onForm_pay {
+  margin-bottom: 45px;
+  padding-bottom: 20px;
+  margin-left: 4px;
+  width: 100%;
+  background: #ffffff;
+  -webkit-box-shadow: 0 0px 9px rgba(0, 0, 0, 0.1);
+}
+.top_pay {
+  margin-top: 20px;
+  padding-top: 10px;
+  width: 92%;
+  height: 52px;
+  border-bottom: 1px solid #e22721;
+  margin-left: auto;
+  margin-right: auto;
+}
+.topSpan_pay {
+  font-size: 22px;
+  color: #e22721;
+  font-weight: bold;
+}
+.middle_pay {
+  width: 92%;
+  margin: 0 auto;
+}
+.middle_pay_left {
+  display: inline-block;
+  vertical-align: top;
+  width: 55%;
+  height: 390px;
+}
+.middle_pay_left_org {
+  margin-top: 6%;
+  width: 670px;
+  /* height: 405px; */
+  background: rgba(255, 255, 255, 1);
+  /* box-shadow: 0px 4px 18px 0px rgb(0 0 0 / 8%); */
+  /* border-radius: 4px; */
+}
+.middle_pay_right_org {
+  margin-top: 14%;
+  margin-left: 7%;
+  width: 86%;
+  height: 74%;
+  color: #eb8500;
+  font-size: 15px;
+  background-color: #fff2de;
+}
+.middle_pay_right {
+  display: inline-block;
+  vertical-align: top;
+  width: 38%;
+  height: 390px;
+}
+.middle_box {
+  padding-top: 30px;
+  width: 84%;
+  margin: 0 auto;
+}
+.box {
+  padding: 5px;
+  width: 145px;
+  height: 145px;
+}
+.box_on {
+  margin: 0 auto;
+  width: 128px;
+  height: 128px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 16px;
+  box-shadow: 0px 0px 10px 10px rgba(230, 242, 248, 0.5);
+  text-align: center;
+  cursor: pointer;
+}
+.box_on:hover {
+  width: 138px;
+  height: 138px;
+}
+.img-size {
+  width: 96px;
+  height: 96px;
+}
+.img-span {
+  font-size: 12px;
+  display: block;
+  text-align: center;
+  font-family: PingFangSCRegular;
+  color: #464a4c;
+}
+.img_pay {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.span_pay_top {
+  font-size: 20px;
+  color: #ff9000;
+  font-weight: bold;
+  padding-left: 23px;
+  padding-top: 16px;
+}
+.span_pay {
+  font-size: 18px;
+  padding: 20px;
+}
+.button_submit {
+  width: 153px;
+  height: 40px;
+}
+.button_clear {
+  margin-left: 58px;
+  width: 153px;
+  height: 40px;
+}
+.verificationCode {
+  width: 100px;
+  height: 37px;
+  margin-left: 15px;
+  margin-top: 2px;
+}
+p {
+  margin-bottom: 4px !important;
+}
+.middle_payInfo {
+  position: relative;
+  border: 1px solid #ccc;
+  background: #eef7fe;
+  background: url(../images/png_template.png);
+  width: 900px;
+  height: 430px;
+  padding-top: 20px;
+  margin: 10px auto;
+}
+.bottom_payInfo {
+  /* border: 1px solid #ccc; */
+  width: 900px;
+  padding-top: 20px;
+  margin: 10px auto;
+  text-align: center;
+}
+.title_t {
+  text-align: center;
+  font-size: 18px;
+}
+.title-ti span {
+  font-size: 12px;
+  margin-left: 44px;
+  color: black;
+  text-decoration: none;
+}
+.form_f {
+  text-align: center;
+  text-align: -moz-center;
+  text-align: -webkit-center;
+  width: 820px;
+  height: 250px;
+  margin: 14px auto;
+}
+.url_button {
+  background-color: #3c76a6;
+  color: white;
+  width: 140px;
+  height: 35px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  margin-top: 20px;
+  border: 0px;
+}
+.url_button_clear {
+  margin-left: 20px;
+  background-color: #3c76a6;
+  color: white;
+  width: 140px;
+  height: 35px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  margin-top: 20px;
+  border: 0px;
+}
+.row {
+  height: 300px;
+  text-align: center;
+  background-color: white;
+}
+.row_p {
+  font-size: 18px;
+  text-align: center;
+  color: green;
+  margin-top: 30px;
+}
+/* .heada {
+  background: url(../images/tou.png) no-repeat;
+  padding: 0;
+  width: 100%;
+  height: 196px;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  background-position: center 0;
+} */

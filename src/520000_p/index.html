@@ -1,0 +1,146 @@
+<extends src="pc.html">
+  <block name="title">贵州省财政厅门户网站</block>
+  <block name="header">
+  </block>
+  <block name="content">
+    <link rel="stylesheet" type="text/css" href="../520000_p/public/topAndBottom/index_2.css" />
+    <link rel="stylesheet" type="text/css" href="../520000_p/public/topAndBottom/reset_2.css" />
+    <link rel="stylesheet" type="text/css" href="../520000_p/public/topAndBottom/header_2.css" />
+    <link rel="stylesheet" type="text/css" href="../520000_p/public/topAndBottom/footer_2.css" />
+
+    <div>
+      <div class="header">
+        <div class="top">
+          <dl>
+            <dt>
+              <ul>
+                <li><span id="labelTime"></span>
+                  <script type="text/javascript"> ShowDateTime();</script>
+                </li>
+                <li class="tianqi">
+                  <iframe width="240" scrolling="no" height="25" frameborder="0" allowtransparency="true"
+                    src="http://i.tianqi.com/index.php?c=code&id=34&py=guiyang1"></iframe>
+                </li>
+              </ul>
+            </dt>
+            <dd>
+              <ul>
+                <li><a onclick="SetHome(this,window.location)" style="cursor: pointer;">设为首页</a></li>
+                <li>|</li>
+                <li><a onclick="AddFavorite(window.location,document.title)" style="cursor: pointer;">收藏本站</a></li>
+              </ul>
+            </dd>
+          </dl>
+        </div>
+        <div class="banner">
+          <div class="logo"> <img src="../520000_p/public/topAndBottom/images/logo_2.png" width="1080" height="177"
+              alt="" ignore="1" /> </div>
+          <div class="Searchbox">
+            <div class="search">
+              <input type="text" class="input" value="请输入关键检索字" id="keyword"
+                onblur="if(this.value==''){this.value='请输入关键检索字';}"
+                onfocus="javascript:if(this.value=='请输入关键检索字')this.value='';" />
+              <a href="javascript:;" id="j_search_btn">
+                <!-- 检索跳转 -->
+                <script>
+                  $(function () {
+                    $('#j_search_btn').click(function () {
+                      var str = $(this).prev().val();
+                      checks(str);
+                    });
+                  });
+                  function checks(t) {
+                    t = t.replace(/(^\s+)|(\s+$)/g, "");
+                    if (t == "" || t == "请输入关键检索字") {
+                      alert('请输入有效内容');
+                      return false;
+                    }
+                    szMsg = "[#_%&'/",
+                      ";:=!^]";
+
+                    var key = document.getElementById("keyword").value;
+                    window.location.href = "/search.html?keyword=" + key;
+                    return true;
+                  }
+                </script>
+              </a>
+            </div>
+            <div class="search_hot"> <strong>热词：</strong>
+
+              <a href="javascript:void(0);" onClick="return subkeys('会计考试');" style="cursor: hand;" title="会计考试"
+                target="_blank">会计考试</a>&emsp;
+
+              <a href="javascript:void(0);" onClick="return subkeys('高级会计师');" style="cursor: hand;" title="高级会计师"
+                target="_blank">高级会计师</a>&emsp;
+
+              <a href="javascript:void(0);" onClick="return subkeys('小微贷款');" style="cursor: hand;" title="小微贷款"
+                target="_blank">小微贷款</a>&emsp;
+
+            </div>
+            <script type="text/javascript">
+              function subkeys(querykey) {
+                //必需，先将文本转换为utf-8
+                document.charset = "utf-8";
+                fixvalue = querykey.replace(/\~|\!|\*|\?|\^|\\|\(|\)|\[|\]|\+|\-|\:|\{|\}|\"/g, "");
+                window.open('/search.html?keyword=' + encodeURI(fixvalue)); //传入参数
+                return false;
+              }
+            </script>
+          </div>
+        </div>
+        <div class="nav_1">
+          <ul>
+            <li class="home"><a href="/"></li>
+            <li class="news"><a href="http://czt.guizhou.gov.cn/xwzx/"><i></i><span>新闻中心</span></a></li>
+            <li class="xxgk"><a href="http://czt.guizhou.gov.cn/zwgk/"><i></i><span>政务公开</span></a></li>
+            <li class="gzcy"><a href="http://czt.guizhou.gov.cn/hdjl/"><i></i><span>互动交流</span></a></li>
+            <li class="zxfw"><a href="http://czt.guizhou.gov.cn/bsfw/"><i></i><span>办事服务</span></a></li>
+            <li class="ywgz "><a href="http://czt.guizhou.gov.cn/ywxt/"><i></i><span>业务系统</span></a></li>
+            <li class="ztzl"><a href="http://czt.guizhou.gov.cn/ztzl/"><i></i><span>专题专栏</span></a></li>
+            <li class="email"><a style="line-height: 50px;font-size: 16px;"
+                href="http://data.guizhou.gov.cn/home#!/dataDirectory" target="_blank"><i
+                  style="width: 26px;height: 21px;background-position: -390px -20px; margin: 12px 0 0 10px;"></i><span
+                  style="margin-left: 5px;">数据开放</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div id="root"></div>
+
+    <div>
+      <div id="footer">
+        <div class="syqt">
+          <p><a href="http://czt.guizhou.gov.cn/syqt/yssm/">隐私申明</a>&emsp;|&emsp;<a
+              href="http://czt.guizhou.gov.cn/syqt/bqsm/">版权声明</a>&emsp;|&emsp;<a
+              href="http://czt.guizhou.gov.cn/syqt/wzdt/">网站地图</a>&emsp;|&emsp;<a
+              href="http://czt.guizhou.gov.cn/syqt/wzbz/">网站帮助</a>&emsp;|&emsp;<a
+              href="http://czt.guizhou.gov.cn/syqt/gywm/">关于我们</a>&emsp;|&emsp;<a
+              href="http://czt.guizhou.gov.cn/syqt/lxfs/">联系方式</a></p>
+          <p>主办：贵州省财政厅 客服电话：400 888 5699 政府网站标识码：5200000032 </p>
+          <p>黔ICP备09002671号-8 地址：省政府大院七号楼 邮编：550004 技术支持：<a>北京博思致新互联网科技有限公司</a> 管理单位名称：贵州省财政厅办公室 <a target="_blank"
+              href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=52010302001704"
+              style="display:inline-block;text-decoration:none;height:20px;line-height:20px;"><img
+                src="./public/topAndBottom/images/ggwaba_2.png" style="float:left;" />贵公网安备 52010302000571号</a>
+
+          </p>
+          <p style="display: none;">
+            <script
+              type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://"); document.write(unescape("%3Cspan id='cnzz_stat_icon_5520432'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s6.cnzz.com/stat.php%3Fid%3D5520432%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script>
+          </p>
+          <p>
+            <!--<script type="text/javascript">document.write(unescape("%3Cspan id='_ideConac' %3E%3C/span%3E%3Cscript   src='http://dcs.conac.cn/js/24/000/0000/40586280/CA240000000405862800001.js' type='text/javascript'%3E%3C/script%3E"));</script-->
+            <script
+              type="text/javascript">document.write(unescape("%3Cspan id='_ideConac' %3E%3C/span%3E%3Cscript   src='http://dcs.conac.cn/js/24/000/0000/40586280/CA240000000405862800001.js' type='text/javascript'%3E%3C/script%3E"));</script>
+            &nbsp;&nbsp;
+            <script id="_jiucuo_" sitecode='5200000032' src='./public/topAndBottom/jiucuo_2.js'></script>
+          </p>
+
+        </div>
+      </div>
+
+    </div>
+  </block>
+  <block name="footer">
+    <script src="./index.js"></script>
+  </block>
+</extends>

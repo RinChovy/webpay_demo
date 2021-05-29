@@ -1,0 +1,13 @@
+﻿/*底部样式*/
+.footer{width:1440px; margin:0 auto;overflow:hidden;}
+.yqlj{width: 1440px;height: 50px; margin:0 auto; line-height:50px;background-color: #3BA4E2;}
+.yqlj .select-box{width: 1080px;margin: 0 auto;overflow: hidden;}
+.yqlj ul li{ float:left; width:20%;}
+.select_yqlj{width: 154px;height: 22px;margin: 8px;border: 1px solid #ddd;}
+
+/*底部导航*/
+.syqt{width: 1080px;margin: 0 auto;overflow: hidden; line-height:30px; text-align:center;}
+
+
+
+
