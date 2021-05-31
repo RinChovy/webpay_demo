@@ -9,7 +9,7 @@
   "scripts": {
     "start": "cross-env NODE_ENV=development ailjc-service server",
     "build": "npm run prebuild && cross-env NODE_ENV=development ailjc-service build",
-    "build:pro": "npm run prubuild && cross-env NODE_ENV=production ailjc-service build",
+    "build:pro": "npm run prebuild && cross-env NODE_ENV=production ailjc-service build",
     "prebuild": "rimraf ./dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -23,6 +23,7 @@
     "connect-history-api-fallback": "^1.6.0",
     "console-polyfill": "^0.3.0",
     "es5-shim": "^4.5.15",
+    "iconv-lite": "^0.6.2",
     "iscroll": "^5.2.0",
     "isomorphic-fetch": "^3.0.0",
     "jquery": "1.11.1",

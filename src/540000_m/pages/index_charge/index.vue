@@ -87,108 +87,101 @@
 </template>
 
 <script>
-import { Button, Row, Col, Search, Dialog } from "vant";
+import { Button, Row, Col, Search, Dialog } from 'vant'
 // 大写金额
-import { Arabia_to_Chinese } from "../../public/js/money";
+import { Arabia_to_Chinese } from '../../public/js/money'
 // 自动生成商户订单号
-import { guid } from "../../public/js/orderNo";
-import API from "../../config/api.js";
+import { guid } from '../../public/js/orderNo'
+import API from '../../config/api.js'
 export default {
-  name: "index_charge",
+  name: 'index_charge',
   components: {
-    "van-row": Row,
-    "van-col": Col,
-    "van-button": Button,
-    "van-search": Search,
-    "van-dialog": Dialog,
+    'van-row': Row,
+    'van-col': Col,
+    'van-button': Button,
+    'van-search': Search,
+    'van-dialog': Dialog,
   },
   data() {
     return {
       //商户号
-      merchant_no: "",
+      merchant_no: '',
       //缴款码
-      payCode: "",
+      payCode: '',
       //缴款人
-      payer: "",
+      payer: '',
       //执收单位名称
-      exeAgencyName: "",
+      exeAgencyName: '',
       //收费项目
       queryItem: [],
       //编制日期
-      fillDate: "",
+      fillDate: '',
       //缴纳金额
-      totalAmount: "",
+      totalAmount: '',
       //缴纳金额化为分
-      totalAmount_fen: "",
+      totalAmount_fen: '',
       //备注
-      remarks: "无",
+      remarks: '无',
       //缴款书状态
-      status: "",
+      status: '',
       //电子票地址
-      einvoice_url: "",
-    };
+      einvoice_url: '',
+    }
   },
   //加载前生命周期
   beforeCreate() {},
   //初始生命周期
   created() {
-    console.log("加载后" + localStorage.getItem("data"));
-    const dateString = JSON.parse(localStorage.getItem("data"));
-    this.merchant_no = dateString.data.merchant_no;
-    this.payCode = dateString.data.payBook.payCode;
-    this.payer = dateString.data.payBook.payer;
-    this.exeAgencyName = dateString.data.payBook.exeAgencyName;
-    this.queryItem = JSON.parse(dateString.data.itemDetails);
-    this.fillDate = this.time(dateString.data.payBook.fillDate);
-    this.totalAmount = parseFloat(
-      dateString.data.payBook.totalAmount / 100
-    ).toFixed(2);
-    this.totalAmount_fen = dateString.data.payBook.totalAmount;
-    this.status = dateString.data.status;
-    this.einvoice_url = dateString.data.einvoice_url;
+    console.log('加载后' + localStorage.getItem('data'))
+    const dateString = JSON.parse(localStorage.getItem('data'))
+    this.merchant_no = dateString.data.merchant_no
+    this.payCode = dateString.data.payBook.payCode
+    this.payer = dateString.data.payBook.payer
+    this.exeAgencyName = dateString.data.payBook.exeAgencyName
+    this.queryItem = JSON.parse(dateString.data.itemDetails)
+    this.fillDate = this.time(dateString.data.payBook.fillDate)
+    this.totalAmount = parseFloat(dateString.data.payBook.totalAmount / 100).toFixed(2)
+    this.totalAmount_fen = dateString.data.payBook.totalAmount
+    this.status = dateString.data.status
+    this.einvoice_url = dateString.data.einvoice_url
   },
   methods: {
     submit() {
       // 挂件调用
       thirdpay_widget.init({
-        container: "widget", //挂件在当前页面放置的控件ID
+        container: 'widget', //挂件在当前页面放置的控件ID
         merchant_no: this.merchant_no, //分配的商户号
         merchant_order_no: guid(), //订单在商户系统中的订单号
         amount: this.totalAmount_fen, //订单价格，单位：人民币 分
-        effective_time: "1c",
-        device_type: "phone", //设备类型
+        effective_time: '1c',
+        device_type: 'phone', //设备类型
         widget_param: {
           paycode: this.payCode,
         }, //控件参数，常用来传递缴款服务所需定义的内容，如，非税paycode直缴或传入相关缴费信息生成缴款书
         charge_url: API.createCharge, //商户服务端创建charge时的controller地址
         charge_param: {
-          a: "a",
-          b: "b",
           regionCode: API.region,
           frontCallBackUrl: API.callback,
+          payCode: this.payCode,
+          paymentName: this.payer,
         }, //(可选，用户自定义参数，若存在自定义参数则会通过 POST 方法透传给 charge_url
-        version_no: "1.1",
-      });
+        version_no: '1.1',
+      })
     },
     fanhui() {
-      window.history.go(-1);
+      window.history.go(-1)
     },
     einvoiceUrl() {
-      window.location.href = this.einvoice_url;
+      window.location.href = this.einvoice_url
     },
     // 填制日期格式化
     time(date) {
-      var fillDate = date;
-      var fillDateStr =
-        fillDate.substr(0, 4) +
-        "-" +
-        fillDate.substr(4, 2) +
-        "-" +
-        fillDate.substr(6, 2);
-      return fillDateStr;
+      var fillDate = date
+      var fillDateStr = fillDate.substr(0, 4) + '-' + fillDate.substr(4, 2) + '-' + fillDate.substr(6, 2)
+      return fillDateStr
     },
   },
-};
+}
 </script>
 
 <style scoped lang="scss">
@@ -270,13 +263,7 @@ export default {
   button {
     width: 94%;
     height: 44px;
-    background: -webkit-gradient(
-      linear,
-      left top,
-      left bottom,
-      color-stop(0%, #4690ff),
-      color-stop(100%, #556ffe)
-    );
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #4690ff), color-stop(100%, #556ffe));
     border-radius: 4px;
     border: 0px;
     color: white;

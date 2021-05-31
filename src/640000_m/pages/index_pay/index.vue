@@ -3,7 +3,6 @@
     <div class="form">
       <div class="form_box">
         <div class="form_label">
-          <img alt="" src="../../public/images/paycode.png" />
           <span>缴款码</span>
         </div>
         <div class="form_input">
@@ -15,7 +14,6 @@
       </div>
       <div class="form_box">
         <div class="form_label">
-          <img alt="" src="../../public/images/payname.png" />
           <span>缴款人</span>
         </div>
         <div class="form_input">
@@ -27,7 +25,6 @@
       </div>
       <div class="form_box">
         <div class="form_label">
-          <img alt="" src="../../public/images/code.png" />
           <span>验证码</span>
         </div>
         <div class="form_input_code">
@@ -50,7 +47,7 @@
 <script>
 import { Button, Row, Col, Search, Dialog } from 'vant'
 import API from '../../config/api.js'
-import { queryPayInfo } from '../../config/services.js'
+import { queryPayInfo, code } from '../../config/services.js'
 export default {
   name: 'index_pay',
   components: {
@@ -65,7 +62,7 @@ export default {
       // 固定地址
       codeUrl: API.code,
       // 时间戳验证码地址
-      codeUrlT: API.code,
+      codeUrlT: '',
       // 绑定缴款码
       payCode: '',
       // 绑定缴款码验证语言
@@ -80,13 +77,26 @@ export default {
       codeWarn: '',
       //按钮失效
       disabled: true,
+      //uuid
+      uuid: '',
     }
+  },
+  created() {
+    code().then((res) => {
+      res.code === 0
+        ? ((this.codeUrlT = 'data:image/gif;base64,' + res.data.img), (this.uuid = res.data.uuid))
+        : this.handleError(res)
+    })
   },
   methods: {
     // 改变验证码
     changeCode() {
-      let timestamp = new Date().valueOf()
-      this.codeUrlT = this.codeUrl.split('?')[0] + '?timestamp=' + timestamp
+      var timestamp = new Date().valueOf()
+      code({ timestamp: timestamp }).then((res) => {
+        res.code === 0
+          ? ((this.codeUrlT = 'data:image/gif;base64,' + res.data.img), (this.uuid = res.data.uuid))
+          : this.handleError(res)
+      })
     },
     //提交下一步
     submit() {
@@ -98,6 +108,7 @@ export default {
           payCode: this.payCode,
           payPeople: this.payPeople,
           code: this.code,
+          uuid: this.uuid,
         }).then((res) => {
           res.code === 0 ? this.handleSuccess(res) : this.handleError(res)
         })
@@ -128,9 +139,10 @@ export default {
       console.log(regular)
       this.payCode == ''
         ? (this.payCodeWarn = '请输入缴款码')
-        : this.payPeople == ''
-        ? (this.payPeopleWarn = '请输入缴款人')
-        : (this.payPeopleWarn = '')
+        : eval(regular).test(this.payCode)
+        ? (this.payCodeWarn = '')
+        : (this.payCodeWarn = API.regularText)
+      this.payPeople == '' ? (this.payPeopleWarn = '请输入缴款人') : (this.payPeopleWarn = '')
       this.code == '' ? (this.codeWarn = '请输入验证码') : (this.codeWarn = '')
     },
   },
@@ -148,15 +160,13 @@ export default {
   height: 110px;
 }
 .form_label {
-  img {
-    margin-left: 4%;
-    width: 25px;
-  }
   span {
-    margin-left: 5px;
+    margin-left: 5%;
     vertical-align: -3px;
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 17px;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: #999999;
   }
 }
 .form_input {
@@ -164,14 +174,22 @@ export default {
   width: 100%;
   text-align: center;
   input {
-    color: #999ea0;
-    font-size: 17px;
-    padding-left: 10px;
+    color: #333333;
+    font-size: 16px;
     height: 35px;
-    background-color: #f4f4f4;
+    background-color: transparent;
     border: 0px solid #ddd;
+    border-bottom: 1px solid #eeeef1;
     width: 90%;
-    border-radius: 4px;
+  }
+  input::-webkit-input-placeholder {
+    color: #c3c3c4;
+  }
+  input:-moz-placeholder {
+    color: #c3c3c4;
+  }
+  input:-ms-input-placeholder {
+    color: #c3c3c4;
   }
 }
 .form_input_warn {
@@ -188,15 +206,23 @@ export default {
   margin-top: 10px;
   width: 100%;
   input {
-    color: #999ea0;
-    font-size: 17px;
-    padding-left: 10px;
+    color: #333333;
+    font-size: 16px;
     height: 35px;
-    background-color: #f4f4f4;
+    background-color: transparent;
     border: 0px solid #ddd;
+    border-bottom: 1px solid #eeeef1;
     width: 46%;
-    margin-left: 4%;
-    border-radius: 4px;
+    margin-left: 5%;
+  }
+  input::-webkit-input-placeholder {
+    color: #c3c3c4;
+  }
+  input:-moz-placeholder {
+    color: #c3c3c4;
+  }
+  input:-ms-input-placeholder {
+    color: #c3c3c4;
   }
   img {
     vertical-align: -12px;
@@ -211,12 +237,12 @@ export default {
   text-align: center;
   button {
     width: 94%;
-    height: 44px;
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #4690ff), color-stop(100%, #556ffe));
+    height: 48px;
+    background: #e7b382;
     border-radius: 4px;
     border: 0px;
     color: white;
-    font-size: 19px;
+    font-size: 16px;
   }
 }
 </style>

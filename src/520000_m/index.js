@@ -11,8 +11,10 @@ import Index_pay_traffic from './pages/index_pay_traffic/index.vue';
 import Index_charge from './pages/Index_charge/index.vue';
 import Success from './pages/success/index.vue';
 import Fail from './pages/fail/index.vue';
-import Error404 from './pages/error404.vue';
-
+// import Error404 from './pages/error404.vue';
+import Acityservice from './pages/acityservice';
+import Order_record from './pages/order_record/index.vue';
+import Order_record_details from './pages/order_record_details/index.vue';
 window.enableDev = true;
 
 const routes = [
@@ -56,14 +58,25 @@ const routes = [
     name: 'fail',
     component: Fail,
   },
-  // {
-  //   path: '*',
-  //   component: Error404,
-  // },
+  {
+    path: '/acityservice', 
+    name: 'acityservice',
+    component: Acityservice,
+  },
+  {
+    path: '/order_record', //微信小程序页
+    name: 'order_record',
+    component: Order_record,
+  },
+  {
+    path: '/order_record_details', //微信小程序页详情页
+    name: 'order_record_details',
+    component: Order_record_details,
+  }
 ];
 const router = new VueRouter({
-  // mode: 'history',
-  base: '/webpay_520000',
+  mode: 'history',
+  base: '/520000',
   routes,
 });
 

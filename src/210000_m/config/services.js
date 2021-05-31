@@ -8,6 +8,7 @@ export async function queryPayInfo(params) {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       regionCode: Api.region,
+      codeUId: params.uuid,
     },
     data: stringify(params),
   });
@@ -120,6 +121,16 @@ export async function getSchoolInfo(params) {
 // get获取非税信息
 export async function nontaxPage(params) {
   return xFetch(Api.nontaxPage, {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      regionCode: Api.region,
+    },
+    data: stringify(params),
+  });
+}
+// 验证码
+export async function code(params) {
+  return xFetch(Api.code, {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       regionCode: Api.region,

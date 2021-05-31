@@ -1,0 +1,213 @@
+﻿body {
+  background: url(../topAndBottom/images/img02_1.jpg) center top #edf6ff
+    no-repeat;
+}
+.header {
+  width: 1440px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.top {
+  height: 38px;
+  background: url(../topAndBottom/images/img01_1.jpg) repeat-x;
+  overflow: hidden;
+}
+.top dl {
+  display: block;
+  width: 1080px;
+  margin: 0 auto;
+}
+.top dl li {
+  float: left;
+  line-height: 34px;
+}
+.top dl li a {
+  padding: 0 10px;
+}
+.top dl dt {
+  float: left;
+}
+.top dl dt .tianqi {
+  margin-left: 10px;
+  margin-top: 4px;
+  *margin-top: 5px;
+}
+.top dl dd {
+  float: right;
+}
+.banner {
+  height: 177px;
+  overflow: hidden;
+  width: 1080px;
+  margin: 0 auto;
+  position: relative;
+}
+.Searchbox {
+  width: 260px;
+  top: 28%;
+  right: 0%;
+  position: absolute;
+}
+.Searchbox .search {
+  height: 26px;
+  background: url(../topAndBottom/images/search_bg_2.png) center center
+    no-repeat;
+}
+.Searchbox .search input {
+  width: 213px;
+  height: 26px;
+  line-height: 26px;
+  padding-left: 10px;
+  border: none;
+  background: none;
+  float: left;
+  font-size: 14px;
+  color: #afafaf;
+}
+.Searchbox .search a {
+  display: block;
+  width: 36px;
+  height: 26px;
+  float: right;
+}
+.Searchbox .search_hot {
+  height: 30px;
+  line-height: 30px;
+}
+.nav_1 {
+  width: 100%;
+  height: 50px;
+  background: #00a4e3;
+  overflow: hidden;
+}
+.nav_1 ul {
+  display: block;
+  width: 1080px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.nav_1 ul li {
+  width: 135px;
+  overflow: hidden;
+  float: left;
+  background: url(../topAndBottom/images/img04_2.jpg) center right no-repeat;
+}
+.nav_1 ul li a {
+  display: block;
+  cursor: pointer;
+  height: 50px;
+  line-height: 50px;
+  font-size: 16px;
+  color: #ffffff;
+  font-family: "微软雅黑", "黑体"; /*text-shadow: 0 1px 1px #000; */
+  overflow: hidden;
+  transition: all 0.3s ease-in 0s;
+  -moz-transition: all 0.3s ease-in 0s;
+  -webkit-transition: all 0.3s ease-in 0s;
+}
+.nav_1 ul li a i {
+  display: block;
+  float: left;
+  background: url(../topAndBottom/images/an_2.png) no-repeat;
+  ransition: transform 0.7s ease-out 0s;
+  -moz-transition: transform 0.7s ease-out 0s;
+  -webkit-transition: transform 0.7s ease-out 0s;
+}
+.nav_1 ul li a:hover i {
+  transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+  ransition: transform 0.7s ease-out 0s;
+  -moz-transition: transform 0.7s ease-out 0s;
+  -webkit-transition: transform 0.7s ease-out 0s;
+}
+.nav_1 ul li a span {
+  float: left;
+  margin-left: 5px;
+}
+.nav_1 ul li a:hover {
+  background: #3abef4;
+  transition: all 0.3s ease-in 0s;
+  -moz-transition: all 0.3s ease-in 0s;
+  -webkit-transition: all 0.3s ease-in 0s;
+}
+.nav_1 ul li.home span {
+  margin-left: 15px;
+}
+.nav_1 ul li.home a i {
+  width: 20px;
+  height: 20px;
+  background-position: -32px -20px;
+  margin: 16px 0 0 20px;
+}
+.nav_1 ul li.news a i {
+  width: 25px;
+  height: 25px;
+  background-position: -78px -20px;
+  margin: 16px 0 0 10px;
+}
+.nav_1 ul li.xxgk a i {
+  width: 26px;
+  height: 28px;
+  background-position: -130px -20px;
+  margin: 14px 0 0 10px;
+}
+.nav_1 ul li.gzcy a i {
+  width: 25px;
+  height: 19px;
+  background-position: -180px -20px;
+  margin: 14px 0 0 10px;
+}
+.nav_1 ul li.zxfw a i {
+  width: 35px;
+  height: 35px;
+  background-position: -222px -20px;
+  margin: 13px 0 0 10px;
+}
+.nav_1 ul li.ywgz a i {
+  width: 31px;
+  height: 26px;
+  background-position: -270px -20px;
+  margin: 12px 0 0 10px;
+}
+.nav_1 ul li.ztzl a i {
+  width: 26px;
+  height: 21px;
+  background-position: -330px -20px;
+  margin: 12px 0 0 10px;
+}
+.nav_1 ul li.email {
+  background: none;
+}
+.nav_1 ul li.email a {
+  line-height: 25px;
+  text-align: center;
+  font-size: 14px;
+  text-align: center;
+}
+.nav_1 ul li a em {
+  display: block;
+  background: url(../topAndBottom/images/an_2.png) no-repeat;
+  ransition: transform 0.7s ease-out 0s;
+  -moz-transition: transform 0.7s ease-out 0s;
+  -webkit-transition: transform 0.7s ease-out 0s;
+}
+.nav_1 ul li a:hover em {
+  transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+  ransition: transform 0.7s ease-out 0s;
+  -moz-transition: transform 0.7s ease-out 0s;
+  -webkit-transition: transform 0.7s ease-out 0s;
+}
+.nav_1 ul li.email a em {
+  display: block;
+  width: 25px;
+  height: 24px;
+  background-position: -390px -20px;
+  margin: 0px 0 0 60px;
+  *margin: 0px 0 0 10px;
+}
+.nav_1 ul li.email a span {
+  margin-left: 45px;
+}

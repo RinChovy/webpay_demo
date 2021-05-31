@@ -1,14 +1,14 @@
-import React from "react";
-import { HashRouter as Router, Route, Switch } from "react-router-dom";
-import Home from "../pages/home/index.js";
-import Index_pay from "../pages/index_pay/index.js";
-import Index_pay_traffic from "../pages/Index_pay_traffic/index.js";
-import NTpayChange from "../pages/index_charge/index.js";
-import Success from "../pages/success/index.js";
-import Fail from "../pages/fail/index.js";
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Home from '../pages/home/index.js';
+import Index_pay from '../pages/index_pay/index.js';
+import Index_pay_traffic from '../pages/Index_pay_traffic/index.js';
+import NTpayChange from '../pages/index_charge/index.js';
+import Success from '../pages/success/index.js';
+import Fail from '../pages/fail/index.js';
 function App() {
   return (
-    <Router>
+    <Router basename="520000">
       <Switch>
         <Route path="/" exact={true} component={Home} />
         {/* 非税缴款 */}

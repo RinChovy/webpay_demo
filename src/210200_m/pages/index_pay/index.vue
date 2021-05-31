@@ -50,7 +50,7 @@
 <script>
 import { Button, Row, Col, Search, Dialog } from 'vant'
 import API from '../../config/api.js'
-import { queryPayInfo } from '../../config/services.js'
+import { queryPayInfo, code } from '../../config/services.js'
 export default {
   name: 'index_pay',
   components: {
@@ -65,7 +65,7 @@ export default {
       // 固定地址
       codeUrl: API.code,
       // 时间戳验证码地址
-      codeUrlT: API.code,
+      codeUrlT: '',
       // 绑定缴款码
       payCode: '',
       // 绑定缴款码验证语言
@@ -80,13 +80,26 @@ export default {
       codeWarn: '',
       //按钮失效
       disabled: true,
+      //uuid
+      uuid: '',
     }
+  },
+  created() {
+    code().then((res) => {
+      res.code === 0
+        ? ((this.codeUrlT = 'data:image/gif;base64,' + res.data.img), (this.uuid = res.data.uuid))
+        : this.handleError(res)
+    })
   },
   methods: {
     // 改变验证码
     changeCode() {
-      let timestamp = new Date().valueOf()
-      this.codeUrlT = this.codeUrl.split('?')[0] + '?timestamp=' + timestamp
+      var timestamp = new Date().valueOf()
+      code({ timestamp: timestamp }).then((res) => {
+        res.code === 0
+          ? ((this.codeUrlT = 'data:image/gif;base64,' + res.data.img), (this.uuid = res.data.uuid))
+          : this.handleError(res)
+      })
     },
     //提交下一步
     submit() {
@@ -98,6 +111,7 @@ export default {
           payCode: this.payCode,
           payPeople: this.payPeople,
           code: this.code,
+          uuid: this.uuid,
         }).then((res) => {
           res.code === 0 ? this.handleSuccess(res) : this.handleError(res)
         })

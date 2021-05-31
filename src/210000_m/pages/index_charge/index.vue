@@ -229,7 +229,12 @@ export default {
                 openid: openid,
               },
               charge_url: API.createCharge, //商户服务端创建charge时的controller地址
-              charge_param: { a: 'a', b: 'b', regionCode: API.region, frontCallBackUrl: API.callback }, //(可选，用户自定义参数，若存在自定义参数则会通过 POST 方法透传给 charge_url
+              charge_param: {
+                payCode: that.payCode,
+                paymentName: that.payer,
+                regionCode: API.region,
+                frontCallBackUrl: API.callback,
+              }, //(可选，用户自定义参数，若存在自定义参数则会通过 POST 方法透传给 charge_url
               version_no: '1.1',
             })
           } else {
@@ -246,7 +251,12 @@ export default {
                 paycode: payCode,
               },
               charge_url: API.createCharge, //商户服务端创建charge时的controller地址
-              charge_param: { a: 'a', b: 'b', regionCode: API.region, frontCallBackUrl: API.callback }, //(可选，用户自定义参数，若存在自定义参数则会通过 POST 方法透传给 charge_url
+              charge_param: {
+                payCode: that.payCode,
+                paymentName: that.payer,
+                regionCode: API.region,
+                frontCallBackUrl: API.callback,
+              }, //(可选，用户自定义参数，若存在自定义参数则会通过 POST 方法透传给 charge_url
               version_no: '1.1',
             })
           }
@@ -276,7 +286,12 @@ export default {
                     aliAppId: e.appId,
                   },
                   charge_url: API.createCharge, //商户服务端创建charge时的controller地址
-                  charge_param: { a: 'a', b: 'b', regionCode: API.region, frontCallBackUrl: API.callback }, //(可选，用户自定义参数，若存在自定义参数则会通过 POST 方法透传给 charge_url
+                  charge_param: {
+                    payCode: that.payCode,
+                    paymentName: that.payer,
+                    regionCode: API.region,
+                    frontCallBackUrl: API.callback,
+                  }, //(可选，用户自定义参数，若存在自定义参数则会通过 POST 方法透传给 charge_url
                   version_no: '1.1',
                 })
                 $('.zhebg').show()
@@ -308,7 +323,12 @@ export default {
             paycode: payCode,
           },
           charge_url: API.createCharge, //商户服务端创建charge时的controller地址
-          charge_param: { a: 'a', b: 'b', regionCode: API.region, frontCallBackUrl: API.callback }, //(可选，用户自定义参数，若存在自定义参数则会通过 POST 方法透传给 charge_url
+          charge_param: {
+            payCode: that.payCode,
+            paymentName: that.payer,
+            regionCode: API.region,
+            frontCallBackUrl: API.callback,
+          }, //(可选，用户自定义参数，若存在自定义参数则会通过 POST 方法透传给 charge_url
           version_no: '1.1',
         })
       }

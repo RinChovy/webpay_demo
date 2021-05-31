@@ -45,10 +45,8 @@ export default {
         console.log(res)
         ;(this.url = res.data.einvoice_url), (this.merchant_order_no = res.data.merchant_order_no)
       } else {
-        Dialog.alert({
-          message: res.msg,
-        }).then(() => {
-          // on close
+        this.$router.push({
+          path: '/fail',
         })
       }
     })
@@ -62,11 +60,29 @@ export default {
     einvoice_url() {
       window.location.href = this.url
     },
+    // home() {
+    //   this.$router.push({
+    //     path: '/home',
+    //   })
+    // },
     home() {
-      this.$router.push({
-        path: '/home',
-      })
-    },
+      const userId = localStorage.getItem('userId')
+      if (userId) {
+        if (navigator.userAgent.toLowerCase().indexOf('micromessenger') != -1) {
+          this.$router.push({
+            path: '/index_pay',
+          })
+        } else {
+          this.$router.push({
+            path: '/acityservice',
+          })
+        }
+      } else {
+        this.$router.push({
+          path: '/home',
+        })
+      }
+    }
   },
 }
 </script>

@@ -15,7 +15,7 @@
           <span>推荐服务</span>
         </div>
         <div class="footer_box">
-          <img @click="indexPay" src="../../public/images/phone_box_bottom.png" alt="" />
+          <img src="../../public/images/phone_box_bottom.png" alt="" />
         </div>
       </div>
       <div class="bottom_span">
@@ -84,7 +84,7 @@ export default {
   },
   methods: {
     indexPay(itemCode, modelUrl) {
-      if (itemCode == 110) {
+      if (modelUrl.startsWith('http')) {
         window.location.href = modelUrl
       } else {
         let data = { itemCode: itemCode }
