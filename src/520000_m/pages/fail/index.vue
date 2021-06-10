@@ -26,7 +26,7 @@ export default {
     return {
       value: "value",
       good: "value",
-      bottom_span: "主办单位：鹤岗市财政局",
+      bottom_span: "主办单位：贵州省财政厅",
     };
   },
   methods: {

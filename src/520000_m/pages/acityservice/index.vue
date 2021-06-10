@@ -26,9 +26,6 @@
       <div class="bottom_span">
         <span>{{ bottom_span }}</span
         ><br />
-        <span>{{ bottom_span2 }}</span
-        ><br />
-        <span>{{ bottom_span3 }}</span>
       </div>
     </div>
   </div>
@@ -51,22 +48,23 @@ export default {
     return {
       value: 'value',
       good: 'value',
-      bottom_span: '主办单位：青岛市财政局',
-      bottom_span2: '服务电话：0532-85856831',
-      bottom_span3: '服务时间：法定工作日，09:00-17:00',
+      bottom_span: '主办单位：贵州省财政厅',
+      // bottom_span2: '服务电话：0532-85856831',
+      // bottom_span3: '服务时间：法定工作日，09:00-17:00',
     }
   },
   mounted() {
-    const user_id = localStorage.getItem('userId')
-    if (!user_id) {
+    const user_id = localStorage.getItem('userId');
+    let appId=localStorage.getItem('appId');
+    if (!user_id||appId!=="2021002148681851") {
       ap &&
         ap.getAuthCode(
           {
-            appId: '2019090566921553',
+            appId: '2021002148681851',
             scopes: ['auth_base'],
           },
           function (res) {
-                  console.log(res,'res');
+            console.log(res,'res');
             getAliUserId({
               authCode: res.authCode,
             }).then((data) => {
@@ -77,6 +75,8 @@ export default {
                   if (resData.code === 0) {
                     localStorage.removeItem('userId')
                     localStorage.setItem('userId', resData.data.user_id)
+                    localStorage.removeItem('appId')
+                    localStorage.setItem('appId', "2021002148681851")
                   } else {
                     Dialog.alert({
                       message: resData.msg,

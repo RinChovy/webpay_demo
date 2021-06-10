@@ -15,8 +15,14 @@ import Fail from './pages/fail/index.vue';
 import Acityservice from './pages/acityservice';
 import Order_record from './pages/order_record/index.vue';
 import Order_record_details from './pages/order_record_details/index.vue';
-window.enableDev = true;
+//////////////小程序日志插件/////////////////////////////
+import VConsole from 'vconsole';
 
+// if (process.env.NODE_ENV === 'production') {
+new VConsole();
+// }
+//////////////小程序日志插件/////////////////////////////
+window.enableDev = true;
 const routes = [
   {
     path: '/',
