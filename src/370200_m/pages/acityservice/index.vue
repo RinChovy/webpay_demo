@@ -58,7 +58,8 @@ export default {
   },
   mounted() {
     const user_id = localStorage.getItem('userId')
-    if (!user_id) {
+     let appId=localStorage.getItem('appId');
+    if (!user_id||appId!=="2019090566921553") {
       ap &&
         ap.getAuthCode(
           {
@@ -76,6 +77,8 @@ export default {
                   if (resData.code === 0) {
                     localStorage.removeItem('userId')
                     localStorage.setItem('userId', resData.data.user_id)
+                    localStorage.removeItem('appId')
+                    localStorage.setItem('appId', '2019090566921553')
                   } else {
                     Dialog.alert({
                       message: resData.msg,

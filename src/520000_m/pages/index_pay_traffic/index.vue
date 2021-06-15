@@ -67,11 +67,8 @@ export default {
       disabled: true,
     }
   },
-    created(){
-      this.changeCode()
-    },
-    mounted() {
-   
+  created(){
+    this.changeCode()
   },
   methods: {
     GetQueryValue(queryName) {
