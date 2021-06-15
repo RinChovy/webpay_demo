@@ -19,7 +19,7 @@ import Order_record_details from './pages/order_record_details/index.vue';
 import VConsole from 'vconsole';
 
 // if (process.env.NODE_ENV === 'production') {
-new VConsole();
+// new VConsole();
 // }
 //////////////小程序日志插件/////////////////////////////
 window.enableDev = true;
@@ -31,6 +31,11 @@ const routes = [
   {
     path: '/home', //首页
     name: 'home',
+    component: Home,
+  },
+  {
+    path: '/index_door', //首页
+    name: 'index_door',
     component: Home,
   },
   {
