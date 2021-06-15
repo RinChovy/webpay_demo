@@ -144,6 +144,9 @@ class home extends React.Component {
               </div>
             </div>
           </div>
+          <div>
+            <img src={require('../../public/images/background_bottom.png')} />
+          </div>
         </div>
       </div>
     );
