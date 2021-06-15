@@ -33,8 +33,9 @@
         </div>
       </div>
       <div class="bottom_span">
+        <img src="../../public/images/bosssoft_logo.png" alt="" />
         <span>{{ bottom_span }}<br /></span>
-        <span>{{ bottom_span2 }}</span>
+        <!-- <span>{{ bottom_span2 }}</span> -->
       </div>
     </div>
   </div>
@@ -54,7 +55,7 @@ export default {
     return {
       value: 'value',
       good: 'value',
-      bottom_span: '北京博思致新科技有限公司为您提供缴费支持',
+      bottom_span: '博思致新为您提供缴费支持',
       bottom_span2: '客服电话：010-0001001',
     }
   },
@@ -162,5 +163,12 @@ export default {
   color: #999ea0;
   // display: flex;
   // justify-content: center;
+  img {
+    width: 16px;
+  }
+  span {
+    margin-left: 5px;
+    vertical-align: bottom;
+  }
 }
 </style>

@@ -41,7 +41,8 @@ class success extends React.Component {
         <div className="outForm_pay_ningxia">
           <div className="onForm_pay">
             <div className="onForm_pay_top">
-              <span>缴费成功</span>
+              <img src={require('../../public/images/top_icon.png')} />
+              <span>您当前位置: 统一公共支付 {'>>'}缴款成功</span>
             </div>
             <div className="outForm_pay_qingdao">
               <div className="middle_pay">

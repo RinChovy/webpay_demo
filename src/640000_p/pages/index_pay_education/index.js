@@ -206,10 +206,6 @@ class education extends React.Component {
       <div className="body">
         <div className="outForm_pay_ningxia">
           <div className="onForm_pay">
-            <div className="onForm_pay_top">
-              <span>教育缴款</span>
-            </div>
-
             <div className="outForm_pay_qingdao">
               <div className="middle_pay">
                 <div className="middle_pay_left">
