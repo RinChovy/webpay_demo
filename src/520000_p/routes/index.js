@@ -14,6 +14,7 @@ function App() {
         {/* 非税缴款 */}
 
         <Route path="/home" component={Home} />
+        <Route path="/index_door" component={Home} />
         <Route path="/index_pay" component={Index_pay} />
         <Route path="/index_pay.do" component={Index_pay} />
         <Route path="/index_pay_traffic" component={Index_pay_traffic} />

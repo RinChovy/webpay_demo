@@ -70,7 +70,7 @@ const routes = [
     component: Fail,
   },
   {
-    path: '/acityservice', 
+    path: '/acityservice',
     name: 'acityservice',
     component: Acityservice,
   },
@@ -83,7 +83,7 @@ const routes = [
     path: '/order_record_details', //微信小程序页详情页
     name: 'order_record_details',
     component: Order_record_details,
-  }
+  },
 ];
 const router = new VueRouter({
   mode: 'history',

@@ -78,6 +78,7 @@
 
 <script>
 import { Button, Row, Col, Search, Dialog } from 'vant'
+import { createCashier } from '../../config/services.js'
 // 自动生成商户订单号
 import { guid } from '../../public/js/orderNo'
 import API from '../../config/api.js'
@@ -144,56 +145,117 @@ export default {
 
   methods: {
     submit() {
+      let that = this
       let userId = localStorage.getItem('userId')
       let openid = localStorage.getItem('openid')
-      // 挂件调用
+      const dateString = JSON.parse(localStorage.getItem('data'))
+      const query = dateString.data
+      const queryJson = query.payBook
+      //收银台参数定义
+      const widget_param = {
+        paycode: queryJson.payCode,
+      }
+      const merchant_order_no = guid()
       if ('' != typeof userId && typeof userId != 'undefined' && 'null' != typeof userId) {
-        thirdpay_widget.init({
-          container: 'widget', //挂件在当前页面放置的控件ID
-          merchant_no: this.merchant_no, //分配的商户号
-          merchant_order_no: guid(), //订单在商户系统中的订单号
-          amount: this.totalAmount_fen, //订单价格，单位：人民币 分
+        const widget_content = {
+          merchant_no: query.merchant_no,
+          merchant_order_no: merchant_order_no,
+          amount: queryJson.totalAmount,
           effective_time: '1c',
-          device_type: 'phone', //设备类型
-          widget_param: {
-            paycode: this.payCode,
-          }, //控件参数，常用来传递缴款服务所需定义的内容，如，非税paycode直缴或传入相关缴费信息生成缴款书
-          charge_url: API.createCharge, //商户服务端创建charge时的controller地址
+          version_no: '1.1',
+          subject: 'subject',
+          body: 'body',
+          device_type: 'phone',
+          widget_param: widget_param,
           //适用于开放平台的订单字段
           userId: userId,
           paymentName: this.exeAgencyName,
           itemNameSet: this.queryItem,
-          charge_param: {
-            openid: openid,
-            b: 'b',
-            payCode: this.payCode,
-            paymentName: this.payer,
-            regionCode: API.region,
-            frontCallBackUrl: API.callback,
-          }, //(可选，用户自定义参数，若存在自定义参数则会通过 POST 方法透传给 charge_url
-          version_no: '1.1',
-        })
+        }
+        const charge_param = { openid: openid, payCode: this.payCode, paymentName: this.payer }
       } else {
-        thirdpay_widget.init({
-          container: 'widget', //挂件在当前页面放置的控件ID
-          merchant_no: this.merchant_no, //分配的商户号
-          merchant_order_no: guid(), //订单在商户系统中的订单号
-          amount: this.totalAmount_fen, //订单价格，单位：人民币 分
+        const widget_content = {
+          merchant_no: query.merchant_no,
+          merchant_order_no: merchant_order_no,
+          amount: queryJson.totalAmount,
           effective_time: '1c',
-          device_type: 'phone', //设备类型
-          widget_param: {
-            paycode: this.payCode,
-          }, //控件参数，常用来传递缴款服务所需定义的内容，如，非税paycode直缴或传入相关缴费信息生成缴款书
-          charge_url: API.createCharge, //商户服务端创建charge时的controller地址
-          charge_param: {
-            payCode: this.payCode,
-            paymentName: this.payer,
-            regionCode: API.region,
-            frontCallBackUrl: API.callback,
-          }, //(可选，用户自定义参数，若存在自定义参数则会通过 POST 方法透传给 charge_url
           version_no: '1.1',
-        })
+          subject: 'subject',
+          body: 'body',
+          device_type: 'phone',
+          widget_param: widget_param,
+        }
+        const charge_param = { payCode: this.payCode, paymentName: this.payer }
       }
+      createCashier({
+        charge_param: JSON.stringify(charge_param),
+        widget_content: JSON.stringify(widget_content),
+        frontCallBackUrl: API.callback,
+        merchantOrderNo: merchant_order_no,
+      }).then((res) => {
+        res.code === 0 ? that.showCashier(res.msg) : that.handleError(res.msg)
+      })
+    },
+    // submit() {
+    //   let userId = localStorage.getItem('userId')
+    //   let openid = localStorage.getItem('openid')
+    //   // 挂件调用
+    //   if ('' != typeof userId && typeof userId != 'undefined' && 'null' != typeof userId) {
+    //     thirdpay_widget.init({
+    //       container: 'widget', //挂件在当前页面放置的控件ID
+    //       merchant_no: this.merchant_no, //分配的商户号
+    //       merchant_order_no: guid(), //订单在商户系统中的订单号
+    //       amount: this.totalAmount_fen, //订单价格，单位：人民币 分
+    //       effective_time: '1c',
+    //       device_type: 'phone', //设备类型
+    //       widget_param: {
+    //         paycode: this.payCode,
+    //       }, //控件参数，常用来传递缴款服务所需定义的内容，如，非税paycode直缴或传入相关缴费信息生成缴款书
+    //       charge_url: API.createCharge, //商户服务端创建charge时的controller地址
+    //       //适用于开放平台的订单字段
+    //       userId: userId,
+    //       paymentName: this.exeAgencyName,
+    //       itemNameSet: this.queryItem,
+    //       charge_param: {
+    //         openid: openid,
+    //         b: 'b',
+    //         payCode: this.payCode,
+    //         paymentName: this.payer,
+    //         regionCode: API.region,
+    //         frontCallBackUrl: API.callback,
+    //       }, //(可选，用户自定义参数，若存在自定义参数则会通过 POST 方法透传给 charge_url
+    //       version_no: '1.1',
+    //     })
+    //   } else {
+    //     thirdpay_widget.init({
+    //       container: 'widget', //挂件在当前页面放置的控件ID
+    //       merchant_no: this.merchant_no, //分配的商户号
+    //       merchant_order_no: guid(), //订单在商户系统中的订单号
+    //       amount: this.totalAmount_fen, //订单价格，单位：人民币 分
+    //       effective_time: '1c',
+    //       device_type: 'phone', //设备类型
+    //       widget_param: {
+    //         paycode: this.payCode,
+    //       }, //控件参数，常用来传递缴款服务所需定义的内容，如，非税paycode直缴或传入相关缴费信息生成缴款书
+    //       charge_url: API.createCharge, //商户服务端创建charge时的controller地址
+    //       charge_param: {
+    //         payCode: this.payCode,
+    //         paymentName: this.payer,
+    //         regionCode: API.region,
+    //         frontCallBackUrl: API.callback,
+    //       }, //(可选，用户自定义参数，若存在自定义参数则会通过 POST 方法透传给 charge_url
+    //       version_no: '1.1',
+    //     })
+    //   }
+    // },
+    showCashier(pageParams) {
+      document.write(pageParams)
+    },
+    // 失败提示
+    handleError(err) {
+      Dialog.alert({
+        message: err,
+      }).then(() => {})
     },
     fanhui() {
       window.history.go(-1)
