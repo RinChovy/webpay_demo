@@ -30,8 +30,9 @@ export async function queryPenaltyDecisionInfo(params) {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       regionCode: Api.region,
+      codeUId:params.headers.codeUId
     },
-    data: stringify(params),
+    data: stringify(params.data),
   });
 }
 // 验证码

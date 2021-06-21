@@ -38,7 +38,7 @@
 <script>
 import { Button, Row, Col, Search, Dialog } from 'vant'
 import API from '../../config/api.js'
-import { queryPayInfo , getOpenid , getOpenPlatformUserid,getCode } from '../../config/services.js'
+import { queryPayInfo , getOpenid , getOpenPlatformUserid,getCode ,queryPenaltyDecisionInfo } from '../../config/services.js'
 export default {
   name: 'index_pay',
   components: {
@@ -97,7 +97,7 @@ export default {
       this.warning()
       if (this.payCodeWarn == '' && this.codeWarn == '') {
         that.disabled = false
-        queryPayInfo({
+        queryPenaltyDecisionInfo({
           // payCode: this.payCode,
           // code: this.code,
           headers: {
