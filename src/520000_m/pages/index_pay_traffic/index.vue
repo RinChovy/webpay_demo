@@ -135,11 +135,8 @@ export default {
     warning() {
       const regular = API.regular
       console.log(regular)
-      this.payCode == ''
-        ? (this.payCodeWarn = '请输入处罚决定书编号')
-        : eval(regular).test(this.payCode)
-        ? (this.payCodeWarn = '')
-        : (this.payCodeWarn = API.regularText)
+      this.payCode == '' ? (this.payCodeWarn = '请输入处罚决定书编号'):(this.payCodeWarn = '')
+       
       this.code == '' ? (this.codeWarn = '请输入验证码') : (this.codeWarn = '')
     },
   },
