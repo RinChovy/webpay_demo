@@ -1,12 +1,12 @@
-import xFetch from "../../utils/xFetch";
-import { stringify } from "qs";
-import Api from "./api.js";
+import xFetch from '../../utils/xFetch';
+import { stringify } from 'qs';
+import Api from './api.js';
 
 // 非税缴费提交
 export async function queryPayInfo(params) {
   return xFetch(Api.queryPayInfo, {
     headers: {
-      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       regionCode: Api.region,
     },
     data: stringify(params),
@@ -16,7 +16,7 @@ export async function queryPayInfo(params) {
 export async function success(params) {
   return xFetch(Api.success, {
     headers: {
-      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       regionCode: Api.region,
     },
     data: stringify(params),
@@ -26,7 +26,7 @@ export async function success(params) {
 export async function getAliUserId(params) {
   return xFetch(Api.getAliUserId, {
     headers: {
-      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       regionCode: Api.region,
     },
     data: stringify(params),
@@ -36,7 +36,7 @@ export async function getAliUserId(params) {
 export async function getOpenPlatformUserid(params) {
   return xFetch(Api.getOpenPlatformUserid, {
     headers: {
-      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       regionCode: Api.region,
     },
     data: stringify(params),
@@ -46,7 +46,7 @@ export async function getOpenPlatformUserid(params) {
 export async function getOpenid(params) {
   return xFetch(Api.getOpenid, {
     headers: {
-      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       regionCode: Api.region,
     },
     data: stringify(params),
@@ -56,7 +56,18 @@ export async function getOpenid(params) {
 export async function queryOrderRecord(params) {
   return xFetch(Api.queryOrderRecord, {
     headers: {
-      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      regionCode: Api.region,
+    },
+    data: stringify(params),
+  });
+}
+
+//收银台接口
+export async function createCashier(params) {
+  return xFetch(Api.createCashier, {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       regionCode: Api.region,
     },
     data: stringify(params),

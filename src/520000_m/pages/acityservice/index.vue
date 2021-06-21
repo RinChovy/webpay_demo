@@ -54,9 +54,9 @@ export default {
     }
   },
   mounted() {
-    const user_id = localStorage.getItem('userId');
-    let appId=localStorage.getItem('appId');
-    if (!user_id||appId!=="2021002148681851") {
+    const user_id = localStorage.getItem('userId')
+    let appId = localStorage.getItem('appId')
+    if (!user_id || appId !== '2021002148681851') {
       ap &&
         ap.getAuthCode(
           {
@@ -64,7 +64,7 @@ export default {
             scopes: ['auth_base'],
           },
           function (res) {
-            console.log(res,'res');
+            console.log(res, 'res')
             getAliUserId({
               authCode: res.authCode,
             }).then((data) => {
@@ -76,7 +76,7 @@ export default {
                     localStorage.removeItem('userId')
                     localStorage.setItem('userId', resData.data.user_id)
                     localStorage.removeItem('appId')
-                    localStorage.setItem('appId', "2021002148681851")
+                    localStorage.setItem('appId', '2021002148681851')
                   } else {
                     Dialog.alert({
                       message: resData.msg,

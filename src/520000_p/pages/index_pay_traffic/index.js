@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, Input, Button, Row, Col, notification } from 'antd';
-import { queryPayInfo } from '../../service/services';
+import { queryPenaltyDecisionInfo } from '../../service/services';
 import { api } from '../../service/api';
 import style from '../../public/css/index.css';
 
