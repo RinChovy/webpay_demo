@@ -1,6 +1,7 @@
 import base from 'utils/baseURL';
 
-const callback = 'http://fsjf.czt.guizhou.gov.cn/pay/success'; //传给后台的回调地址
+// const callback = 'http://fsjf.czt.guizhou.gov.cn/pay/success'; //传给后台的回调地址
+const callback = 'https://api.epayservice.cn/webpay_520000/success'; //传给后台的回调地址
 
 const region = '520000'; //区划号
 

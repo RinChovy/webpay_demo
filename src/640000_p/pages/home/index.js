@@ -32,7 +32,7 @@ class home extends React.Component {
       : null;
   };
   // 点击右侧按钮
-  right = () => {
+  right = (e) => {
     const { classBox } = this.state;
     classBox == '' || classBox == 'out_1'
       ? this.setState({
@@ -45,6 +45,7 @@ class home extends React.Component {
       : null;
   };
   button = (e) => {
+    e.stopPropagation(); //阻止冒泡事件
     this.setState({
       classButton: true,
     });
@@ -61,11 +62,18 @@ class home extends React.Component {
       pathname: '/education',
     });
   };
+  //body按钮 阻止冒泡事件
+  body = () => {
+    // e.stopPropagation();
+    this.setState({
+      classButton: false,
+    });
+  };
 
   render() {
     const { classBox, classButton, url_1, url_2, url_3 } = this.state;
     return (
-      <div className="body">
+      <div className="body" onClick={this.body}>
         <div className="outForm_pay">
           <div className="home_div">
             <div className="home_div_LR">
