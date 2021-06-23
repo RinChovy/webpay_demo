@@ -46,7 +46,7 @@ textarea {
   width: 100%;
   height: 623px;
   background: url(/public/images/background_home.png) center;
-  background-size: 103 %;
+  background-size: 103%;
   position: relative;
 }
 .onForm_pay {
