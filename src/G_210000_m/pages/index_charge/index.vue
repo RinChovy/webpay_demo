@@ -3,7 +3,7 @@
     <div class="form">
       <div class="form_box">
         <div class="form_label">
-          <img src="../../public/images/phone/paycode.png" />
+          <img alt='' src="../../public/images/phone/paycode.png" />
           <span>缴款码</span>
         </div>
         <div class="form_span">
@@ -12,7 +12,7 @@
       </div>
       <div class="form_box">
         <div class="form_label">
-          <img src="../../public/images/phone/paypeople.png" />
+          <img alt='' src="../../public/images/phone/paypeople.png" />
           <span>缴款人</span>
         </div>
         <div class="form_span">
@@ -21,7 +21,7 @@
       </div>
       <div class="form_box">
         <div class="form_label">
-          <img src="../../public/images/phone/danwei.png" />
+          <img alt='' src="../../public/images/phone/danwei.png" />
           <span>执收单位名称</span>
         </div>
         <div class="form_span">
@@ -30,7 +30,7 @@
       </div>
       <div class="form_box" style="height: auto">
         <div class="form_label">
-          <img src="../../public/images/phone/xiangmu.png" />
+          <img alt='' src="../../public/images/phone/xiangmu.png" />
           <span>收费项目</span>
         </div>
         <div v-for="(v, k) in queryItem" :key="k">
@@ -42,7 +42,7 @@
       </div>
       <div class="form_box">
         <div class="form_label">
-          <img src="../../public/images/phone/bianzhih.png" />
+          <img alt='' src="../../public/images/phone/bianzhih.png" />
           <span>编制日期</span>
         </div>
         <div class="form_span">
@@ -51,7 +51,7 @@
       </div>
       <div class="form_box">
         <div class="form_label">
-          <img src="../../public/images/phone/jiaonah.png" />
+          <img alt='' src="../../public/images/phone/jiaonah.png" />
           <span>缴纳金额</span>
         </div>
         <div class="form_span">
@@ -60,7 +60,7 @@
       </div>
       <div class="form_box">
         <div class="form_label">
-          <img src="../../public/images/phone/beizhuh.png" />
+          <img alt='' src="../../public/images/phone/beizhuh.png" />
           <span>备注</span>
         </div>
         <div class="form_span">
@@ -77,7 +77,7 @@
         <button @click="fanhui">返回</button>
       </div>
     </div>
-    <img
+    <img alt=''
       class="paied"
       src="../../public/images/phone/paied.png"
       v-if="status != 0"
@@ -88,6 +88,8 @@
 
 <script>
 import { Button, Row, Col, Search, Dialog } from 'vant'
+// 大写金额
+import { Arabia_to_Chinese } from '../../public/js/money'
 // 自动生成商户订单号
 import { guid } from '../../public/js/orderNo'
 import API from '../../config/api.js'
@@ -131,12 +133,27 @@ export default {
     }
   },
   //加载前生命周期
-  beforeCreate() {},
+  beforeCreate() {
+    console.log('加载前' + localStorage.getItem('data'))
+  },
   //初始生命周期
   created() {
     const { order_no } = this
     const ua = window.navigator.userAgent.toLowerCase()
     console.log(order_no)
+    // if (navigator.userAgent.indexOf('AlipayClient') > -1) {
+    //   // 如果是支付宝则引入 支付宝js
+    //   alert('这是支付宝')
+    //   document.writeln('<script src="https://appx/web-view.min.js"' + '>' + '<' + '/' + 'script>')
+    //   // util.loadScript("https://appx/web-view.min.js");
+    // } else if (navigator.userAgent.toLowerCase().indexOf('micromessenger') != -1) {
+    //   // 否则就是在微信中 引入微信js
+    //   alert('微信')
+    //   document.writeln('<script src="https://res.wx.qq.com/open/js/jweixin-1.3.2.js"' + '>' + '<' + '/' + 'script>')
+    //   // util.loadScript("https://res.wx.qq.com/open/js/jweixin-1.3.2.js");
+    //   //  处理微信小程序内 webview 页面监听状态的方法
+    // }
+
     //  处理微信小程序内 webview 页面监听状态的方法
     let that = this
     if (ua.match(/MicroMessenger/i) == 'micromessenger') {
@@ -151,6 +168,7 @@ export default {
         }
       })
     }
+
     console.log('加载后' + localStorage.getItem('data'))
     const dateString = JSON.parse(localStorage.getItem('data'))
     this.merchant_no = dateString.data.merchant_no
@@ -185,13 +203,12 @@ export default {
       })
     },
     submit() {
-      const userId = localStorage.getItem('userId')
-      const openid = localStorage.getItem('openId')
       let that = this
       const { order_no, merchant_no, totalAmount_fen, payCode } = this
+
       // 挂件调用
       var ua = window.navigator.userAgent.toLowerCase()
-
+      var openid = localStorage.getItem('openId')
       //通过正则表达式匹配ua中是否含有MicroMessenger字符串
       if (ua.match(/MicroMessenger/i) == 'micromessenger') {
         wx.miniProgram.getEnv(function (res) {
@@ -244,55 +261,76 @@ export default {
             })
           }
         })
+      } else if (ua.indexOf('alipay') != -1) {
+        // 在支付宝浏览器中
+        my.getEnv(function (res) {
+          console.log(res.miniprogram) //true
+          if (res.miniprogram) {
+            // 在支付宝小程序中
+            my.postMessage({ flag: 'getAuthCode' })
+            // 接收来自小程序的消息。
+            my.onMessage = function (e) {
+              if (e.flag === 'authCode') {
+                that.miniProgramMark = true
+                thirdpay_widget.init({
+                  container: 'widget', //挂件在当前页面放置的控件ID
+                  merchant_no: merchant_no, //分配的商户号
+                  merchant_order_no: order_no, //订单在商户系统中的订单号
+                  amount: totalAmount_fen, //订单价格，单位：人民币 分
+                  effective_time: '1c',
+                  device_type: 'miniProgramH5',
+                  widget_param: {
+                    paycode: payCode,
+                    // 微信小程序需要的字段 openid
+                    openid: e.authCode,
+                    aliAppId: e.appId,
+                  },
+                  charge_url: API.createCharge, //商户服务端创建charge时的controller地址
+                  charge_param: {
+                    payCode: that.payCode,
+                    paymentName: that.payer,
+                    regionCode: API.region,
+                    frontCallBackUrl: API.callback,
+                  }, //(可选，用户自定义参数，若存在自定义参数则会通过 POST 方法透传给 charge_url
+                  version_no: '1.1',
+                })
+                $('.zhebg').show()
+              } else if (e.flag === 'paySuccess') {
+                // todo 接受成功后 需要处理回调页面
+
+                that.$router.push({
+                  path: '/success_wx',
+                  name: 'success_wx',
+                  query: { merchant_order_no: order_no },
+                })
+                // window.location.href = '<%=path%>/query/queryRealTime.do?' + 'merchant_order_no=' + order_no
+              }
+            }
+          } else {
+            // 在支付宝浏览器中
+            initWidget()
+          }
+        })
       } else {
-        // 挂件调用
-        if ('' != typeof userId && typeof userId != 'undefined' && 'null' != typeof userId) {
-          thirdpay_widget.init({
-            container: 'widget', //挂件在当前页面放置的控件ID
-            merchant_no: this.merchant_no, //分配的商户号
-            merchant_order_no: order_no, //订单在商户系统中的订单号
-            amount: this.totalAmount_fen, //订单价格，单位：人民币 分
-            effective_time: '1c',
-            device_type: 'phone', //设备类型
-            widget_param: {
-              paycode: this.payCode,
-            }, //控件参数，常用来传递缴款服务所需定义的内容，如，非税paycode直缴或传入相关缴费信息生成缴款书
-            charge_url: API.createCharge, //商户服务端创建charge时的controller地址
-            //适用于开放平台的订单字段
-            userId: userId,
-            paymentName: this.exeAgencyName,
-            itemNameSet: this.queryItem,
-            charge_param: {
-              openid: openid,
-              b: 'b',
-              payCode: this.payCode,
-              paymentName: this.payer,
-              regionCode: API.region,
-              frontCallBackUrl: API.callback,
-            }, //(可选，用户自定义参数，若存在自定义参数则会通过 POST 方法透传给 charge_url
-            version_no: '1.1',
-          })
-        } else {
-          thirdpay_widget.init({
-            container: 'widget', //挂件在当前页面放置的控件ID
-            merchant_no: this.merchant_no, //分配的商户号
-            merchant_order_no: order_no, //订单在商户系统中的订单号
-            amount: this.totalAmount_fen, //订单价格，单位：人民币 分
-            effective_time: '1c',
-            device_type: 'phone', //设备类型
-            widget_param: {
-              paycode: this.payCode,
-            }, //控件参数，常用来传递缴款服务所需定义的内容，如，非税paycode直缴或传入相关缴费信息生成缴款书
-            charge_url: API.createCharge, //商户服务端创建charge时的controller地址
-            charge_param: {
-              payCode: this.payCode,
-              paymentName: this.payer,
-              regionCode: API.region,
-              frontCallBackUrl: API.callback,
-            }, //(可选，用户自定义参数，若存在自定义参数则会通过 POST 方法透传给 charge_url
-            version_no: '1.1',
-          })
-        }
+        thirdpay_widget.init({
+          container: 'widget', //挂件在当前页面放置的控件ID
+          merchant_no: merchant_no, //分配的商户号
+          merchant_order_no: order_no, //订单在商户系统中的订单号
+          amount: totalAmount_fen, //订单价格，单位：人民币 分
+          effective_time: '1c',
+          device_type: 'phone',
+          widget_param: {
+            paycode: payCode,
+          },
+          charge_url: API.createCharge, //商户服务端创建charge时的controller地址
+          charge_param: {
+            payCode: that.payCode,
+            paymentName: that.payer,
+            regionCode: API.region,
+            frontCallBackUrl: API.callback,
+          }, //(可选，用户自定义参数，若存在自定义参数则会通过 POST 方法透传给 charge_url
+          version_no: '1.1',
+        })
       }
     },
     fanhui() {

@@ -211,20 +211,17 @@ p {
 }
 .middle_payInfo {
   position: relative;
-  border: 1px solid #ccc;
-  background: #eef7fe;
-  background: url(../images/png_template.png);
-  width: 900px;
-  height: 430px;
+  width: 1190px;
+  /* height: 430px; */
   padding-top: 20px;
   margin: 10px auto;
 }
 .bottom_payInfo {
   /* border: 1px solid #ccc; */
-  width: 900px;
-  padding-top: 20px;
+  width: 1104px;
+  padding-top: 8px;
   margin: 10px auto;
-  text-align: center;
+  text-align: right;
 }
 .title_t {
   text-align: center;
@@ -240,8 +237,8 @@ p {
   text-align: center;
   text-align: -moz-center;
   text-align: -webkit-center;
-  width: 820px;
-  height: 250px;
+  width: 1105px;
+  height: 340px;
   margin: 14px auto;
 }
 .school_div {

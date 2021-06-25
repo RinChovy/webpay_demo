@@ -37,65 +37,43 @@ class NonTaxPayChange extends React.Component {
     window.location.href = this.state.einvoice_url;
   };
   componentDidMount() {
-    const query = JSON.parse(localStorage.getItem('data'));
-    console.log(query);
-    const queryJson = query.payBook;
-    const queryItem = JSON.parse(query.itemDetails);
-    let status = query.status; //缴款状态
-    let exeAgencyCode = queryJson.exeAgencyCode; //执收单位编码
-    let exeAgencyName = queryJson.exeAgencyName; //执收单位名称
-    let payCode = queryJson.payCode; //缴款码
-    let payerName = queryJson.payer; //付款人全称
-    let recName = queryJson.recAcctName; //收款人全称
-    let payerAcct = queryJson.payAcct; //付款人账号
-    let recAcct = queryJson.recAcct; //收款人账号
-    let payerOpBk = queryJson.payAcctBank; //付款人开户银行
-    let recOpBk = queryJson.recAcctBank; //收款人开户银行
-    let amt = parseFloat(queryJson.totalAmount / 100).toFixed(2); //金额小写
-    let amtZ = money(amt); //金额大写
-    let billDate = this.time(queryJson.fillDate); //填制日期
-    let einvoice_url = query.einvoice_url; //电子票地址
-    console.log(query.einvoice_url);
-    this.setState({
-      billDate: billDate,
-      exeAgencyCode: exeAgencyCode,
-      exeAgencyName: exeAgencyName,
-      payCode: payCode,
-      payerName: payerName,
-      recName: recName,
-      payerAcct: payerAcct,
-      recAcct: recAcct,
-      payerOpBk: payerOpBk,
-      recOpBk: recOpBk,
-      amt: amt,
-      amtZ: amtZ,
-      queryItem: queryItem,
-      billDate: billDate,
-      status: status,
-      einvoice_url: einvoice_url,
-    });
-    setTimeout(() => {
-      thirdpay_widget &&
-        thirdpay_widget.init({
-          container: 'widget', //挂件在当前页面放置的控件ID
-          merchant_no: query.merchant_no, //分配的商户号
-          merchant_order_no: guid(), //订单在商户系统中的订单号
-          amount: queryJson.totalAmount, //订单价格，单位：人民币 分
-          effective_time: '1c',
-          device_type: 'pc', //设备类型
-          widget_param: {
-            paycode: payCode,
-          }, //控件参数，常用来传递缴款服务所需定义的内容，如，非税paycode直缴或传入相关缴费信息生成缴款书
-          charge_url: api.createCharge, //商户服务端创建charge时的controller地址
-          charge_param: {
-            payCode: queryJson.payCode,
-            paymentName: queryJson.payer,
-            regionCode: api.region,
-            frontCallBackUrl: api.callback,
-          }, //(可选，用户自定义参数，若存在自定义参数则会通过 POST 方法透传给 charge_url
-          version_no: '1.1',
-        });
-    }, 100);
+    // const query = JSON.parse(localStorage.getItem('data'));
+    // console.log(query);
+    // const queryJson = query.payBook;
+    // const queryItem = JSON.parse(query.itemDetails);
+    // let status = query.status; //缴款状态
+    // let exeAgencyCode = queryJson.exeAgencyCode; //执收单位编码
+    // let exeAgencyName = queryJson.exeAgencyName; //执收单位名称
+    // let payCode = queryJson.payCode; //缴款码
+    // let payerName = queryJson.payer; //付款人全称
+    // let recName = queryJson.recAcctName; //收款人全称
+    // let payerAcct = queryJson.payAcct; //付款人账号
+    // let recAcct = queryJson.recAcct; //收款人账号
+    // let payerOpBk = queryJson.payAcctBank; //付款人开户银行
+    // let recOpBk = queryJson.recAcctBank; //收款人开户银行
+    // let amt = parseFloat(queryJson.totalAmount / 100).toFixed(2); //金额小写
+    // let amtZ = money(amt); //金额大写
+    // let billDate = this.time(queryJson.fillDate); //填制日期
+    // let einvoice_url = query.einvoice_url; //电子票地址
+    // console.log(query.einvoice_url);
+    // this.setState({
+    //   billDate: billDate,
+    //   exeAgencyCode: exeAgencyCode,
+    //   exeAgencyName: exeAgencyName,
+    //   payCode: payCode,
+    //   payerName: payerName,
+    //   recName: recName,
+    //   payerAcct: payerAcct,
+    //   recAcct: recAcct,
+    //   payerOpBk: payerOpBk,
+    //   recOpBk: recOpBk,
+    //   amt: amt,
+    //   amtZ: amtZ,
+    //   queryItem: queryItem,
+    //   billDate: billDate,
+    //   status: status,
+    //   einvoice_url: einvoice_url,
+    // });
   }
   // 页面销毁生命周期
   componentWillUnmount() {
@@ -144,20 +122,25 @@ class NonTaxPayChange extends React.Component {
     // 挂件
     const thirdpay = (
       <div className="bottom_payInfo">
-        <p id="widget"></p>
+        <Button onClick={this.goCashier} className="button_dianzi">
+          去支付
+        </Button>
       </div>
     );
+
     // 电子票查验地址
     const thirdpayOk =
       einvoice_url != '' && einvoice_url != null ? (
         <div className="bottom_payInfo">
-          <Button onClick={this.einvoiceUrl}>电子票查验</Button>
+          <Button onClick={this.einvoiceUrl} className="button_dianzi">
+            查看电子票
+          </Button>
         </div>
       ) : null;
     // 已交款字段
     const statusOk =
       status == 0 ? null : (
-        <div style={{ position: 'absolute', right: '18%' }}>
+        <div style={{ position: 'absolute', right: '25%' }}>
           <img
             style={{ width: 100 }}
             src={require('../../public/images/paiec.png')}
@@ -165,114 +148,128 @@ class NonTaxPayChange extends React.Component {
         </div>
       );
     return (
-      <div>
-        <div>
-          <div className="outForm_pay">
-            <div className="img_pay">
-              <div className="onForm_pay">
-                <div className="top_pay">
-                  <span className="topSpan_pay">非税缴款</span>
-                </div>
-                <div className="middle_pay">
-                  <div className="middle_payInfo">
-                    {statusOk}
-                    <p className="title_t">
-                      <b>缴款通知书</b>
-                    </p>
-                    <p className="title-ti">
-                      <span>填制日期：{billDate}</span>
-                    </p>
-                    <p className="title-ti">
-                      <span>执收单位编码：{exeAgencyCode}</span>
-                      <span style={{ marginLeft: 50 }}>
-                        执收单位名称：{exeAgencyName}
-                      </span>
-                    </p>
-                    <p className="title-ti">
-                      <span>缴款码：{payCode}</span>
-                    </p>
-                    <table border="1" className="form_f">
-                      <tbody>
-                        <tr>
-                          <td width="23" rowSpan="3">
-                            <center>付款人</center>
-                          </td>
-                          <td width="73">
-                            <center>全&nbsp;&nbsp;称</center>
-                          </td>
-                          <td width="230" colSpan="2">
-                            &nbsp;{payerName}
-                          </td>
+      <div className="body">
+        <div className="outForm_pay_ningxia">
+          <div className="onForm_pay">
+            <div className="onForm_pay_top">
+              <span>统一支付公共平台</span>
+              <span className="right">
+                当前位置:&nbsp; 首页 &nbsp;{'>'}&nbsp;非税缴款
+              </span>
+            </div>
 
-                          <td width="23" rowSpan="3">
-                            <center>收款人</center>
-                          </td>
-                          <td width="73">
-                            <center>全&nbsp;&nbsp;称</center>
-                          </td>
+            <div className="middle_pay_charge">
+              <div className="middle_pay_right">
+                <div>
+                  <div className="middle_pay_charge">
+                    <div className="middle_payInfo">
+                      {statusOk}
+                      <p className="title_t">
+                        <b>缴款通知书</b>
+                      </p>
+                      <p className="title-ti">
+                        <span>填制日期：{billDate}</span>
+                      </p>
+                      <p className="title-ti">
+                        <span>执收单位编码：{exeAgencyCode}</span>
+                        <span style={{ marginLeft: 280 }}>
+                          执收单位名称：{exeAgencyName}
+                        </span>
+                        <span style={{ marginLeft: 280 }}>
+                          缴款码：{payCode}
+                        </span>
+                      </p>
 
-                          <td colSpan="3">{recName}</td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <center>账&nbsp;&nbsp;号</center>
-                          </td>
-                          <td colSpan="2">&nbsp;{payerAcct}</td>
-                          <td>
-                            <center>账&nbsp;&nbsp;号</center>
-                          </td>
-                          <td colSpan="3">&nbsp;{recAcct}</td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <center>开户银行</center>
-                          </td>
-                          <td colSpan="2">&nbsp;{payerOpBk}</td>
-                          <td>
-                            <center>开户银行</center>
-                          </td>
-                          <td colSpan="3">&nbsp;{recOpBk}</td>
-                        </tr>
-                        <tr>
-                          <td colSpan="2">
-                            <center>金额（小写）</center>
-                          </td>
-                          <td colSpan="2">&nbsp;￥{amt}</td>
-                          <td colSpan="2">
-                            <center>金额（大写）</center>
-                          </td>
-                          <td colSpan="3">&nbsp;{amtZ}</td>
-                        </tr>
-                        <tr>
-                          <td colSpan="2">
-                            <center>项目识别码</center>
-                          </td>
-                          <td width="120">
-                            <center>收入项目编码</center>
-                          </td>
-                          <td width="160">
-                            <center>收入项目名称</center>
-                          </td>
-                          <td colSpan="2">
-                            <center>单位</center>
-                          </td>
-                          <td width="100">
-                            <center>数量</center>
-                          </td>
-                          <td width="100">
-                            <center>收缴标准</center>
-                          </td>
-                          <td width="100">
-                            <center>金额</center>
-                          </td>
-                        </tr>
-                        {itemModel}
-                      </tbody>
-                    </table>
+                      <table border="1" className="form_f">
+                        <tbody>
+                          <tr>
+                            <td width="23" rowSpan="3">
+                              <center>
+                                付{<br />}款{<br />}人
+                              </center>
+                            </td>
+                            <td width="73">
+                              <center>全&nbsp;&nbsp;称</center>
+                            </td>
+                            <td width="230" colSpan="2">
+                              &nbsp;{payerName}
+                            </td>
+
+                            <td width="23" rowSpan="3">
+                              <center>
+                                收{<br />}款{<br />}人
+                              </center>
+                            </td>
+                            <td width="73">
+                              <center>全&nbsp;&nbsp;称</center>
+                            </td>
+
+                            <td colSpan="3">{recName}</td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <center>账&nbsp;&nbsp;号</center>
+                            </td>
+                            <td colSpan="2">&nbsp;{payerAcct}</td>
+                            <td>
+                              <center>账&nbsp;&nbsp;号</center>
+                            </td>
+                            <td colSpan="3">&nbsp;{recAcct}</td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <center>开户银行</center>
+                            </td>
+                            <td colSpan="2">&nbsp;{payerOpBk}</td>
+                            <td>
+                              <center>开户银行</center>
+                            </td>
+                            <td colSpan="3">&nbsp;{recOpBk}</td>
+                          </tr>
+                          <tr>
+                            <td colSpan="2">
+                              <center>金额（小写）</center>
+                            </td>
+                            <td colSpan="2">&nbsp;￥{amt}</td>
+                            <td colSpan="2">
+                              <center>金额（大写）</center>
+                            </td>
+                            <td colSpan="3">&nbsp;{amtZ}</td>
+                          </tr>
+                          <tr>
+                            <td colSpan="2">
+                              <center>项目识别码</center>
+                            </td>
+                            <td width="120">
+                              <center>收入项目编码</center>
+                            </td>
+                            <td width="160">
+                              <center>收入项目名称</center>
+                            </td>
+                            <td colSpan="2">
+                              <center>单位</center>
+                            </td>
+                            <td width="100">
+                              <center>数量</center>
+                            </td>
+                            <td width="100">
+                              <center>收缴标准</center>
+                            </td>
+                            <td width="100">
+                              <center>金额</center>
+                            </td>
+                          </tr>
+                          {itemModel}
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
-                </div>
-                <div className="middle_pay" style={{ overflow: 'hidden' }}>
-                  {status == 0 ? thirdpay : thirdpayOk}
+                  <div
+                    className="middle_pay_charge"
+                    style={{ overflow: 'hidden' }}
+                  >
+                    {status == 0 ? thirdpay : thirdpayOk}
+                  </div>
                 </div>
               </div>
             </div>

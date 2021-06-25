@@ -33,7 +33,7 @@
         <div class="form_input_code">
           <input placeholder="请输入验证码" v-model="code" />
           <img alt="" :src="codeUrlT" />
-          <span style="color: #4690ff" @click="changeCode">换一张</span>
+          <span style="color: #4690ff; font-size: 12px" @click="changeCode">换一张</span>
         </div>
         <div class="form_input_warn">
           <span>{{ codeWarn }}</span>
@@ -50,7 +50,7 @@
 <script>
 import { Button, Row, Col, Search, Dialog } from 'vant'
 import API from '../../config/api.js'
-import { queryPayInfo, getOpenid, getOpenPlatformUserid } from '../../config/services.js'
+import { queryPayInfo, nontaxPage, code } from '../../config/services.js'
 export default {
   name: 'index_pay',
   components: {
@@ -65,7 +65,7 @@ export default {
       // 固定地址
       codeUrl: API.code,
       // 时间戳验证码地址
-      codeUrlT: API.code,
+      codeUrlT: '',
       // 绑定缴款码
       payCode: '',
       // 绑定缴款码验证语言
@@ -80,74 +80,48 @@ export default {
       codeWarn: '',
       //按钮失效
       disabled: true,
+      //uuid
+      uuid: '',
     }
   },
   mounted() {
-    if (navigator.userAgent.toLowerCase().indexOf('micromessenger') != -1) {
-      // 否则就是在微信中 引入微信js
-      // document.writeln('<script src="https://res.wx.qq.com/open/js/jweixin-1.3.2.js"' + '>' + '<' + '/' + 'script>');
-      // util.loadScript("https://res.wx.qq.com/open/js/jweixin-1.3.2.js");
-      //  处理微信小程序内 webview 页面监听状态的方法
-      const openid = localStorage.getItem('openid')
-      if (openid) {
-        getOpenPlatformUserid({
-          openid: openid,
-        }).then((resData) => {
-          if (resData.code === 0) {
-            localStorage.removeItem('userId')
-            localStorage.setItem('userId', resData.data.user_id)
-          } else {
-            Dialog.alert({
-              message: resData.msg,
+    const url = location.href
+    console.log('url为' + url)
+    if (url.indexOf('openId=') != -1) {
+      const rsa = url.substring(url.indexOf('openId=') + 7)
+      console.log('rsa为' + rsa)
+      const openId = rsa
+      if (openId != '' && openId != null) {
+        localStorage.removeItem('openId')
+        localStorage.setItem('openId', openId)
+      }
+    }
+    if (url.search('areaId') != -1) {
+      const areaId = url.substring(url.indexOf('areaId=') + 7)
+      nontaxPage({
+        areaId: areaId,
+      }).then((res) => {
+        res.code === 0
+          ? localStorage.setItem('areaId', areaId)
+          : Dialog.alert({
+              message: res.msg,
             }).then(() => {
               // on close
             })
-          }
-        })
-      } else {
-        var url = location.href.split('#')[0]
-        let state = this.GetQueryValue('state')
-        console.log('url' + url)
-        console.log('start' + state)
-        if (typeof state != 'undefined' && '' != typeof state) {
-          if (state == 'cityService') {
-            // 验证是城市服务
-            // 获取code
-            let code = this.GetQueryValue('code')
-            console.log('code' + code)
-            getOpenid({
-              code: code,
-            }).then((data) => {
-              if (data.code === 0) {
-                localStorage.removeItem('openid')
-                localStorage.setItem('openid', data.data.openid)
-                getOpenPlatformUserid({
-                  openid: data.data.openid,
-                }).then((resData) => {
-                  if (resData.code === 0) {
-                    localStorage.removeItem('userId')
-                    localStorage.setItem('userId', resData.data.user_id)
-                  } else {
-                    Dialog.alert({
-                      message: resData.msg,
-                    }).then(() => {
-                      // on close
-                    })
-                  }
-                })
-              } else {
-                Dialog.alert({
-                  message: data.msg,
-                }).then(() => {
-                  // on close
-                })
-              }
-            })
-          }
-        }
-      }
+      })
     }
   },
+  created() {
+    code().then((res) => {
+      res.code === 0
+        ? ((this.codeUrlT = 'data:image/gif;base64,' + res.data.img), (this.uuid = res.data.uuid))
+        : this.handleError(res)
+    })
+  },
+  // 销毁生命周期
+  // beforeDestroy() {1
+  // window.location.reload()
+  // },
   methods: {
     GetQueryValue(queryName) {
       var reg = new RegExp('(^|&)' + queryName + '=([^&]*)(&|$)', 'i')
@@ -158,10 +132,13 @@ export default {
         return ''
       }
     },
-    // 改变验证码
     changeCode() {
-      let timestamp = new Date().valueOf()
-      this.codeUrlT = this.codeUrl.split('?')[0] + '?timestamp=' + timestamp
+      var timestamp = new Date().valueOf()
+      code({ timestamp: timestamp }).then((res) => {
+        res.code === 0
+          ? ((this.codeUrlT = 'data:image/gif;base64,' + res.data.img), (this.uuid = res.data.uuid))
+          : this.handleError(res)
+      })
     },
     //提交下一步
     submit() {
@@ -173,13 +150,14 @@ export default {
           payCode: this.payCode,
           payPeople: this.payPeople,
           code: this.code,
+          uuid: this.uuid,
         }).then((res) => {
           res.code === 0 ? this.handleSuccess(res) : this.handleError(res)
         })
-      } else {
       }
     },
     // 提交成功
+
     handleSuccess(data) {
       localStorage.setItem('data', JSON.stringify(data))
       this.$router.push({
@@ -294,5 +272,11 @@ export default {
     color: white;
     font-size: 19px;
   }
+}
+.footerc {
+  font-size: 14px;
+  color: #999ea0;
+  text-align: center;
+  // height:0.92rem;
 }
 </style>

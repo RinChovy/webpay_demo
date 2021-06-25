@@ -1,5 +1,4 @@
 import xFetch from '../../utils/xFetch';
-import request from '../../utils/requestStream';
 import { stringify } from 'qs';
 import Api from './api.js';
 
@@ -9,11 +8,11 @@ export async function queryPayInfo(params) {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       regionCode: Api.region,
+      codeUId: params.uuid,
     },
     data: stringify(params),
   });
 }
-
 // 成功回调接口
 export async function success(params) {
   return xFetch(Api.success, {
@@ -24,39 +23,6 @@ export async function success(params) {
     data: stringify(params),
   });
 }
-// 获取政策查询依据接口
-export async function searchItemInfo(params) {
-  return xFetch(Api.searchItemInfo, {
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-      regionCode: Api.region,
-    },
-    data: stringify(params),
-  });
-}
-// 查询政策文件
-export async function searchPolicyDocument(params) {
-  return xFetch(Api.searchPolicyDocument, {
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-      regionCode: Api.region,
-    },
-    data: stringify(params),
-  });
-}
-// 下载政策文件
-export async function downLoadPolicyDocument(params) {
-  return request(Api.downLoadPolicyDocument, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-      regionCode: Api.region,
-    },
-    data: stringify(params),
-  });
-}
-
-////////////////////////////////////以下是城市服
 // 支付宝接口1
 export async function getAliUserId(params) {
   return xFetch(Api.getAliUserId, {
@@ -97,9 +63,74 @@ export async function queryOrderRecord(params) {
     data: stringify(params),
   });
 }
-// success_wx直接访问接口
+
+// 查询城市借口手机端
+export async function getCityData(params) {
+  return xFetch(Api.getCityData, {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      regionCode: Api.region,
+    },
+    data: stringify(params),
+  });
+}
+// 查询城市菜单接口
+export async function homeConfigInfo(params) {
+  return xFetch(Api.homeConfigInfo, {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      regionCode: Api.region,
+    },
+    data: stringify(params),
+  });
+}
+
+// 查询城市菜单接口
 export async function queryRealTime(params) {
   return xFetch(Api.queryRealTime, {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      regionCode: Api.region,
+    },
+    data: stringify(params),
+  });
+}
+
+// 学校接口
+export async function school(params) {
+  return xFetch(Api.school, {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      regionCode: Api.region,
+    },
+    data: stringify(params),
+  });
+}
+
+//get获取学校信息
+export async function getSchoolInfo(params) {
+  return xFetch(Api.getSchoolInfo, {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      regionCode: Api.region,
+    },
+    data: stringify(params),
+  });
+}
+
+// get获取非税信息
+export async function nontaxPage(params) {
+  return xFetch(Api.nontaxPage, {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      regionCode: Api.region,
+    },
+    data: stringify(params),
+  });
+}
+// 验证码
+export async function code(params) {
+  return xFetch(Api.code, {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       regionCode: Api.region,
