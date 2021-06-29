@@ -47,6 +47,7 @@ textarea {
   width: 100%;
   background: #ffffff;
   -webkit-box-shadow: 0 0px 9px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0px 9px rgba(0, 0, 0, 0.1);
 }
 .top_pay {
   margin-top: 20px;
