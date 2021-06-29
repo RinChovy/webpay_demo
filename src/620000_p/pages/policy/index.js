@@ -1,8 +1,7 @@
 import React from 'react';
-import { Input, Button, Table, Tag, Space } from 'antd';
-import reqwest from 'reqwest';
+import { Input, Button, Table, Tag } from 'antd';
 import { searchItemInfo, searchPolicyDocument } from '../../service/services';
-import { api } from '../../service/api';
+
 import style from '../../public/css/index.css';
 import Model from '../components/model';
 
@@ -49,7 +48,6 @@ class Policy extends React.Component {
   // 页面方法
   tableList = (page, bool) => {
     let { pagination, selectModel } = this.state;
-    let that = this;
     this.setState({ loading: true });
     searchItemInfo({
       pageNo: bool == true ? 1 : page.current,
@@ -62,7 +60,7 @@ class Policy extends React.Component {
         });
         pagination.current = page.current;
         pagination.total = res.data.totalPage * 10;
-        that.setState({
+        this.setState({
           loading: false,
           data: listArr,
           pagination: pagination,
@@ -72,12 +70,11 @@ class Policy extends React.Component {
       }
     });
   };
-  handleTableChange = (pagination, filters, sorter) => {
+  handleTableChange = (pagination) => {
     this.tableList(pagination);
   };
   // 查询方法
   select = () => {
-    debugger;
     const { pagination } = this.state;
     this.tableList(pagination, true);
   };
@@ -153,7 +150,7 @@ class Policy extends React.Component {
     } = this.state;
     return (
       <div className="body">
-        {model == true && (
+        {model && (
           <Model model={model} dataModel={dataModel} cencel={this.cencel} />
         )}
         <div className="outForm_pay">

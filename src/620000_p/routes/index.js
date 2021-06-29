@@ -8,7 +8,7 @@ import Fail from '../pages/fail/index.js';
 import Policy from '../pages/policy/index.js';
 function App() {
   return (
-    <Router basename="620000">
+    <Router basename="/">
       <Switch>
         <Route path="/" exact={true} component={Home} />
         {/* 非税缴款 */}

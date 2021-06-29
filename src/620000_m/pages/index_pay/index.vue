@@ -88,7 +88,18 @@ export default {
       // document.writeln('<script src="https://res.wx.qq.com/open/js/jweixin-1.3.2.js"' + '>' + '<' + '/' + 'script>');
       // util.loadScript("https://res.wx.qq.com/open/js/jweixin-1.3.2.js");
       //  处理微信小程序内 webview 页面监听状态的方法
-      const openid = localStorage.getItem('openid')
+      let openid = localStorage.getItem('openid')
+      if (url.indexOf('openId=') != -1) {
+        const rsa = url.substring(url.indexOf('openId=') + 7)
+        console.log('rsa为' + rsa)
+        const openId = rsa
+        if (openId != '' && openId != null) {
+          localStorage.removeItem('openId')
+          localStorage.setItem('openId', openId)
+          openid = openId
+        }
+      }
+
       if (openid) {
         getOpenPlatformUserid({
           openid: openid,

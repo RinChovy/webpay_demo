@@ -1,19 +1,16 @@
 import React from 'react';
-import { Input, Button } from 'antd';
+import { Button } from 'antd';
 import { api } from '../../service/api';
 import { downLoadPolicyDocument } from '../../service/services';
 export default class model extends React.Component {
   state = {
-    //   判断遮罩亮起元素
-    model: false,
     dataModel: {},
   };
 
-  componentWillMount() {
+  componentDidMount() {
     this.setState({
       dataModel: this.props.dataModel,
     });
-    console.log(this.props.dataModel);
   }
   down = () => {
     const { dataModel } = this.state;
@@ -29,8 +26,6 @@ export default class model extends React.Component {
     });
   };
   resolveBlob = (res, mimeType) => {
-    console.log(res);
-    console.log(res.headers);
     const aLink = document.createElement('a');
     var blob = new Blob([res.data], { type: mimeType });
     // //从response的headers中获取filename, 后端response.setHeader("Content-disposition", "attachment; filename=xxxx.docx") 设置的文件名;
