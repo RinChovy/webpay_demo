@@ -136,7 +136,7 @@ class Home extends React.Component {
                             src={require('../../public/images/xizang/caizheng.png')}
                           />
                           <div {...marginTop}>
-                            <span>缴款查询</span>
+                            <span>票据查询打印</span>
                           </div>
                         </div>
                         <div className="box" onClick={this.policy}>
