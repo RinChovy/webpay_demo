@@ -31,10 +31,10 @@ class Policy extends React.Component {
   }
 
   // 列表table点击弹出组件
-  handleClickTable = (value) => {
+  handleClickTable = value => {
     searchPolicyDocument({
       title: value,
-    }).then((res) => {
+    }).then(res => {
       if (res.code === 0) {
         this.setState({
           dataModel: res.data,
@@ -47,14 +47,14 @@ class Policy extends React.Component {
   };
 
   // 页面方法
-  tableList = (page, bool) => {
+  tableList = (page, bool = false) => {
     let { pagination, selectModel } = this.state;
     this.setState({ loading: true });
     searchItemInfo({
       pageNo: bool ? 1 : page.current,
       pageSize: 10,
       ...selectModel,
-    }).then((res) => {
+    }).then(res => {
       if (res.code === 0) {
         const listArr = res.data.itemList.map((item, i) => {
           return { ...item, index: i + 1 };
@@ -72,7 +72,7 @@ class Policy extends React.Component {
     });
   };
   // 表格改变方法
-  handleTableChange = (pagination) => {
+  handleTableChange = pagination => {
     this.tableList(pagination);
   };
   // 查询方法
@@ -128,7 +128,7 @@ class Policy extends React.Component {
         key: 'docNos',
         align: 'left',
         width: '500px',
-        render: (items) => (
+        render: items => (
           <>
             {items.map((item, key) => (
               <Tag
@@ -178,7 +178,7 @@ class Policy extends React.Component {
                   size="large"
                   style={{ marginLeft: 20, width: 130 }}
                   value={selectModel.itemStdIDCode}
-                  onChange={(e) =>
+                  onChange={e =>
                     this.handleChange('itemStdIDCode', e.target.value)
                   }
                 />
@@ -187,18 +187,14 @@ class Policy extends React.Component {
                   size="large"
                   style={{ marginLeft: 20, width: 130 }}
                   value={selectModel.itemCode}
-                  onChange={(e) =>
-                    this.handleChange('itemCode', e.target.value)
-                  }
+                  onChange={e => this.handleChange('itemCode', e.target.value)}
                 />
                 <label>项目名称:</label>
                 <Input
                   size="large"
                   style={{ marginLeft: 20, width: 130 }}
                   value={selectModel.itemName}
-                  onChange={(e) =>
-                    this.handleChange('itemName', e.target.value)
-                  }
+                  onChange={e => this.handleChange('itemName', e.target.value)}
                 />
                 <Button
                   style={{
@@ -215,7 +211,7 @@ class Policy extends React.Component {
               </div>
               <div className="policy_table">
                 <Table
-                  rowKey={(record) => record.index}
+                  rowKey="itemIDCode"
                   columns={columns}
                   dataSource={data}
                   pagination={pagination}
@@ -226,7 +222,6 @@ class Policy extends React.Component {
                   }}
                   bordered
                 />
-                ,
               </div>
             </div>
           </div>
