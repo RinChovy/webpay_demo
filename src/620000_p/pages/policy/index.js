@@ -1,14 +1,14 @@
 import React from 'react';
 import { Input, Button, Table, Tag } from 'antd';
 import { searchItemInfo, searchPolicyDocument } from '../../service/services';
-import style from '../../public/css/index.css';
-import Model from '../components/model';
+import MaskModel from '../components/maskModel';
 
 class Policy extends React.Component {
   state = {
     spanPayTop: '温馨提示',
     model: false, //控制遮罩层显示隐藏属性
     pagination: {
+      //table插件设置参数
       position: ['bottomCenter'],
       showSizeChanger: false,
       current: 1,
@@ -31,10 +31,10 @@ class Policy extends React.Component {
   }
 
   // 列表table点击弹出组件
-  click_table = value => {
+  handleClickTable = (value) => {
     searchPolicyDocument({
       title: value,
-    }).then(res => {
+    }).then((res) => {
       if (res.code === 0) {
         this.setState({
           dataModel: res.data,
@@ -54,7 +54,7 @@ class Policy extends React.Component {
       pageNo: bool ? 1 : page.current,
       pageSize: 10,
       ...selectModel,
-    }).then(res => {
+    }).then((res) => {
       if (res.code === 0) {
         const listArr = res.data.itemList.map((item, i) => {
           return { ...item, index: i + 1 };
@@ -71,16 +71,17 @@ class Policy extends React.Component {
       }
     });
   };
-  handleTableChange = pagination => {
+  // 表格改变方法
+  handleTableChange = (pagination) => {
     this.tableList(pagination);
   };
   // 查询方法
-  select = () => {
+  handleSelect = () => {
     const { pagination } = this.state;
     this.tableList(pagination, true);
   };
   //绑定事件
-  change = (title, value) => {
+  handleChange = (title, value) => {
     let arry = this.state.selectModel;
     title == 'itemStdIDCode'
       ? (arry.itemStdIDCode = value)
@@ -91,7 +92,8 @@ class Policy extends React.Component {
       selectModel: arry,
     });
   };
-  cencel = () => {
+  //模板消失
+  onCancel = () => {
     this.setState({
       model: false,
     });
@@ -126,16 +128,16 @@ class Policy extends React.Component {
         key: 'docNos',
         align: 'left',
         width: '500px',
-        render: v => (
+        render: (items) => (
           <>
-            {v.map((i, k) => (
+            {items.map((item, key) => (
               <Tag
                 color="default"
-                key={k}
+                key={key}
                 style={{ marginBottom: 4 }}
-                onClick={() => this.click_table(i)}
+                onClick={() => this.handleClickTable(item)}
               >
-                {i}
+                {item}
               </Tag>
             ))}
           </>
@@ -152,9 +154,7 @@ class Policy extends React.Component {
     } = this.state;
     return (
       <div className="body">
-        {model && (
-          <Model model={model} dataModel={dataModel} cencel={this.cencel} />
-        )}
+        {model && <MaskModel dataModel={dataModel} cancel={this.onCancel} />}
         <div className="outForm_pay">
           <div className="img_pay">
             <div className="onForm_pay">
@@ -178,21 +178,27 @@ class Policy extends React.Component {
                   size="large"
                   style={{ marginLeft: 20, width: 130 }}
                   value={selectModel.itemStdIDCode}
-                  onChange={e => this.change('itemStdIDCode', e.target.value)}
+                  onChange={(e) =>
+                    this.handleChange('itemStdIDCode', e.target.value)
+                  }
                 />
                 <label>项目编码:</label>
                 <Input
                   size="large"
                   style={{ marginLeft: 20, width: 130 }}
                   value={selectModel.itemCode}
-                  onChange={e => this.change('itemCode', e.target.value)}
+                  onChange={(e) =>
+                    this.handleChange('itemCode', e.target.value)
+                  }
                 />
                 <label>项目名称:</label>
                 <Input
                   size="large"
                   style={{ marginLeft: 20, width: 130 }}
                   value={selectModel.itemName}
-                  onChange={e => this.change('itemName', e.target.value)}
+                  onChange={(e) =>
+                    this.handleChange('itemName', e.target.value)
+                  }
                 />
                 <Button
                   style={{
@@ -202,14 +208,14 @@ class Policy extends React.Component {
                     marginTop: '-20px',
                   }}
                   type="primary"
-                  onClick={this.select}
+                  onClick={this.handleSelect}
                 >
                   搜索
                 </Button>
               </div>
               <div className="policy_table">
                 <Table
-                  rowKey={record => record.index}
+                  rowKey={(record) => record.index}
                   columns={columns}
                   dataSource={data}
                   pagination={pagination}

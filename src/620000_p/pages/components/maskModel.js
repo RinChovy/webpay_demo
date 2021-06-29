@@ -12,7 +12,7 @@ export default class model extends React.Component {
       dataModel: this.props.dataModel,
     });
   }
-  down = () => {
+  handleDown = () => {
     const { dataModel } = this.state;
     const mimeMap = {
       xlsx: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
@@ -42,7 +42,7 @@ export default class model extends React.Component {
   };
   render() {
     const { dataModel } = this.state;
-    const { cencel } = this.props;
+    const { cancel } = this.props;
     return (
       <>
         <div className="maska">
@@ -73,14 +73,14 @@ export default class model extends React.Component {
                 <Button
                   className="modall_button"
                   type="primary"
-                  onClick={this.down}
+                  onClick={this.handleDown}
                 >
                   下载文件
                 </Button>
                 <Button
                   className="modall_button"
                   type="primary"
-                  onClick={cencel}
+                  onClick={cancel}
                 >
                   取消
                 </Button>
