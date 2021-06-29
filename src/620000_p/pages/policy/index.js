@@ -1,7 +1,6 @@
 import React from 'react';
 import { Input, Button, Table, Tag } from 'antd';
 import { searchItemInfo, searchPolicyDocument } from '../../service/services';
-
 import style from '../../public/css/index.css';
 import Model from '../components/model';
 
@@ -25,11 +24,17 @@ class Policy extends React.Component {
       itemName: '',
     }, //查询参数
   };
+
+  componentDidMount() {
+    const { pagination } = this.state;
+    this.tableList(pagination);
+  }
+
   // 列表table点击弹出组件
-  click_table = (value) => {
+  click_table = value => {
     searchPolicyDocument({
       title: value,
-    }).then((res) => {
+    }).then(res => {
       if (res.code === 0) {
         this.setState({
           dataModel: res.data,
@@ -41,19 +46,15 @@ class Policy extends React.Component {
     });
   };
 
-  componentDidMount() {
-    const { pagination } = this.state;
-    this.tableList(pagination);
-  }
   // 页面方法
   tableList = (page, bool) => {
     let { pagination, selectModel } = this.state;
     this.setState({ loading: true });
     searchItemInfo({
-      pageNo: bool == true ? 1 : page.current,
+      pageNo: bool ? 1 : page.current,
       pageSize: 10,
       ...selectModel,
-    }).then((res) => {
+    }).then(res => {
       if (res.code === 0) {
         const listArr = res.data.itemList.map((item, i) => {
           return { ...item, index: i + 1 };
@@ -70,7 +71,7 @@ class Policy extends React.Component {
       }
     });
   };
-  handleTableChange = (pagination) => {
+  handleTableChange = pagination => {
     this.tableList(pagination);
   };
   // 查询方法
@@ -95,6 +96,7 @@ class Policy extends React.Component {
       model: false,
     });
   };
+
   render() {
     const columns = [
       {
@@ -124,7 +126,7 @@ class Policy extends React.Component {
         key: 'docNos',
         align: 'left',
         width: '500px',
-        render: (v) => (
+        render: v => (
           <>
             {v.map((i, k) => (
               <Tag
@@ -176,21 +178,21 @@ class Policy extends React.Component {
                   size="large"
                   style={{ marginLeft: 20, width: 130 }}
                   value={selectModel.itemStdIDCode}
-                  onChange={(e) => this.change('itemStdIDCode', e.target.value)}
+                  onChange={e => this.change('itemStdIDCode', e.target.value)}
                 />
                 <label>项目编码:</label>
                 <Input
                   size="large"
                   style={{ marginLeft: 20, width: 130 }}
                   value={selectModel.itemCode}
-                  onChange={(e) => this.change('itemCode', e.target.value)}
+                  onChange={e => this.change('itemCode', e.target.value)}
                 />
                 <label>项目名称:</label>
                 <Input
                   size="large"
                   style={{ marginLeft: 20, width: 130 }}
                   value={selectModel.itemName}
-                  onChange={(e) => this.change('itemName', e.target.value)}
+                  onChange={e => this.change('itemName', e.target.value)}
                 />
                 <Button
                   style={{
@@ -207,7 +209,7 @@ class Policy extends React.Component {
               </div>
               <div className="policy_table">
                 <Table
-                  rowKey={(record) => record.index}
+                  rowKey={record => record.index}
                   columns={columns}
                   dataSource={data}
                   pagination={pagination}
