@@ -1,5 +1,6 @@
 import React from 'react';
 import pdf from '../../public/jk.pdf';
+import style from '../../public/css/index.css';
 
 class Home extends React.Component {
   state = {
