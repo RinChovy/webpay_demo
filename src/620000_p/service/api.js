@@ -1,6 +1,6 @@
 import base from 'utils/baseURL';
 
-const callback = 'https://www.gstyggzf.gov.cn/success'; //传给后台的回调地址
+const callback = 'https://www.gstyggzf.gov.cn/620000/success'; //传给后台的回调地址
 
 const region = '620000'; //区划号
 
@@ -21,6 +21,7 @@ const api = {
   searchItemInfo: base + '/620000/searchItemInfo.do', //获取政策查询依据接口
   searchPolicyDocument: base + '/620000/searchPolicyDocument.do', //查询政策文件
   downLoadPolicyDocument: base + '/620000/downLoadPolicyDocument.do', //下载政策文件
+  queryEinvoiceUrl: base + '/common/queryEinvoiceUrl', //直接查电子票地址
 };
 
 export { api };

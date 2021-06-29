@@ -60,6 +60,17 @@ export async function searchPolicyDocument(params) {
     data: stringify(params),
   });
 }
+//直接查电子票地址
+export async function queryEinvoiceUrl(params) {
+  return xFetch(api.queryEinvoiceUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      regionCode: api.region,
+    },
+    data: stringify(params),
+  });
+}
 //下载政策文件
 export async function downLoadPolicyDocument(params) {
   return request(api.downLoadPolicyDocument, {

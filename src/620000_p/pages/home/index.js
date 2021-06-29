@@ -34,6 +34,12 @@ class Home extends React.Component {
       pathname: '/index_pay',
     });
   };
+  NTpayEn = () => {
+    this.props.history.push({
+      pathname: '/index_payEn',
+    });
+  };
+
   // 票据查询
   evURL = () => {
     window.location.href = this.state.url;
@@ -132,7 +138,7 @@ class Home extends React.Component {
                     )}
                     {leftOrRight === 'right' && (
                       <div className="box_wai">
-                        <div className="box" onClick={this.NTpay}>
+                        <div className="box" onClick={this.NTpayEn}>
                           <img
                             src={require('../../public/images/xizang/caizheng.png')}
                           />
