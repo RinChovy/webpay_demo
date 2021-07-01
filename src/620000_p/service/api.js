@@ -24,4 +24,4 @@ const api = {
   queryEinvoiceUrl: base + '/common/queryEinvoiceUrl', //直接查电子票地址
 };
 
-export { api };
+export { api, base };
