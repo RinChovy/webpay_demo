@@ -1,7 +1,8 @@
 import xFetch from '../../utils/xFetch';
 import request from '../../utils/requestStream';
+import { encrypt } from 'utils/utils';
 import { stringify } from 'qs';
-import { api } from './api.js';
+import { api, base } from './api.js';
 
 // home request
 export async function queryHomelist(params) {
@@ -16,13 +17,13 @@ export async function queryHomelist(params) {
 
 // 非税缴费提交
 export async function queryPayInfo(params) {
-  return xFetch(api.queryPayInfo, {
+  return xFetch(base + '/620000/queryPayInfo.do', {
     credentials: 'include',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       regionCode: api.region,
     },
-    data: stringify(params),
+    data: stringify({ key: encrypt(JSON.stringify(params)) }),
   });
 }
 
@@ -46,7 +47,7 @@ export async function searchItemInfo(params) {
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       regionCode: api.region,
     },
-    data: stringify(params),
+    data: stringify({ key: encrypt(JSON.stringify(params)) }),
   });
 }
 //查询政策文件
@@ -57,7 +58,7 @@ export async function searchPolicyDocument(params) {
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       regionCode: api.region,
     },
-    data: stringify(params),
+    data: stringify({ key: encrypt(JSON.stringify(params)) }),
   });
 }
 //直接查电子票地址
