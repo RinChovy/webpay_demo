@@ -1,6 +1,10 @@
 import React from 'react';
 import pdf from '../../public/jk.pdf';
 import style from '../../public/css/index.css';
+import icon_feishui from '../../public/images/xizang/feishui.png';
+import icon_jiaoyu from '../../public/images/xizang/jiaoyu.png';
+import icon_caizheng from '../../public/images/xizang/caizheng.png';
+import icon_zhengce from '../../public/images/xizang/zhengce.png';
 
 class Home extends React.Component {
   state = {
@@ -119,17 +123,13 @@ class Home extends React.Component {
                     {leftOrRight === 'left' && (
                       <div className="box_wai">
                         <div className="box" onClick={this.NTpay}>
-                          <img
-                            src={require('../../public/images/xizang/feishui.png')}
-                          />
+                          <img src={icon_feishui} />
                           <div {...marginTop}>
                             <span>非税缴款</span>
                           </div>
                         </div>
                         <div className="box" onClick={this.NTpay}>
-                          <img
-                            src={require('../../public/images/xizang/jiaoyu.png')}
-                          />
+                          <img src={icon_jiaoyu} />
                           <div {...marginTop}>
                             <span>教育收费</span>
                           </div>
@@ -139,17 +139,13 @@ class Home extends React.Component {
                     {leftOrRight === 'right' && (
                       <div className="box_wai">
                         <div className="box" onClick={this.NTpayEn}>
-                          <img
-                            src={require('../../public/images/xizang/caizheng.png')}
-                          />
+                          <img src={icon_caizheng} />
                           <div {...marginTop}>
                             <span>票据查询打印</span>
                           </div>
                         </div>
                         <div className="box" onClick={this.policy}>
-                          <img
-                            src={require('../../public/images/xizang/zhengce.png')}
-                          />
+                          <img src={icon_zhengce} />
                           <div {...marginTop}>
                             <span>政策依据查询</span>
                           </div>

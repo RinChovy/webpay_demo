@@ -2,6 +2,7 @@ import React from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
 import { api } from '../../service/api.js';
 import { Arabia_to_Chinese as money, guid } from 'utils/utils';
+import ReactToPrint from 'react-to-print';
 
 class NonTaxPayChange extends React.Component {
   state = {
@@ -20,6 +21,7 @@ class NonTaxPayChange extends React.Component {
     queryItem: [], //项目信息
     status: '', //缴款状态
     einvoice_url: '', //电子票查验地址
+    refDayin: '', //打印内容
   };
   // 填制日期格式化
   time = (date) => {
@@ -171,7 +173,21 @@ class NonTaxPayChange extends React.Component {
                   <span className="topSpan_pay">非税缴款</span>
                 </div>
                 <div className="middle_pay">
-                  <div className="middle_payInfo">
+                  <ReactToPrint
+                    trigger={() => (
+                      <img
+                        className="icon_dayin"
+                        src={require('../../public/images/dayin.png')}
+                        title="点击打印"
+                      />
+                    )}
+                    content={() => this.state.refDayin}
+                  />
+
+                  <div
+                    className="middle_payInfo"
+                    ref={(el) => (this.state.refDayin = el)}
+                  >
                     {statusOk}
                     <p className="title_t">
                       <b>甘肃省政府非税收入电子缴款通知书</b>

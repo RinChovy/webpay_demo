@@ -64,8 +64,14 @@ textarea {
   font-weight: bold;
 }
 .middle_pay {
+  position: relative;
   width: 92%;
   margin: 0 auto;
+}
+.icon_dayin {
+  width: 50px;
+  position: absolute;
+  right: 0;
 }
 .middle_pay_left {
   display: inline-block;

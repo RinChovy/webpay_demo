@@ -13,7 +13,16 @@ export async function queryPayInfo(params) {
     data: stringify(params),
   });
 }
-
+// 直接查电子票
+export async function queryEinvoiceUrl(params) {
+  return xFetch(Api.queryEinvoiceUrl, {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      regionCode: Api.region,
+    },
+    data: stringify(params),
+  });
+}
 // 成功回调接口
 export async function success(params) {
   return xFetch(Api.success, {

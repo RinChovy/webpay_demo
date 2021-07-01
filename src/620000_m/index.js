@@ -9,6 +9,7 @@ import Home from './pages/home/index.vue';
 import Acityservice from './pages/acityservice/index.vue';
 import Phone_index from './pages/home/index.vue';
 import Index_pay from './pages/index_pay/index.vue';
+import Index_payEn from './pages/index_payEn/index.vue';
 import Index_charge from './pages/Index_charge/index.vue';
 import Success from './pages/success/index.vue';
 import Success_wx from './pages/success_wx/index.vue';
@@ -48,7 +49,11 @@ const routes = [
     name: 'index_pay',
     component: Index_pay,
   },
-
+  {
+    path: '/index_payEn', //非税缴款界面
+    name: 'index_payEn',
+    component: Index_payEn,
+  },
   {
     path: '/index_pay.do', //非税缴款界面
     name: 'index_pay.do',
@@ -113,5 +118,5 @@ const router = new VueRouter({
 
 new Vue({
   router,
-  render: h => h(App),
+  render: (h) => h(App),
 }).$mount('#app');

@@ -14,9 +14,9 @@
           </div>
           <div class="box" @click="policy">
             <img src="../../public/images/icon/qupiao.png" alt="" />
-            <div><span>政策依旧查询</span></div>
+            <div><span>政策依据查询</span></div>
           </div>
-          <div class="box" @click="indexPay">
+          <div class="box" @click="indexPayEn">
             <img src="../../public/images/icon/ping.png" alt="" />
             <div><span>票据查询打印</span></div>
           </div>
@@ -65,6 +65,11 @@ export default {
     policy() {
       this.$router.push({
         path: '/policy',
+      })
+    },
+    indexPayEn() {
+      this.$router.push({
+        path: '/index_payEn',
       })
     },
   },
