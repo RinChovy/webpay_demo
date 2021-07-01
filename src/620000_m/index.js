@@ -107,11 +107,11 @@ const routes = [
 ];
 const router = new VueRouter({
   mode: 'history',
-  // base: '/620000',
+  base: '/620000',
   routes,
 });
 
 new Vue({
   router,
-  render: (h) => h(App),
+  render: h => h(App),
 }).$mount('#app');
