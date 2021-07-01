@@ -36,7 +36,7 @@ class NonTaxPay extends React.Component {
     });
   };
   //提交成功
-  handleFormSubmit = (values) => {
+  handleFormSubmit = values => {
     //防止重复点击
     const { loadings, uuid } = this.state;
     this.setState(({ loadings }) => {
@@ -50,12 +50,12 @@ class NonTaxPay extends React.Component {
       payCode: values.payCode,
       payPeople: values.payName,
       code: values.verificationCode,
-    }).then((res) => {
+    }).then(res => {
       res.code === 0 ? this.handleSuccess(res.data) : this.handleError(res.msg);
     });
   };
   // 提交成功
-  handleSuccess = (data) => {
+  handleSuccess = data => {
     localStorage.setItem('data', JSON.stringify(data));
     this.props.history.push({
       pathname: '/index_charge',
@@ -63,7 +63,7 @@ class NonTaxPay extends React.Component {
     });
   };
   // 提交失败1
-  handleError = (err) => {
+  handleError = err => {
     localStorage.removeItem('data');
     this.openNotificationWithIcon('error', err);
     //防止重复点击解开按钮限制
@@ -76,7 +76,7 @@ class NonTaxPay extends React.Component {
     });
   };
   //提交失败
-  onFinishFailed = (values) => {
+  onFinishFailed = values => {
     console.log('fail:', values);
   };
   render() {

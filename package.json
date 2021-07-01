@@ -22,6 +22,7 @@
     "clipboard-copy": "^3.1.0",
     "connect-history-api-fallback": "^1.6.0",
     "console-polyfill": "^0.3.0",
+    "crypto-js": "^4.0.0",
     "es5-shim": "^4.5.15",
     "iconv-lite": "^0.6.2",
     "iscroll": "^5.2.0",

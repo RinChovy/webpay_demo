@@ -1,6 +1,8 @@
+import CryptoJS from 'crypto-js';
+
 const guid = () => {
-  let chars = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
-  let res = "";
+  let chars = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+  let res = '';
   for (var i = 0; i < 3; i++) {
     let id = Math.ceil(Math.random() * 9);
     res += chars[id];
@@ -13,24 +15,24 @@ const guid = () => {
   let mm = now.getMinutes(); //分
   let ss = now.getSeconds(); //秒
   let hm = now.getMilliseconds(); //毫秒
-  let clock = year + "";
-  if (month < 10) clock += "0";
-  clock += month + "";
-  if (day < 10) clock += "0";
-  clock += day + "";
-  if (hh < 10) clock += "0";
-  clock += hh + "";
-  if (mm < 10) clock += "0";
-  clock += mm + "";
-  if (ss < 10) clock += "0";
-  clock += ss + "";
+  let clock = year + '';
+  if (month < 10) clock += '0';
+  clock += month + '';
+  if (day < 10) clock += '0';
+  clock += day + '';
+  if (hh < 10) clock += '0';
+  clock += hh + '';
+  if (mm < 10) clock += '0';
+  clock += mm + '';
+  if (ss < 10) clock += '0';
+  clock += ss + '';
 
   if (hm < 10) {
-    clock += "00";
+    clock += '00';
   } else if (hm < 100) {
-    clock += "0";
+    clock += '0';
   }
-  clock += hm + "";
+  clock += hm + '';
   return clock + res;
 };
 
@@ -40,35 +42,35 @@ const urlredirect = () => {
   if (
     ua.match(/(ipod|iphone os|midp|ucweb|android|windows ce|windows mobile)/i)
   ) {
-    window.location.href = thisUrl.replace("_p", "_m");
+    window.location.href = thisUrl.replace('_p', '_m');
   }
-  window.location.href = thisUrl.replace("_m", "_p");
+  window.location.href = thisUrl.replace('_m', '_p');
 };
 
-const Arabia_to_Chinese = (money) => {
+const Arabia_to_Chinese = money => {
   //汉字的数字
   var cnNums = new Array(
-    "零",
-    "壹",
-    "贰",
-    "叁",
-    "肆",
-    "伍",
-    "陆",
-    "柒",
-    "捌",
-    "玖"
+    '零',
+    '壹',
+    '贰',
+    '叁',
+    '肆',
+    '伍',
+    '陆',
+    '柒',
+    '捌',
+    '玖'
   );
   //基本单位
-  var cnIntRadice = new Array("", "拾", "佰", "仟");
+  var cnIntRadice = new Array('', '拾', '佰', '仟');
   //对应整数部分扩展单位
-  var cnIntUnits = new Array("", "万", "亿", "兆");
+  var cnIntUnits = new Array('', '万', '亿', '兆');
   //对应小数部分单位
-  var cnDecUnits = new Array("角", "分", "毫", "厘");
+  var cnDecUnits = new Array('角', '分', '毫', '厘');
   //整数金额时后面跟的字符
-  var cnInteger = "整";
+  var cnInteger = '整';
   //整型完以后的单位
-  var cnIntLast = "元";
+  var cnIntLast = '元';
   //最大处理的数字
   var maxNum = 999999999999999.9999;
   //金额整数部分
@@ -76,16 +78,16 @@ const Arabia_to_Chinese = (money) => {
   //金额小数部分
   var decimalNum;
   //输出的中文金额字符串
-  var chineseStr = "";
+  var chineseStr = '';
   //分离金额后用的数组，预定义
   var parts;
-  if (money == "") {
-    return "";
+  if (money == '') {
+    return '';
   }
   money = parseFloat(money);
   if (money >= maxNum) {
     //超出最大处理数字
-    return "";
+    return '';
   }
   if (money == 0) {
     chineseStr = cnNums[0] + cnIntLast + cnInteger;
@@ -93,11 +95,11 @@ const Arabia_to_Chinese = (money) => {
   }
   //转换为字符串
   money = money.toString();
-  if (money.indexOf(".") == -1) {
+  if (money.indexOf('.') == -1) {
     integerNum = money;
-    decimalNum = "";
+    decimalNum = '';
   } else {
-    parts = money.split(".");
+    parts = money.split('.');
     integerNum = parts[0];
     decimalNum = parts[1].substr(0, 4);
   }
@@ -110,7 +112,7 @@ const Arabia_to_Chinese = (money) => {
       var p = IntLen - i - 1;
       var q = p / 4;
       var m = p % 4;
-      if (n == "0") {
+      if (n == '0') {
         zeroCount++;
       } else {
         if (zeroCount > 0) {
@@ -127,21 +129,46 @@ const Arabia_to_Chinese = (money) => {
     chineseStr += cnIntLast;
   }
   //小数部分
-  if (decimalNum != "") {
+  if (decimalNum != '') {
     var decLen = decimalNum.length;
     for (var i = 0; i < decLen; i++) {
       var n = decimalNum.substr(i, 1);
-      if (n != "0") {
+      if (n != '0') {
         chineseStr += cnNums[Number(n)] + cnDecUnits[i];
       }
     }
   }
-  if (chineseStr == "") {
+  if (chineseStr == '') {
     chineseStr += cnNums[0] + cnIntLast + cnInteger;
-  } else if (decimalNum == "") {
+  } else if (decimalNum == '') {
     chineseStr += cnInteger;
   }
   return chineseStr;
 };
 
-export { Arabia_to_Chinese, guid, urlredirect };
+/**
+ * 前后端加密
+ * 秘钥 key, iv 16位需保持一致
+ */
+
+const key = CryptoJS.enc.Utf8.parse('Itsniceofyou_Key');
+const iv = CryptoJS.enc.Utf8.parse('Itsniceofyou_KTV');
+// 加密
+const encrypt = pass => {
+  const password = CryptoJS.enc.Utf8.parse(pass);
+  return CryptoJS.AES.encrypt(password, key, {
+    mode: CryptoJS.mode.CBC,
+    iv: iv,
+    padding: CryptoJS.pad.Pkcs7,
+  }).toString();
+};
+// 解密
+const decrypt = pass => {
+  return CryptoJS.AES.decrypt(pass, key, {
+    mode: CryptoJS.mode.CBC,
+    iv: iv,
+    padding: CryptoJS.pad.Pkcs7,
+  }).toString(CryptoJS.enc.Utf8);
+};
+
+export { Arabia_to_Chinese, guid, urlredirect, encrypt, decrypt };
