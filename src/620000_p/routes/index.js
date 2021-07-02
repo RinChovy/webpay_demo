@@ -11,7 +11,7 @@ const PayEn = lazy(() => import('../pages/index_payEn/index.js'));
 
 function App() {
   return (
-    <Router basename="620000">
+    <Router basename="/">
       <Suspense fallback={<div>Loading...</div>}>
         <Switch>
           <Route path="/" exact={true} component={Home} />

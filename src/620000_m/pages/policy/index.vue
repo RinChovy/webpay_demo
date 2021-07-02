@@ -188,13 +188,14 @@ export default {
     color: #4690ff;
   }
   button {
-    width: 55px;
+    width: 60px !important;
     color: white;
-    border-radius: 25px;
+    border-radius: 30px;
     border: 1px solid #4690ff;
     background-color: #4690ff;
     position: absolute;
     right: 10px;
+    font-size: 14px;
   }
 }
 .form_input_warn {

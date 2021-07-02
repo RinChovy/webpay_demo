@@ -172,13 +172,18 @@ export default {
         if (res.active == true || res.active == 'true') {
           if (!that.miniProgramMark) {
             return
+          } else {
+            that.miniProgramMark = fal
+
+            se
+            // 查询订单支付状态
+            that.$router.push({
+              path: '/success_wx',
+              name: 'success_wx',
+              query: { merchant_order_no: order_no },
+            })
           }
-          // 查询订单支付状态
-          that.$router.push({
-            path: '/success_wx',
-            name: 'success_wx',
-            query: { merchant_order_no: order_no },
-          })
+
           // window.location.href = '<%=path%>/query/queryRealTime.do?' + 'merchant_order_no=' + order_no
         }
         console.log(res)

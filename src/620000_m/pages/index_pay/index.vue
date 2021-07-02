@@ -51,6 +51,7 @@
 import { Button, Row, Col, Search, Dialog } from 'vant'
 import API from '../../config/api.js'
 import { queryPayInfo, getOpenid, getOpenPlatformUserid } from '../../config/services.js'
+
 export default {
   name: 'index_pay',
   components: {
@@ -83,13 +84,15 @@ export default {
     }
   },
   mounted() {
-    if (navigator.userAgent.toLowerCase().indexOf('micromessenger') != -1) {
+    let url = location.href.split('#')[0]
+    let state = this.GetQueryValue('state')
+    if (navigator.userAgent.toLowerCase().includes('micromessenger')) {
       // 否则就是在微信中 引入微信js
       // document.writeln('<script src="https://res.wx.qq.com/open/js/jweixin-1.3.2.js"' + '>' + '<' + '/' + 'script>');
       // util.loadScript("https://res.wx.qq.com/open/js/jweixin-1.3.2.js");
       //  处理微信小程序内 webview 页面监听状态的方法
       let openid = localStorage.getItem('openid')
-      if (url.indexOf('openId=') != -1) {
+      if (url.includes('openId=')) {
         const rsa = url.substring(url.indexOf('openId=') + 7)
         console.log('rsa为' + rsa)
         const openId = rsa
@@ -116,8 +119,6 @@ export default {
           }
         })
       } else {
-        var url = location.href.split('#')[0]
-        let state = this.GetQueryValue('state')
         console.log('url' + url)
         console.log('start' + state)
         if (typeof state != 'undefined' && '' != typeof state) {

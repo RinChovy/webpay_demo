@@ -1,6 +1,6 @@
 import baseapi from 'utils/baseURL';
 
-const callback = 'https://www.gstyggzf.gov.cn/620000/success'; //传给后台的回调地址
+const callback = 'https://www.gstyggzf.gov.cn/success'; //传给后台的回调地址
 const region = '620000'; //区划号
 const regular = /^62\d{18}$/; //非税缴款正则表达式
 const regularText = '缴款码必须等于20位且62开头'; //非税缴款正则表达式提示信息
@@ -19,7 +19,7 @@ export default {
   // 验证码
   code: `${baseapi}/common/getCo`,
   // 提交缴款书
-  queryPayInfo: `${baseapi}/common/queryPayInfo.do`,
+  queryPayInfo: `${baseapi}/620000/queryPayInfo.do`,
   // 缴费接口
   createCharge: `${baseapi}/common/createCharge`,
   //成功回调接口
@@ -31,7 +31,7 @@ export default {
   //下载政策文件
   downLoadPolicyDocument: `${baseapi}/620000/downLoadPolicyDocument.do`,
   //直接查电子票地址
-  queryEinvoiceUrl: `${baseapi}/common/queryEinvoiceUrl.do`,
+  queryEinvoiceUrl: `${baseapi}/620000/queryEinvoiceUrl`,
 
   /////////////////////////以下是城市服务////////////////////////
   //支付宝接口1

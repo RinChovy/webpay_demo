@@ -21,10 +21,10 @@ import Policy_detail from './pages/policy_detail/index.vue';
 import Error404 from './pages/error404.vue';
 
 //////////////小程序日志插件/////////////////////////////
-// import VConsole from 'vconsole';
+import VConsole from 'vconsole';
 
 // if (process.env.NODE_ENV === 'production') {
-// new VConsole();
+new VConsole();
 // }
 //////////////小程序日志插件/////////////////////////////
 window.enableDev = true;
@@ -112,7 +112,7 @@ const routes = [
 ];
 const router = new VueRouter({
   mode: 'history',
-  base: '/620000',
+  // base: '/620000',
   routes,
 });
 

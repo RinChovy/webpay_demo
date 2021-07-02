@@ -1,5 +1,6 @@
 import xFetch from '../../utils/xFetch';
 import request from '../../utils/requestStream';
+import { encrypt } from 'utils/utils';
 import { stringify } from 'qs';
 import Api from './api.js';
 
@@ -10,7 +11,7 @@ export async function queryPayInfo(params) {
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       regionCode: Api.region,
     },
-    data: stringify(params),
+    data: stringify({ key: encrypt(JSON.stringify(params)) }),
   });
 }
 // 直接查电子票
@@ -20,7 +21,7 @@ export async function queryEinvoiceUrl(params) {
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       regionCode: Api.region,
     },
-    data: stringify(params),
+    data: stringify({ key: encrypt(JSON.stringify(params)) }),
   });
 }
 // 成功回调接口
@@ -40,7 +41,7 @@ export async function searchItemInfo(params) {
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       regionCode: Api.region,
     },
-    data: stringify(params),
+    data: stringify({ key: encrypt(JSON.stringify(params)) }),
   });
 }
 // 查询政策文件
@@ -50,7 +51,7 @@ export async function searchPolicyDocument(params) {
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       regionCode: Api.region,
     },
-    data: stringify(params),
+    data: stringify({ key: encrypt(JSON.stringify(params)) }),
   });
 }
 // 下载政策文件

@@ -13,30 +13,53 @@
 </template>
 
 <script>
-import { Button, Row, Col, Search } from "vant";
+import { Button, Row, Col, Search } from 'vant'
 export default {
-  name: "success",
+  name: 'success',
   components: {
-    "van-row": Row,
-    "van-col": Col,
-    "van-button": Button,
-    "van-search": Search,
+    'van-row': Row,
+    'van-col': Col,
+    'van-button': Button,
+    'van-search': Search,
   },
   data() {
     return {
-      value: "value",
-      good: "value",
-      bottom_span: "主办单位：鹤岗市财政局",
-    };
+      value: 'value',
+      good: 'value',
+      bottom_span: '主办单位：鹤岗市财政局',
+    }
   },
   methods: {
     home() {
-      this.$router.push({
-        path: "/home",
-      });
+      const ua = window.navigator.userAgent.toLowerCase()
+      //通过正则表达式匹配ua中是否含有MicroMessenger字符串
+      if (ua.indexOf('alipay') != -1) {
+        my.getEnv(function (res) {
+          console.log(res.miniprogram) //true
+          if (res.miniprogram) {
+            my.switchTab({
+              url: '/pages/index/index',
+            })
+          }
+        })
+      } else if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+        wx.miniProgram.getEnv(function (res) {
+          if (res.miniprogram) {
+            wx.miniProgram.reLaunch({url: '/pages/index/index'})
+          } else {
+            this.$router.push({
+              path: '/home',
+            })
+          }
+        })
+      } else {
+        this.$router.push({
+          path: '/home',
+        })
+      }
     },
   },
-};
+}
 </script>
 
 <style scoped lang="scss">

@@ -13,7 +13,7 @@
       <span>年度:{{ year }}</span>
     </div>
   </div>
-  <div class="button">
+  <div class="button" v-if="!alipay">
     <button @click="down">点击下载</button>
   </div>
 </template>
@@ -32,6 +32,7 @@ export default {
       issDate: '',
       year: '',
       file: '',
+      alipay: false, //判断是否支付宝
     }
   },
   //加载前生命周期
@@ -44,6 +45,15 @@ export default {
     this.year = policyData.year
     this.issDate = policyData.issDate
     this.file = policyData.file
+    //判断支付宝是否
+    const ua = window.navigator.userAgent.toLowerCase()
+    if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+      this.alipay = true
+    } else if (ua.match(/Alipay/i) == 'alipay') {
+      this.alipay = true
+    } else {
+      this.alipay = false
+    }
   },
   methods: {
     // 刷新页面方法

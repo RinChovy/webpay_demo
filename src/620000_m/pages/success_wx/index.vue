@@ -1,16 +1,16 @@
 <template>
   <div class="mainwrap">
     <div class="div_img">
-      <img src="../../public/images/phone/success.png" alt="" />
+      <img v-if="yesOrNo == true" src="../../public/images/phone/success.png" alt="" />
       <div style="margin-top: 10px">
-        <span>缴款成功</span>
+        <span v-if="yesOrNo == true">缴款成功</span>
       </div>
     </div>
     <div class="div_button" v-if="url != null">
-      <button @click="einvoice_url">查看电子票</button>
+      <button @click="einvoice_url" v-if="yesOrNo == true">查看电子票</button>
     </div>
     <div class="div_button" else>
-      <button @click="home">返回首页</button>
+      <button @click="home" v-if="yesOrNo == true">返回首页</button>
     </div>
   </div>
 </template>
@@ -32,6 +32,7 @@ export default {
       merchant_order_no: '',
       spanPay: '缴款成功',
       url: '', //电子票地址
+      yesOrNo: false,
     }
   },
   //加载生命周期
@@ -41,8 +42,9 @@ export default {
       merchant_order_no: order_no,
     }).then((res) => {
       if (res.code === 0) {
-        console.log(res)
-        ;(this.url = res.data.einvoice_url), (this.merchant_order_no = res.data.merchant_order_no)
+        this.url = res.data.einvoice_url
+        this.merchant_order_no = res.data.merchant_order_no
+        this.yesOrNo = true
       } else {
         this.$router.push({
           path: '/fail',
@@ -74,8 +76,10 @@ export default {
       } else if (ua.match(/MicroMessenger/i) == 'micromessenger') {
         wx.miniProgram.getEnv(function (res) {
           if (res.miniprogram) {
-            wx.miniProgram.switchTab({
-              url: '/pages/index/index',
+            wx.miniProgram.reLaunch({ url: '/pages/index/index' })
+          } else {
+            this.$router.push({
+              path: '/home',
             })
           }
         })
