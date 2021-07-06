@@ -71,7 +71,7 @@
         <button @click="submit">确认支付</button>
       </div>
       <div class="button_box" v-else-if="einvoice_url != null">
-        <button @click="einvoiceUrl">电子票地址</button>
+        <button @click="einvoiceUrl" v-if="einvoice_or == true">电子票地址</button>
       </div>
       <div class="button_box" v-else>
         <button @click="fanhui">返回</button>
@@ -124,6 +124,8 @@ export default {
       status: '',
       //电子票地址
       einvoice_url: '',
+      //判断电子票浏览器
+      einvoice_or: true,
       // 商户订单号
       order_no: guid(),
       //??
@@ -142,6 +144,8 @@ export default {
     if (ua.match(/MicroMessenger/i) == 'micromessenger') {
       wx.miniProgram.getEnv(function (res) {
         if (res.miniprogram) {
+          console.log('不走电子票，小程序中')
+          that.einvoice_or = false
           if (document.addEventListener) {
             document.addEventListener('WeixinJSBridgeReady', that.sendMessage(), false)
           } else if (document.attachEvent) {
@@ -173,9 +177,7 @@ export default {
           if (!that.miniProgramMark) {
             return
           } else {
-            that.miniProgramMark = fal
-
-            se
+            that.miniProgramMark = false
             // 查询订单支付状态
             that.$router.push({
               path: '/success_wx',
@@ -269,8 +271,8 @@ export default {
                   paycode: that.payCode,
                 }, //控件参数，常用来传递缴款服务所需定义的内容，如，非税paycode直缴或传入相关缴费信息生成缴款书
                 charge_url: API.createCharge, //商户服务端创建charge时的controller地址
+                payCode: that.payCode,
                 charge_param: {
-                  payCode: that.payCode,
                   paymentName: that.payer,
                   regionCode: API.region,
                   frontCallBackUrl: API.callback,
