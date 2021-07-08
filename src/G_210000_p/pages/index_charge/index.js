@@ -1,6 +1,7 @@
 import React from 'react';
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button, notification } from 'antd';
 import { api } from '../../service/api.js';
+import { createCashier } from '../../service/services';
 import { Arabia_to_Chinese as money, guid } from 'utils/utils';
 
 class NonTaxPayChange extends React.Component {
@@ -36,44 +37,94 @@ class NonTaxPayChange extends React.Component {
   einvoiceUrl = () => {
     window.location.href = this.state.einvoice_url;
   };
+  //收银台逻辑
+  goCashier = () => {
+    let that = this;
+    const query = JSON.parse(localStorage.getItem('data'));
+    const queryJson = query.payBook;
+    //收银台参数定义
+    const widget_param = {
+      paycode: queryJson.payCode,
+      paymentName: queryJson.payer,
+    };
+    const merchant_order_no = guid();
+    const widget_content = {
+      merchant_no: query.merchant_no,
+      merchant_order_no: merchant_order_no,
+      amount: queryJson.totalAmount,
+      effective_time: '1c',
+      version_no: '1.1',
+      subject: 'subject',
+      body: 'body',
+      device_type: 'pc',
+      widget_param: widget_param,
+    };
+    const charge_param = {
+      payCode: queryJson.payCode,
+      paymentName: queryJson.payer,
+    };
+    createCashier({
+      charge_param: JSON.stringify(charge_param),
+      widget_content: JSON.stringify(widget_content),
+      frontCallBackUrl: api.callback,
+      merchantOrderNo: merchant_order_no,
+    }).then((res) => {
+      res.code === 0 ? that.showCashier(res.msg) : that.handleError(res.msg);
+    });
+  };
+  showCashier = (pageParams) => {
+    document.write(pageParams);
+  };
+  handleError = (err) => {
+    localStorage.removeItem('data');
+    this.openNotificationWithIcon('error', err);
+    //防止重复点击解开按钮限制
+  };
+  // 提示信息方法
+  openNotificationWithIcon = (type, msg) => {
+    notification[type]({
+      message: '查询错误',
+      description: msg,
+    });
+  };
   componentDidMount() {
-    // const query = JSON.parse(localStorage.getItem('data'));
-    // console.log(query);
-    // const queryJson = query.payBook;
-    // const queryItem = JSON.parse(query.itemDetails);
-    // let status = query.status; //缴款状态
-    // let exeAgencyCode = queryJson.exeAgencyCode; //执收单位编码
-    // let exeAgencyName = queryJson.exeAgencyName; //执收单位名称
-    // let payCode = queryJson.payCode; //缴款码
-    // let payerName = queryJson.payer; //付款人全称
-    // let recName = queryJson.recAcctName; //收款人全称
-    // let payerAcct = queryJson.payAcct; //付款人账号
-    // let recAcct = queryJson.recAcct; //收款人账号
-    // let payerOpBk = queryJson.payAcctBank; //付款人开户银行
-    // let recOpBk = queryJson.recAcctBank; //收款人开户银行
-    // let amt = parseFloat(queryJson.totalAmount / 100).toFixed(2); //金额小写
-    // let amtZ = money(amt); //金额大写
-    // let billDate = this.time(queryJson.fillDate); //填制日期
-    // let einvoice_url = query.einvoice_url; //电子票地址
-    // console.log(query.einvoice_url);
-    // this.setState({
-    //   billDate: billDate,
-    //   exeAgencyCode: exeAgencyCode,
-    //   exeAgencyName: exeAgencyName,
-    //   payCode: payCode,
-    //   payerName: payerName,
-    //   recName: recName,
-    //   payerAcct: payerAcct,
-    //   recAcct: recAcct,
-    //   payerOpBk: payerOpBk,
-    //   recOpBk: recOpBk,
-    //   amt: amt,
-    //   amtZ: amtZ,
-    //   queryItem: queryItem,
-    //   billDate: billDate,
-    //   status: status,
-    //   einvoice_url: einvoice_url,
-    // });
+    const query = JSON.parse(localStorage.getItem('data'));
+    console.log(query);
+    const queryJson = query.payBook;
+    const queryItem = JSON.parse(query.itemDetails);
+    let status = query.status; //缴款状态
+    let exeAgencyCode = queryJson.exeAgencyCode; //执收单位编码
+    let exeAgencyName = queryJson.exeAgencyName; //执收单位名称
+    let payCode = queryJson.payCode; //缴款码
+    let payerName = queryJson.payer; //付款人全称
+    let recName = queryJson.recAcctName; //收款人全称
+    let payerAcct = queryJson.payAcct; //付款人账号
+    let recAcct = queryJson.recAcct; //收款人账号
+    let payerOpBk = queryJson.payAcctBank; //付款人开户银行
+    let recOpBk = queryJson.recAcctBank; //收款人开户银行
+    let amt = parseFloat(queryJson.totalAmount / 100).toFixed(2); //金额小写
+    let amtZ = money(amt); //金额大写
+    let billDate = this.time(queryJson.fillDate); //填制日期
+    let einvoice_url = query.einvoice_url; //电子票地址
+    console.log(query.einvoice_url);
+    this.setState({
+      billDate: billDate,
+      exeAgencyCode: exeAgencyCode,
+      exeAgencyName: exeAgencyName,
+      payCode: payCode,
+      payerName: payerName,
+      recName: recName,
+      payerAcct: payerAcct,
+      recAcct: recAcct,
+      payerOpBk: payerOpBk,
+      recOpBk: recOpBk,
+      amt: amt,
+      amtZ: amtZ,
+      queryItem: queryItem,
+      billDate: billDate,
+      status: status,
+      einvoice_url: einvoice_url,
+    });
   }
   // 页面销毁生命周期
   componentWillUnmount() {

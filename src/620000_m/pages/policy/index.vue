@@ -62,13 +62,30 @@ export default {
       currentPage: '1',
       //总页数
       page_count: '',
+      //session
+      sessionPage: '',
+      sessionItemName: '',
     }
   },
   //加载前生命周期
   beforeCreate() {},
   //初始生命周期
   created() {
-    this.tableList()
+    //下一页返回记录页码和搜索框
+    let sessionItemName = localStorage.getItem('sessionItemName')
+    let sessionPage = localStorage.getItem('sessionPage')
+    sessionItemName ? ((this.selectModel.itemName = sessionItemName), (this.sessionItemName = sessionItemName)) : null
+    sessionPage ? (this.tableList(sessionPage), (this.sessionPage = sessionPage)) : this.tableList()
+    localStorage.removeItem('sessionPage')
+    localStorage.removeItem('sessionItemName')
+  },
+  //销毁前
+  beforeDestroy() {
+    //下一页返回记录页码和搜索框但是刷新不返回
+    localStorage.removeItem('sessionPage')
+    localStorage.removeItem('sessionItemName')
+    localStorage.setItem('sessionPage', this.sessionPage)
+    localStorage.setItem('sessionItemName', this.sessionItemName)
   },
   methods: {
     // 刷新页面方法
@@ -100,9 +117,11 @@ export default {
     },
     change(e) {
       this.tableList(e)
+      this.sessionPage = e
     },
     select() {
       this.tableList()
+      this.sessionItemName = this.selectModel.itemName
     },
     look(value) {
       let that = this

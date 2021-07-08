@@ -1,6 +1,7 @@
 import React from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
 import { api } from '../../service/api.js';
+import { createCashier } from '../../service/services';
 import { Arabia_to_Chinese as money, guid } from 'utils/utils';
 
 // let tt = null;
@@ -41,6 +42,7 @@ class NonTaxPayChange extends React.Component {
   goCashier = () => {
     let that = this;
     const query = JSON.parse(localStorage.getItem('data'));
+    console.log(query);
     const queryJson = query.payBook;
     //收银台参数定义
     const widget_param = {

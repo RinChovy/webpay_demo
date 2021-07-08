@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button, notification, Popover } from 'antd';
 import { api } from '../../service/api.js';
 import { createCashier } from '../../service/services';
 import { Arabia_to_Chinese as money, guid } from 'utils/utils';
@@ -82,6 +82,13 @@ class NonTaxPayChange extends React.Component {
     localStorage.removeItem('data');
     this.openNotificationWithIcon('error', err);
     //防止重复点击解开按钮限制
+  };
+  // 提示信息方法
+  openNotificationWithIcon = (type, msg) => {
+    notification[type]({
+      message: '查询错误',
+      description: msg,
+    });
   };
   componentDidMount() {
     const spanTop = localStorage.getItem('spanTop');

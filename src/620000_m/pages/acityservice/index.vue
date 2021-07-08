@@ -112,6 +112,8 @@ export default {
       })
     },
     policy() {
+      localStorage.removeItem('sessionPage')
+      localStorage.removeItem('sessionItemName')
       this.$router.push({
         path: '/policy',
       })
