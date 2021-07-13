@@ -13,6 +13,16 @@ export async function queryPayInfo(params) {
     data: stringify(params),
   });
 }
+//收银台接口
+export async function createCashier(params) {
+  return xFetch(Api.createCashier, {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      regionCode: Api.region,
+    },
+    data: stringify(params),
+  });
+}
 // 成功回调接口
 export async function success(params) {
   return xFetch(Api.success, {

@@ -193,6 +193,9 @@ export default {
     submit() {
       let that = this
       const { order_no, merchant_no, totalAmount_fen, payCode } = this
+      const dateString = JSON.parse(localStorage.getItem('data'))
+      const query = dateString.data
+      const queryJson = query.payBook
 
       // 挂件调用
       var ua = window.navigator.userAgent.toLowerCase()
@@ -204,48 +207,71 @@ export default {
             // 走在小程序的逻辑
             // 微信小程序 监听页面变化
             that.miniProgramMark = true
-            thirdpay_widget.init({
-              container: 'widget', //挂件在当前页面放置的控件ID
-              merchant_no: merchant_no, //分配的商户号
-              merchant_order_no: order_no, //订单在商户系统中的订单号
-              amount: totalAmount_fen, //订单价格，单位：人民币 分
+            //收银台参数定义
+            const widget_param = {
+              paycode: payCode,
+              // 微信小程序需要的字段 openid
+              openid: openid,
+            }
+            const merchant_order_no = guid()
+            const widget_content = {
+              merchant_no: merchant_no,
+              merchant_order_no: merchant_order_no,
+              amount: totalAmount_fen,
               effective_time: '1c',
-              device_type: 'miniProgramH5',
-              widget_param: {
-                paycode: payCode,
-                // 微信小程序需要的字段 openid
-                openid: openid,
-              },
-              charge_url: API.createCharge, //商户服务端创建charge时的controller地址
-              charge_param: {
-                payCode: that.payCode,
-                paymentName: that.payer,
-                regionCode: API.region,
-                frontCallBackUrl: API.callback,
-              }, //(可选，用户自定义参数，若存在自定义参数则会通过 POST 方法透传给 charge_url
               version_no: '1.1',
+              subject: 'subject',
+              body: 'body',
+              device_type: 'miniProgramH5',
+              widget_param: widget_param,
+            }
+            const charge_param = {
+              payCode: that.payCode,
+              paymentName: that.payer,
+              regionCode: API.region,
+              frontCallBackUrl: API.callback,
+            }
+            createCashier({
+              charge_param: JSON.stringify(charge_param),
+              widget_content: JSON.stringify(widget_content),
+              frontCallBackUrl: API.callback,
+              merchantOrderNo: merchant_order_no,
+            }).then((res) => {
+              res.code === 0 ? that.showCashier(res.msg) : that.handleError(res.msg)
             })
           } else {
             // 在微信浏览器中
             // 但不是小程序中
-            thirdpay_widget.init({
-              container: 'widget', //挂件在当前页面放置的控件ID
-              merchant_no: merchant_no, //分配的商户号
-              merchant_order_no: order_no, //订单在商户系统中的订单号
-              amount: totalAmount_fen, //订单价格，单位：人民币 分
+            //收银台参数定义
+            const widget_param = {
+              paycode: payCode,
+              // 微信小程序需要的字段 openid
+            }
+            const merchant_order_no = guid()
+            const widget_content = {
+              merchant_no: merchant_no,
+              merchant_order_no: merchant_order_no,
+              amount: totalAmount_fen,
               effective_time: '1c',
-              device_type: 'phone',
-              widget_param: {
-                paycode: payCode,
-              },
-              charge_url: API.createCharge, //商户服务端创建charge时的controller地址
-              charge_param: {
-                payCode: that.payCode,
-                paymentName: that.payer,
-                regionCode: API.region,
-                frontCallBackUrl: API.callback,
-              }, //(可选，用户自定义参数，若存在自定义参数则会通过 POST 方法透传给 charge_url
               version_no: '1.1',
+              subject: 'subject',
+              body: 'body',
+              device_type: 'phone',
+              widget_param: widget_param,
+            }
+            const charge_param = {
+              payCode: that.payCode,
+              paymentName: that.payer,
+              regionCode: API.region,
+              frontCallBackUrl: API.callback,
+            }
+            createCashier({
+              charge_param: JSON.stringify(charge_param),
+              widget_content: JSON.stringify(widget_content),
+              frontCallBackUrl: API.callback,
+              merchantOrderNo: merchant_order_no,
+            }).then((res) => {
+              res.code === 0 ? that.showCashier(res.msg) : that.handleError(res.msg)
             })
           }
         })
@@ -260,29 +286,38 @@ export default {
             my.onMessage = function (e) {
               if (e.flag === 'authCode') {
                 that.miniProgramMark = true
-                thirdpay_widget.init({
-                  container: 'widget', //挂件在当前页面放置的控件ID
-                  merchant_no: merchant_no, //分配的商户号
-                  merchant_order_no: order_no, //订单在商户系统中的订单号
-                  amount: totalAmount_fen, //订单价格，单位：人民币 分
+                //收银台参数定义
+                const widget_param = {
+                  paycode: payCode,
+                  openid: e.authCode,
+                  aliAppId: e.appId,
+                }
+                const merchant_order_no = guid()
+                const widget_content = {
+                  merchant_no: merchant_no,
+                  merchant_order_no: merchant_order_no,
+                  amount: totalAmount_fen,
                   effective_time: '1c',
-                  device_type: 'miniProgramH5',
-                  widget_param: {
-                    paycode: payCode,
-                    // 微信小程序需要的字段 openid
-                    openid: e.authCode,
-                    aliAppId: e.appId,
-                  },
-                  charge_url: API.createCharge, //商户服务端创建charge时的controller地址
-                  charge_param: {
-                    payCode: that.payCode,
-                    paymentName: that.payer,
-                    regionCode: API.region,
-                    frontCallBackUrl: API.callback,
-                  }, //(可选，用户自定义参数，若存在自定义参数则会通过 POST 方法透传给 charge_url
                   version_no: '1.1',
+                  subject: 'subject',
+                  body: 'body',
+                  device_type: 'miniProgramH5',
+                  widget_param: widget_param,
+                }
+                const charge_param = {
+                  payCode: that.payCode,
+                  paymentName: that.payer,
+                  regionCode: API.region,
+                  frontCallBackUrl: API.callback,
+                }
+                createCashier({
+                  charge_param: JSON.stringify(charge_param),
+                  widget_content: JSON.stringify(widget_content),
+                  frontCallBackUrl: API.callback,
+                  merchantOrderNo: merchant_order_no,
+                }).then((res) => {
+                  res.code === 0 ? that.showCashier(res.msg) : that.handleError(res.msg)
                 })
-                $('.zhebg').show()
               } else if (e.flag === 'paySuccess') {
                 // todo 接受成功后 需要处理回调页面
 
@@ -300,26 +335,46 @@ export default {
           }
         })
       } else {
-        thirdpay_widget.init({
-          container: 'widget', //挂件在当前页面放置的控件ID
-          merchant_no: merchant_no, //分配的商户号
-          merchant_order_no: order_no, //订单在商户系统中的订单号
-          amount: totalAmount_fen, //订单价格，单位：人民币 分
+        //收银台参数定义
+        const widget_param = {
+          paycode: payCode,
+        }
+        const merchant_order_no = guid()
+        const widget_content = {
+          merchant_no: merchant_no,
+          merchant_order_no: merchant_order_no,
+          amount: totalAmount_fen,
           effective_time: '1c',
-          device_type: 'phone',
-          widget_param: {
-            paycode: payCode,
-          },
-          charge_url: API.createCharge, //商户服务端创建charge时的controller地址
-          charge_param: {
-            payCode: that.payCode,
-            paymentName: that.payer,
-            regionCode: API.region,
-            frontCallBackUrl: API.callback,
-          }, //(可选，用户自定义参数，若存在自定义参数则会通过 POST 方法透传给 charge_url
           version_no: '1.1',
+          subject: 'subject',
+          body: 'body',
+          device_type: 'phone',
+          widget_param: widget_param,
+        }
+        const charge_param = {
+          payCode: that.payCode,
+          paymentName: that.payer,
+          regionCode: API.region,
+          frontCallBackUrl: API.callback,
+        }
+        createCashier({
+          charge_param: JSON.stringify(charge_param),
+          widget_content: JSON.stringify(widget_content),
+          frontCallBackUrl: API.callback,
+          merchantOrderNo: merchant_order_no,
+        }).then((res) => {
+          res.code === 0 ? that.showCashier(res.msg) : that.handleError(res.msg)
         })
       }
+    },
+    showCashier(pageParams) {
+      document.write(pageParams)
+    },
+    // 失败提示
+    handleError(err) {
+      Dialog.alert({
+        message: err,
+      }).then(() => {})
     },
     fanhui() {
       window.history.go(-1)

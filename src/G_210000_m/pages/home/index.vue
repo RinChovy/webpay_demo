@@ -171,6 +171,9 @@ export default {
       text-align: center;
       width: 50%;
       height: 118px;
+      div {
+        margin-top: 10px;
+      }
       img {
         margin-top: 15px;
         width: 62px;

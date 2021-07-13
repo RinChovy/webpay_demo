@@ -27,18 +27,19 @@
         </div>
       </div>
       <div class="footer">
-        <div class="footer_span">
-          <span>推荐服务</span>
+        <div class="bottom_span">
+          <div>
+            <img src="../../public/images/icon/danwei.png" alt="" />
+            <span>{{ bottom_span }}</span>
+          </div>
+          <div>
+            <img src="../../public/images/icon/phone.png" alt="" />
+            <span>{{ bottom_span2 }}&nbsp;&nbsp;</span>
+          </div>
         </div>
-        <div class="footer_box">
-          <img src="../../public/images/jiaoyu_bottom.png" alt="" />
-        </div>
-      </div>
-      <div class="bottom_span">
-        <span>{{ bottom_span }}</span>
-        <span>{{ bottom_span2 }}</span>
       </div>
     </div>
+    <img class="bottom" src="../../public/images/background_bottom.png" alt="" />
   </div>
 </template>
 
@@ -133,12 +134,20 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.mainwrap {
+  width: 100%;
+  background: url('../../public/images/background_top.png');
+  background-repeat: no-repeat;
+  background-color: #066ef7;
+  background-size: 100%;
+  // background: #066ef7;
+  position: fixed;
+  z-index: -2;
+}
 .headern {
   width: 100%;
-  background: url('../../public/images/phone_background.png') no-repeat;
-  background-size: 100%;
-  height: 640px;
-  padding-top: 43%;
+  height: 670px;
+  padding-top: 50%;
 }
 .middle {
   width: 100%;
@@ -195,9 +204,27 @@ export default {
   margin: 20px auto;
   width: 92%;
   font-size: 12px;
-  text-align: center;
-  color: #999ea0;
+  // text-align: center;
+  color: white;
+  font-size: 16px;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: flex-start;
+  div {
+    margin: 2px auto;
+    overflow-x: auto;
+  }
+  img {
+    width: 16px;
+  }
+  span {
+    vertical-align: middle;
+  }
+}
+.bottom {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  z-index: -1;
 }
 </style>

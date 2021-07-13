@@ -95,12 +95,12 @@ const routes = [
 ];
 const router = new VueRouter({
   mode: 'history',
-  // base: '/210000',
+  base: '/210000',
   routes,
 });
 
 new Vue({
   router,
-  render: h => h(App),
+  render: (h) => h(App),
 }).$mount('#app');
 1;

@@ -15,10 +15,10 @@ import Success_wx from './pages/success_wx/index.vue';
 import Fail from './pages/fail/index.vue';
 // import Error404 from './pages/error404.vue';
 //////////////小程序日志插件/////////////////////////////
-// import VConsole from 'vconsole';
+import VConsole from 'vconsole';
 
 // if (process.env.NODE_ENV === 'production') {
-// new VConsole();
+new VConsole();
 // }
 //////////////小程序日志插件/////////////////////////////
 window.enableDev = true;
@@ -95,12 +95,11 @@ const routes = [
 ];
 const router = new VueRouter({
   mode: 'history',
-  // base: '/210000',
+  base: '/210000',
   routes,
 });
 
 new Vue({
   router,
-  render: h => h(App),
+  render: (h) => h(App),
 }).$mount('#app');
-1;
