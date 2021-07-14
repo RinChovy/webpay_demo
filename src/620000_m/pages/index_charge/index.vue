@@ -71,7 +71,7 @@
         <button @click="submit">确认支付</button>
       </div>
       <div class="button_box" v-else-if="einvoice_url != null">
-        <button @click="einvoiceUrl" v-if="einvoice_or == true">电子票地址</button>
+        <button @click="einvoiceUrl">电子票地址</button>
       </div>
       <div class="button_box" v-else>
         <button @click="fanhui">返回</button>
@@ -124,8 +124,6 @@ export default {
       status: '',
       //电子票地址
       einvoice_url: '',
-      //判断电子票浏览器
-      einvoice_or: true,
       // 商户订单号
       order_no: guid(),
       //??
@@ -145,7 +143,6 @@ export default {
       wx.miniProgram.getEnv(function (res) {
         if (res.miniprogram) {
           console.log('不走电子票，小程序中')
-          that.einvoice_or = false
           if (document.addEventListener) {
             document.addEventListener('WeixinJSBridgeReady', that.sendMessage(), false)
           } else if (document.attachEvent) {

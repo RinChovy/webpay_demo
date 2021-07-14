@@ -95,7 +95,7 @@ const routes = [
 ];
 const router = new VueRouter({
   mode: 'history',
-  base: '/210000',
+  base: '/G_210000_m',
   routes,
 });
 

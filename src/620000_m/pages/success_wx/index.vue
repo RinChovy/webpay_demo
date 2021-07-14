@@ -7,7 +7,7 @@
       </div>
     </div>
     <div class="div_button" v-if="url != null">
-      <button @click="einvoice_url" v-if="yesOrNo == true && einvoice_or == true">查看电子票</button>
+      <button @click="einvoice_url" v-if="yesOrNo == true">查看电子票</button>
     </div>
     <div class="div_button" else>
       <button @click="home" v-if="yesOrNo == true">返回首页</button>
@@ -33,7 +33,6 @@ export default {
       spanPay: '缴款成功',
       url: '', //电子票地址
       yesOrNo: false,
-      einvoice_or: true, //是否显示电子票
     }
   },
   //加载生命周期
@@ -50,13 +49,6 @@ export default {
         this.url = res.data.einvoice_url
         this.merchant_order_no = res.data.merchant_order_no
         this.yesOrNo = true
-        if (ua.match(/MicroMessenger/i) == 'micromessenger') {
-          wx.miniProgram.getEnv(function (res) {
-            if (res.miniprogram) {
-              that.einvoice_or = false
-            }
-          })
-        }
       } else {
         this.$router.push({
           path: '/fail',

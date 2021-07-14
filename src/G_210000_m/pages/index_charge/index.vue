@@ -198,8 +198,9 @@ export default {
       const queryJson = query.payBook
 
       // 挂件调用
-      var ua = window.navigator.userAgent.toLowerCase()
-      var openid = localStorage.getItem('openId')
+      const ua = window.navigator.userAgent.toLowerCase()
+      const openid = localStorage.getItem('openId')
+      const userId = localStorage.getItem('userId')
       //通过正则表达式匹配ua中是否含有MicroMessenger字符串
       if (ua.match(/MicroMessenger/i) == 'micromessenger') {
         wx.miniProgram.getEnv(function (res) {
@@ -224,6 +225,9 @@ export default {
               body: 'body',
               device_type: 'miniProgramH5',
               widget_param: widget_param,
+              userId: userId,
+              paymentName: that.exeAgencyName,
+              itemNameSet: that.queryItem,
             }
             const charge_param = {
               payCode: that.payCode,
@@ -303,6 +307,9 @@ export default {
                   body: 'body',
                   device_type: 'miniProgramH5',
                   widget_param: widget_param,
+                  userId: e.userId,
+                  paymentName: that.exeAgencyName,
+                  itemNameSet: that.queryItem,
                 }
                 const charge_param = {
                   payCode: that.payCode,
