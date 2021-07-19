@@ -7,10 +7,11 @@ import education from '../pages/education/index.js';
 import education_wx from '../pages/education_wx/index.js';
 import success from '../pages/success/index.js';
 import fail from '../pages/fail/index.js';
+import { api } from '../service/api';
 
 function App() {
   return (
-    <Router>
+    <Router basename={api.baseName}>
       <Switch>
         <Route path="/" exact={true} component={Home} />
         <Route path="/home" component={Home} />

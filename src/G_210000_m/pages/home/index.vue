@@ -61,15 +61,21 @@ export default {
     }
   },
   created() {
+    let that = this
     const url = location.href
     console.log('url为' + url)
     if (url.indexOf('openId=') != -1) {
-      const rsa = url.substring(url.indexOf('openId=') + 7)
-      console.log('rsa为' + rsa)
-      const openId = rsa
+      const openId = that.GetQueryValue('openId')
+      console.log('openId为' + openId)
+      const userId = that.GetQueryValue('userId')
+      console.log('userId' + userId)
       if (openId != '' && openId != null) {
         localStorage.removeItem('openId')
         localStorage.setItem('openId', openId)
+      }
+      if (userId != '' && userId != null) {
+        localStorage.removeItem('userId')
+        localStorage.setItem('userId', userId)
       }
     }
     // 初始化城市列表
@@ -86,6 +92,15 @@ export default {
     })
   },
   methods: {
+    GetQueryValue(queryName) {
+      var reg = new RegExp('(^|&)' + queryName + '=([^&]*)(&|$)', 'i')
+      var r = window.location.search.substr(1).match(reg)
+      if (r != null) {
+        return decodeURI(r[2])
+      } else {
+        return ''
+      }
+    },
     indexPay(itemCode, modelUrl) {
       if (modelUrl.startsWith('http')) {
         window.location.href = modelUrl
