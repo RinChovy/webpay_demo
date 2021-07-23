@@ -1,14 +1,20 @@
 import React from 'react';
-import { Form, Input, Button, Row, Col, notification } from 'antd';
+import { Form, Input, Button, Row, Col, notification, Popover } from 'antd';
 import { queryPayInfo, nontaxPage, getCo } from '../../service/services';
 import { api } from '../../service/api';
+import InputComponents from '../components/inputComponents';
 import style from '../../public/css/index.css';
+import img from '../../public/images/paycode_1.png';
+import img2 from '../../public/images/paycode_2.png';
+import img3 from '../../public/images/paycode_3.png';
+import img_hover from '../../public/images/paycode_1_hover.png';
+import img_hover2 from '../../public/images/paycode_2_hover.png';
+import img_hover3 from '../../public/images/paycode_3_hover.png';
 
 class NonTaxPay extends React.Component {
   formRef = React.createRef();
   state = {
     spanPayTop: '温馨提示',
-    spanPay: '缴款码为执收单位开具的非税收入一般缴款书上的20位编码。',
     codeUrl: '', //验证码
     uuid: '', //uuid
     loadings: [], //等待时间
@@ -110,8 +116,28 @@ class NonTaxPay extends React.Component {
   onFinishFailed = (values) => {
     console.log('fail:', values);
   };
+  //焦点获取
+  focusInput = (e) => {
+    this.setState(({ blurInput }) => {
+      let newJson = blurInput;
+      newJson[e] = true;
+      return {
+        blurInput: newJson,
+      };
+    });
+  };
+  //焦点丢失
+  blurInput = (e) => {
+    this.setState(({ blurInput }) => {
+      let newJson = blurInput;
+      newJson[e] = false;
+      return {
+        blurInput: newJson,
+      };
+    });
+  };
   render() {
-    const { spanPay, spanPayTop, codeUrl, loadings } = this.state;
+    const { codeUrl, loadings } = this.state;
     const layout = {
       labelCol: {
         span: 8,
@@ -122,24 +148,36 @@ class NonTaxPay extends React.Component {
     };
     const tailLayout = {
       wrapperCol: {
-        offset: 8,
+        offset: 4,
         span: 16,
       },
     };
     return (
-      <div>
-        <div>
-          <div className="outForm_pay">
-            <div className="img_pay">
-              <img src={require('../../public/images/icon_top.png')} />
+      <div className="body">
+        <div className="outForm_pay_ningxia">
+          <div className="onForm_pay">
+            <div className="onForm_pay_top">
+              <span>统一支付公共平台</span>
+              <span className="right">
+                当前位置:&nbsp; 首页 &nbsp;{'>'}&nbsp;非税缴款
+              </span>
             </div>
-            <div className="onForm_pay">
-              <div className="top_pay">
-                <span className="topSpan_pay">非税缴款</span>
-              </div>
+
+            <div className="outForm_pay_qingdao">
               <div className="middle_pay">
                 <div className="middle_pay_left">
-                  <div className="middle_pay_left_org">
+                  <img src={require('../../public/images/paycode.png')} />
+                </div>
+                <div className="middle_pay_right">
+                  <div className="middle_pay_right_org_e">
+                    <div
+                      className="middle_pay_right_org_top"
+                      style={{ width: 130 }}
+                    >
+                      <div className="classHover">
+                        <span>按缴款码查询</span>
+                      </div>
+                    </div>
                     <Form
                       {...layout}
                       name="basic"
@@ -150,94 +188,41 @@ class NonTaxPay extends React.Component {
                       onFinish={this.handleFormSubmit}
                       onFinishFailed={this.onFinishFailed}
                     >
-                      <div style={{ height: 195 }}>
-                        <Form.Item
-                          label={<span style={{ fontSize: 17 }}>缴款码</span>}
-                        >
-                          <Row gutter={8}>
-                            <Col span={12}>
-                              <Form.Item
-                                name="payCode"
-                                style={{ width: 400 }}
-                                rules={[
-                                  {
-                                    required: true,
-                                    message: '请输入缴款码',
-                                  },
-                                  {
-                                    pattern: api.regular,
-                                    message: api.regularText,
-                                  },
-                                ]}
-                              >
-                                <Input size="large" style={{ width: 400 }} />
-                              </Form.Item>
-                            </Col>
-                          </Row>
-                        </Form.Item>
-                        <Form.Item
-                          style={{ marginTop: -20 }}
-                          label={<span style={{ fontSize: 17 }}>缴款人</span>}
-                        >
-                          <Row gutter={8}>
-                            <Col span={12}>
-                              <Form.Item
-                                name="payName"
-                                style={{ width: 400 }}
-                                rules={[
-                                  {
-                                    required: true,
-                                    message: '请输入缴款人',
-                                  },
-                                ]}
-                              >
-                                <Input size="large" style={{ width: 400 }} />
-                              </Form.Item>
-                            </Col>
-                          </Row>
-                        </Form.Item>
-                        <Form.Item
-                          style={{ marginTop: -20 }}
-                          label={<span style={{ fontSize: 17 }}>验证码</span>}
-                        >
-                          <Row gutter={8}>
-                            <Col span={12}>
-                              <Form.Item
-                                name="verificationCode"
-                                rules={[
-                                  {
-                                    required: true,
-                                    message: '请输入验证码',
-                                  },
-                                ]}
-                              >
-                                <Input size="large" style={{ width: 200 }} />
-                              </Form.Item>
-                            </Col>
-                            <Col span={12}>
-                              <img
-                                className="verificationCode"
-                                alt="验证码"
-                                src={codeUrl}
-                              />
-                              <span
-                                style={{
-                                  marginLeft: 20,
-                                  cursor: 'pointer',
-                                  color: '#1890ff',
-                                }}
-                                onClick={this.changeImg}
-                              >
-                                换一张
-                              </span>
-                            </Col>
-                          </Row>
-                        </Form.Item>
+                      <div className="middle_box">
+                        <InputComponents
+                          name="payCode" //FROM名称
+                          blur="paycode" //blur绑定参数
+                          img={img} //图片1
+                          img_hover={img_hover} //图片2
+                          label="缴款码" //label名称
+                          haveSpanPay={true} //是否含有感叹号提示信息
+                          isVecode={false} //是否属于验证码
+                        />
+                        <InputComponents
+                          name="payName"
+                          blur="payname"
+                          img={img2}
+                          img_hover={img_hover2}
+                          label="缴款人"
+                          haveSpanPay={false}
+                          isVecode={false}
+                        />
+                        <InputComponents
+                          name="verificationCode"
+                          blur="code"
+                          img={img3}
+                          img_hover={img_hover3}
+                          label="验证码"
+                          haveSpanPay={false}
+                          isVecode={true}
+                          codeUrl={codeUrl} //验证码地址
+                          changeImg={this.changeImg} //验证码换一张点击方法
+                        />
                       </div>
 
                       <Form.Item {...tailLayout} style={{ marginTop: 40 }}>
                         <Button
-                          className="button_submit"
+                          className="button_ningxia"
                           size="large"
                           type="primary"
                           htmlType="submit"
@@ -254,12 +239,6 @@ class NonTaxPay extends React.Component {
                         </Button>
                       </Form.Item>
                     </Form>
-                  </div>
-                </div>
-                <div className="middle_pay_right">
-                  <div className="middle_pay_right_org">
-                    <div className="span_pay_top">{spanPayTop}</div>
-                    <div className="span_pay">{spanPay}</div>
                   </div>
                 </div>
               </div>

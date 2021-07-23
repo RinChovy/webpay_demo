@@ -3,7 +3,6 @@
     <div class="form">
       <div class="form_box">
         <div class="form_label">
-          <img alt="" src="../../public/images/paycode.png" />
           <span>缴款码</span>
         </div>
         <div class="form_input">
@@ -15,7 +14,6 @@
       </div>
       <div class="form_box">
         <div class="form_label">
-          <img alt="" src="../../public/images/payname.png" />
           <span>缴款人</span>
         </div>
         <div class="form_input">
@@ -27,13 +25,12 @@
       </div>
       <div class="form_box">
         <div class="form_label">
-          <img alt="" src="../../public/images/code.png" />
           <span>验证码</span>
         </div>
         <div class="form_input_code">
           <input placeholder="请输入验证码" v-model="code" />
           <img alt="" :src="codeUrlT" />
-          <span style="color: #4690ff; font-size: 12px" @click="changeCode">换一张</span>
+          <span style="color: #4690ff" @click="changeCode">换一张</span>
         </div>
         <div class="form_input_warn">
           <span>{{ codeWarn }}</span>
@@ -85,15 +82,21 @@ export default {
     }
   },
   mounted() {
+    let that = this
     const url = location.href
     console.log('url为' + url)
     if (url.indexOf('openId=') != -1) {
-      const rsa = url.substring(url.indexOf('openId=') + 7)
-      console.log('rsa为' + rsa)
-      const openId = rsa
+      const openId = that.GetQueryValue('openId')
+      console.log('openId为' + openId)
+      const userId = that.GetQueryValue('userId')
+      console.log('userId' + userId)
       if (openId != '' && openId != null) {
         localStorage.removeItem('openId')
         localStorage.setItem('openId', openId)
+      }
+      if (userId != '' && userId != null) {
+        localStorage.removeItem('userId')
+        localStorage.setItem('userId', userId)
       }
     }
     if (url.search('areaId') != -1) {
@@ -199,18 +202,16 @@ export default {
 }
 .form_box {
   width: 100%;
-  height: 110px;
+  height: 100px;
 }
 .form_label {
-  img {
-    margin-left: 4%;
-    width: 25px;
-  }
   span {
-    margin-left: 5px;
+    margin-left: 5%;
     vertical-align: -3px;
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 17px;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: #999999;
   }
 }
 .form_input {
@@ -218,14 +219,22 @@ export default {
   width: 100%;
   text-align: center;
   input {
-    color: #999ea0;
-    font-size: 17px;
-    padding-left: 10px;
+    color: #333333;
+    font-size: 16px;
     height: 35px;
-    background-color: #f4f4f4;
+    background-color: transparent;
     border: 0px solid #ddd;
+    border-bottom: 1px solid #eeeef1;
     width: 90%;
-    border-radius: 4px;
+  }
+  input::-webkit-input-placeholder {
+    color: #c3c3c4;
+  }
+  input:-moz-placeholder {
+    color: #c3c3c4;
+  }
+  input:-ms-input-placeholder {
+    color: #c3c3c4;
   }
 }
 .form_input_warn {
@@ -242,15 +251,23 @@ export default {
   margin-top: 10px;
   width: 100%;
   input {
-    color: #999ea0;
-    font-size: 17px;
-    padding-left: 10px;
+    color: #333333;
+    font-size: 16px;
     height: 35px;
-    background-color: #f4f4f4;
+    background-color: transparent;
     border: 0px solid #ddd;
+    border-bottom: 1px solid #eeeef1;
     width: 46%;
-    margin-left: 4%;
-    border-radius: 4px;
+    margin-left: 5%;
+  }
+  input::-webkit-input-placeholder {
+    color: #c3c3c4;
+  }
+  input:-moz-placeholder {
+    color: #c3c3c4;
+  }
+  input:-ms-input-placeholder {
+    color: #c3c3c4;
   }
   img {
     vertical-align: -12px;
@@ -265,12 +282,12 @@ export default {
   text-align: center;
   button {
     width: 94%;
-    height: 44px;
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #4690ff), color-stop(100%, #556ffe));
+    height: 48px;
+    background: #4a71b7;
     border-radius: 4px;
     border: 0px;
     color: white;
-    font-size: 19px;
+    font-size: 16px;
   }
 }
 .footerc {

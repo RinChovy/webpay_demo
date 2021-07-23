@@ -1,0 +1,50 @@
+<extends src="pc.html">
+  <block name="title">辽宁政府非税收入收缴暨票据管理服务网</block>
+  <block name="header">
+    <style>
+      .wrap {
+        width: 1438px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: left;
+        position: relative;
+        background-image: url("./public/images/liaoning_top.png");
+      }
+
+      .header-title {
+        position: absolute;
+        top: 50px;
+        left: 216px;
+        width: 600px;
+        height: 140px;
+        font-size: 30px;
+      }
+
+      .banner-index {
+        height: 224px;
+        overflow: hidden;
+        position: relative;
+      }
+    </style>
+  </block>
+  <block name="content">
+    <div id="heada">
+      <div class="wrap banner-index">
+        <div class="header-title">
+          <img src="http://czt.ln.gov.cn/static/images/czt_logo.png" width="600" height="140">
+        </div>
+      </div>
+    </div>
+    <div id="root"></div>
+    <div id="bottom">
+      <iframe src="http://czt.ln.gov.cn/static/html/footer.html" height="120" width="100%" scrolling="no"
+        frameborder="0" style="background-color:transparent; z-index:1;margin-bottom:-5px\0; margin-top:0;  "
+        allowtransparency="true">
+
+      </iframe>
+    </div>
+  </block>
+  <block name="footer">
+    <script src="./index.js"></script>
+  </block>
+</extends>

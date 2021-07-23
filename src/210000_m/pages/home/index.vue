@@ -1,12 +1,15 @@
 <template>
   <div class="mainwrap">
+     <span class="haveCity" @click="city">切换城市：{{haveCity}}</span>
     <div class="headern">
-      <span class="haveCity" @click="city">切换城市：{{haveCity}}</span>
+     
       <div class="middle">
-        <div class="box" @click="indexPay(v.itemCode,v.modelUrl)" v-for="(v,k) in homeList" :key="k">
-          <img :src="v.modelPicture" alt="" />
-          <div>
-            <span>{{v.itemName}}</span>
+        <div class="middle_box">
+          <div class="box" @click="indexPay(v.itemCode,v.modelUrl)" v-for="(v,k) in homeList" :key="k">
+            <img :src="v.modelPicture" alt="" />
+            <div>
+              <span>{{v.itemName}}</span>
+            </div>
           </div>
         </div>
       </div>
@@ -58,15 +61,21 @@ export default {
     }
   },
   created() {
+    let that = this
     const url = location.href
     console.log('url为' + url)
     if (url.indexOf('openId=') != -1) {
-      const rsa = url.substring(url.indexOf('openId=') + 7)
-      console.log('rsa为' + rsa)
-      const openId = rsa
+      const openId = that.GetQueryValue('openId')
+      console.log('openId为' + openId)
+      const userId = that.GetQueryValue('userId')
+      console.log('userId' + userId)
       if (openId != '' && openId != null) {
         localStorage.removeItem('openId')
         localStorage.setItem('openId', openId)
+      }
+      if (userId != '' && userId != null) {
+        localStorage.removeItem('userId')
+        localStorage.setItem('userId', userId)
       }
     }
     // 初始化城市列表
@@ -83,6 +92,15 @@ export default {
     })
   },
   methods: {
+    GetQueryValue(queryName) {
+      var reg = new RegExp('(^|&)' + queryName + '=([^&]*)(&|$)', 'i')
+      var r = window.location.search.substr(1).match(reg)
+      if (r != null) {
+        return decodeURI(r[2])
+      } else {
+        return ''
+      }
+    },
     indexPay(itemCode, modelUrl) {
       if (modelUrl.startsWith('http')) {
         window.location.href = modelUrl
@@ -138,18 +156,54 @@ export default {
 .headern {
   width: 100%;
   background: url('../../public/images/phone_background.png') no-repeat;
-  background-size: cover;
+  background-size: 100%;
   height: 640px;
+  padding-top: 41%;
 }
 .middle {
-  width: 90%;
-  background: white;
-  margin: 52% auto 0;
-  padding-bottom: 20px;
-  border-radius: 20px;
-  box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.15);
-  display: flex;
-  flex-wrap: wrap;
+  width: 100%;
+  height: 236px;
+  .middle_box {
+    width: 94%;
+    background: white;
+    height: 236px;
+    margin: 0 auto;
+    border-radius: 20px;
+    box-shadow: 0px 0px 30px 0px rgba(146, 146, 146, 0.18);
+    display: flex;
+    flex-wrap: wrap;
+    .box:first-child {
+      border-right: 1px solid #f2f3f5;
+      border-bottom: 1px solid #f2f3f5;
+    }
+    .box:nth-child(2) {
+      border-bottom: 1px solid #f2f3f5;
+    }
+    .box:nth-child(3) {
+      border-right: 1px solid #f2f3f5;
+    }
+    .box {
+      text-align: center;
+      width: 50%;
+      height: 118px;
+      div {
+        margin-top: 10px;
+      }
+      img {
+        margin-top: 15px;
+        width: 62px;
+      }
+      span {
+        font-size: 14px;
+        font-family: PingFang SC;
+        font-weight: 400;
+        color: #464a4c;
+      }
+    }
+  }
+}
+.mainwrap {
+  position: relative;
 }
 .img {
   background: url('../../public/images/phone_box.png') no-repeat center;
@@ -178,24 +232,6 @@ export default {
     width: 96%;
   }
 }
-.box {
-  width: 50%;
-  height: 100px;
-  margin-top: 10px;
-  text-align: center;
-  div {
-    height: 30px;
-    display: flex;
-  }
-  img {
-    width: 90px;
-  }
-  span {
-    width: 100%;
-    vertical-align: top;
-    font-size: 12px;
-  }
-}
 
 .bottom_span {
   margin-top: 20px;
@@ -204,7 +240,7 @@ export default {
   color: #999ea0;
 }
 .haveCity {
-  position: relative;
+  position: absolute;
   top: 10px;
   left: 10px;
   font-size: 16px;

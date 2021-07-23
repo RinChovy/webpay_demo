@@ -1,9 +1,9 @@
-import baseapi from "utils/baseURL";
+import baseapi from 'utils/baseURL';
 
-const callback = "https://370200.epayservice.cn/webpay_370200/success"; //传给后台的回调地址
-const region = "370200"; //区划号
+const callback = 'https://370200.epayservice.cn/webpay_370200/success'; //传给后台的回调地址
+const region = '370200'; //区划号
 const regular = /^37\d{18}$/; //非税缴款正则表达式
-const regularText = "缴款码必须等于20位且37开头"; //非税缴款正则表达式提示信息
+const regularText = '缴款码必须等于20位且37开头'; //非税缴款正则表达式提示信息
 
 export default {
   //非税缴款正则表达式
@@ -32,4 +32,6 @@ export default {
   getOpenid: `${baseapi}/common/getOpenid`,
   //内部查询订单接口
   queryOrderRecord: `${baseapi}/common/queryOrderRecord`,
+  //收银台接口
+  createCashier: `${baseapi}/common/createCashier`,
 };

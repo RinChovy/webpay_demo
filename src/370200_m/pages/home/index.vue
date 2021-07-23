@@ -1,20 +1,8 @@
 <template>
   <div class="mainwrap">
     <div class="headern">
-      <div class="middle">
-        <div class="box" @click="indexPay">
-          <img src="../../public/images/feisui.png" alt="" />
-          <div>
-            <span>电子票<br />输入缴款码缴款</span>
-          </div>
-        </div>
-        <!-- <div class="box" @click="indexUrl">
-          <img src="../../public/images/jiaoyu.png" alt="" />
-          <div>
-            <span>纸质票<br />输入票号缴款</span>
-          </div>
-        </div> -->
-      </div>
+      <img class="middle" @click="indexPay" src="../../public/images/phone_box.png" alt="" />
+
       <div class="footer">
         <div class="footer_span">
           <span>推荐服务</span>
@@ -70,19 +58,20 @@ export default {
 .headern {
   width: 100%;
   background: url('../../public/images/phone_background.png') no-repeat;
-  background-size: cover;
+  background-size: 100%;
   height: 640px;
   padding-top: 52%;
 }
 .middle {
-  width: 90%;
-  height: 200px;
-  background: white;
-  margin: 0 auto 0;
-  border-radius: 20px;
-  box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.15);
-  display: flex;
-  justify-content: space-around;
+  width: 100%;
+  margin: -44px auto 0;
+  // height: 200px;
+  // background: white;
+  // margin: 0 auto 0;
+  // border-radius: 20px;
+  // box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.15);
+  // display: flex;
+  // justify-content: space-around;
 }
 .img {
   background: url('../../public/images/phone_box.png') no-repeat center;

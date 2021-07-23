@@ -57,7 +57,10 @@ class home extends React.Component {
     });
   };
   //教育缴款
-  education = () => {
+  education = (e) => {
+    e
+      ? localStorage.setItem('contents', '教育缴款')
+      : localStorage.setItem('contents', '缴款凭证查询');
     this.props.history.push({
       pathname: '/education',
     });
@@ -89,13 +92,13 @@ class home extends React.Component {
                     <p>非税缴款</p>
                   </div>
                 </div>
-                <div className="home_box" onClick={this.education}>
+                <div className="home_box" onClick={() => this.education(true)}>
                   <div>
                     <img src={require('../../public/images/home_2.png')} />
                     <p>教育缴费</p>
                   </div>
                 </div>
-                <div className="home_box" onClick={this.education}>
+                <div className="home_box" onClick={() => this.education(false)}>
                   <div>
                     <img src={require('../../public/images/home_3.png')} />
                     <p>缴款凭证查询</p>
@@ -153,7 +156,10 @@ class home extends React.Component {
             </div>
           </div>
           <div>
-            <img src={require('../../public/images/background_bottom.png')} />
+            <img
+              style={{ width: '100%' }}
+              src={require('../../public/images/background_bottom.png')}
+            />
           </div>
         </div>
       </div>

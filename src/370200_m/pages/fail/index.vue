@@ -7,36 +7,40 @@
       </div>
     </div>
     <div class="div_button">
-      <button @click="home">返回首页</button>
+      <button @click="home" :style="type == 'wx' ? 'color:#55B76B;border:1px solid #55B76B' : null">返回首页</button>
     </div>
   </div>
 </template>
 
 <script>
-import { Button, Row, Col, Search } from "vant";
+import { Button, Row, Col, Search } from 'vant'
 export default {
-  name: "success",
+  name: 'success',
   components: {
-    "van-row": Row,
-    "van-col": Col,
-    "van-button": Button,
-    "van-search": Search,
+    'van-row': Row,
+    'van-col': Col,
+    'van-button': Button,
+    'van-search': Search,
   },
   data() {
     return {
-      value: "value",
-      good: "value",
-      bottom_span: "主办单位：鹤岗市财政局",
-    };
+      value: 'value',
+      good: 'value',
+      bottom_span: '主办单位：鹤岗市财政局',
+      type: 'web',
+    }
+  },
+  created() {
+    this.type = localStorage.getItem('type')
   },
   methods: {
     home() {
       this.$router.push({
-        path: "/home",
-      });
+        path: '/home',
+      })
     },
   },
-};
+}
 </script>
 
 <style scoped lang="scss">
@@ -45,6 +49,7 @@ export default {
   text-align: center;
   img {
     margin-top: 56%;
+    width: 190px;
   }
   span {
     font-size: 16px;

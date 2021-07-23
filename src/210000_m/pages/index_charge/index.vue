@@ -1,95 +1,83 @@
 <template>
-  <div class="mainwrap">
-    <div class="form">
-      <div class="form_box">
-        <div class="form_label">
-          <img alt='' src="../../public/images/phone/paycode.png" />
-          <span>缴款码</span>
+  <div>
+    <div class="box">
+      <img src="../../public/images/icon/icon.png" />
+      <div class="box_nei">
+        <div class="top_logo">
+          <span>{{ totalAmount }}元</span>
         </div>
-        <div class="form_span">
-          <span>{{ payCode }}</span>
-        </div>
-      </div>
-      <div class="form_box">
-        <div class="form_label">
-          <img alt='' src="../../public/images/phone/paypeople.png" />
-          <span>缴款人</span>
-        </div>
-        <div class="form_span">
-          <span>{{ payer }}</span>
+        <div class="top_logo">
+          <span style="color: #ee8835" v-if="status == '0'">等待缴款</span>
+          <span style="color: #666666" v-else>已缴款</span>
         </div>
       </div>
-      <div class="form_box">
-        <div class="form_label">
-          <img alt='' src="../../public/images/phone/danwei.png" />
-          <span>执收单位名称</span>
-        </div>
-        <div class="form_span">
-          <span>{{ exeAgencyName }}</span>
+      <div class="box_nei">
+        <div class="top">
+          <span class="left">缴款码</span>
+          <span class="left_two">{{ payCode }}</span>
         </div>
       </div>
-      <div class="form_box" style="height: auto">
-        <div class="form_label">
-          <img alt='' src="../../public/images/phone/xiangmu.png" />
-          <span>收费项目</span>
+      <div class="box_nei">
+        <div class="top">
+          <span class="left">缴款人</span>
+          <span class="left_two">{{ payer }}</span>
+        </div> 
+      </div>
+      <div class="box_nei">
+        <div class="top">
+          <span class="left">执收单位名称</span>
+          <span class="left_two">{{ exeAgencyName }}</span>
         </div>
-        <div v-for="(v, k) in queryItem" :key="k">
-          <div class="form_span">
-            <span>{{ v.itemName }}</span
-            ><span class="right">{{ parseFloat(v.amt).toFixed(2) }}元</span>
+      </div>
+      <div class="box_nei">
+        <div class="top">
+          <span class="left">编制日期</span>
+          <span class="left_two">{{ fillDate }}</span>
+        </div>
+      </div>
+      <div class="box_nei">
+        <div class="top">
+          <span class="left">项目信息</span>
+        </div>
+      </div>
+      <div class="box_nei">
+        <div class="item_box" v-for="(v, k) in queryItem" :key="k">
+          <span class="left">{{ v.itemName }}</span>
+          <span class="right">{{ parseFloat(v.amt).toFixed(2) }}元</span>
+        </div>
+      </div>
+      <div class="xian">
+        <div class="box_nei">
+          <div class="top">
+            <!-- <img src="../../public/images/phone/shoufeih.png" /> -->
+            <span class="left">缴款金额</span>
+            <span class="left_two blod">{{ totalAmount }}元</span>
+          </div>
+        </div>
+        <div class="box_nei">
+          <div class="top">
+            <span class="left">备注</span>
+            <span class="left_two">{{ remarks }}</span>
           </div>
         </div>
       </div>
-      <div class="form_box">
-        <div class="form_label">
-          <img alt='' src="../../public/images/phone/bianzhih.png" />
-          <span>编制日期</span>
-        </div>
-        <div class="form_span">
-          <span>{{ fillDate }}</span>
-        </div>
-      </div>
-      <div class="form_box">
-        <div class="form_label">
-          <img alt='' src="../../public/images/phone/jiaonah.png" />
-          <span>缴纳金额</span>
-        </div>
-        <div class="form_span">
-          <span style="color: red; font-weight: bold">{{ totalAmount }}元</span>
-        </div>
-      </div>
-      <div class="form_box">
-        <div class="form_label">
-          <img alt='' src="../../public/images/phone/beizhuh.png" />
-          <span>备注</span>
-        </div>
-        <div class="form_span">
-          <span>{{ remarks }}</span>
-        </div>
-      </div>
-      <div class="button_box" v-if="status == 0">
-        <button @click="submit">确认支付</button>
-      </div>
-      <div class="button_box" v-else-if="einvoice_url != null">
-        <button @click="einvoiceUrl">电子票地址</button>
-      </div>
-      <div class="button_box" v-else>
-        <button @click="fanhui">返回</button>
-      </div>
     </div>
-    <img alt=''
-      class="paied"
-      src="../../public/images/phone/paied.png"
-      v-if="status != 0"
-    />
-    <div id="widget" class="zhebg">
+    <div class="button" v-if="status == 0">
+      <button @click="submit">确认支付</button>
+    </div>
+    <div class="button" v-else-if="einvoice_url != null">
+      <button @click="einvoiceUrl">电子票地址</button>
+    </div>
+    <div class="button" v-else>
+      <button @click="fanhui">返回</button>
+    </div>
+     <div id="widget" class="zhebg">
   </div>
 </template>
 
 <script>
 import { Button, Row, Col, Search, Dialog } from 'vant'
-// 大写金额
-import { Arabia_to_Chinese } from '../../public/js/money'
+import { createCashier } from '../../config/services.js'
 // 自动生成商户订单号
 import { guid } from '../../public/js/orderNo'
 import API from '../../config/api.js'
@@ -205,10 +193,14 @@ export default {
     submit() {
       let that = this
       const { order_no, merchant_no, totalAmount_fen, payCode } = this
+      const dateString = JSON.parse(localStorage.getItem('data'))
+      const query = dateString.data
+      const queryJson = query.payBook
 
       // 挂件调用
-      var ua = window.navigator.userAgent.toLowerCase()
-      var openid = localStorage.getItem('openId')
+      const ua = window.navigator.userAgent.toLowerCase()
+      const openid = localStorage.getItem('openId')
+      const userId = localStorage.getItem('userId')
       //通过正则表达式匹配ua中是否含有MicroMessenger字符串
       if (ua.match(/MicroMessenger/i) == 'micromessenger') {
         wx.miniProgram.getEnv(function (res) {
@@ -216,48 +208,74 @@ export default {
             // 走在小程序的逻辑
             // 微信小程序 监听页面变化
             that.miniProgramMark = true
-            thirdpay_widget.init({
-              container: 'widget', //挂件在当前页面放置的控件ID
-              merchant_no: merchant_no, //分配的商户号
-              merchant_order_no: order_no, //订单在商户系统中的订单号
-              amount: totalAmount_fen, //订单价格，单位：人民币 分
+            //收银台参数定义
+            const widget_param = {
+              paycode: payCode,
+              // 微信小程序需要的字段 openid
+              openid: openid,
+            }
+            const merchant_order_no = guid()
+            const widget_content = {
+              merchant_no: merchant_no,
+              merchant_order_no: merchant_order_no,
+              amount: totalAmount_fen,
               effective_time: '1c',
-              device_type: 'miniProgramH5',
-              widget_param: {
-                paycode: payCode,
-                // 微信小程序需要的字段 openid
-                openid: openid,
-              },
-              charge_url: API.createCharge, //商户服务端创建charge时的controller地址
-              charge_param: {
-                payCode: that.payCode,
-                paymentName: that.payer,
-                regionCode: API.region,
-                frontCallBackUrl: API.callback,
-              }, //(可选，用户自定义参数，若存在自定义参数则会通过 POST 方法透传给 charge_url
               version_no: '1.1',
+              subject: 'subject',
+              body: 'body',
+              device_type: 'miniProgramH5',
+              widget_param: widget_param,
+              userId: userId,
+              paymentName: that.exeAgencyName,
+              itemNameSet: that.queryItem,
+            }
+            const charge_param = {
+              payCode: that.payCode,
+              paymentName: that.payer,
+              regionCode: API.region,
+              frontCallBackUrl: API.callback,
+            }
+            createCashier({
+              charge_param: JSON.stringify(charge_param),
+              widget_content: JSON.stringify(widget_content),
+              frontCallBackUrl: API.callback,
+              merchantOrderNo: merchant_order_no,
+            }).then((res) => {
+              res.code === 0 ? that.showCashier(res.msg) : that.handleError(res.msg)
             })
           } else {
             // 在微信浏览器中
             // 但不是小程序中
-            thirdpay_widget.init({
-              container: 'widget', //挂件在当前页面放置的控件ID
-              merchant_no: merchant_no, //分配的商户号
-              merchant_order_no: order_no, //订单在商户系统中的订单号
-              amount: totalAmount_fen, //订单价格，单位：人民币 分
+            //收银台参数定义
+            const widget_param = {
+              paycode: payCode,
+              // 微信小程序需要的字段 openid
+            }
+            const merchant_order_no = guid()
+            const widget_content = {
+              merchant_no: merchant_no,
+              merchant_order_no: merchant_order_no,
+              amount: totalAmount_fen,
               effective_time: '1c',
-              device_type: 'phone',
-              widget_param: {
-                paycode: payCode,
-              },
-              charge_url: API.createCharge, //商户服务端创建charge时的controller地址
-              charge_param: {
-                payCode: that.payCode,
-                paymentName: that.payer,
-                regionCode: API.region,
-                frontCallBackUrl: API.callback,
-              }, //(可选，用户自定义参数，若存在自定义参数则会通过 POST 方法透传给 charge_url
               version_no: '1.1',
+              subject: 'subject',
+              body: 'body',
+              device_type: 'phone',
+              widget_param: widget_param,
+            }
+            const charge_param = {
+              payCode: that.payCode,
+              paymentName: that.payer,
+              regionCode: API.region,
+              frontCallBackUrl: API.callback,
+            }
+            createCashier({
+              charge_param: JSON.stringify(charge_param),
+              widget_content: JSON.stringify(widget_content),
+              frontCallBackUrl: API.callback,
+              merchantOrderNo: merchant_order_no,
+            }).then((res) => {
+              res.code === 0 ? that.showCashier(res.msg) : that.handleError(res.msg)
             })
           }
         })
@@ -272,29 +290,41 @@ export default {
             my.onMessage = function (e) {
               if (e.flag === 'authCode') {
                 that.miniProgramMark = true
-                thirdpay_widget.init({
-                  container: 'widget', //挂件在当前页面放置的控件ID
-                  merchant_no: merchant_no, //分配的商户号
-                  merchant_order_no: order_no, //订单在商户系统中的订单号
-                  amount: totalAmount_fen, //订单价格，单位：人民币 分
+                //收银台参数定义
+                const widget_param = {
+                  paycode: payCode,
+                  openid: e.authCode,
+                  aliAppId: e.appId,
+                }
+                const merchant_order_no = guid()
+                const widget_content = {
+                  merchant_no: merchant_no,
+                  merchant_order_no: merchant_order_no,
+                  amount: totalAmount_fen,
                   effective_time: '1c',
-                  device_type: 'miniProgramH5',
-                  widget_param: {
-                    paycode: payCode,
-                    // 微信小程序需要的字段 openid
-                    openid: e.authCode,
-                    aliAppId: e.appId,
-                  },
-                  charge_url: API.createCharge, //商户服务端创建charge时的controller地址
-                  charge_param: {
-                    payCode: that.payCode,
-                    paymentName: that.payer,
-                    regionCode: API.region,
-                    frontCallBackUrl: API.callback,
-                  }, //(可选，用户自定义参数，若存在自定义参数则会通过 POST 方法透传给 charge_url
                   version_no: '1.1',
+                  subject: 'subject',
+                  body: 'body',
+                  device_type: 'miniProgramH5',
+                  widget_param: widget_param,
+                  userId: e.userId,
+                  paymentName: that.exeAgencyName,
+                  itemNameSet: that.queryItem,
+                }
+                const charge_param = {
+                  payCode: that.payCode,
+                  paymentName: that.payer,
+                  regionCode: API.region,
+                  frontCallBackUrl: API.callback,
+                }
+                createCashier({
+                  charge_param: JSON.stringify(charge_param),
+                  widget_content: JSON.stringify(widget_content),
+                  frontCallBackUrl: API.callback,
+                  merchantOrderNo: merchant_order_no,
+                }).then((res) => {
+                  res.code === 0 ? that.showCashier(res.msg) : that.handleError(res.msg)
                 })
-                $('.zhebg').show()
               } else if (e.flag === 'paySuccess') {
                 // todo 接受成功后 需要处理回调页面
 
@@ -312,26 +342,46 @@ export default {
           }
         })
       } else {
-        thirdpay_widget.init({
-          container: 'widget', //挂件在当前页面放置的控件ID
-          merchant_no: merchant_no, //分配的商户号
-          merchant_order_no: order_no, //订单在商户系统中的订单号
-          amount: totalAmount_fen, //订单价格，单位：人民币 分
+        //收银台参数定义
+        const widget_param = {
+          paycode: payCode,
+        }
+        const merchant_order_no = guid()
+        const widget_content = {
+          merchant_no: merchant_no,
+          merchant_order_no: merchant_order_no,
+          amount: totalAmount_fen,
           effective_time: '1c',
-          device_type: 'phone',
-          widget_param: {
-            paycode: payCode,
-          },
-          charge_url: API.createCharge, //商户服务端创建charge时的controller地址
-          charge_param: {
-            payCode: that.payCode,
-            paymentName: that.payer,
-            regionCode: API.region,
-            frontCallBackUrl: API.callback,
-          }, //(可选，用户自定义参数，若存在自定义参数则会通过 POST 方法透传给 charge_url
           version_no: '1.1',
+          subject: 'subject',
+          body: 'body',
+          device_type: 'phone',
+          widget_param: widget_param,
+        }
+        const charge_param = {
+          payCode: that.payCode,
+          paymentName: that.payer,
+          regionCode: API.region,
+          frontCallBackUrl: API.callback,
+        }
+        createCashier({
+          charge_param: JSON.stringify(charge_param),
+          widget_content: JSON.stringify(widget_content),
+          frontCallBackUrl: API.callback,
+          merchantOrderNo: merchant_order_no,
+        }).then((res) => {
+          res.code === 0 ? that.showCashier(res.msg) : that.handleError(res.msg)
         })
       }
+    },
+    showCashier(pageParams) {
+      document.write(pageParams)
+    },
+    // 失败提示
+    handleError(err) {
+      Dialog.alert({
+        message: err,
+      }).then(() => {})
     },
     fanhui() {
       window.history.go(-1)
@@ -350,89 +400,113 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.paied {
-  position: absolute;
-  width: 100px;
-  top: 68px;
-  right: 50px;
+.blod {
+  font-weight: bold;
 }
-.form {
+.button {
   width: 100%;
-  height: 100px;
-  padding-top: 20px;
-}
-.form_box {
-  width: 100%;
-  height: 80px;
-}
-.form_label {
-  img {
-    margin-left: 4%;
-    width: 25px;
-  }
-  span {
-    margin-left: 5px;
-    vertical-align: -3px;
-    font-size: 18px;
-    font-weight: bold;
-  }
-}
-.form_span {
-  position: relative;
-  margin: 10px auto;
-  width: 90%;
-  span {
-    font-size: 17px;
-    color: #4690ff;
-  }
-  span.right {
-    position: absolute;
-    right: 0;
-  }
-}
-.form_input_warn {
-  width: 100%;
-  margin-top: 8px;
-  span {
-    margin-left: 5%;
-    font-size: 13px;
-    color: red;
-  }
-}
-
-.form_input_code {
-  margin-top: 10px;
-  width: 100%;
-  input {
-    color: #999ea0;
-    font-size: 17px;
-    padding-left: 10px;
-    height: 35px;
-    background-color: #f4f4f4;
-    border: 0px solid #ddd;
-    width: 46%;
-    margin-left: 4%;
-    border-radius: 4px;
-  }
-  img {
-    vertical-align: -12px;
-    width: 86px;
-    height: 35px;
-  }
-}
-
-.button_box {
-  width: 100%;
-  margin-top: 20px;
+  margin-top: 30px;
   text-align: center;
   button {
-    width: 94%;
-    height: 44px;
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #4690ff), color-stop(100%, #556ffe));
-    border-radius: 4px;
-    border: 0px;
-    color: white;
-    font-size: 19px;
+    width: 90%;
+    height: 46px;
+    background: #4a71b7;
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: #ffffff;
+    border: 0;
+  }
+}
+.box {
+  position: relative;
+  width: 94%;
+  margin: 50px auto 0;
+  background: #ffffff;
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 7px;
+  padding-top: 40px;
+  img {
+    position: absolute;
+    left: 50%;
+    top: -35px;
+    margin-left: -35px;
+    width: 70px;
+  }
+  .box_nei {
+    width: 92%;
+    margin: 0 auto;
+    .top_logo {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      span {
+        font-size: 16px;
+        font-family: PingFang SC;
+      }
+    }
+    .top {
+      display: flex;
+      padding-top: 10px;
+      align-items: baseline;
+      width: 100%;
+      min-height: 40px;
+      img {
+        position: absolute;
+        top: 18px;
+        width: 20px;
+      }
+      .left {
+        flex: 1;
+        font-size: 16px;
+        font-family: PingFang SC;
+        color: #999999;
+      }
+      .left_two {
+        flex: 2;
+        font-size: 16px;
+        font-family: PingFang SC;
+        color: #464a4c;
+        text-align: right;
+      }
+    }
+    .bottom {
+      position: relative;
+      width: 100%;
+      height: 40px;
+      span {
+        position: absolute;
+        top: 10px;
+        left: 0;
+        font-size: 16px;
+        font-family: PingFang SC;
+        font-weight: 400;
+        color: #464a4c;
+      }
+    }
+  }
+  .item_box {
+    width: 100%;
+    margin: 10px auto;
+    display: flex;
+
+    span {
+      font-size: 15px;
+    }
+    .left {
+      color: #999999;
+      flex: 2;
+    }
+    .right {
+      text-align: right;
+      flex: 1;
+    }
+  }
+  .xian {
+    width: 100%;
+    border-top: 1px dashed #f3f3f3;
+    padding-bottom: 4px;
   }
 }
 </style>

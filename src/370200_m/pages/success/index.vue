@@ -1,16 +1,19 @@
 <template>
   <div class="mainwrap">
     <div class="div_img">
-      <img src="../../public/images/phone/success.png" alt="" />
+      <img v-if="type == 'wx'" src="../../public/images/phone/success_wx.png" alt="" />
+      <img v-else src="../../public/images/phone/success.png" alt="" />
       <div style="margin-top: 10px">
         <span>缴款成功</span>
       </div>
     </div>
     <div class="div_button" v-if="url != null">
-      <button @click="einvoice_url">查看电子票</button>
+      <button @click="einvoice_url" :style="type == 'wx' ? 'color:#55B76B;border:1px solid #55B76B' : null">
+        查看电子票
+      </button>
     </div>
     <div class="div_button" else>
-      <button @click="home">返回首页</button>
+      <button @click="home" :style="type == 'wx' ? 'color:#55B76B;border:1px solid #55B76B' : null">返回首页</button>
     </div>
   </div>
 </template>
@@ -32,10 +35,12 @@ export default {
       merchant_order_no: '',
       spanPay: '缴款成功',
       url: '', //电子票地址
+      type: 'web',
     }
   },
   //加载生命周期
   created() {
+    this.type = localStorage.getItem('type')
     const url = location.href
     console.log('url为' + url)
     const rsa = url.substring(url.indexOf('=') + 1)
@@ -90,6 +95,7 @@ export default {
   text-align: center;
   img {
     margin-top: 56%;
+    width: 190px;
   }
   span {
     font-size: 16px;

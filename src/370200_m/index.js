@@ -9,6 +9,7 @@ import App from './index.vue';
 import Home from './pages/home/index.vue';
 import Acityservice from './pages/acityservice/index.vue';
 import Index_pay from './pages/index_pay/index.vue';
+import Index_pay_wx from './pages/index_pay_wx/index.vue';
 import Index_charge from './pages/Index_charge/index.vue';
 import Success from './pages/success/index.vue';
 import Fail from './pages/fail/index.vue';
@@ -42,6 +43,11 @@ const routes = [
     path: '/phone_pay', //非税缴款界面
     name: 'phone_pay',
     component: Index_pay,
+  },
+  {
+    path: '/index_pay_wx', //非税缴款界面微信页面
+    name: 'index_pay_wx',
+    component: Index_pay_wx,
   },
   {
     path: '/index_charge', //缴款书界面

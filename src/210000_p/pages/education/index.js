@@ -113,47 +113,63 @@ class school extends React.Component {
       );
     });
     return (
-      <div>
-        <div>
-          <div className="outForm_pay">
-            <div className="school_div">
-              <div className="school_div_on">
-                <Form {...layout}>
-                  <Form.Item
-                    label={<span style={{ fontSize: 17 }}>学校区域</span>}
-                  >
-                    <Select
-                      labelInValue
-                      placeholder="请选择学校区域"
-                      size="large"
-                      onChange={this.cityChange}
-                      notFoundContent={<span>对不起,暂无学校区域信息</span>}
-                    >
-                      {cityModel}
-                    </Select>
-                  </Form.Item>
-                  <Form.Item
-                    style={{ marginTop: 40 }}
-                    label={<span style={{ fontSize: 17 }}>学校名称</span>}
-                  >
-                    <Select
-                      labelInValue
-                      onChange={this.schoolChange}
-                      placeholder="请选择学校"
-                      size="large"
-                      notFoundContent={
-                        <span>对不起,您选择的区域暂无学校信息</span>
-                      }
-                    >
-                      {schoolModel}
-                    </Select>
-                  </Form.Item>
-                  <Form.Item {...tailLayout} style={{ marginTop: 50 }}>
-                    <button className="school_button" onClick={this.submit}>
-                      下一步
-                    </button>
-                  </Form.Item>
-                </Form>
+      <div className="body">
+        <div className="outForm_pay_ningxia">
+          <div className="onForm_pay">
+            <div className="onForm_pay_top">
+              <span>统一支付公共平台</span>
+              <span className="right">
+                当前位置:&nbsp; 首页 &nbsp;{'>'}&nbsp;教育缴费
+              </span>
+            </div>
+
+            <div className="outForm_pay_qingdao">
+              <div className="middle_pay">
+                <div className="middle_pay_left">
+                  <img src={require('../../public/images/school_left.png')} />
+                </div>
+                <div className="middle_pay_right">
+                  <div className="school_div_on">
+                    <Form {...layout}>
+                      <Form.Item
+                        label={<span style={{ fontSize: 17 }}>学校区域</span>}
+                      >
+                        <Select
+                          className="select"
+                          labelInValue
+                          placeholder="请选择学校区域"
+                          size="large"
+                          onChange={this.cityChange}
+                          notFoundContent={<span>对不起,暂无学校区域信息</span>}
+                        >
+                          {cityModel}
+                        </Select>
+                      </Form.Item>
+                      <Form.Item
+                        style={{ marginTop: 40 }}
+                        label={<span style={{ fontSize: 17 }}>学校名称</span>}
+                      >
+                        <Select
+                          className="select"
+                          labelInValue
+                          onChange={this.schoolChange}
+                          placeholder="请选择学校"
+                          size="large"
+                          notFoundContent={
+                            <span>对不起,您选择的区域暂无学校信息</span>
+                          }
+                        >
+                          {schoolModel}
+                        </Select>
+                      </Form.Item>
+                      <Form.Item {...tailLayout} style={{ marginTop: 50 }}>
+                        <button className="school_button" onClick={this.submit}>
+                          下一步
+                        </button>
+                      </Form.Item>
+                    </Form>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

@@ -5,11 +5,12 @@
       .heada {
         background: url(./public/images/tou.png) no-repeat;
         width: 100%;
-        height: 196px;
-        background-size: cover;
-        -webkit-background-size: cover;
-        -o-background-size: cover;
-        background-position: center 0;
+        height: 150px;
+        background-size: 100%;
+        -webkit-background-size: 100%;
+        -o-background-size: 100%;
+        /* background-position: center 0; */
+        background-position: center center;
       }
 
       .bottom {
@@ -21,6 +22,39 @@
         -o-background-size: cover;
         background-position: center 0;
       }
+
+      .footer_bg {
+        width: 100%;
+        height: 90px;
+        margin: 0 auto;
+        background-color: #013d79;
+      }
+
+      .footer {
+        width: 1000px;
+        height: 90px;
+        margin: 1px auto;
+      }
+
+      .footer_left {
+        float: left;
+        width: 200px;
+      }
+
+      .footer_middle {
+        float: left;
+        color: #fff;
+        width: 600px;
+        padding: 10px 0px;
+        line-height: 35px;
+        text-align: center;
+      }
+
+      .footer_right {
+        float: left;
+        width: 200px;
+        margin: 5px 0 0 0;
+      }
     </style>
 
   </block>
@@ -28,8 +62,36 @@
     <div class="heada">
     </div>
     <div id="root"></div>
-    <div class="bottom">
+    <div class="footer_bg" style="height: 130px;">
+      <div class="footer" style="height: 130px;">
+        <div class="footer_left" style="text-align: right; margin-top: 18px;"><a
+            href="http://bszs.conac.cn/sitename?method=show&amp;id=06A070A7E8F67F0FE053022819AC605A"
+            target="_blank"><img border="0" src="http://qdcz.qingdao.gov.cn/qdfimages/red2.png"></a></div>
+
+        <div class="footer_middle"><a href="" target="_blank">
+            <font color="#ffffff">网站首页</font>
+          </a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="" target="_blank">
+            <font color="#ffffff">网站地图</font>
+          </a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="" target="_blank">
+            <font color="#ffffff">使用帮助</font>
+          </a><br>
+          <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=37020202001040"
+            style="height: 20px; line-height: 20px; text-decoration: none; display: inline-block;" target="_blank"><img
+              src="http://www.qingdao.gov.cn/n172/images/beian.png" style="float: left;"> </a><a
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=37020202001040"
+            style="height: 20px; color: rgb(255, 255, 255); line-height: 20px; text-decoration: none; display: inline-block;"
+            target="_blank">鲁公网安备 37020202001040号</a> 网站标识码3702000054　<a href="http://beian.miit.gov.cn/"
+            style="color: rgb(255, 255, 255);" target="_blank">鲁ICP备11027714号</a><br>
+          青岛市财政局版权所有&nbsp;&nbsp;会计咨询电话：85855870、85855871&nbsp;&nbsp;&nbsp;办公电话：85855291
+        </div>
+
+        <div class="footer_right" style="margin-top: 18px;">
+          <script id="_jiucuo_" sitecode="3702000054" src="https://zfwzgl.www.gov.cn/exposure/jiucuo.js"></script>
+        </div>
+      </div>
     </div>
+    <!-- <div class="bottom">
+    </div> -->
   </block>
   <block name="footer">
     <script src="./index.js"></script>

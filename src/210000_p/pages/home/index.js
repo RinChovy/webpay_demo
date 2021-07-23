@@ -27,9 +27,6 @@ class Home extends React.Component {
       this.props.history.push({ pathname: `/${url}` });
     }
   };
-  // routers = url => {
-  //   this.props.history.push({ pathname: '/success', query: '太对了' });
-  // };
 
   render() {
     const { list, yunwei } = this.state;
@@ -53,10 +50,15 @@ class Home extends React.Component {
     return (
       <div>
         <div className="outForm">
-          <div className="onForm">
-            {listModel}
-            <div className="home_span_warn">
-              <span>{yunwei}</span>
+          <div className="onForm_top">
+            <div></div>
+          </div>
+          <div className="onForm_bottom">
+            <div className="onForm">
+              {listModel}
+              <div className="home_span_warn">
+                <span>{yunwei}</span>
+              </div>
             </div>
           </div>
         </div>

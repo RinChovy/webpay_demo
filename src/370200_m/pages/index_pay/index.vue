@@ -3,7 +3,6 @@
     <div class="form">
       <div class="form_box">
         <div class="form_label">
-          <img alt="" src="../../public/images/paycode.png" />
           <span>缴款码</span>
         </div>
         <div class="form_input">
@@ -15,7 +14,6 @@
       </div>
       <div class="form_box">
         <div class="form_label">
-          <img alt="" src="../../public/images/payname.png" />
           <span>缴款人</span>
         </div>
         <div class="form_input">
@@ -27,21 +25,24 @@
       </div>
       <div class="form_box">
         <div class="form_label">
-          <img alt="" src="../../public/images/code.png" />
           <span>验证码</span>
         </div>
         <div class="form_input_code">
           <input placeholder="请输入验证码" v-model="code" />
           <img alt="" :src="codeUrlT" />
-          <span style="color: #4690ff; font-size: 12px" @click="changeCode">换一张</span>
+          <span style="color: #4690ff" @click="changeCode">换一张</span>
         </div>
         <div class="form_input_warn">
           <span>{{ codeWarn }}</span>
         </div>
       </div>
       <div class="button_box">
-        <button @click="submit" v-if="disabled == true">下一步</button>
-        <button @click="submit" disabled="disabled" v-else>下一步</button>
+        <button @click="submit" :style="type == 'wx' ? 'background-color:#55B76B' : null" v-if="disabled == true">
+          下一步
+        </button>
+        <button @click="submit" :style="type == 'wx' ? 'background-color:#55B76B' : null" disabled="disabled" v-else>
+          下一步
+        </button>
       </div>
       <div class="footerc" style="line-height: 20px; margin-top: 24px">
         <span style="display: block">版本所有：青岛市财政局</span>
@@ -51,6 +52,7 @@
     </div>
   </div>
 </template>
+
 
 <script>
 import { Button, Row, Col, Search, Dialog } from 'vant'
@@ -85,9 +87,17 @@ export default {
       codeWarn: '',
       //按钮失效
       disabled: true,
+      //type判断是否微信
+      type: 'web',
     }
   },
   mounted() {
+    const ua = window.navigator.userAgent.toLowerCase()
+    if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+      this.type = 'wx'
+    } else {
+      this.type = 'web'
+    }
     if (navigator.userAgent.toLowerCase().indexOf('micromessenger') != -1) {
       // 否则就是在微信中 引入微信js
       // document.writeln('<script src="https://res.wx.qq.com/open/js/jweixin-1.3.2.js"' + '>' + '<' + '/' + 'script>');
@@ -199,6 +209,9 @@ export default {
 
     handleSuccess(data) {
       localStorage.setItem('data', JSON.stringify(data))
+      if (this.type == 'wx') {
+        localStorage.setItem('type', 'wx')
+      }
       this.$router.push({
         path: '/index_charge',
         name: 'index_charge',
@@ -238,18 +251,16 @@ export default {
 }
 .form_box {
   width: 100%;
-  height: 110px;
+  height: 100px;
 }
 .form_label {
-  img {
-    margin-left: 4%;
-    width: 25px;
-  }
   span {
-    margin-left: 5px;
+    margin-left: 5%;
     vertical-align: -3px;
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 17px;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: #999999;
   }
 }
 .form_input {
@@ -257,14 +268,22 @@ export default {
   width: 100%;
   text-align: center;
   input {
-    color: #999ea0;
-    font-size: 17px;
-    padding-left: 10px;
+    color: #333333;
+    font-size: 16px;
     height: 35px;
-    background-color: #f4f4f4;
+    background-color: transparent;
     border: 0px solid #ddd;
+    border-bottom: 1px solid #eeeef1;
     width: 90%;
-    border-radius: 4px;
+  }
+  input::-webkit-input-placeholder {
+    color: #c3c3c4;
+  }
+  input:-moz-placeholder {
+    color: #c3c3c4;
+  }
+  input:-ms-input-placeholder {
+    color: #c3c3c4;
   }
 }
 .form_input_warn {
@@ -281,15 +300,23 @@ export default {
   margin-top: 10px;
   width: 100%;
   input {
-    color: #999ea0;
-    font-size: 17px;
-    padding-left: 10px;
+    color: #333333;
+    font-size: 16px;
     height: 35px;
-    background-color: #f4f4f4;
+    background-color: transparent;
     border: 0px solid #ddd;
+    border-bottom: 1px solid #eeeef1;
     width: 46%;
-    margin-left: 4%;
-    border-radius: 4px;
+    margin-left: 5%;
+  }
+  input::-webkit-input-placeholder {
+    color: #c3c3c4;
+  }
+  input:-moz-placeholder {
+    color: #c3c3c4;
+  }
+  input:-ms-input-placeholder {
+    color: #c3c3c4;
   }
   img {
     vertical-align: -12px;
@@ -304,12 +331,12 @@ export default {
   text-align: center;
   button {
     width: 94%;
-    height: 44px;
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #4690ff), color-stop(100%, #556ffe));
+    height: 48px;
+    background: #327af0;
     border-radius: 4px;
     border: 0px;
     color: white;
-    font-size: 19px;
+    font-size: 16px;
   }
 }
 .footerc {

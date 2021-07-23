@@ -58,8 +58,7 @@ export default {
   },
   mounted() {
     const user_id = localStorage.getItem('userId')
-     let appId=localStorage.getItem('appId');
-    if (!user_id||appId!=="2019090566921553") {
+    if (!user_id) {
       ap &&
         ap.getAuthCode(
           {
@@ -77,8 +76,6 @@ export default {
                   if (resData.code === 0) {
                     localStorage.removeItem('userId')
                     localStorage.setItem('userId', resData.data.user_id)
-                    localStorage.removeItem('appId')
-                    localStorage.setItem('appId', '2019090566921553')
                   } else {
                     Dialog.alert({
                       message: resData.msg,
@@ -119,17 +116,17 @@ export default {
 .headern {
   width: 100%;
   background: url('../../public/images/phone_background.png') no-repeat;
-  background-size: cover;
+  background-size: 100%;
   height: 640px;
-  padding-top: 52%;
+  padding-top: 44%;
 }
 .middle {
   width: 90%;
-  height: 200px;
+  height: 134px;
   background: white;
   margin: 0 auto 0;
   border-radius: 20px;
-  box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 0px 30px 0px rgba(146, 146, 146, 0.18);
   display: flex;
   justify-content: space-around;
 }
@@ -161,20 +158,27 @@ export default {
   }
 }
 .box {
-  margin-top: 20px;
-  text-align: center;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column;
   div {
     height: 30px;
     display: flex;
   }
   img {
-    width: 90px;
+    width: 68px;
   }
   span {
     width: 100%;
     vertical-align: top;
-    font-size: 12px;
+    font-size: 14px;
+    margin-top: 10px;
   }
+}
+.box:first-child {
+  border-right: 1px solid #f1f1f1;
 }
 
 .bottom_span {

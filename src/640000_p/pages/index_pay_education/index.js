@@ -206,6 +206,15 @@ class education extends React.Component {
       <div className="body">
         <div className="outForm_pay_ningxia">
           <div className="onForm_pay">
+            <div className="onForm_pay_top">
+              <img src={require('../../public/images/top_icon.png')} />
+              <span>
+                您当前位置: 统一公共支付 {'>>'}{' '}
+                {localStorage.getItem('contents')
+                  ? localStorage.getItem('contents')
+                  : '教育缴款'}
+              </span>
+            </div>
             <div className="outForm_pay_qingdao">
               <div className="middle_pay">
                 <div className="middle_pay_left">
