@@ -1,6 +1,6 @@
 import base from 'utils/baseURL';
 
-const callback = 'https://370200.epayservice.cn/370200_p/index.html#/success'; // 青岛传给后台的回调地址
+const callback = 'https://370200.epayservice.cn/webpay_370200/#/success'; // 青岛传给后台的回调地址
 // const callback = 'http://192.168.1.120:8080/370200_p/index.html#/success'; // 测试传给后台的回调地址
 
 const region = '370200'; // 青岛区划号
@@ -19,6 +19,7 @@ const api = {
   queryPayInfo: base + '/common/queryPayInfo.do', //缴款书提交接口
   createCharge: base + '/common/createCharge', //缴费接口
   success: base + '/callback/frontnotice', //成功回调接口
+  createCashier: base + '/common/createCashier', //收银台接口
 };
 
 export { api };

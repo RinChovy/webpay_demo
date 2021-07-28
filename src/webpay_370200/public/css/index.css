@@ -4,6 +4,16 @@ select,
 textarea {
   outline: none;
 }
+.body {
+  background: #f1f7ff;
+}
+.outForm_pay_ningxia {
+  position: relative;
+  width: 1270px;
+  height: 590px;
+  margin: 0 auto;
+  padding-top: 20px;
+}
 .home_span_warn {
   position: absolute;
   bottom: -40px;
@@ -22,6 +32,17 @@ textarea {
   background: url(../images/qingdao3.png) no-repeat center;
   background-size: cover;
 }
+.outForm_pay_qingdao_charge {
+  position: relative;
+  width: 100%;
+  margin: 10px auto 0;
+  background-size: cover;
+  background: white;
+}
+.middle_pay_charge {
+  margin: 0 auto;
+  display: flex;
+}
 .onForm {
   position: absolute;
   display: flex;
@@ -37,6 +58,28 @@ textarea {
   width: 100%;
   background: #ffffff;
   -webkit-box-shadow: 0 0px 9px rgba(0, 0, 0, 0.1);
+}
+.onForm_pay_charge {
+  margin-left: 4px;
+  width: 100%;
+  height: 560px;
+  background: #f1f7ff;
+}
+.onForm_pay_top {
+  width: 100%;
+  height: 47px;
+}
+.onForm_pay_top img {
+  vertical-align: -7%;
+  margin-left: 20px;
+  line-height: 47px;
+}
+.onForm_pay_top span {
+  font-size: 18px;
+  font-family: PingFang SC;
+  font-weight: 500;
+  margin-left: 10px;
+  line-height: 47px;
 }
 .top_pay {
   margin-top: 20px;
@@ -61,6 +104,11 @@ textarea {
   vertical-align: top;
   width: 55%;
   height: 390px;
+}
+.middle_pay_right_charge {
+  display: inline-block;
+  vertical-align: top;
+  flex: 1;
 }
 .middle_pay_right_org {
   margin-top: 16%;
@@ -136,6 +184,14 @@ textarea {
   width: 153px;
   height: 40px;
 }
+.button_dianzi {
+  color: white !important;
+  border: 1px solid #2d5da6 !important;
+  background: #2d5da6 !important;
+  border-radius: 4px !important;
+  width: 157px !important;
+  height: 41px !important;
+}
 .verificationCode {
   width: 100px;
   height: 37px;
@@ -155,12 +211,19 @@ p {
   padding-top: 20px;
   margin: 10px auto;
 }
-.bottom_payInfo {
-  /* border: 1px solid #ccc; */
-  width: 900px;
+.middle_payInfo_charge {
+  position: relative;
+  width: 1190px;
+  /* height: 430px; */
   padding-top: 20px;
   margin: 10px auto;
-  text-align: center;
+}
+.bottom_payInfo {
+  /* border: 1px solid #ccc; */
+  width: 1104px;
+  padding-top: 8px;
+  margin: 10px auto;
+  text-align: right;
 }
 .title_t {
   text-align: center;
@@ -176,32 +239,32 @@ p {
   text-align: center;
   text-align: -moz-center;
   text-align: -webkit-center;
-  width: 820px;
+  width: 1105px;
   height: 250px;
   margin: 14px auto;
 }
 .url_button {
-  background-color: #3c76a6;
-  color: white;
-  width: 140px;
-  height: 35px;
-  font-size: 16px;
-  font-weight: bold;
-  border-radius: 5px;
-  margin-top: 20px;
-  border: 0px;
+  width: 148px;
+  height: 36px;
+  border: 1px solid #375ea1;
+  background: white;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: PingFang SC;
+  font-weight: 500;
+  color: #375ea1;
 }
 .url_button_clear {
   margin-left: 20px;
-  background-color: #3c76a6;
-  color: white;
-  width: 140px;
-  height: 35px;
-  font-size: 16px;
-  font-weight: bold;
-  border-radius: 5px;
-  margin-top: 20px;
-  border: 0px;
+  width: 148px;
+  height: 36px;
+  border: 1px solid #375ea1;
+  background: white;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: PingFang SC;
+  font-weight: 500;
+  color: #375ea1;
 }
 .row {
   height: 300px;

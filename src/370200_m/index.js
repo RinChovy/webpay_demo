@@ -91,8 +91,8 @@ const routes = [
 ];
 const router = new VueRouter({
   mode: 'history',
-  // base: '/webpay_370200',
-  base: '/370200',
+  base: '/webpay_370200',
+  // base: '/370200',
   routes,
 });
 
