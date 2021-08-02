@@ -7,40 +7,18 @@ import style from '../../public/css/index.css';
 class NonTaxPay extends React.Component {
   formRef = React.createRef();
   state = {
-    warnSpan: '“非税缴费技术服务电话 0532-85856831”',
     codeUrl: api.getCo, //验证码
     loadings: [], //等待时间
+    menuState: '001', //决定显示隐藏
     buttonList: [
       {
         name: '非税缴款',
         id: '001',
         class: 'box_button box_button_hover',
       },
-      // {
-      //     'name':'缴款查询',
-      //     'id':'002'
-      // },
       {
-        name: '教育缴费',
-        id: '003',
-        class: 'box_button',
-      },
-      // {
-      //     'name':'法院诉讼缴费',
-      //     'id':'004'
-      // },
-      // {
-      //     'name':'出入境',
-      //     'id':'005'
-      // },
-      {
-        name: '不动产',
-        id: '006',
-        class: 'box_button',
-      },
-      {
-        name: '更多',
-        id: '007',
+        name: '缴款查询',
+        id: '002',
         class: 'box_button',
       },
     ],
@@ -75,7 +53,6 @@ class NonTaxPay extends React.Component {
   //提交
   handleFormSubmit = (values) => {
     //防止重复点击
-    const { loadings } = this.state;
     this.setState(({ loadings }) => {
       const newLoadings = [...loadings];
       newLoadings[1] = true;
@@ -83,13 +60,28 @@ class NonTaxPay extends React.Component {
         loadings: newLoadings,
       };
     });
-    queryPayInfo({
-      payCode: values.payCode,
-      payPeople: values.payName,
-      code: values.verificationCode,
-    }).then((res) => {
-      res.code === 0 ? this.handleSuccess(res.data) : this.handleError(res.msg);
-    });
+    switch (values) {
+      case '001':
+        queryPayInfo({
+          payCode: values.payCode,
+          payPeople: values.payName,
+          code: values.verificationCode,
+        }).then((res) => {
+          res.code === 0 ? this.handleSuccess(res.data) : this.handleError(res.msg);
+        })
+        break;
+      case '002':
+        queryPayInfo({
+          payCode: values.payCode,
+          payPeople: values.payName,
+          code: values.verificationCode,
+        }).then((res) => {
+          res.code === 0 ? this.handleSuccessSelect(res.data) : this.handleError(res.msg);
+        })
+        break;
+      default: null
+    }
+
   };
 
   // 提交成功
@@ -97,7 +89,13 @@ class NonTaxPay extends React.Component {
     localStorage.setItem('data', JSON.stringify(data));
     this.props.history.push({
       pathname: '/index_charge',
-      // query: res.data,
+    });
+  };
+   // 提交成功-前往查询页
+   handleSuccessSelect = (data) => {
+    localStorage.setItem('data', JSON.stringify(data));
+    this.props.history.push({
+      pathname: '/index_charge',
     });
   };
   // 提交失败1
@@ -133,10 +131,11 @@ class NonTaxPay extends React.Component {
     };
     this.setState({
       buttonList: buttonList,
+      menuState: menu.id
     });
   };
   render() {
-    const { codeUrl, warnSpan, loadings, buttonList } = this.state;
+    const { codeUrl, loadings, buttonList, menuState } = this.state;
     const layout = {
       labelCol: {
         span: 8,
@@ -147,7 +146,7 @@ class NonTaxPay extends React.Component {
     };
     const tailLayout = {
       wrapperCol: {
-        offset: 2,
+        offset: 5,
         span: 20,
       },
     };
@@ -164,74 +163,96 @@ class NonTaxPay extends React.Component {
           <div className="outForm_pay_qingdao">
             <div className="top_logo">
               <div className="top_logo_span"></div>
-              <span style={{ verticalAlign: 'top', marginLeft: 10 }}>
+              <span style={{ verticalAlign: 'top', }}>
                 缴费业务
               </span>
             </div>
             <div className="manu">{menu}</div>
-            <div className="middle_pay">
-              <div className="middle_pay_left"></div>
-              <div className="middle_pay_right">
-                <div className="middle_pay_right_org">
-                  <Form
-                    {...layout}
-                    name="basic"
-                    initialValues={{
-                      remember: true,
-                    }}
-                    ref={this.formRef}
-                    onFinish={this.handleFormSubmit}
-                    onFinishFailed={this.onFinishFailed}
-                  >
-                    <div className="middle_box">
-                      <span style={{ fontSize: 15, color: '#787584' }}>
-                        缴款通知书编号
-                      </span>
-                      <span style={{ fontSize: 15, color: 'red' }}>或</span>
-                      <span style={{ fontSize: 15, color: '#787584' }}>
-                        交罚决定书编号:
-                      </span>
-                      <Form.Item
-                        style={{ marginTop: 6 }}
-                        name="payCode"
-                        rules={[
-                          {
-                            required: true,
-                            message: '请输入缴款码',
-                          },
-                          // {
-                          //   pattern: api.regular,
-                          //   message: api.regularText,
-                          // },
-                        ]}
-                      >
-                        <Input size="large" style={{ width: 376 }} />
-                      </Form.Item>
-
-                      <span style={{ fontSize: 15, color: '#787584' }}>
-                        缴款人：
-                      </span>
-
-                      <Form.Item
-                        style={{ marginTop: 6 }}
-                        name="payName"
-                        rules={[
-                          {
-                            required: true,
-                            message: '请输入缴款人',
-                          },
-                        ]}
-                      >
-                        <Input size="large" style={{ width: 376 }} />
-                      </Form.Item>
-
-                      <span style={{ fontSize: 15, color: '#787584' }}>
-                        验证码：
-                      </span>
+            {menuState === '001' && <div className="middle_pay">
+              <div className="middle_pay_one">
+                <img src={require('../../public/images/left_2.png')} />
+              </div>
+              <div className="middle_pay_two">
+                <Form
+                  {...layout}
+                  name="basic"
+                  initialValues={{
+                    remember: true,
+                  }}
+                  ref={this.formRef}
+                  onFinish={() => this.handleFormSubmit('001')}
+                  onFinishFailed={this.onFinishFailed}
+                >
+                  <div className="middle_box">
+                    <Form.Item
+                      style={{ marginLeft: '-140px', marginTop: 40 }}
+                      label={
+                        <span style={{ fontSize: 16,color: '#666666' }}>缴款码</span>
+                      }
+                    >
                       <Row gutter={8}>
                         <Col span={12}>
                           <Form.Item
-                            style={{ marginTop: 6 }}
+                            style={{ width: 400 }}
+                            name="payCode"
+                            rules={[
+                              {
+                                required: true,
+                                message: '请输入缴款码',
+                              },
+                              {
+                                pattern: api.regular,
+                                message: api.regularText,
+                              },
+                            ]}
+                          >
+                            <Input
+                              className="orgInput"
+                              size="large"
+                              style={{ width: 400 }}
+                            />
+                          </Form.Item>
+                        </Col>
+                      </Row>
+                    </Form.Item>
+                    <Form.Item
+                      style={{ marginLeft: '-140px', marginTop: -20 }}
+                      label={
+
+                        <span style={{ fontSize: 16,color: '#666666'  }}>缴款人</span>
+                      }
+                    >
+                      <Row gutter={8}>
+                        <Col span={12}>
+                          <Form.Item
+                            style={{ width: 400 }}
+                            name="payName"
+                            rules={[
+                              {
+                                required: true,
+                                message: '请输入缴款人',
+                              }
+                            ]}
+                          >
+                            <Input
+                              className="orgInput"
+                              size="large"
+                              style={{ width: 400 }}
+                            />
+                          </Form.Item>
+                        </Col>
+                      </Row>
+                    </Form.Item>
+                    <Form.Item
+                      // style={{ marginTop: -20 }}
+                      style={{ marginLeft: '-140px', marginTop: -20 }}
+                      label={
+                        <span style={{ fontSize: 16,color: '#666666'  }}>验证码</span>
+                      }
+                    >
+                      <Row gutter={8}>
+                        <Col span={12}>
+                          <Form.Item
                             name="verificationCode"
                             rules={[
                               {
@@ -240,11 +261,16 @@ class NonTaxPay extends React.Component {
                               },
                             ]}
                           >
-                            <Input size="large" style={{ width: 180 }} />
+                            <Input
+                              className="orgInput"
+                              size="large"
+                              style={{ width: 200 }}
+                            />
                           </Form.Item>
                         </Col>
                         <Col span={12}>
                           <img
+                            style={{ marginTop: 2 }}
                             className="verificationCode"
                             alt="验证码"
                             src={codeUrl}
@@ -252,8 +278,9 @@ class NonTaxPay extends React.Component {
                           <span
                             style={{
                               marginLeft: 20,
-                              cursor: 'pointer',
-                              color: '#1890ff',
+                              fontSize: 15,
+                              fontWeight: 'bold',
+                              color: '#FF6100',
                             }}
                             onClick={this.changeImg}
                           >
@@ -261,41 +288,196 @@ class NonTaxPay extends React.Component {
                           </span>
                         </Col>
                       </Row>
-                    </div>
-
-                    <Form.Item {...tailLayout} style={{ marginTop: 10 }}>
-                      <Button
-                        className="button_submit"
-                        size="large"
-                        type="primary"
-                        htmlType="submit"
-                        loading={loadings[1]}
-                      >
-                        下一步
-                      </Button>
-
-                      <Button
-                        className="button_clear"
-                        size="large"
-                        onClick={this.onReset}
-                      >
-                        清空
-                      </Button>
                     </Form.Item>
-                    <div
-                      style={{
-                        marginTop: '-9px',
-                        width: '100%',
-                        textAlign: 'center',
-                        fontWeight: 'bold',
-                      }}
+
+
+                  </div>
+
+                  <Form.Item {...tailLayout} style={{ marginTop: 10 }}>
+                    <Button
+                      className="button_submit"
+                      size="large"
+                      type="primary"
+                      htmlType="submit"
+                      loading={loadings[1]}
                     >
-                      <span>{warnSpan}</span>
-                    </div>
-                  </Form>
+                      缴款
+                    </Button>
+
+                    <Button
+                      className="button_clear"
+                      size="large"
+                      onClick={this.onReset}
+                    >
+                      清空
+                    </Button>
+                  </Form.Item>
+
+                </Form>
+              </div>
+              <div className="middle_pay_three">
+                <div>
+                  <span>温馨提示</span>
+                  <p>缴款码为执收单位开具的非税收入一般缴款书上的20位编码</p>
                 </div>
               </div>
-            </div>
+
+            </div>}
+            {menuState === '002' && <div className="middle_pay">
+              <div className="middle_pay_one">
+                <img src={require('../../public/images/chaxun.png')} />
+              </div>
+              <div className="middle_pay_two">
+                <Form
+                  {...layout}
+                  name="basic"
+                  initialValues={{
+                    remember: true,
+                  }}
+                  ref={this.formRef}
+                  onFinish={() => this.handleFormSubmit('002')}
+                  onFinishFailed={this.onFinishFailed}
+                >
+                  <div className="middle_box">
+                    <Form.Item
+                      style={{ marginLeft: '-140px', marginTop: 40 }}
+                      label={
+                        <span style={{ fontSize: 16,color: '#666666'  }}>缴款码</span>
+                      }
+                    >
+                      <Row gutter={8}>
+                        <Col span={12}>
+                          <Form.Item
+                            style={{ width: 400 }}
+                            name="payCode"
+                            rules={[
+                              {
+                                required: true,
+                                message: '请输入缴款码',
+                              },
+                              {
+                                pattern: api.regular,
+                                message: api.regularText,
+                              },
+                            ]}
+                          >
+                            <Input
+                              className="orgInput"
+                              size="large"
+                              style={{ width: 400 }}
+                            />
+                          </Form.Item>
+                        </Col>
+                      </Row>
+                    </Form.Item>
+                    <Form.Item
+                      style={{ marginLeft: '-140px', marginTop: -20 }}
+                      label={
+
+                        <span style={{ fontSize: 16,color: '#666666'  }}>缴款人</span>
+                      }
+                    >
+                      <Row gutter={8}>
+                        <Col span={12}>
+                          <Form.Item
+                            style={{ width: 400 }}
+                            name="payName"
+                            rules={[
+                              {
+                                required: true,
+                                message: '请输入缴款人',
+                              }
+                            ]}
+                          >
+                            <Input
+                              className="orgInput"
+                              size="large"
+                              style={{ width: 400 }}
+                            />
+                          </Form.Item>
+                        </Col>
+                      </Row>
+                    </Form.Item>
+                    <Form.Item
+                      // style={{ marginTop: -20 }}
+                      style={{ marginLeft: '-140px', marginTop: -20 }}
+                      label={
+                        <span style={{ fontSize: 16,color: '#666666'  }}>验证码</span>
+                      }
+                    >
+                      <Row gutter={8}>
+                        <Col span={12}>
+                          <Form.Item
+                            name="verificationCode"
+                            rules={[
+                              {
+                                required: true,
+                                message: '请输入验证码',
+                              },
+                            ]}
+                          >
+                            <Input
+                              className="orgInput"
+                              size="large"
+                              style={{ width: 200 }}
+                            />
+                          </Form.Item>
+                        </Col>
+                        <Col span={12}>
+                          <img
+                            style={{ marginTop: 2 }}
+                            className="verificationCode"
+                            alt="验证码"
+                            src={codeUrl}
+                          />
+                          <span
+                            style={{
+                              marginLeft: 20,
+                              fontSize: 15,
+                              fontWeight: 'bold',
+                              color: '#FF6100',
+                            }}
+                            onClick={this.changeImg}
+                          >
+                            换一张
+                          </span>
+                        </Col>
+                      </Row>
+                    </Form.Item>
+
+
+                  </div>
+
+                  <Form.Item {...tailLayout} style={{ marginTop: 10 }}>
+                    <Button
+                      className="button_submit"
+                      size="large"
+                      type="primary"
+                      htmlType="submit"
+                      loading={loadings[1]}
+                    >
+                      查询
+                    </Button>
+
+                    <Button
+                      className="button_clear"
+                      size="large"
+                      onClick={this.onReset}
+                    >
+                      清空
+                    </Button>
+                  </Form.Item>
+
+                </Form>
+              </div>
+              <div className="middle_pay_three">
+                <div>
+                  <span>温馨提示</span>
+                  <p>缴款码为执收单位开具的非税收入一般缴款书上的20位编码</p>
+                </div>
+              </div>
+
+            </div>}
           </div>
         </div>
       </div>

@@ -83,41 +83,41 @@ class NonTaxPayChange extends React.Component {
     //防止重复点击解开按钮限制
   };
   componentDidMount() {
-    const query = JSON.parse(localStorage.getItem('data'));
-    const queryJson = query.payBook;
-    const queryItem = JSON.parse(query.itemDetails);
-    let status = query.status; //缴款状态
-    let exeAgencyCode = queryJson.exeAgencyCode; //执收单位编码
-    let exeAgencyName = queryJson.exeAgencyName; //执收单位名称
-    let payCode = queryJson.payCode; //缴款码
-    let payerName = queryJson.payer; //付款人全称
-    let recName = queryJson.recAcctName; //收款人全称
-    let payerAcct = queryJson.payAcct; //付款人账号
-    let recAcct = queryJson.recAcct; //收款人账号
-    let payerOpBk = queryJson.payAcctBank; //付款人开户银行
-    let recOpBk = queryJson.recAcctBank; //收款人开户银行
-    let amt = parseFloat(queryJson.totalAmount / 100).toFixed(2); //金额小写
-    let amtZ = money(amt); //金额大写
-    let billDate = this.time(queryJson.fillDate); //填制日期
-    let einvoice_url = query.einvoice_url; //电子票地址
-    this.setState({
-      billDate: billDate,
-      exeAgencyCode: exeAgencyCode,
-      exeAgencyName: exeAgencyName,
-      payCode: payCode,
-      payerName: payerName,
-      recName: recName,
-      payerAcct: payerAcct,
-      recAcct: recAcct,
-      payerOpBk: payerOpBk,
-      recOpBk: recOpBk,
-      amt: amt,
-      amtZ: amtZ,
-      queryItem: queryItem,
-      billDate: billDate,
-      status: status,
-      einvoice_url: einvoice_url,
-    });
+  //   const query = JSON.parse(localStorage.getItem('data'));
+  //   const queryJson = query.payBook;
+  //   const queryItem = JSON.parse(query.itemDetails);
+  //   let status = query.status; //缴款状态
+  //   let exeAgencyCode = queryJson.exeAgencyCode; //执收单位编码
+  //   let exeAgencyName = queryJson.exeAgencyName; //执收单位名称
+  //   let payCode = queryJson.payCode; //缴款码
+  //   let payerName = queryJson.payer; //付款人全称
+  //   let recName = queryJson.recAcctName; //收款人全称
+  //   let payerAcct = queryJson.payAcct; //付款人账号
+  //   let recAcct = queryJson.recAcct; //收款人账号
+  //   let payerOpBk = queryJson.payAcctBank; //付款人开户银行
+  //   let recOpBk = queryJson.recAcctBank; //收款人开户银行
+  //   let amt = parseFloat(queryJson.totalAmount / 100).toFixed(2); //金额小写
+  //   let amtZ = money(amt); //金额大写
+  //   let billDate = this.time(queryJson.fillDate); //填制日期
+  //   let einvoice_url = query.einvoice_url; //电子票地址
+  //   this.setState({
+  //     billDate: billDate,
+  //     exeAgencyCode: exeAgencyCode,
+  //     exeAgencyName: exeAgencyName,
+  //     payCode: payCode,
+  //     payerName: payerName,
+  //     recName: recName,
+  //     payerAcct: payerAcct,
+  //     recAcct: recAcct,
+  //     payerOpBk: payerOpBk,
+  //     recOpBk: recOpBk,
+  //     amt: amt,
+  //     amtZ: amtZ,
+  //     queryItem: queryItem,
+  //     billDate: billDate,
+  //     status: status,
+  //     einvoice_url: einvoice_url,
+  //   });
   }
 
   componentWillUnmount() {
@@ -193,11 +193,13 @@ class NonTaxPayChange extends React.Component {
       );
     return (
       <div className="body">
-        <div className="outForm_pay_ningxia">
-          <div className="onForm_pay_charge">
-            <div className="onForm_pay_top">
-              {/* <img src={require('../../public/images/top_icon.png')} /> */}
-              <span>您当前位置: 统一公共支付 {'>'} 非税缴款</span>
+        <div className="outForm_pay_qingdao">
+      
+          <div className="top_logo">
+              <div className="top_logo_span"></div>
+              <span style={{ verticalAlign: 'top', }}>
+                缴费通知书
+              </span>
             </div>
 
             <div className="outForm_pay_qingdao_charge">
@@ -318,7 +320,7 @@ class NonTaxPayChange extends React.Component {
               </div>
             </div>
           </div>
-        </div>
+        
       </div>
     );
   }

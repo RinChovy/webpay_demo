@@ -1,341 +1,487 @@
-input,
-button,
-select,
-textarea {
-  outline: none;
+input, button, select, textarea {
+    outline: none;
 }
+
 body {
-  background-image: url(../images/background.jpeg);
+    background-image: url(../images/background.jpeg);
 }
+
 .top_logo {
-  width: 100%;
-  height: 68px;
-  background: linear-gradient(
-    0deg,
-    rgba(0, 0, 0, 0.04),
-    rgba(255, 255, 255, 0.04)
-  );
-  /*border: 1px solid #EEF1F5;*/
-  box-shadow: 0px 1px 0px 0px rgba(255, 255, 255, 0.18);
-  font-size: 20px;
-  font-family: PingFang SC;
-  font-weight: 400;
-  color: #343434;
-  padding: 24px;
-  display: flex;
-  align-items: center;
+    width: 100%;
+    height: 68px;
+    background: linear-gradient( 0deg, rgba(0, 0, 0, 0.04), rgba(255, 255, 255, 0.04));
+    /*border: 1px solid #EEF1F5;*/
+    box-shadow: 0px 1px 0px 0px rgba(255, 255, 255, 0.18);
+    font-size: 20px;
+    font-family: PingFang SC;
+    font-weight: 400;
+    color: #343434;
+    padding: 24px;
+    display: flex;
+    align-items: center;
 }
+
 .top_logo_span {
-  display: inline-block;
-  width: 4px;
-  height: 24px;
-  background: linear-gradient(0deg, #e86a2e, #fbdf7c);
+    display: inline-block;
+    width: 4px;
+    height: 24px;
+    background: linear-gradient(0deg, #e86a2e, #fbdf7c);
 }
+
 .outForm_pay_ningxia {
-  position: relative;
-  width: 1270px;
-  height: 590px;
-  margin: 0 auto;
-  padding-top: 20px;
+    position: relative;
+    width: 1270px;
+    height: 590px;
+    margin: 0 auto;
+    padding-top: 20px;
 }
+
 .home_span_warn {
-  position: absolute;
-  bottom: -40px;
-  left: 150px;
+    position: absolute;
+    bottom: -40px;
+    left: 150px;
 }
+
 .outForm_pay {
-  position: relative;
-  width: 1440px;
-  /* height: 470px; */
-  margin: 0 auto;
+    position: relative;
+    width: 1440px;
+    /* height: 470px; */
+    margin: 0 auto;
 }
+
 .outForm_pay_qingdao {
-  position: relative;
-  width: 1306px;
-  height: 537px;
-  margin: 30px auto;
-  background: #ffffff;
-  box-shadow: 0px 7px 18px 2px rgba(9, 8, 45, 0.05);
-  border-radius: 5px;
+    position: relative;
+    width: 1306px;
+    height: 537px;
+    margin: 30px auto;
+    background: #ffffff;
+    box-shadow: 0px 7px 18px 2px rgba(9, 8, 45, 0.05);
+    border-radius: 5px;
 }
+
 .outForm_pay_qingdao_charge {
-  position: relative;
-  width: 100%;
-  margin: 10px auto 0;
-  background-size: cover;
-  background: white;
+    position: relative;
+    width: 100%;
+    margin: 10px auto 0;
+    background-size: cover;
+    background: white;
 }
+
 .middle_pay_charge {
-  margin: 0 auto;
-  display: flex;
+    margin: 0 auto;
+    display: flex;
 }
+
 .onForm {
-  position: absolute;
-  display: flex;
-  flex-wrap: wrap;
-  width: 400px;
-  right: 10%;
-  top: 10%;
+    position: absolute;
+    display: flex;
+    flex-wrap: wrap;
+    width: 400px;
+    right: 10%;
+    top: 10%;
 }
+
 .onForm_pay {
-  margin-bottom: 45px;
-  padding-bottom: 20px;
-  margin-left: 4px;
-  width: 100%;
-  background: #ffffff;
-  -webkit-box-shadow: 0 0px 9px rgba(0, 0, 0, 0.1);
+    margin-bottom: 45px;
+    padding-bottom: 20px;
+    margin-left: 4px;
+    width: 100%;
+    background: #ffffff;
+    -webkit-box-shadow: 0 0px 9px rgba(0, 0, 0, 0.1);
 }
+
 .onForm_pay_charge {
-  margin-left: 4px;
-  width: 100%;
-  height: 560px;
-  background: #f1f7ff;
+    margin-left: 4px;
+    width: 100%;
+    height: 560px;
+
 }
+
 .onForm_pay_top {
-  width: 100%;
-  height: 47px;
+    width: 100%;
+    height: 47px;
 }
+
 .onForm_pay_top img {
-  vertical-align: -7%;
-  margin-left: 20px;
-  line-height: 47px;
+    vertical-align: -7%;
+    margin-left: 20px;
+    line-height: 47px;
 }
+
 .onForm_pay_top span {
-  font-size: 18px;
-  font-family: PingFang SC;
-  font-weight: 500;
-  margin-left: 10px;
-  line-height: 47px;
+    font-size: 18px;
+    font-family: PingFang SC;
+    font-weight: 500;
+    margin-left: 10px;
+    line-height: 47px;
 }
+
 .top_pay {
-  margin-top: 20px;
-  padding-top: 10px;
-  width: 92%;
-  height: 52px;
-  border-bottom: 1px solid #e22721;
-  margin-left: auto;
-  margin-right: auto;
+    margin-top: 20px;
+    padding-top: 10px;
+    width: 92%;
+    height: 52px;
+    border-bottom: 1px solid #e22721;
+    margin-left: auto;
+    margin-right: auto;
 }
+
 .topSpan_pay {
-  font-size: 22px;
-  color: #e22721;
-  font-weight: bold;
+    font-size: 22px;
+    color: #e22721;
+    font-weight: bold;
 }
+
 .middle_pay {
-  width: 92%;
-  margin: 0 auto;
+    width: 100%;
+    height: 390px;
+    margin: 0 auto;
+    display: flex;
 }
+
+.middle_pay_one {
+    flex: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.middle_pay_one img {
+    width: 390px;
+}
+
+.middle_pay_two {
+    flex: 4;
+}
+
+.middle_pay_three {
+    flex: 2;
+}
+
+.middle_pay_three div {
+    width: 90%;
+    margin: 70px auto;
+}
+
+.middle_pay_three span {
+    font-size: 20px;
+    color: #ff9000;
+    font-weight: bold;
+}
+
+.middle_pay_three p {
+    color:#ff9000;
+}
+
 .middle_pay_left {
-  display: inline-block;
-  vertical-align: top;
-  width: 55%;
-  height: 390px;
+    display: inline-block;
+    vertical-align: top;
+    width: 55%;
+    height: 390px;
 }
+
 .middle_pay_right_charge {
-  display: inline-block;
-  vertical-align: top;
-  flex: 1;
+    display: inline-block;
+    vertical-align: top;
+    flex: 1;
 }
+
 .middle_pay_right_org {
-  margin-top: 16%;
-  margin-left: 7%;
-  width: 450px;
-  height: 405px;
-  background: rgba(255, 255, 255, 1);
-  box-shadow: 0px 4px 18px 0px rgb(0 0 0 / 8%);
-  border-radius: 4px;
+    margin-top: 16%;
+    margin-left: 7%;
+    width: 450px;
+    height: 405px;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0px 4px 18px 0px rgb(0 0 0 / 8%);
+    border-radius: 4px;
 }
+
 .middle_pay_right {
-  display: inline-block;
-  vertical-align: top;
-  width: 38%;
-  height: 390px;
+    display: inline-block;
+    vertical-align: top;
+    width: 38%;
+    height: 390px;
 }
+
 .middle_box {
-  padding-top: 30px;
-  width: 84%;
-  margin: 0 auto;
+    padding-top: 30px;
+    width: 84%;
+    margin: 0 auto;
 }
+
 .box {
-  padding: 5px;
-  width: 145px;
-  height: 145px;
+    padding: 5px;
+    width: 145px;
+    height: 145px;
 }
+
 .box_on {
-  margin: 0 auto;
-  width: 128px;
-  height: 128px;
-  background-color: rgb(255, 255, 255);
-  border-radius: 16px;
-  box-shadow: 0px 0px 10px 10px rgba(230, 242, 248, 0.5);
-  text-align: center;
-  cursor: pointer;
+    margin: 0 auto;
+    width: 128px;
+    height: 128px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 16px;
+    box-shadow: 0px 0px 10px 10px rgba(230, 242, 248, 0.5);
+    text-align: center;
+    cursor: pointer;
 }
+
 .box_on:hover {
-  width: 138px;
-  height: 138px;
+    width: 138px;
+    height: 138px;
 }
+
 .img-size {
-  width: 96px;
-  height: 96px;
+    width: 96px;
+    height: 96px;
 }
+
 .img-span {
-  font-size: 12px;
-  display: block;
-  text-align: center;
-  font-family: PingFangSCRegular;
-  color: #464a4c;
+    font-size: 12px;
+    display: block;
+    text-align: center;
+    font-family: PingFangSCRegular;
+    color: #464a4c;
 }
+
 .img_pay {
-  margin-top: 20px;
-  margin-bottom: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
+
 .span_pay_top {
-  font-size: 20px;
-  color: #ff9000;
-  font-weight: bold;
-  padding-left: 23px;
-  padding-top: 16px;
+    font-size: 20px;
+    color: #ff9000;
+    font-weight: bold;
+    padding-left: 23px;
+    padding-top: 16px;
 }
+
 .span_pay {
-  font-size: 18px;
-  padding: 20px;
+    font-size: 18px;
+    padding: 20px;
+}
+
+.orgInput{
+    border: 1px solid #FF6100;
+}
+.orgInput:hover{
+    border: 1px solid #FF6100;
 }
 .button_submit {
-  width: 153px;
-  height: 40px;
+    margin-left: -6px;
+    width: 120px;
+    height: 50px;
+    border: 0px solid #0a628f;
+    background-color: #FF6100;
+    font-family: PingFang SC;
+    font-weight: 400;
+    color: #FFFFFF;
+    box-shadow: 1px 7px 18px 2px rgba(9, 9, 45, 0.05);
+    border-radius: 3px;
+    font-weight: bold;
+    font-size: 18px;
+
 }
+.button_submit:hover{
+    margin-left: -6px;
+    width: 120px;
+    height: 50px;
+    border: 0px solid #0a628f;
+    background-color: #FF6100;
+    font-family: PingFang SC;
+    font-weight: 400;
+    color: #FFFFFF;
+    box-shadow: 1px 7px 18px 2px rgba(9, 9, 45, 0.05);
+    border-radius: 3px;
+    font-weight: bold;
+    font-size: 18px;
+
+}
+
 .button_clear {
-  margin-left: 58px;
-  width: 153px;
-  height: 40px;
+    margin-left: 58px;
+    width: 120px;
+    height: 50px;
+    border: 0px solid #0a628f;
+    background: #FF9202;
+    font-size: 18px;
+    font-family: PingFang SC;
+    font-weight: 400;
+    color: #FFFFFF;
+    box-shadow: 1px 7px 18px 2px rgba(9, 9, 45, 0.05);
+    font-weight: bold;
+    border-radius: 3px;
+}
+.button_clear:hover{
+    margin-left: 58px;
+    width: 120px;
+    height: 50px;
+    border: 0px solid #0a628f;
+    background: #FF9202;
+    font-size: 18px;
+    font-family: PingFang SC;
+    font-weight: 400;
+    color: #FFFFFF;
+    box-shadow: 1px 7px 18px 2px rgba(9, 9, 45, 0.05);
+    font-weight: bold;
+    border-radius: 3px;
+}
+.ant-btn-primary:hover, .ant-btn-primary:focus {
+    color: #fff;
+    background: #FF6100;
+    border-color: #FF6100;
+}
+.ant-btn:hover, .ant-btn:focus {
+    color: #fff;
+    background: #FF9202;
+    border-color: #FF9202;
 }
 .button_dianzi {
-  color: white !important;
-  border: 1px solid #2d5da6 !important;
-  background: #2d5da6 !important;
-  border-radius: 4px !important;
-  width: 157px !important;
-  height: 41px !important;
+    color: white !important;
+    border: 1px solid #FF6100!important;
+    background: #FF6100 !important;
+    border-radius: 4px !important;
+    width: 157px !important;
+    height: 41px !important;
 }
+
 .verificationCode {
-  width: 100px;
-  height: 37px;
-  margin-left: 15px;
-  margin-top: 7px;
+    width: 100px;
+    height: 37px;
+    margin-left: 15px;
+    margin-top: 7px;
 }
+
 p {
-  margin-bottom: 4px !important;
+    margin-bottom: 4px !important;
 }
+
 .middle_payInfo {
-  position: relative;
-  border: 1px solid #ccc;
-  background: #eef7fe;
-  background: url(../images/png_template.png);
-  width: 900px;
-  height: 430px;
-  padding-top: 20px;
-  margin: 10px auto;
+    position: relative;
+    border: 1px solid #ccc;
+    background: #eef7fe;
+    background: url(../images/png_template.png);
+    width: 900px;
+    height: 430px;
+    padding-top: 20px;
+    margin: 10px auto;
 }
+
 .middle_payInfo_charge {
-  position: relative;
-  width: 1190px;
-  /* height: 430px; */
-  padding-top: 20px;
-  margin: 10px auto;
+    position: relative;
+    width: 1190px;
+    /* height: 430px; */
+    padding-top: 20px;
+    margin: 10px auto;
 }
+
 .bottom_payInfo {
-  /* border: 1px solid #ccc; */
-  width: 1104px;
-  padding-top: 8px;
-  margin: 10px auto;
-  text-align: right;
+    /* border: 1px solid #ccc; */
+    width: 1104px;
+    padding-top: 8px;
+    margin: 10px auto;
+    text-align: right;
 }
+
 .title_t {
-  text-align: center;
-  font-size: 18px;
+    text-align: center;
+    font-size: 18px;
 }
+
 .title-ti span {
-  font-size: 12px;
-  margin-left: 44px;
-  color: black;
-  text-decoration: none;
+    font-size: 12px;
+    margin-left: 44px;
+    color: black;
+    text-decoration: none;
 }
+
 .form_f {
-  text-align: center;
-  text-align: -moz-center;
-  text-align: -webkit-center;
-  width: 1105px;
-  height: 250px;
-  margin: 14px auto;
+    text-align: center;
+    text-align: -moz-center;
+    text-align: -webkit-center;
+    width: 1105px;
+    height: 250px;
+    margin: 14px auto;
 }
+
 .url_button {
-  width: 148px;
-  height: 36px;
-  border: 1px solid #375ea1;
-  background: white;
-  border-radius: 4px;
-  font-size: 14px;
-  font-family: PingFang SC;
-  font-weight: 500;
-  color: #375ea1;
+    width: 148px;
+    height: 36px;
+    border: 1px solid #375ea1;
+    background: white;
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: #375ea1;
 }
+
 .url_button_clear {
-  margin-left: 20px;
-  width: 148px;
-  height: 36px;
-  border: 1px solid #375ea1;
-  background: white;
-  border-radius: 4px;
-  font-size: 14px;
-  font-family: PingFang SC;
-  font-weight: 500;
-  color: #375ea1;
+    margin-left: 20px;
+    width: 148px;
+    height: 36px;
+    border: 1px solid #375ea1;
+    background: white;
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: #375ea1;
 }
+
 .row {
-  height: 300px;
-  text-align: center;
-  background-color: white;
+    height: 300px;
+    text-align: center;
+    background-color: white;
 }
+
 .row_p {
-  font-size: 18px;
-  text-align: center;
-  color: green;
-  margin-top: 30px;
+    font-size: 18px;
+    text-align: center;
+    color: green;
+    margin-top: 30px;
 }
+
 .box_button {
-  cursor: pointer;
-  display: inline-block;
-  width: 128px;
-  height: 36px;
-  line-height: 36px;
-  text-align: center;
-  border: 1px solid #6b7f9f;
-  font-size: 16px;
-  color: #6b7f9f;
-  background: white;
-  opacity: 0.5;
+    cursor: pointer;
+    display: inline-block;
+    width: 128px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    border: 1px solid #6b7f9f;
+    font-size: 16px;
+    color: #6b7f9f;
+    background: white;
+    opacity: 0.5;
 }
+
 .box_button_hover {
-  color: #ed6c2e;
-  border: 1px solid #ed6c2e;
+    color: #ed6c2e;
+    border: 1px solid #ed6c2e;
 }
-.box_button_hover + .box_button {
-  border-left: 0px solid #6b7f9f;
+
+.box_button_hover+.box_button {
+    border-left: 0px solid #6b7f9f;
 }
+
 .box_button:nth-child(n + 1):not(:last-child):not(.box_button_hover) {
-  border-right: 0px solid #6b7f9f;
+    border-right: 0px solid #6b7f9f;
 }
+
 .box_button:first-child {
-  border-radius: 4px 0px 0px 4px;
+    border-radius: 4px 0px 0px 4px;
 }
+
 .box_button:last-child {
-  border-radius: 0px 4px 4px 0px;
+    border-radius: 0px 4px 4px 0px;
 }
+
 .manu {
-  width: 100%;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  padding-left: 30px;
+    width: 100%;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    padding-left: 30px;
 }
