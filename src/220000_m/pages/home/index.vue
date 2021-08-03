@@ -1,8 +1,26 @@
 <template>
   <div class="mainwrap">
     <div class="headern">
-      <img class="middle" @click="indexPay" src="../../public/images/phone_box.png" alt="" />
-
+      <div class="middle">
+        <div class="middle_box">
+          <div class="box" @click="indexPay">
+            <img src="../../public/images/icon/feisui.png" alt="" />
+            <div><span>一般非税缴款</span></div>
+          </div>
+          <div class="box" @click="indexError">
+            <img src="../../public/images/icon/jiaoyu.png" alt="" />
+            <div><span>交罚缴费</span></div>
+          </div>
+          <div class="box" @click="indexUrl">
+            <img src="../../public/images/icon/caizheng.png" alt="" />
+            <div><span>财政票据查询</span></div>
+          </div>
+          <div class="box" @click="indexPay">
+            <img src="../../public/images/icon/ping.png" alt="" />
+            <div><span>缴款凭证查询</span></div>
+          </div>
+        </div>
+      </div>
       <div class="footer">
         <div class="footer_span">
           <span>推荐服务</span>
@@ -23,7 +41,7 @@
 </template>
 
 <script>
-import { Button, Row, Col, Search } from 'vant'
+import { Button, Row, Col, Search,Dialog } from 'vant'
 export default {
   name: 'home',
   components: {
@@ -36,9 +54,9 @@ export default {
     return {
       value: 'value',
       good: 'value',
-      bottom_span: '主办单位：青岛市财政局',
-      bottom_span2: '服务电话：0532-85856831',
-      bottom_span3: '服务时间：法定工作日，09:00-17:00',
+      bottom_span: '主办单位：吉林省政府',
+      bottom_span2: '',
+      bottom_span3: '',
     }
   },
   methods: {
@@ -48,8 +66,15 @@ export default {
       })
     },
     indexUrl() {
-      window.location.href = 'http://120.221.95.25/nonapp/nontaxapp/homepage.html'
+      window.location.href = 'http://pjcy.mof.gov.cn'
     },
+    indexError(){
+      Dialog.alert({
+        message: '对不起,该功能正在建设中',
+      }).then(() => {
+        // on close
+      })
+    }
   },
 }
 </script>
@@ -59,19 +84,52 @@ export default {
   width: 100%;
   background: url('../../public/images/phone_background.png') no-repeat;
   background-size: 100%;
+  background-position: 0px -50px;
   height: 640px;
-  padding-top: 52%;
+  padding-top: 45%;
 }
 .middle {
   width: 100%;
-  margin: -44px auto 0;
-  // height: 200px;
-  // background: white;
-  // margin: 0 auto 0;
-  // border-radius: 20px;
-  // box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.15);
-  // display: flex;
-  // justify-content: space-around;
+  height: 236px;
+
+  .middle_box {
+    width: 94%;
+    background: white;
+    height: 236px;
+    margin: 0 auto;
+    border-radius: 20px;
+    box-shadow: 0px 0px 30px 0px rgba(146, 146, 146, 0.18);
+    display: flex;
+    flex-wrap: wrap;
+    .box:first-child {
+      border-right: 1px solid #f2f3f5;
+      border-bottom: 1px solid #f2f3f5;
+    }
+    .box:nth-child(2) {
+      border-bottom: 1px solid #f2f3f5;
+    }
+    .box:nth-child(3) {
+      border-right: 1px solid #f2f3f5;
+    }
+    .box {
+      text-align: center;
+      width: 50%;
+      height: 118px;
+      div {
+        margin-top: 10px;
+      }
+      img {
+        margin-top: 15px;
+        width: 62px;
+      }
+      span {
+        font-size: 14px;
+        font-family: PingFang SC;
+        font-weight: 400;
+        color: #464a4c;
+      }
+    }
+  }
 }
 .img {
   background: url('../../public/images/phone_box.png') no-repeat center;
@@ -100,22 +158,7 @@ export default {
     width: 96%;
   }
 }
-.box {
-  margin-top: 20px;
-  text-align: center;
-  div {
-    height: 30px;
-    display: flex;
-  }
-  img {
-    width: 90px;
-  }
-  span {
-    width: 100%;
-    vertical-align: top;
-    font-size: 12px;
-  }
-}
+
 
 .bottom_span {
   margin-top: 20px;

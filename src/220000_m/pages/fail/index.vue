@@ -3,7 +3,7 @@
     <div class="div_img">
       <img src="../../public/images/phone/fail.png" alt="" />
       <div style="margin-top: 10px">
-        <span>缴款失败</span>
+        <span style='color:#AFAFAF'>缴款失败</span>
       </div>
     </div>
     <div class="div_button">
@@ -65,9 +65,9 @@ export default {
   button {
     width: 140px;
     height: 40px;
-    border: 1px solid #4690ff;
+    border: 1px solid #EFCD99;
     font-size: 17px;
-    color: #4690ff;
+    color: #EFCD99;
     border-radius: 3px;
     background-color: white;
   }

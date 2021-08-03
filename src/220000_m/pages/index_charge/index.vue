@@ -2,7 +2,7 @@
   <div>
     <div class="box">
       <img v-if="type=='wx'" src="../../public/images/phone/icon_wx.png" />
-      <img v-else src="../../public/images/phone/icon.png" />
+      <img v-else src="../../public/images/phone/icon_2.png" />
       <div class="box_nei">
         <div class="top_logo">
           <span>{{ totalAmount }}元</span>
@@ -240,7 +240,7 @@ export default {
   button {
     width: 90%;
     height: 46px;
-    background: #327af0;
+    background: linear-gradient(-90deg, #efcd99, #e8bb99);
     border-radius: 4px;
     font-size: 16px;
     font-family: PingFang SC;

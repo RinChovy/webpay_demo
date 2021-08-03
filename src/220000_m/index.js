@@ -7,15 +7,10 @@ Vue.use(VueRouter);
 
 import App from './index.vue';
 import Home from './pages/home/index.vue';
-import Acityservice from './pages/acityservice/index.vue';
 import Index_pay from './pages/index_pay/index.vue';
-import Index_pay_wx from './pages/index_pay_wx/index.vue';
 import Index_charge from './pages/Index_charge/index.vue';
 import Success from './pages/success/index.vue';
 import Fail from './pages/fail/index.vue';
-import Order_record from './pages/order_record/index.vue';
-import Order_record_details from './pages/order_record_details/index.vue';
-// import Error404 from './pages/error404.vue';
 
 window.enableDev = true;
 
@@ -45,11 +40,6 @@ const routes = [
     component: Index_pay,
   },
   {
-    path: '/index_pay_wx', //非税缴款界面微信页面
-    name: 'index_pay_wx',
-    component: Index_pay_wx,
-  },
-  {
     path: '/index_charge', //缴款书界面
     name: 'index_charge',
     component: Index_charge,
@@ -65,29 +55,10 @@ const routes = [
     component: Fail,
   },
   {
-    path: '/order_record', //微信小程序页
-    name: 'order_record',
-    component: Order_record,
-  },
-  {
-    path: '/order_record_details', //微信小程序页详情页
-    name: 'order_record_details',
-    component: Order_record_details,
-  },
-  {
-    path: '/acityservice', //支付宝小程序页
-    name: '/acityservice',
-    component: Acityservice,
-  },
-  {
     path: '/phone_index', //首页
     name: 'phone_index',
     component: Home,
   },
-  // {
-  //   path: '*',
-  //   component: Error404,
-  // },
 ];
 const router = new VueRouter({
   mode: 'history',

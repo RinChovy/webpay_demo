@@ -1,13 +1,14 @@
 import React from 'react';
 import { Form, Input, Button, Row, Col, notification } from 'antd';
-import { queryPayInfo } from '../../service/services';
+import { queryPayInfo, getCo } from '../../service/services';
 import { api } from '../../service/api';
 import style from '../../public/css/index.css';
 
 class NonTaxPay extends React.Component {
   formRef = React.createRef();
   state = {
-    codeUrl: api.getCo, //验证码
+    codeUrl: '', //验证码
+    uuid: '', //uuid
     loadings: [], //等待时间
     menuState: '001', //决定显示隐藏
     buttonList: [
@@ -25,10 +26,14 @@ class NonTaxPay extends React.Component {
   };
 
   componentDidMount() {
-    // alert(this.state.isReload);
-    // if (this.state.isReload) {
-    //   alert(this.state.isReload);
-    // }
+    getCo().then((res) => {
+      res.code === 0
+        ? this.setState({
+          codeUrl: 'data:image/gif;base64,' + res.data.img,
+          uuid: res.data.uuid,
+        })
+        : this.handleError(res.msg);
+    });
   }
   // 提示信息方法
   openNotificationWithIcon = (type, msg) => {
@@ -43,10 +48,14 @@ class NonTaxPay extends React.Component {
   };
   // 验证码换一张
   changeImg = () => {
-    const { codeUrl } = this.state;
     const timestamp = new Date().valueOf();
-    this.setState({
-      codeUrl: codeUrl.split('?')[0] + '?timestamp=' + timestamp,
+    getCo({ timestamp: timestamp }).then((res) => {
+      res.code === 0
+        ? this.setState({
+          codeUrl: 'data:image/gif;base64,' + res.data.img,
+          uuid: res.data.uuid,
+        })
+        : this.handleError(res.msg);
     });
   };
 
@@ -66,6 +75,7 @@ class NonTaxPay extends React.Component {
           payCode: values.payCode,
           payPeople: values.payName,
           code: values.verificationCode,
+          uuid: this.state.uuid,
         }).then((res) => {
           res.code === 0 ? this.handleSuccess(res.data) : this.handleError(res.msg);
         })
@@ -75,6 +85,7 @@ class NonTaxPay extends React.Component {
           payCode: values.payCode,
           payPeople: values.payName,
           code: values.verificationCode,
+          uuid: this.state.uuid,
         }).then((res) => {
           res.code === 0 ? this.handleSuccessSelect(res.data) : this.handleError(res.msg);
         })
@@ -91,8 +102,8 @@ class NonTaxPay extends React.Component {
       pathname: '/index_charge',
     });
   };
-   // 提交成功-前往查询页
-   handleSuccessSelect = (data) => {
+  // 提交成功-前往查询页
+  handleSuccessSelect = (data) => {
     localStorage.setItem('data', JSON.stringify(data));
     this.props.history.push({
       pathname: '/index_charge',
@@ -163,7 +174,7 @@ class NonTaxPay extends React.Component {
           <div className="outForm_pay_qingdao">
             <div className="top_logo">
               <div className="top_logo_span"></div>
-              <span style={{ verticalAlign: 'top', }}>
+              <span style={{ verticalAlign: 'top', marginLeft: 20 }}>
                 缴费业务
               </span>
             </div>
@@ -187,7 +198,7 @@ class NonTaxPay extends React.Component {
                     <Form.Item
                       style={{ marginLeft: '-140px', marginTop: 40 }}
                       label={
-                        <span style={{ fontSize: 16,color: '#666666' }}>缴款码</span>
+                        <span style={{ fontSize: 16, color: '#666666' }}>缴款码</span>
                       }
                     >
                       <Row gutter={8}>
@@ -219,7 +230,7 @@ class NonTaxPay extends React.Component {
                       style={{ marginLeft: '-140px', marginTop: -20 }}
                       label={
 
-                        <span style={{ fontSize: 16,color: '#666666'  }}>缴款人</span>
+                        <span style={{ fontSize: 16, color: '#666666' }}>缴款人</span>
                       }
                     >
                       <Row gutter={8}>
@@ -247,7 +258,7 @@ class NonTaxPay extends React.Component {
                       // style={{ marginTop: -20 }}
                       style={{ marginLeft: '-140px', marginTop: -20 }}
                       label={
-                        <span style={{ fontSize: 16,color: '#666666'  }}>验证码</span>
+                        <span style={{ fontSize: 16, color: '#666666' }}>验证码</span>
                       }
                     >
                       <Row gutter={8}>
@@ -342,7 +353,7 @@ class NonTaxPay extends React.Component {
                     <Form.Item
                       style={{ marginLeft: '-140px', marginTop: 40 }}
                       label={
-                        <span style={{ fontSize: 16,color: '#666666'  }}>缴款码</span>
+                        <span style={{ fontSize: 16, color: '#666666' }}>缴款码</span>
                       }
                     >
                       <Row gutter={8}>
@@ -374,7 +385,7 @@ class NonTaxPay extends React.Component {
                       style={{ marginLeft: '-140px', marginTop: -20 }}
                       label={
 
-                        <span style={{ fontSize: 16,color: '#666666'  }}>缴款人</span>
+                        <span style={{ fontSize: 16, color: '#666666' }}>缴款人</span>
                       }
                     >
                       <Row gutter={8}>
@@ -402,7 +413,7 @@ class NonTaxPay extends React.Component {
                       // style={{ marginTop: -20 }}
                       style={{ marginLeft: '-140px', marginTop: -20 }}
                       label={
-                        <span style={{ fontSize: 16,color: '#666666'  }}>验证码</span>
+                        <span style={{ fontSize: 16, color: '#666666' }}>验证码</span>
                       }
                     >
                       <Row gutter={8}>
@@ -473,7 +484,7 @@ class NonTaxPay extends React.Component {
               <div className="middle_pay_three">
                 <div>
                   <span>温馨提示</span>
-                  <p>缴款码为执收单位开具的非税收入一般缴款书上的20位编码</p>
+                  <p>缴费人可以通过缴款码查询缴费结果信息。</p>
                 </div>
               </div>
 

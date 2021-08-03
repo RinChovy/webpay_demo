@@ -44,11 +44,6 @@
           下一步
         </button>
       </div>
-      <div class="footerc" style="line-height: 20px; margin-top: 24px">
-        <span style="display: block">版本所有：青岛市财政局</span>
-        <span style="display: block">技术支持：福建博思软件股份有限公司</span>
-        <span style="display: block">支持电话：0532-85856831</span>
-      </div>
     </div>
   </div>
 </template>
@@ -57,7 +52,7 @@
 <script>
 import { Button, Row, Col, Search, Dialog } from 'vant'
 import API from '../../config/api.js'
-import { queryPayInfo, getOpenid, getOpenPlatformUserid } from '../../config/services.js'
+import { queryPayInfo,code } from '../../config/services.js'
 export default {
   name: 'index_pay',
   components: {
@@ -72,7 +67,7 @@ export default {
       // 固定地址
       codeUrl: API.code,
       // 时间戳验证码地址
-      codeUrlT: API.code,
+      codeUrlT:'',
       // 绑定缴款码
       payCode: '',
       // 绑定缴款码验证语言
@@ -89,106 +84,26 @@ export default {
       disabled: true,
       //type判断是否微信
       type: 'web',
+      //uuid
+      uuid: '',
     }
   },
-  mounted() {
-    const ua = window.navigator.userAgent.toLowerCase()
-    if (ua.match(/MicroMessenger/i) == 'micromessenger') {
-      this.type = 'wx'
-    } else {
-      this.type = 'web'
-    }
-    if (navigator.userAgent.toLowerCase().indexOf('micromessenger') != -1) {
-      // 否则就是在微信中 引入微信js
-      // document.writeln('<script src="https://res.wx.qq.com/open/js/jweixin-1.3.2.js"' + '>' + '<' + '/' + 'script>');
-      // util.loadScript("https://res.wx.qq.com/open/js/jweixin-1.3.2.js");
-      //  处理微信小程序内 webview 页面监听状态的方法
-      const openid = localStorage.getItem('openid')
-      if (openid) {
-        getOpenPlatformUserid({
-          openid: openid,
-        }).then((resData) => {
-          if (resData.code === 0) {
-            localStorage.removeItem('userId')
-            localStorage.setItem('userId', resData.data.user_id)
-          } else {
-            Dialog.alert({
-              message: resData.msg,
-            }).then(() => {
-              // on close
-            })
-          }
-        })
-      } else {
-        var url = location.href.split('#')[0]
-        let state = this.GetQueryValue('state')
-        console.log('url' + url)
-        console.log('start' + state)
-        if (typeof state != 'undefined' && '' != typeof state) {
-          if (state == 'cityService') {
-            // 验证是城市服务
-            // 获取code
-            let code = this.GetQueryValue('code')
-            console.log('code' + code)
-            getOpenid({
-              code: code,
-            }).then((data) => {
-              if (data.code === 0) {
-                localStorage.removeItem('openid')
-                localStorage.setItem('openid', data.data.openid)
-                getOpenPlatformUserid({
-                  openid: data.data.openid,
-                }).then((resData) => {
-                  if (resData.code === 0) {
-                    localStorage.removeItem('userId')
-                    localStorage.setItem('userId', resData.data.user_id)
-                  } else {
-                    Dialog.alert({
-                      message: resData.msg,
-                    }).then(() => {
-                      // on close
-                    })
-                  }
-                })
-              } else {
-                Dialog.alert({
-                  message: data.msg,
-                }).then(() => {
-                  // on close
-                })
-              }
-            })
-          }
-        }
-      }
-    }
+  created() {
+    code().then((res) => {
+      res.code === 0
+        ? ((this.codeUrlT = 'data:image/gif;base64,' + res.data.img), (this.uuid = res.data.uuid))
+        : this.handleError(res)
+    })
   },
   methods: {
-    GetQueryValue(queryName) {
-      var reg = new RegExp('(^|&)' + queryName + '=([^&]*)(&|$)', 'i')
-      var r = window.location.search.substr(1).match(reg)
-      if (r != null) {
-        return decodeURI(r[2])
-      } else {
-        return ''
-      }
-    },
-    //验证码时间戳
-    chgUrl(url) {
-      var timestamp = new Date().valueOf()
-      // url = url.substring(0, 50);
-      if (url.indexOf('&') >= 0) {
-        url = url + '×tamp=' + timestamp
-      } else {
-        // url = url + '?timestamp=' + timestamp;
-        url = url + '?timestamp=' + timestamp
-      }
-      return url
-    },
-    // 改变验证码
+     // 改变验证码
     changeCode() {
-      let newCode = this.chgUrl(this.codeUrl)
-      this.codeUrlT = newCode
+      var timestamp = new Date().valueOf()
+      code({ timestamp: timestamp }).then((res) => {
+        res.code === 0
+          ? ((this.codeUrlT = 'data:image/gif;base64,' + res.data.img), (this.uuid = res.data.uuid))
+          : this.handleError(res)
+      })
     },
     //提交下一步
     submit() {
@@ -200,6 +115,7 @@ export default {
           payCode: this.payCode,
           payPeople: this.payPeople,
           code: this.code,
+           uuid: this.uuid,
         }).then((res) => {
           res.code === 0 ? this.handleSuccess(res) : this.handleError(res)
         })
@@ -332,7 +248,7 @@ export default {
   button {
     width: 94%;
     height: 48px;
-    background: #327af0;
+    background: linear-gradient(-90deg, #efcd99, #e8bb99);
     border-radius: 4px;
     border: 0px;
     color: white;

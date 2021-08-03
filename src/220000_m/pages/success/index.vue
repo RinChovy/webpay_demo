@@ -4,7 +4,7 @@
       <img v-if="type == 'wx'" src="../../public/images/phone/success_wx.png" alt="" />
       <img v-else src="../../public/images/phone/success.png" alt="" />
       <div style="margin-top: 10px">
-        <span>缴款成功</span>
+        <span >缴款成功</span>
       </div>
     </div>
     <div class="div_button" v-if="url != null">
@@ -99,7 +99,7 @@ export default {
   }
   span {
     font-size: 16px;
-    color: #464a4c;
+    color: #F86F29;
     font-weight: bold;
     margin-top: 20px;
   }
@@ -111,9 +111,9 @@ export default {
   button {
     width: 140px;
     height: 40px;
-    border: 1px solid #4690ff;
+    border: 1px solid #F86F29;
     font-size: 17px;
-    color: #4690ff;
+    color: #F86F29;
     border-radius: 3px;
     background-color: white;
   }
