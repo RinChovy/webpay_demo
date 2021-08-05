@@ -3,11 +3,11 @@ import base from 'utils/baseURL';
 const callback = 'https://370200.epayservice.cn/370200_p/index.html#/success'; // 青岛传给后台的回调地址
 // const callback = 'http://192.168.1.120:8080/370200_p/index.html#/success'; // 测试传给后台的回调地址
 
-const region = '370200'; // 青岛区划号
+const region = '220000'; // 青岛区划号
 
-const regular = /^37\d{18}$/; //非税缴款正则表达式
+const regular = /^22\d{18}$/; //非税缴款正则表达式
 
-const regularText = '缴款码必须等于20位且37开头'; //非税缴款正则表达式提示信息
+const regularText = '缴款码必须等于20位且22开头'; //非税缴款正则表达式提示信息
 
 const api = {
   callback: callback, //传给后台的回调地址
