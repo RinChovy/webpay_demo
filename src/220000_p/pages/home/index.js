@@ -136,10 +136,18 @@ class NonTaxPay extends React.Component {
   //菜单按钮
   handleMenu = (menu) => {
     let { buttonList } = this.state;
-    let buttonListIndex = buttonList.findIndex((v) => v.id == menu.id);
-    let buttonListIndex2 = buttonList.findIndex(
-      (v) => v.class == 'box_button box_button_hover'
-    );
+    let buttonListIndex = '';
+    let buttonListIndex2 = '';
+    buttonList.forEach((v, k) => {
+      if (v.id == menu.id) {
+        buttonListIndex = k;
+      }
+    });
+    buttonList.forEach((v, k) => {
+      if (v.class == 'box_button box_button_hover') {
+        buttonListIndex2 = k;
+      }
+    });
     buttonList[buttonListIndex2].class = 'box_button';
     buttonList[buttonListIndex] = {
       name: menu.name,
