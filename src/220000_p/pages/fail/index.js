@@ -23,24 +23,22 @@ class fail extends React.Component {
           </div>
           <div className="onForm_pay" style={{ height: 480 }}>
             <div className="outForm_pay_qingdao_charge">
-              <div className="middle_pay">
-                <div className="middle_pay">
-                  <div className="row">
-                    <img
-                      style={{ marginTop: 100 }}
-                      src={require('../../public/images/failn.png')}
+              <div className="middle_pay" style={{ justifyContent: 'center' }}>
+                <div className="row">
+                  <img
+                    style={{ marginTop: 100 }}
+                    src={require('../../public/images/failn.png')}
+                  />
+                  <p className="row_p" style={{ color: 'red' }}>
+                    缴款失败
+                  </p>
+                  <div style={{ marginTop: 30 }}>
+                    <input
+                      className="url_button"
+                      type="button"
+                      value="返回"
+                      onClick={this.cencel}
                     />
-                    <p className="row_p" style={{ color: 'red' }}>
-                      缴款失败
-                    </p>
-                    <div style={{ marginTop: 30 }}>
-                      <input
-                        className="url_button"
-                        type="button"
-                        value="返回"
-                        onClick={this.cencel}
-                      />
-                    </div>
                   </div>
                 </div>
               </div>

@@ -45,33 +45,29 @@ class success extends React.Component {
           </div>
           <div className="onForm_pay" style={{ height: 480 }}>
             <div className="outForm_pay_qingdao_charge">
-              <div className="middle_pay">
-                <div className="middle_pay">
-                  <div className="row">
-                    <img
-                      style={{ marginTop: 100 }}
-                      src={require('../../public/images/successn.png')}
-                    />
-                    <p className="row_p">缴款成功</p>
-                    <p className="row_w">如需换开纸质票据，请联系执收单位</p>
-                    <div style={{ marginTop: 30 }}>
-                      {url != '' && (
-                        <input
-                          className="url_button"
-                          type="button"
-                          value="查看电子票"
-                          onClick={this.url}
-                        />
-                      )}
+              <div className="middle_pay" style={{ justifyContent: 'center' }}>
+                <div className="row">
+                  <img
+                    style={{ marginTop: 100 }}
+                    src={require('../../public/images/successn.png')}
+                  />
+                  <p className="row_p">缴款成功</p>
+                  <p className="row_w">如需换开纸质票据，请联系执收单位</p>
+                  <div style={{ marginTop: 30 }}>
+                    {url != '' && (
                       <input
-                        className={
-                          url != '' ? 'url_button_clear' : 'url_button'
-                        }
+                        className="url_button"
                         type="button"
-                        value="返回"
-                        onClick={this.cencel}
+                        value="查看电子票"
+                        onClick={this.url}
                       />
-                    </div>
+                    )}
+                    <input
+                      className={url != '' ? 'url_button_clear' : 'url_button'}
+                      type="button"
+                      value="返回"
+                      onClick={this.cencel}
+                    />
                   </div>
                 </div>
               </div>
