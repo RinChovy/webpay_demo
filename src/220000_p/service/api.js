@@ -1,6 +1,6 @@
 import base from 'utils/baseURL';
 
-const callback = 'https://370200.epayservice.cn/370200_p/index.html#/success'; // 青岛传给后台的回调地址
+const callback = 'https://debug.epayservice.cn/220000_p/success'; // 青岛传给后台的回调地址
 // const callback = 'http://192.168.1.120:8080/370200_p/index.html#/success'; // 测试传给后台的回调地址
 
 const region = '220000'; // 青岛区划号

@@ -52,7 +52,7 @@
 <script>
 import { Button, Row, Col, Search, Dialog } from 'vant'
 import API from '../../config/api.js'
-import { queryPayInfo,code } from '../../config/services.js'
+import { queryPayInfo, code } from '../../config/services.js'
 export default {
   name: 'index_pay',
   components: {
@@ -67,7 +67,7 @@ export default {
       // 固定地址
       codeUrl: API.code,
       // 时间戳验证码地址
-      codeUrlT:'',
+      codeUrlT: '',
       // 绑定缴款码
       payCode: '',
       // 绑定缴款码验证语言
@@ -96,7 +96,7 @@ export default {
     })
   },
   methods: {
-     // 改变验证码
+    // 改变验证码
     changeCode() {
       var timestamp = new Date().valueOf()
       code({ timestamp: timestamp }).then((res) => {
@@ -115,7 +115,7 @@ export default {
           payCode: this.payCode,
           payPeople: this.payPeople,
           code: this.code,
-           uuid: this.uuid,
+          uuid: this.uuid,
         }).then((res) => {
           res.code === 0 ? this.handleSuccess(res) : this.handleError(res)
         })
@@ -160,6 +160,26 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@mixin button-org {
+  width: 94%;
+  height: 48px;
+  background: linear-gradient(-90deg, #efcd99, #e8bb99);
+  border-radius: 4px;
+  border: 0px;
+  color: white;
+  font-size: 16px;
+}
+@mixin color-input {
+  input::-webkit-input-placeholder {
+    color: #c3c3c4;
+  }
+  input:-moz-placeholder {
+    color: #c3c3c4;
+  }
+  input:-ms-input-placeholder {
+    color: #c3c3c4;
+  }
+}
 .form {
   width: 100%;
   height: 100px;
@@ -192,15 +212,7 @@ export default {
     border-bottom: 1px solid #eeeef1;
     width: 90%;
   }
-  input::-webkit-input-placeholder {
-    color: #c3c3c4;
-  }
-  input:-moz-placeholder {
-    color: #c3c3c4;
-  }
-  input:-ms-input-placeholder {
-    color: #c3c3c4;
-  }
+  @include color-input;
 }
 .form_input_warn {
   width: 100%;
@@ -225,15 +237,7 @@ export default {
     width: 46%;
     margin-left: 5%;
   }
-  input::-webkit-input-placeholder {
-    color: #c3c3c4;
-  }
-  input:-moz-placeholder {
-    color: #c3c3c4;
-  }
-  input:-ms-input-placeholder {
-    color: #c3c3c4;
-  }
+  @include color-input;
   img {
     vertical-align: -12px;
     width: 86px;
@@ -246,13 +250,7 @@ export default {
   margin-top: 20px;
   text-align: center;
   button {
-    width: 94%;
-    height: 48px;
-    background: linear-gradient(-90deg, #efcd99, #e8bb99);
-    border-radius: 4px;
-    border: 0px;
-    color: white;
-    font-size: 16px;
+    @include button-org;
   }
 }
 .footerc {

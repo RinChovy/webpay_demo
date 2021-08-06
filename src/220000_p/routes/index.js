@@ -11,6 +11,7 @@ function App() {
         <Route path='/' exact={true} component={Home} />
         {/* 非税缴款 */}
         <Route path='/home' component={Home} />
+        <Route path='/index_door' component={Home} />
         <Route path='/index_pay' component={Home} />
         <Route path='/index_pay.do' component={Home} />
         {/* 非税缴款缴款书界面 */}
