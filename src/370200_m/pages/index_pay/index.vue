@@ -212,6 +212,7 @@ export default {
       if (this.type == 'wx') {
         localStorage.setItem('type', 'wx')
       }
+      this.disabled = true
       this.$router.push({
         path: '/index_charge',
         name: 'index_charge',
