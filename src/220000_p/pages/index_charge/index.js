@@ -41,10 +41,16 @@ class NonTaxPayChange extends React.Component {
   };
   //收银台逻辑
   goCashier = () => {
-    let that = this;
+    const { queryItem } = this.state
     const query = JSON.parse(localStorage.getItem('data'));
-    console.log(query);
     const queryJson = query.payBook;
+    let subject = '';
+    queryItem.forEach((v)=>{
+      // subject = subject.concat(v.itemName)
+      subject = subject+v.itemName+','
+    })
+    // 删除subject最后一位
+    subject=subject.slice(0,subject.length-1)
     //收银台参数定义
     const widget_param = {
       paycode: queryJson.payCode,
@@ -57,8 +63,7 @@ class NonTaxPayChange extends React.Component {
       amount: queryJson.totalAmount,
       effective_time: '1c',
       version_no: '1.1',
-      subject: 'subject',
-      body: 'body',
+      subject: subject,
       device_type: 'pc',
       widget_param: widget_param,
     };
@@ -72,7 +77,7 @@ class NonTaxPayChange extends React.Component {
       frontCallBackUrl: api.callback,
       merchantOrderNo: merchant_order_no,
     }).then((res) => {
-      res.code === 0 ? that.showCashier(res.msg) : that.handleError(res.msg);
+      res.code === 0 ? this.showCashier(res.msg) : this.handleError(res.msg);
     });
   };
   showCashier = (pageParams) => {

@@ -6,7 +6,8 @@ let baseURL = '';
 
 if (process.env.NODE_ENV === 'development') {
   // baseURL = 'https://debug.epayservice.cn/webpay_new';
-  baseURL = 'http://192.168.5.179:8701/webpay_new'; //任雪健
+  baseURL = 'http://192.168.1.120:8092/webpay_new'; //测试tomcat
+  // baseURL = 'http://192.168.5.179:8701/webpay_new'; //任雪健
   // baseURL = 'http://192.168.5.103:8701/webpay_new'; //刘少璞后台地址
   // baseURL = 'http://192.168.62.15:8701/webpay_new'; //刘源后台地址
   // baseURL = 'https://www.gstyggzf.gov.cn/webpay_new'; //甘肃现场地址

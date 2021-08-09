@@ -140,6 +140,13 @@ export default {
       const dateString = JSON.parse(localStorage.getItem('data'))
       const query = dateString.data
       const queryJson = query.payBook
+      let subject = ''
+      this.queryItem.forEach((v) => {
+        // subject = subject.concat(v.itemName)
+        subject = subject + v.itemName + ','
+      })
+      // 删除subject最后一位
+      subject = subject.slice(0, subject.length - 1)
       //收银台参数定义
       const widget_param = {
         paycode: queryJson.payCode,
@@ -151,7 +158,7 @@ export default {
         amount: queryJson.totalAmount,
         effective_time: '1c',
         version_no: '1.1',
-        subject: 'subject',
+        subject: subject,
         body: 'body',
         device_type: 'phone',
         widget_param: widget_param,
