@@ -39,7 +39,7 @@ export default {
   },
   //加载生命周期
   created() {
-    const order_no = this.$route.query.merchant_order_no
+    const order_no = this.GetQueryValue('merchant_order_no')
     queryRealTime({
       merchant_order_no: order_no,
     }).then((res) => {
@@ -54,6 +54,15 @@ export default {
     })
   },
   methods: {
+    GetQueryValue(queryName) {
+      var reg = new RegExp('(^|&)' + queryName + '=([^&]*)(&|$)', 'i')
+      var r = window.location.search.substr(1).match(reg)
+      if (r != null) {
+        return decodeURI(r[2])
+      } else {
+        return ''
+      }
+    },
     indexPay() {
       this.$router.push({
         path: '/index_pay',

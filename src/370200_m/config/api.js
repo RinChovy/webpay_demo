@@ -1,6 +1,7 @@
 import baseapi from 'utils/baseURL';
 
-const callback = 'https://370200.epayservice.cn/webpay_370200/success'; //传给后台的回调地址
+// const callback = 'https://370200.epayservice.cn/webpay_370200/success'; //传给后台的回调地址
+const callback = 'http://192.168.1.120:8092/webpay_370200/success'; //传给后台的回调地址
 const region = '370200'; //区划号
 const regular = /^37\d{18}$/; //非税缴款正则表达式
 const regularText = '缴款码必须等于20位且37开头'; //非税缴款正则表达式提示信息
