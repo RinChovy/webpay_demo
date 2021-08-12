@@ -23,7 +23,7 @@ class success extends React.Component {
           merchant_order_no: res.data.merchant_order_no,
         });
       } else {
-        // this.props.history.push({ pathname: '/fail', query: '' });
+        this.props.history.push({ pathname: '/fail', query: '' });
       }
     });
     const areaId = localStorage.getItem('areaId');

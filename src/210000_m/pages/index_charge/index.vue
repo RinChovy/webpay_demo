@@ -127,36 +127,7 @@ export default {
   //初始生命周期
   created() {
     const { order_no } = this
-    const ua = window.navigator.userAgent.toLowerCase()
     console.log(order_no)
-    // if (navigator.userAgent.indexOf('AlipayClient') > -1) {
-    //   // 如果是支付宝则引入 支付宝js
-    //   alert('这是支付宝')
-    //   document.writeln('<script src="https://appx/web-view.min.js"' + '>' + '<' + '/' + 'script>')
-    //   // util.loadScript("https://appx/web-view.min.js");
-    // } else if (navigator.userAgent.toLowerCase().indexOf('micromessenger') != -1) {
-    //   // 否则就是在微信中 引入微信js
-    //   alert('微信')
-    //   document.writeln('<script src="https://res.wx.qq.com/open/js/jweixin-1.3.2.js"' + '>' + '<' + '/' + 'script>')
-    //   // util.loadScript("https://res.wx.qq.com/open/js/jweixin-1.3.2.js");
-    //   //  处理微信小程序内 webview 页面监听状态的方法
-    // }
-
-    //  处理微信小程序内 webview 页面监听状态的方法
-    let that = this
-    if (ua.match(/MicroMessenger/i) == 'micromessenger') {
-      wx.miniProgram.getEnv(function (res) {
-        if (res.miniprogram) {
-          if (document.addEventListener) {
-            document.addEventListener('WeixinJSBridgeReady', that.sendMessage(), false)
-          } else if (document.attachEvent) {
-            document.attachEvent('WeixinJSBridgeReady', that.sendMessage())
-            document.attachEvent('onWeixinJSBridgeReady', that.sendMessage())
-          }
-        }
-      })
-    }
-
     console.log('加载后' + localStorage.getItem('data'))
     const dateString = JSON.parse(localStorage.getItem('data'))
     this.merchant_no = dateString.data.merchant_no
@@ -171,25 +142,6 @@ export default {
     this.einvoice_url = dateString.data.einvoice_url
   },
   methods: {
-    sendMessage() {
-      const { order_no } = this
-      let that = this
-      WeixinJSBridge.on('onPageStateChange', function (res) {
-        if (res.active == true || res.active == 'true') {
-          if (!that.miniProgramMark) {
-            return
-          }
-          // 查询订单支付状态
-          that.$router.push({
-            path: '/success_wx',
-            name: 'success_wx',
-            query: { merchant_order_no: order_no },
-          })
-          // window.location.href = '<%=path%>/query/queryRealTime.do?' + 'merchant_order_no=' + order_no
-        }
-        console.log(res)
-      })
-    },
     submit() {
       let that = this
       const { order_no, merchant_no, totalAmount_fen, payCode } = this
@@ -239,12 +191,12 @@ export default {
               payCode: that.payCode,
               paymentName: that.payer,
               regionCode: API.region,
-              frontCallBackUrl: API.callback,
+              frontCallBackUrl: API.callback + '_wx',
             }
             createCashier({
               charge_param: JSON.stringify(charge_param),
               widget_content: JSON.stringify(widget_content),
-              frontCallBackUrl: API.callback,
+              frontCallBackUrl: API.callback + '_wx',
               merchantOrderNo: merchant_order_no,
             }).then((res) => {
               res.code === 0 ? that.showCashier(res.msg) : that.handleError(res.msg)
@@ -319,12 +271,12 @@ export default {
                   payCode: that.payCode,
                   paymentName: that.payer,
                   regionCode: API.region,
-                  frontCallBackUrl: API.callback,
+                  frontCallBackUrl: API.callback + '_wx',
                 }
                 createCashier({
                   charge_param: JSON.stringify(charge_param),
                   widget_content: JSON.stringify(widget_content),
-                  frontCallBackUrl: API.callback,
+                  frontCallBackUrl: API.callback + '_wx',
                   merchantOrderNo: merchant_order_no,
                 }).then((res) => {
                   res.code === 0 ? that.showCashier(res.msg) : that.handleError(res.msg)

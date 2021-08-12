@@ -68,17 +68,16 @@ export default {
       window.location.href = this.url
     },
     home() {
-      const userId = localStorage.getItem('userId')
-      if (userId) {
-        if (navigator.userAgent.toLowerCase().indexOf('micromessenger') != -1) {
-          this.$router.push({
-            path: '/index_pay',
-          })
-        } else {
-          this.$router.push({
-            path: '/acityservice',
-          })
-        }
+      if (navigator.userAgent.indexOf('AlipayClient') > -1) {
+        // 如果是支付宝则引入 支付宝js
+        my.switchTab({
+          url: '/pages/index/index',
+        })
+      } else if (navigator.userAgent.toLowerCase().indexOf('micromessenger') != -1) {
+        // 否则就是在微信中 引入微信js
+        wx.miniProgram.switchTab({
+          url: '/pages/index/index',
+        })
       } else {
         this.$router.push({
           path: '/home',

@@ -1,10 +1,12 @@
 import React from 'react';
 import pdf from '../../public/jk.pdf';
 import style from '../../public/css/index.css';
+import { Alert } from 'antd';
 import icon_feishui from '../../public/images/xizang/feishui.png';
 import icon_jiaoyu from '../../public/images/xizang/jiaoyu.png';
 import icon_caizheng from '../../public/images/xizang/caizheng.png';
 import icon_zhengce from '../../public/images/xizang/zhengce.png';
+
 
 class Home extends React.Component {
   state = {
@@ -15,7 +17,7 @@ class Home extends React.Component {
     url: 'http://220.182.49.217:18686/billcheck/html/index.html', //票据查询地址
   };
 
-  componentDidMount() {}
+  componentDidMount() { }
   // 左侧按钮方法
   left = () => {
     this.setState({
@@ -95,13 +97,23 @@ class Home extends React.Component {
         </div>
         <div className="outForm_pay">
           <div className="img_pay">
-            <div className="onForm_pay">
+            <div className="onForm_pay" style={{paddingTop:10}}>
+            <div style={{width:'96%',margin:'0 auto'}}>
+              <Alert
+                message="公告"
+                description="甘肃省政府非税收缴电子化管理系统及统一公共支付平台将于2021年8月14日8时至20时进行升级维护，期间不能办理非税缴费业务。"
+                type="warning"
+                showIcon
+                closable
+              />
+            </div>
               <div className="home">
                 <div className="home_left">
                   <img
                     {...margin}
                     src={require('../../public/images/xizang/left.png')}
                   />
+
                   <div>
                     <span {...span1}>温馨提示:</span>
                     <span {...span2}>
