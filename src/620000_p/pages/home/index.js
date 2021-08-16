@@ -97,16 +97,16 @@ class Home extends React.Component {
         </div>
         <div className="outForm_pay">
           <div className="img_pay">
-            <div className="onForm_pay" style={{paddingTop:10}}>
-            <div style={{width:'96%',margin:'0 auto'}}>
-              <Alert
-                message="公告"
-                description="甘肃省政府非税收缴电子化管理系统及统一公共支付平台将于2021年8月14日8时至20时进行升级维护，期间不能办理非税缴费业务。"
-                type="warning"
-                showIcon
-                closable
-              />
-            </div>
+            <div className="onForm_pay" style={{ paddingTop: 10 }}>
+              <div style={{ width: '96%', margin: '0 auto' }}>
+                <Alert
+                  message={<span style={{ color: 'red' }}>公告</span>}
+                  description={<span style={{ color: "red" }}>甘肃省政府非税收缴电子化管理系统及统一公共支付平台将于2021年8月14日8时至20时进行升级维护，期间不能办理非税缴费业务。</span>}
+                  type="warning"
+                  showIcon
+                  closable
+                />
+              </div>
               <div className="home">
                 <div className="home_left">
                   <img
