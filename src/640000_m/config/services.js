@@ -1,7 +1,7 @@
 import xFetch from '../../utils/xFetch';
 import { stringify } from 'qs';
 import Api from './api.js';
-import { get } from 'vant/es/utils';
+
 
 // 非税缴费提交
 export async function queryPayInfo(params) {

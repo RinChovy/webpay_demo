@@ -10,7 +10,7 @@ import Index_pay_idcard from '../pages/index_pay_idcard/index.js';
 function App() {
   return (
     // <Router>
-    <Router basename="640000">
+    <Router basename="/">
       <Switch>
         <Route path="/" exact={true} component={Home} />
         {/* 非税缴款 */}
@@ -18,6 +18,7 @@ function App() {
         <Route path="/home" component={Home} />
         <Route path="/education" component={Education} />
         <Route path="/index_door" component={Home} />
+        <Route path="/index_door.do" component={Home} />
         <Route path="/index_pay" component={Index_pay} />
         <Route path="/index_pay_idcard" component={Index_pay_idcard} />
         <Route path="/index_pay.do" component={Index_pay} />

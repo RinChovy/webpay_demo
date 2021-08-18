@@ -81,7 +81,7 @@ const routes = [
 ];
 const router = new VueRouter({
   mode: 'history',
-  base: '/640000',
+  // base: '/640000',
   routes,
 });
 
