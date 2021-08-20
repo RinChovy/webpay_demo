@@ -3,7 +3,6 @@
     <div class="form">
       <div class="form_box">
         <div class="form_label">
-          <img alt="" src="../../public/images/paycode.png" />
           <span>缴款码</span>
         </div>
         <div class="form_input">
@@ -15,7 +14,6 @@
       </div>
       <div class="form_box">
         <div class="form_label">
-          <img alt="" src="../../public/images/payname.png" />
           <span>缴款人</span>
         </div>
         <div class="form_input">
@@ -27,7 +25,6 @@
       </div>
       <div class="form_box">
         <div class="form_label">
-          <img alt="" src="../../public/images/code.png" />
           <span>验证码</span>
         </div>
         <div class="form_input_code">
@@ -40,12 +37,17 @@
         </div>
       </div>
       <div class="button_box">
-        <button @click="submit" v-if="disabled == true">下一步</button>
-        <button @click="submit" disabled="disabled" v-else>下一步</button>
+        <button @click="submit" :style="type == 'wx' ? 'background-color:#55B76B' : null" v-if="disabled == true">
+          下一步
+        </button>
+        <button @click="submit" :style="type == 'wx' ? 'background-color:#55B76B' : null" disabled="disabled" v-else>
+          下一步
+        </button>
       </div>
     </div>
   </div>
 </template>
+
 
 <script>
 import { Button, Row, Col, Search, Dialog } from 'vant'
@@ -80,6 +82,8 @@ export default {
       codeWarn: '',
       //按钮失效
       disabled: true,
+      //type判断是否微信
+      type: 'web',
       //uuid
       uuid: '',
     }
@@ -115,12 +119,15 @@ export default {
         }).then((res) => {
           res.code === 0 ? this.handleSuccess(res) : this.handleError(res)
         })
-      } else {
       }
     },
     // 提交成功
+
     handleSuccess(data) {
       localStorage.setItem('data', JSON.stringify(data))
+      if (this.type == 'wx') {
+        localStorage.setItem('type', 'wx')
+      }
       this.$router.push({
         path: '/index_charge',
         name: 'index_charge',
@@ -153,6 +160,26 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@mixin button-org {
+  width: 94%;
+  height: 48px;
+  background: #5380E1;
+  border-radius: 4px;
+  border: 0px;
+  color: white;
+  font-size: 16px;
+}
+@mixin color-input {
+  input::-webkit-input-placeholder {
+    color: #c3c3c4;
+  }
+  input:-moz-placeholder {
+    color: #c3c3c4;
+  }
+  input:-ms-input-placeholder {
+    color: #c3c3c4;
+  }
+}
 .form {
   width: 100%;
   height: 100px;
@@ -160,18 +187,16 @@ export default {
 }
 .form_box {
   width: 100%;
-  height: 110px;
+  height: 100px;
 }
 .form_label {
-  img {
-    margin-left: 4%;
-    width: 25px;
-  }
   span {
-    margin-left: 5px;
+    margin-left: 5%;
     vertical-align: -3px;
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 17px;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: #999999;
   }
 }
 .form_input {
@@ -179,15 +204,15 @@ export default {
   width: 100%;
   text-align: center;
   input {
-    color: #999ea0;
-    font-size: 17px;
-    padding-left: 10px;
+    color: #333333;
+    font-size: 16px;
     height: 35px;
-    background-color: #f4f4f4;
+    background-color: transparent;
     border: 0px solid #ddd;
+    border-bottom: 1px solid #eeeef1;
     width: 90%;
-    border-radius: 4px;
   }
+  @include color-input;
 }
 .form_input_warn {
   width: 100%;
@@ -203,16 +228,16 @@ export default {
   margin-top: 10px;
   width: 100%;
   input {
-    color: #999ea0;
-    font-size: 17px;
-    padding-left: 10px;
+    color: #333333;
+    font-size: 16px;
     height: 35px;
-    background-color: #f4f4f4;
+    background-color: transparent;
     border: 0px solid #ddd;
+    border-bottom: 1px solid #eeeef1;
     width: 46%;
-    margin-left: 4%;
-    border-radius: 4px;
+    margin-left: 5%;
   }
+  @include color-input;
   img {
     vertical-align: -12px;
     width: 86px;
@@ -225,13 +250,13 @@ export default {
   margin-top: 20px;
   text-align: center;
   button {
-    width: 94%;
-    height: 44px;
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #4690ff), color-stop(100%, #556ffe));
-    border-radius: 4px;
-    border: 0px;
-    color: white;
-    font-size: 19px;
+    @include button-org;
   }
+}
+.footerc {
+  font-size: 14px;
+  color: #999ea0;
+  text-align: center;
+  // height:0.92rem;
 }
 </style>

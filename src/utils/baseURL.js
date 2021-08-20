@@ -20,7 +20,10 @@ if (process.env.NODE_ENV === 'development') {
   // baseURL = 'https://520000.epayservice.cn/webpay_new'; //贵州现场地址
   // baseURL = 'http://fsjf.czt.guizhou.gov.cn/webpay_new'; //贵州现场地址
   // baseURL = 'https://www.gstyggzf.gov.cn/webpay_new'; //甘肃现场地址
-  baseURL = 'http://222.75.67.163:10087/webpay_new'; //宁夏现场地址
+  // baseURL = 'http://222.75.67.163:8701/webpay_new'; //宁夏现场地址
+  baseURL = 'http://192.168.0.120:8701/webpay_new'; //吉林现场地址
+
+
 }
 
 export default baseURL;

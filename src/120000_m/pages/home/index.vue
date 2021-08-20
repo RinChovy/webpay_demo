@@ -2,12 +2,7 @@
   <div class="mainwrap">
     <div class="headern">
       <div>
-        <van-search
-          style="opacity: 0.8"
-          shape="round"
-          background="transparent"
-          placeholder="查找服务"
-        />
+        <van-search style="opacity: 0.8" shape="round" background="transparent" placeholder="查找服务" />
       </div>
       <div class="middle">
         <div class="img" @click="indexPay"></div>
@@ -21,44 +16,50 @@
         </div>
       </div>
       <div class="bottom_span">
-        <span>{{ bottom_span }}</span>
+        <span>{{ bottom_span }}</span
+        ><br />
+        <span>{{ bottom_span2 }}</span>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { Button, Row, Col, Search } from "vant";
+import { Button, Row, Col, Search } from 'vant'
 export default {
-  name: "home",
+  name: 'home',
   components: {
-    "van-row": Row,
-    "van-col": Col,
-    "van-button": Button,
-    "van-search": Search,
+    'van-row': Row,
+    'van-col': Col,
+    'van-button': Button,
+    'van-search': Search,
   },
   data() {
     return {
-      value: "value",
-      good: "value",
-      bottom_span: "",
-    };
+      value: 'value',
+      good: 'value',
+      bottom_span: '北京博思致新科技有限公司为您提供缴费支持',
+      bottom_span2: '客服电话：010-0001001',
+    }
   },
   methods: {
     indexPay() {
       this.$router.push({
-        path: "/index_pay",
-      });
+        path: '/index_pay',
+      })
     },
   },
-};
+}
 </script>
 
 <style scoped lang="scss">
+html {
+  background: #f5f5f5;
+}
 .headern {
   width: 100%;
-  background: url("../../public/images/phone_background.png") no-repeat;
-  background-size: cover;
+  background: url('../../public/images/phone_background.jpg') no-repeat, #f5f5f5;
+  background-size: 100%;
   height: 640px;
 }
 .middle {
@@ -68,7 +69,7 @@ export default {
   margin-top: 126px;
 }
 .img {
-  background: url("../../public/images/phone_box.png") no-repeat center;
+  background: url('../../public/images/phone_box.png') no-repeat center;
   background-size: 100%;
   margin: 0 auto;
   width: 100%;
@@ -84,8 +85,7 @@ export default {
   font-size: 17px;
   font-weight: bold;
   color: #464a4c;
-  background: url("../../public/images/span_background.png") no-repeat center
-    bottom;
+  background: url('../../public/images/span_background.png') no-repeat center bottom;
   background-size: 100%;
 }
 .footer_box {

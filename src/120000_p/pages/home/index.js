@@ -123,8 +123,6 @@ class NonTaxPay extends React.Component {
       <div className="body">
         <div className="outForm_pay_ningxia">
           <div className="onForm_pay">
-
-
             <div className="outForm_pay_qingdao">
               <div className="onForm_pay_top">
                 <img src={require('../../public/images/top_icon.png')} />
