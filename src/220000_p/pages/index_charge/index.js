@@ -326,7 +326,7 @@ class NonTaxPayChange extends React.Component {
                     className="middle_pay_charge"
                     style={{ overflow: 'hidden' }}
                   >
-                    {status == 1 && !type ? thirdpay : thirdpayOk}
+                    {status == 0 && !type ? thirdpay : thirdpayOk}
                   </div>
                 </div>
               </div>

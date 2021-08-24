@@ -55,6 +55,11 @@ const routes = [
     component: Education,
   },
   {
+    path: '/phone_edu', //教育缴费页面
+    name: 'phone_edu',
+    component: Education,
+  },
+  {
     path: '/index_pay_idcard', //身份证查询页面
     name: 'index_pay_idcard',
     component: Index_pay_idcard,

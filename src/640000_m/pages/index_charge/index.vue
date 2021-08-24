@@ -159,7 +159,6 @@ export default {
         effective_time: '1c',
         version_no: '1.1',
         subject: subject,
-        body: 'body',
         device_type: 'phone',
         widget_param: widget_param,
       }
