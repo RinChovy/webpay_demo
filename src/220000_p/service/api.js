@@ -1,6 +1,6 @@
 import base from 'utils/baseURL';
 
-const callback = 'http://192.168.0.120:8090/success'; // 吉林后台回调成功页
+const callback = 'https://fssj.czt.jl.gov.cn/success'; // 吉林后台回调成功页
 
 const region = '220000'; // 青岛区划号
 
