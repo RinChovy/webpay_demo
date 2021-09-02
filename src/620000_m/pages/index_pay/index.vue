@@ -51,6 +51,7 @@
 import { Button, Row, Col, Search, Dialog } from 'vant'
 import API from '../../config/api.js'
 import { queryPayInfo, getOpenid, getOpenPlatformUserid } from '../../config/services.js'
+import { getParaString } from '../../config/options.js'
 
 export default {
   name: 'index_pay',
@@ -84,9 +85,21 @@ export default {
     }
   },
   mounted() {
+    if (navigator.userAgent.toLowerCase().includes('alipay')) {
+      // 支付宝跳转
+      let href_url = location.href
+      let paraObj = getParaString(href_url)
+      localStorage.setItem('appid', paraObj.appid)
+      localStorage.setItem('userid', paraObj.userid)
+
+      localStorage.removeItem('data')
+      return
+    }
+
     let url = location.href.split('#')[0]
     let state = this.GetQueryValue('state')
     if (navigator.userAgent.toLowerCase().includes('micromessenger')) {
+      // 微信
       // 否则就是在微信中 引入微信js
       // document.writeln('<script src="https://res.wx.qq.com/open/js/jweixin-1.3.2.js"' + '>' + '<' + '/' + 'script>');
       // util.loadScript("https://res.wx.qq.com/open/js/jweixin-1.3.2.js");

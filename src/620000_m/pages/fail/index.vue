@@ -37,7 +37,7 @@ export default {
         my.getEnv(function (res) {
           console.log(res.miniprogram) //true
           if (res.miniprogram) {
-            my.switchTab({
+            my.reLaunch({
               url: '/pages/index/index',
             })
           }
@@ -45,7 +45,7 @@ export default {
       } else if (ua.match(/MicroMessenger/i) == 'micromessenger') {
         wx.miniProgram.getEnv(function (res) {
           if (res.miniprogram) {
-            wx.miniProgram.reLaunch({url: '/pages/index/index'})
+            wx.miniProgram.reLaunch({ url: '/pages/index/index' })
           } else {
             this.$router.push({
               path: '/home',

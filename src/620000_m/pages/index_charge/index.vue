@@ -279,6 +279,53 @@ export default {
             }
           }
         })
+      } else if (ua.indexOf('alipay') != -1) {
+        console.log('zfb', localStorage.getItem('appid'), localStorage.getItem('userid'))
+        // 在支付宝浏览器中 appid通过url传递
+        my.getEnv(function (res) {
+          console.log(res.miniprogram) //true
+          if (res.miniprogram) {
+            // 在支付宝小程序中
+            thirdpay_widget.init({
+              container: 'widget', //挂件在当前页面放置的控件ID
+              merchant_no: merchant_no, //分配的商户号
+              merchant_order_no: order_no, //订单在商户系统中的订单号
+              amount: totalAmount_fen, //订单价格，单位：人民币 分
+              effective_time: '1c',
+              device_type: 'miniProgramH5',
+              widget_param: {
+                paycode: payCode,
+                // 支付宝小程序需要的字段 openid
+                openid: localStorage.getItem('userid'),
+                aliAppId: localStorage.getItem('appid'),
+              },
+              charge_url: API.createCharge, //商户服务端创建charge时的controller地址
+              charge_param: {
+                payCode: that.payCode,
+                paymentName: that.payer,
+                regionCode: API.region,
+                frontCallBackUrl: API.callback,
+              }, //(可选，用户自定义参数，若存在自定义参数则会通过 POST 方法透传给 charge_url
+              version_no: '1.1',
+            })
+            $('.zhebg').show()
+
+            my.onMessage = function (e) {
+              console.log('eee', e)
+              if (e.flag === 'paySuccess') {
+                that.$router.push({
+                  path: '/success_wx',
+                  name: 'success_wx',
+                  query: { merchant_order_no: order_no },
+                })
+                // window.location.href = '<%=path%>/query/queryRealTime.do?' + 'merchant_order_no=' + order_no
+              }
+            }
+          } else {
+            // 在支付宝浏览器中
+            initWidget()
+          }
+        })
       } else {
         // 挂件调用
         if ('' != typeof userId && typeof userId != 'undefined' && 'null' != typeof userId) {

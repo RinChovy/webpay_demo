@@ -72,7 +72,7 @@ export default {
         my.getEnv(function (res) {
           console.log(res.miniprogram) //true
           if (res.miniprogram) {
-            my.switchTab({
+            my.reLaunch({
               url: '/pages/index/index',
             })
           }
