@@ -1,6 +1,6 @@
 import React from "react";
 import { Form, Input, Button, Row, Col, notification } from "antd";
-import { queryPayInfo } from "../../service/services";
+import { queryPayInfo, getCo } from "../../service/services";
 import { api } from "../../service/api";
 import style from "../../public/css/index.css";
 
@@ -8,15 +8,20 @@ class NonTaxPay extends React.Component {
   formRef = React.createRef();
   state = {
     warnSpan: "“非税缴费技术服务电话 0532-85856831”",
-    codeUrl: api.getCo, //验证码
+    codeUrl: '', //验证码
+    uuid: '', //uuid
     loadings: [], //等待时间
   };
 
   componentDidMount() {
-    // alert(this.state.isReload);
-    // if (this.state.isReload) {
-    //   alert(this.state.isReload);
-    // }
+    getCo().then((res) => {
+      res.code === 0
+        ? this.setState({
+          codeUrl: 'data:image/gif;base64,' + res.data.img,
+          uuid: res.data.uuid,
+        })
+        : this.handleError(res.msg);
+    });
   }
   // 提示信息方法
   openNotificationWithIcon = (type, msg) => {
@@ -31,10 +36,14 @@ class NonTaxPay extends React.Component {
   };
   // 验证码换一张
   changeImg = () => {
-    const { codeUrl } = this.state;
     const timestamp = new Date().valueOf();
-    this.setState({
-      codeUrl: codeUrl.split("?")[0] + "?timestamp=" + timestamp,
+    getCo({ timestamp: timestamp }).then((res) => {
+      res.code === 0
+        ? this.setState({
+          codeUrl: 'data:image/gif;base64,' + res.data.img,
+          uuid: res.data.uuid,
+        })
+        : this.handleError(res.msg);
     });
   };
 
@@ -53,6 +62,7 @@ class NonTaxPay extends React.Component {
       payCode: values.payCode,
       payPeople: values.payName,
       code: values.verificationCode,
+      uuid: this.state.uuid,
     }).then((res) => {
       res.code === 0 ? this.handleSuccess(res.data) : this.handleError(res.msg);
     });
@@ -78,6 +88,15 @@ class NonTaxPay extends React.Component {
       return {
         loadings: newLoadings,
       };
+    });
+    //提交失败修改验证码
+    getCo().then((res) => {
+      res.code === 0
+        ? this.setState({
+          codeUrl: 'data:image/gif;base64,' + res.data.img,
+          uuid: res.data.uuid,
+        })
+        : this.handleError(res.msg);
     });
   };
   //提交失败
