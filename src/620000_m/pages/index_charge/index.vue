@@ -189,7 +189,7 @@ export default {
       })
     },
     submit() {
-      const userId = localStorage.getItem('userId')
+      let userId = localStorage.getItem('userId')
       if (userId == null) {
         userId = ''
       }
@@ -284,7 +284,6 @@ export default {
           }
         })
       } else if (ua.indexOf('alipay') != -1) {
-        console.log('zfb', localStorage.getItem('appid'), localStorage.getItem('userId'))
         // 在支付宝浏览器中 appid通过url传递
         my.getEnv(function (res) {
           console.log(res.miniprogram) //true
@@ -300,10 +299,10 @@ export default {
               widget_param: {
                 paycode: payCode,
                 // 支付宝小程序需要的字段 openid
-                openid: localStorage.getItem('userId'),
+                openid: userId,
                 aliAppId: localStorage.getItem('appid'),
               },
-              userId: localStorage.getItem('userId'),
+              userId: userId,
               paymentName: that.exeAgencyName,
               itemNameSet: that.queryItem,
               charge_url: API.createCharge, //商户服务端创建charge时的controller地址

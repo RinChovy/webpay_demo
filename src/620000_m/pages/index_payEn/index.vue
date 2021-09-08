@@ -88,11 +88,13 @@ export default {
     if (navigator.userAgent.toLowerCase().includes('alipay')) {
       // 支付宝跳转
       let href_url = location.href
-      let paraObj = getParaString(href_url)
-      localStorage.setItem('appid', paraObj.appid)
-      localStorage.setItem('userId', paraObj.userid)
+      if (href_url.indexOf('?') != -1) {
+        let paraObj = getParaString(href_url)
+        localStorage.setItem('appid', paraObj.appid)
+        localStorage.setItem('userId', paraObj.userid)
+      }
+      return
     }
-
     let url = location.href.split('#')[0]
     let state = this.GetQueryValue('state')
     if (navigator.userAgent.toLowerCase().indexOf('micromessenger') != -1) {

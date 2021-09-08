@@ -59,9 +59,9 @@ export default {
         itemName: '',
       },
       //当前页码
-      currentPage: '1',
+      currentPage: 1,
       //总页数
-      page_count: '',
+      page_count: 0,
       //session
       sessionPage: '',
       sessionItemName: '',
@@ -103,7 +103,7 @@ export default {
           })
           that.page_count = res.data.totalPage
           that.data = listArr
-          that.currentPage = page ? page : '1'
+          that.currentPage = page ? page : 1
         } else {
           that.handleError(res)
         }
