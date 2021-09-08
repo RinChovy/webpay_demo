@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { Button, Row, Col, Search ,Dialog} from 'vant'
+import { Button, Row, Col, Search, Dialog } from 'vant'
 export default {
   name: 'home',
   components: {
@@ -61,7 +61,8 @@ export default {
   created() {
     //进来提示
     Dialog.alert({
-      message: '甘肃省政府非税收缴电子化管理系统及统一公共支付平台将于2021年8月14日8时至20时进行升级维护，期间不能办理非税缴费业务。',
+      message:
+        '甘肃省政府非税收缴电子化管理系统及统一公共支付平台将于2021年8月14日8时至20时进行升级维护，期间不能办理非税缴费业务。',
     }).then(() => {})
   },
   methods: {

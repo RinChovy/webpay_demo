@@ -54,6 +54,7 @@
 import { DropdownMenu, DropdownItem, Dialog } from 'vant'
 import API from '../../config/api.js'
 import { queryOrderRecord, getOpenid, getOpenPlatformUserid } from '../../config/services.js'
+import { getParaString } from '../../config/options.js'
 
 export default {
   //   name: "wx_charge",
@@ -86,9 +87,19 @@ export default {
     }
   },
   mounted() {
+    if (navigator.userAgent.toLowerCase().includes('alipay')) {
+      // 支付宝跳转
+      let href_url = location.href
+      let paraObj = getParaString(href_url)
+      localStorage.setItem('appid', paraObj.appid)
+      localStorage.setItem('userId', paraObj.userid)
+    }
+
     //加载完成执行
     var userId = localStorage.getItem('userId')
+    console.log('userId...', userId)
     if (userId) {
+      console.log('queryOederRecord')
       queryOrderRecord({
         date_end: '20300101',
         date_start: '20200101',
@@ -98,6 +109,7 @@ export default {
         user_id: userId,
         // user_id: "fb1457e5680e1c80a97076976fae0764",
       }).then((data) => {
+        console.log('data---', data)
         if (data.code === 0) {
           let a = JSON.parse(data.data.orderInfos)
           this.model = a.details

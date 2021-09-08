@@ -51,6 +51,8 @@
 import { Button, Row, Col, Search, Dialog } from 'vant'
 import API from '../../config/api.js'
 import { queryEinvoiceUrl, getOpenid, getOpenPlatformUserid } from '../../config/services.js'
+import { getParaString } from '../../config/options.js'
+
 export default {
   name: 'index_pay',
   components: {
@@ -83,6 +85,14 @@ export default {
     }
   },
   mounted() {
+    if (navigator.userAgent.toLowerCase().includes('alipay')) {
+      // 支付宝跳转
+      let href_url = location.href
+      let paraObj = getParaString(href_url)
+      localStorage.setItem('appid', paraObj.appid)
+      localStorage.setItem('userId', paraObj.userid)
+    }
+
     let url = location.href.split('#')[0]
     let state = this.GetQueryValue('state')
     if (navigator.userAgent.toLowerCase().indexOf('micromessenger') != -1) {

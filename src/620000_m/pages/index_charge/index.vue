@@ -190,6 +190,10 @@ export default {
     },
     submit() {
       const userId = localStorage.getItem('userId')
+      if (userId == null) {
+        userId = ''
+      }
+      console.log('index_charge_userId', userId)
       const openid = localStorage.getItem('openId')
       let that = this
       const { order_no, merchant_no, totalAmount_fen, payCode } = this
@@ -280,7 +284,7 @@ export default {
           }
         })
       } else if (ua.indexOf('alipay') != -1) {
-        console.log('zfb', localStorage.getItem('appid'), localStorage.getItem('userid'))
+        console.log('zfb', localStorage.getItem('appid'), localStorage.getItem('userId'))
         // 在支付宝浏览器中 appid通过url传递
         my.getEnv(function (res) {
           console.log(res.miniprogram) //true
@@ -292,13 +296,16 @@ export default {
               merchant_order_no: order_no, //订单在商户系统中的订单号
               amount: totalAmount_fen, //订单价格，单位：人民币 分
               effective_time: '1c',
-              device_type: 'miniProgramH5',
+              device_type: 'miniProgram',
               widget_param: {
                 paycode: payCode,
                 // 支付宝小程序需要的字段 openid
-                openid: localStorage.getItem('userid'),
+                openid: localStorage.getItem('userId'),
                 aliAppId: localStorage.getItem('appid'),
               },
+              userId: localStorage.getItem('userId'),
+              paymentName: that.exeAgencyName,
+              itemNameSet: that.queryItem,
               charge_url: API.createCharge, //商户服务端创建charge时的controller地址
               charge_param: {
                 payCode: that.payCode,
@@ -323,7 +330,25 @@ export default {
             }
           } else {
             // 在支付宝浏览器中
-            initWidget()
+            thirdpay_widget.init({
+              container: 'widget', //挂件在当前页面放置的控件ID
+              merchant_no: merchant_no, //分配的商户号
+              merchant_order_no: order_no, //订单在商户系统中的订单号
+              amount: that.totalAmount_fen, //订单价格，单位：人民币 分
+              effective_time: '1c',
+              device_type: 'phone', //设备类型
+              widget_param: {
+                paycode: that.payCode,
+              }, //控件参数，常用来传递缴款服务所需定义的内容，如，非税paycode直缴或传入相关缴费信息生成缴款书
+              charge_url: API.createCharge, //商户服务端创建charge时的controller地址
+              charge_param: {
+                payCode: that.payCode,
+                paymentName: that.payer,
+                regionCode: API.region,
+                frontCallBackUrl: API.callback,
+              }, //(可选，用户自定义参数，若存在自定义参数则会通过 POST 方法透传给 charge_url
+              version_no: '1.1',
+            })
           }
         })
       } else {

@@ -90,7 +90,7 @@ export default {
       let href_url = location.href
       let paraObj = getParaString(href_url)
       localStorage.setItem('appid', paraObj.appid)
-      localStorage.setItem('userid', paraObj.userid)
+      localStorage.setItem('userId', paraObj.userid)
 
       localStorage.removeItem('data')
       return
@@ -199,6 +199,7 @@ export default {
           payPeople: this.payPeople,
           code: this.code,
         }).then((res) => {
+          console.log('index_pay_res', res)
           res.code === 0 ? this.handleSuccess(res) : this.handleError(res)
         })
       } else {
