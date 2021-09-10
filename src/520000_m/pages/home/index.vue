@@ -16,7 +16,7 @@
             <div><span>非税缴款</span></div>
           </div>
           <div class="box" @click="indexPayTraffic">
-            <img src="../../public/images/icon/gongan.png" alt="" />
+            <img src="../../public/images/icon/gongan.jpg" alt="" />
             <div><span>交罚缴款</span></div>
           </div>
           <div class="box" @click="index_url">
@@ -81,39 +81,58 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
 .headern {
   width: 100%;
-  background: url("../../public/images/phone_background.png") no-repeat;
+  background: url('../../public/images/phone_background.png') no-repeat, ;
   background-size: 100%;
   height: 640px;
 }
 .middle {
-  margin-top: 152px;
   width: 100%;
-  height: 240px;
+  // height: 236px;
+  margin-top: 120px;
   .middle_box {
     width: 94%;
     background: white;
-    height: 240px;
+    height: 254px;
     margin: 0 auto;
     border-radius: 20px;
-    box-shadow: rgba(230, 242, 248, 0.5) 0px 0px 10px 10px;
+    box-shadow: 0px 0px 30px 0px rgba(30, 161, 253, 0.2);
     display: flex;
     flex-wrap: wrap;
+    .box:first-child {
+      border-right: 1px solid #f2f3f5;
+      border-bottom: 1px solid #f2f3f5;
+    }
+    .box:nth-child(2) {
+      border-bottom: 1px solid #f2f3f5;
+    }
+    .box:nth-child(3) {
+      border-right: 1px solid #f2f3f5;
+    }
     .box {
       text-align: center;
-      flex: 1;
-      min-width: 50%;
-      height: 120px;
+      width: 50%;
+      height: 128px;
+      div {
+        margin-top: 10px;
+      }
       img {
-        width: 72px;
-        margin-top: 3px;
+        margin-top: 15px;
+        width: 62px;
+      }
+      span {
+        font-size: 14px;
+        font-family: PingFang SC;
+        font-weight: 400;
+        color: #464a4c;
       }
     }
   }
 }
 .img {
-  background: url("../../public/images/phone_box.png") no-repeat center;
+  background: url('../../public/images/phone_box.png') no-repeat center;
   background-size: 100%;
   margin: 0 auto;
   width: 100%;
@@ -129,8 +148,7 @@ export default {
   font-size: 17px;
   font-weight: bold;
   color: #464a4c;
-  background: url("../../public/images/span_background.png") no-repeat center
-    bottom;
+  background: url('../../public/images/span_background.png') no-repeat center bottom;
   background-size: 100%;
 }
 .footer_box {

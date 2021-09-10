@@ -1,6 +1,7 @@
 import React from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
-import { api, createCashier } from '../../service/api.js';
+import { api } from '../../service/api.js';
+import { createCashier } from '../../service/services';
 import { Arabia_to_Chinese as money, guid } from 'utils/utils';
 
 class NonTaxPayChange extends React.Component {

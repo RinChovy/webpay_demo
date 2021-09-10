@@ -1,70 +1,113 @@
+
 <template>
-  <div class="mainwrap">
-    <div class="div_img">
-      <img src="../../public/images/phone/fail.png" alt="" />
-      <div style="margin-top: 10px">
+  <div class="box">
+    <img class="top" src="../../public/images/phone/icon2.png" />
+    <div class="middle">
+      <img src="../../public/images/phone/fail.png" />
+      <div>
         <span>缴款失败</span>
       </div>
     </div>
-    <div class="div_button">
-      <button @click="home">返回首页</button>
+    <div class="bottom">
+      <div class="div_button">
+        <button class="cencel" @click="home">返回首页</button>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { Button, Row, Col, Search } from "vant";
+import { Button, Row, Col, Search } from 'vant'
 export default {
-  name: "success",
+  name: 'success',
   components: {
-    "van-row": Row,
-    "van-col": Col,
-    "van-button": Button,
-    "van-search": Search,
+    'van-row': Row,
+    'van-col': Col,
+    'van-button': Button,
+    'van-search': Search,
   },
   data() {
     return {
-      value: "value",
-      good: "value",
-      bottom_span: "主办单位：贵州省财政厅",
-    };
+      value: 'value',
+      good: 'value',
+      bottom_span: '主办单位：鹤岗市财政局',
+    }
   },
   methods: {
     home() {
       this.$router.push({
-        path: "/home",
-      });
+        path: '/home',
+      })
     },
   },
-};
+}
 </script>
 
 <style scoped lang="scss">
-.div_img {
-  width: 100%;
-  text-align: center;
-  img {
-    margin-top: 56%;
-  }
-  span {
-    font-size: 16px;
-    color: #464a4c;
-    font-weight: bold;
-    margin-top: 20px;
-  }
+.blod {
+  font-weight: bold;
 }
 .div_button {
-  margin-top: 30px;
   width: 100%;
+  margin: 30px auto;
   text-align: center;
   button {
-    width: 140px;
-    height: 40px;
-    border: 1px solid #4690ff;
-    font-size: 17px;
-    color: #4690ff;
-    border-radius: 3px;
-    background-color: white;
+    width: 70%;
+    height: 44px;
+    background: #57B8BD;
+    border-radius: 17px;
+    font-size: 16px;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: #ffffff;
+    border: 0;
+  }
+  button.cencel {
+    width: 70%;
+    height: 44px;
+    background: white;
+    border-radius: 17px;
+    font-size: 16px;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: black;
+    border: 1px solid #57B8BD;
+  }
+}
+.box {
+  position: relative;
+  width: 94%;
+  margin: 50px auto 0;
+  background: #ffffff;
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 7px;
+  padding-top: 40px;
+  img.top {
+    position: absolute;
+    left: 50%;
+    top: -35px;
+    margin-left: -35px;
+    width: 70px;
+  }
+  .middle {
+    width: 100%;
+    height: 280px;
+    text-align: center;
+    img {
+      margin-top: 50px;
+      width: 200px;
+    }
+    span {
+      font-size: 18px;
+      font-family: Source Han Sans CN;
+      font-weight: 400;
+    }
+  }
+  .bottom {
+    width: 100%;
+    // height: 200px;
+    padding-bottom: 20px;
+    border-top: 1px dotted #e5e5e5;
   }
 }
 </style>

@@ -1,17 +1,31 @@
 <template>
   <div class="mainwrap">
     <div class="headern">
+      <div>
+        <van-search
+          style="opacity: 0.8"
+          shape="round"
+          background="transparent"
+          placeholder="查找服务"
+        />
+      </div>
       <div class="middle">
-        <div class="box" @click="indexPay">
-          <img src="../../public/images/feisui.png" alt="" />
-          <div>
-            <span>非税缴款</span>
+        <div class="middle_box">
+          <div class="box" @click="indexPay">
+            <img src="../../public/images/icon/feisui.png" alt="" />
+            <div><span>非税缴款</span></div>
           </div>
-        </div>
-        <div class="box" @click="indexUrl">
-          <img src="../../public/images/jiaoyu.png" alt="" />
-          <div>
-            <span>缴款记录</span>
+          <div class="box" @click="indexUrl">
+            <img src="../../public/images/icon/jiaoyu.png" alt="" />
+            <div><span>缴款记录</span></div>
+          </div>
+          <div class="box" @click="index_url">
+            <img src="../../public/images/icon/caizheng.png" alt="" />
+            <div><span>财政票据查验</span></div>
+          </div>
+          <div class="box" @click="indexPay">
+            <img src="../../public/images/icon/ping.png" alt="" />
+            <div><span>缴款状态查询</span></div>
           </div>
         </div>
       </div>
@@ -20,12 +34,11 @@
           <span>推荐服务</span>
         </div>
         <div class="footer_box">
-          <img @click="indexPay" src="../../public/images/phone_box_bottom.png" alt="" />
+          <img src="../../public/images/phone_box_bottom.png" alt="" />
         </div>
       </div>
       <div class="bottom_span">
-        <span>{{ bottom_span }}</span
-        ><br />
+        <span>{{ bottom_span }}<br />{{ bottom_span2 }}</span>
       </div>
     </div>
   </div>
@@ -108,27 +121,63 @@ export default {
         path: '/order_record',
       })
     },
+    index_url() {
+      window.location.href = "http://fs.guizhou.gov.cn/billcheck";
+    },
   },
 }
 </script>
 
 <style scoped lang="scss">
+
 .headern {
   width: 100%;
-  background: url('../../public/images/phone_background.png') no-repeat;
-  background-size: cover;
+  background: url('../../public/images/phone_background.png') no-repeat, ;
+  background-size: 100%;
   height: 640px;
-  padding-top: 52%;
 }
 .middle {
-  width: 90%;
-  height: 200px;
-  background: white;
-  margin: 0 auto 0;
-  border-radius: 20px;
-  box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.15);
-  display: flex;
-  justify-content: space-around;
+  width: 100%;
+  // height: 236px;
+  margin-top: 120px;
+  .middle_box {
+    width: 94%;
+    background: white;
+    height: 254px;
+    margin: 0 auto;
+    border-radius: 20px;
+    box-shadow: 0px 0px 30px 0px rgba(30, 161, 253, 0.2);
+    display: flex;
+    flex-wrap: wrap;
+    .box:first-child {
+      border-right: 1px solid #f2f3f5;
+      border-bottom: 1px solid #f2f3f5;
+    }
+    .box:nth-child(2) {
+      border-bottom: 1px solid #f2f3f5;
+    }
+    .box:nth-child(3) {
+      border-right: 1px solid #f2f3f5;
+    }
+    .box {
+      text-align: center;
+      width: 50%;
+      height: 128px;
+      div {
+        margin-top: 10px;
+      }
+      img {
+        margin-top: 15px;
+        width: 62px;
+      }
+      span {
+        font-size: 14px;
+        font-family: PingFang SC;
+        font-weight: 400;
+        color: #464a4c;
+      }
+    }
+  }
 }
 .img {
   background: url('../../public/images/phone_box.png') no-repeat center;
@@ -157,22 +206,6 @@ export default {
     width: 96%;
   }
 }
-.box {
-  margin-top: 20px;
-  text-align: center;
-  div {
-    height: 30px;
-    display: flex;
-  }
-  img {
-    width: 90px;
-  }
-  span {
-    width: 100%;
-    vertical-align: top;
-    font-size: 12px;
-  }
-}
 
 .bottom_span {
   margin-top: 20px;
@@ -181,3 +214,4 @@ export default {
   color: #999ea0;
 }
 </style>
+
