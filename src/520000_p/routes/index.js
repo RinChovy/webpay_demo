@@ -8,6 +8,7 @@ import Success from '../pages/success/index.js';
 import Fail from '../pages/fail/index.js';
 function App() {
   return (
+    // <Router basename="520000">
     <Router basename="pay">
       <Switch>
         <Route path="/" exact={true} component={Home} />

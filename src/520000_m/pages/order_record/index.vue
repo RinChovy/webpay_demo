@@ -16,12 +16,9 @@
         <div @click="details" :data-item="JSON.stringify(k)">
           <div class="box_nei">
             <div class="top">
-              <span class="left"
-                ><span class="left_two_ts" v-for="(m, n) in JSON.parse(k.item_name_set)" :key="n">
+              <span class="left"><span class="left_two_ts" v-for="(m, n) in JSON.parse(k.item_name_set)" :key="n">
                   <span>{{ JSON.parse(k.item_name_set)[0].itemName }}...</span>
-                </span></span
-              >
-
+                </span></span>
               <span class="left_two" style="color: #333333; font-weight: 600">￥{{ k.fmat }}</span>
             </div>
           </div>

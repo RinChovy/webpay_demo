@@ -1,8 +1,9 @@
 import baseapi from 'utils/baseURL';
 
-const callback = "http://fsjf.czt.guizhou.gov.cn/pay/success"; //传给后台的回调地址
+// const callback = "http://fsjf.czt.guizhou.gov.cn/pay/success"; //传给后台的回调地址
+const callback = "https://520000.epayservice.cn/webpay_520000/success"; //传给后台的回调地址
 const region = '520000'//"520000"; //区划号
-const regular =/^52\d{18}$/// /^52\d{18}$/; //非税缴款正则表达式
+const regular = /^52\d{18}$/// /^52\d{18}$/; //非税缴款正则表达式
 const regularText = "缴款码必须等于20位且52开头"; //非税缴款正则表达式提示信息
 
 export default {
@@ -30,9 +31,11 @@ export default {
   getAliUserId: `${baseapi}/common/getAliUserId`,
   //支付宝接口2
   getOpenPlatformUserid: `${baseapi}/common/getOpenPlatformUserid`,
+  //微信接口
+  getOpenid: `${baseapi}/common/getOpenid`,
+  //内部查询订单接口
+  queryOrderRecord: `${baseapi}/common/queryOrderRecord`,
+  //收银台接口
+  createCashier: `${baseapi}/common/createCashier`,
 
-    //微信接口
-    getOpenid: `${baseapi}/common/getOpenid`,
-    //内部查询订单接口
-    queryOrderRecord: `${baseapi}/common/queryOrderRecord`,
 };

@@ -8,7 +8,7 @@ export async function queryPayInfo(params) {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       regionCode: Api.region,
-      codeUId:params.headers.codeUId
+      codeUId: params.headers.codeUId
     },
     data: stringify(params.data),
   });
@@ -30,7 +30,7 @@ export async function queryPenaltyDecisionInfo(params) {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       regionCode: Api.region,
-      codeUId:params.headers.codeUId
+      codeUId: params.headers.codeUId
     },
     data: stringify(params.data),
   });
@@ -70,6 +70,17 @@ export async function getOpenPlatformUserid(params) {
 // 内部查询接口
 export async function queryOrderRecord(params) {
   return xFetch(Api.queryOrderRecord, {
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      regionCode: Api.region,
+    },
+    data: stringify(params),
+  });
+}
+
+//收银台接口
+export async function createCashier(params) {
+  return xFetch(Api.createCashier, {
     headers: {
       "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
       regionCode: Api.region,

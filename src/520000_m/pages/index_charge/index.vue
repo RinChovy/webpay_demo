@@ -140,6 +140,7 @@ export default {
       const dateString = JSON.parse(localStorage.getItem('data'))
       const query = dateString.data
       const queryJson = query.payBook
+      const merchant_order_no = guid();
       let subject = ''
       this.queryItem.forEach((v) => {
         // subject = subject.concat(v.itemName)
@@ -154,7 +155,7 @@ export default {
         }
         const widget_content = {
           merchant_no: query.merchant_no,
-          merchant_order_no: guid(),
+          merchant_order_no: merchant_order_no,
           amount: queryJson.totalAmount,
           effective_time: '1c',
           version_no: '1.1',
@@ -186,7 +187,7 @@ export default {
         thirdpay_widget.init({
           container: 'widget', //挂件在当前页面放置的控件ID
           merchant_no: this.merchant_no, //分配的商户号
-          merchant_order_no: guid(), //订单在商户系统中的订单号
+          merchant_order_no: merchant_order_no, //订单在商户系统中的订单号
           amount: this.totalAmount_fen, //订单价格，单位：人民币 分
           effective_time: '1c',
           device_type: 'phone', //设备类型
@@ -207,7 +208,7 @@ export default {
         }
         const widget_content = {
           merchant_no: query.merchant_no,
-          merchant_order_no: guid(),
+          merchant_order_no: merchant_order_no,
           amount: queryJson.totalAmount,
           effective_time: '1c',
           version_no: '1.1',
