@@ -84,6 +84,10 @@ export default {
       disabled: true,
     }
   },
+  created() {
+    console.log('created---非税缴费')
+    this.changeCode()
+  },
   mounted() {
     if (navigator.userAgent.toLowerCase().includes('alipay')) {
       // 支付宝跳转
@@ -197,8 +201,8 @@ export default {
         that.disabled = false
         queryPayInfo({
           payCode: this.payCode,
-          payPeople: this.payPeople,
-          code: this.code,
+          payPeople: this.payPeople.trim(),
+          code: this.code.trim(),
         }).then((res) => {
           console.log('index_pay_res', res)
           res.code === 0 ? this.handleSuccess(res) : this.handleError(res)
@@ -226,6 +230,7 @@ export default {
     },
     //验证方法
     warning() {
+      this.payCode = this.payCode.trim()
       const regular = API.regular
       console.log(regular)
       this.payCode == ''

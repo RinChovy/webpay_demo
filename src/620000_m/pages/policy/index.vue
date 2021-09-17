@@ -92,6 +92,7 @@ export default {
     tableList(page) {
       let that = this
       const { selectModel } = this
+      selectModel.itemName = selectModel.itemName.trim()
       searchItemInfo({
         pageNo: page ? page : '1',
         pageSize: 10,

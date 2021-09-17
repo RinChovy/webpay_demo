@@ -84,6 +84,9 @@ export default {
       disabled: true,
     }
   },
+  created() {
+    console.log('created---票据打印')
+  },
   mounted() {
     if (navigator.userAgent.toLowerCase().includes('alipay')) {
       // 支付宝跳转
@@ -194,8 +197,8 @@ export default {
         that.disabled = false
         queryEinvoiceUrl({
           payCode: this.payCode,
-          payPeople: this.payPeople,
-          code: this.code,
+          payPeople: this.payPeople.trim(),
+          code: this.code.trim(),
         }).then((res) => {
           res.code === 0 ? this.handleSuccess(res.data) : this.handleError(res.msg)
         })
@@ -218,6 +221,7 @@ export default {
     },
     //验证方法
     warning() {
+      this.payCode = this.payCode.trim()
       const regular = API.regular
       console.log(regular)
       this.payCode == ''

@@ -136,7 +136,7 @@ export default {
   created() {
     const { order_no } = this
     const ua = window.navigator.userAgent.toLowerCase()
-    console.log(order_no)
+    console.log('order_no', order_no)
     //  处理微信小程序内 webview 页面监听状态的方法
     let that = this
     if (ua.match(/MicroMessenger/i) == 'micromessenger') {
@@ -185,7 +185,7 @@ export default {
 
           // window.location.href = '<%=path%>/query/queryRealTime.do?' + 'merchant_order_no=' + order_no
         }
-        console.log(res)
+        console.log('res', res)
       })
     },
     submit() {
@@ -286,7 +286,7 @@ export default {
       } else if (ua.indexOf('alipay') != -1) {
         // 在支付宝浏览器中 appid通过url传递
         my.getEnv(function (res) {
-          console.log(res.miniprogram) //true
+          // console.log(res.miniprogram) //true
           if (res.miniprogram) {
             // 在支付宝小程序中
             thirdpay_widget.init({
@@ -315,9 +315,12 @@ export default {
               version_no: '1.1',
             })
             $('.zhebg').show()
-
             my.onMessage = function (e) {
               console.log('eee', e)
+              if (e.flag === 'cancleCharge') {
+                // 取消支付
+                location.reload()
+              }
               if (e.flag === 'paySuccess') {
                 that.$router.push({
                   path: '/success_wx',
