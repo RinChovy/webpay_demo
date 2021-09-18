@@ -10,7 +10,7 @@ import Index_pay_idcard from '../pages/index_pay_idcard/index.js';
 function App() {
   return (
     // <Router>
-    <Router basename="/">
+    <Router basename="webpay_640000">
       <Switch>
         <Route path="/" exact={true} component={Home} />
         {/* 非税缴款 */}

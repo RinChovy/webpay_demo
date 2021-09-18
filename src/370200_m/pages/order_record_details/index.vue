@@ -8,7 +8,7 @@
         </div>
         <div class="top_logo">
           <span
-            style="color: #00d414"
+            style="color: #00d414;"
             v-if="
               model.order_status == '1' ||
               model.order_status == '2' ||
@@ -17,14 +17,18 @@
             "
             >已缴款</span
           >
-          <span style="color: #00d414" v-else-if="model.order_status == '5' || model.order_status == '6'">退款</span>
-          <span style="color: #ee8835" v-else>处理中</span>
+          <span
+            style="color: #00d414;"
+            v-else-if="model.order_status == '5' || model.order_status == '6'"
+            >退款</span
+          >
+          <span style="color: #ee8835;" v-else>处理中</span>
         </div>
       </div>
       <div class="box_nei">
         <div class="top">
           <span class="left">缴款码</span>
-          <span class="left_two">{{ model.order_no }}</span>
+          <span class="left_two">{{ model.pay_code }}</span>
         </div>
       </div>
       <div class="box_nei">
@@ -43,7 +47,7 @@
       <div class="box_nei">
         <div class="top">
           <span class="left">支付订单号</span>
-          <span class="left_two">{{ model.pay_code }}</span>
+          <span class="left_two">{{ model.order_no }}</span>
         </div>
       </div>
       <div class="box_nei">
@@ -60,7 +64,7 @@
             <span class="left_two">金额</span>
           </div>
         </div>
-        <div class="box_nei" style="padding-bottom: 10px">
+        <div class="box_nei" style="padding-bottom: 10px;">
           <div class="item_box" v-for="i in JSON.parse(model.item_name_set)" :key="i">
             <span class="left">{{ i.itemName }}</span>
             <span class="right">{{ i.amt }}元</span>
@@ -72,9 +76,9 @@
 </template>
 
 <script>
-import { DropdownMenu, DropdownItem, Dialog } from 'vant'
-import API from '../../config/api.js'
-import { queryOrderRecord, getOpenid, getOpenPlatformUserid } from '../../config/services.js'
+import { DropdownMenu, DropdownItem, Dialog } from 'vant';
+import API from '../../config/api.js';
+import { queryOrderRecord, getOpenid, getOpenPlatformUserid } from '../../config/services.js';
 
 export default {
   //   name: "wx_charge",
@@ -86,13 +90,13 @@ export default {
   data() {
     return {
       model: JSON.parse(this.$route.params.item), //数据状态
-    }
+    };
   },
   mounted() {
-    console.log(this.model)
+    console.log(this.model);
   },
   methods: {},
-}
+};
 </script>
 <style scoped lang="scss">
 .box {
@@ -186,5 +190,3 @@ export default {
   }
 }
 </style>
-
-

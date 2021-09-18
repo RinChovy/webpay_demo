@@ -24,7 +24,7 @@
       <div class="box_nei">
         <div class="top">
           <span class="left">缴款码</span>
-          <span class="left_two">{{ model.order_no }}</span>
+          <span class="left_two">{{ model.pay_code }}</span>
         </div>
       </div>
       <div class="box_nei">
@@ -43,7 +43,7 @@
       <div class="box_nei">
         <div class="top">
           <span class="left">支付订单号</span>
-          <span class="left_two">{{ model.pay_code }}</span>
+          <span class="left_two">{{ model.order_no}}</span>
         </div>
       </div>
       <div class="box_nei">
