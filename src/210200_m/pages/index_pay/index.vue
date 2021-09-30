@@ -3,7 +3,6 @@
     <div class="form">
       <div class="form_box">
         <div class="form_label">
-          <img alt="" src="../../public/images/paycode.png" />
           <span>缴款码</span>
         </div>
         <div class="form_input">
@@ -15,7 +14,6 @@
       </div>
       <div class="form_box">
         <div class="form_label">
-          <img alt="" src="../../public/images/payname.png" />
           <span>缴款人</span>
         </div>
         <div class="form_input">
@@ -27,30 +25,42 @@
       </div>
       <div class="form_box">
         <div class="form_label">
-          <img alt="" src="../../public/images/code.png" />
           <span>验证码</span>
         </div>
         <div class="form_input_code">
           <input placeholder="请输入验证码" v-model="code" />
           <img alt="" :src="codeUrlT" />
-          <span style="color: #4690ff" @click="changeCode">换一张</span>
+          <span style="color: #4690ff;" @click="changeCode">换一张</span>
         </div>
         <div class="form_input_warn">
           <span>{{ codeWarn }}</span>
         </div>
       </div>
       <div class="button_box">
-        <button @click="submit" v-if="disabled == true">下一步</button>
-        <button @click="submit" disabled="disabled" v-else>下一步</button>
+        <button
+          @click="submit"
+          :style="type == 'wx' ? 'background-color:#55B76B' : null"
+          v-if="disabled == true"
+        >
+          下一步
+        </button>
+        <button
+          @click="submit"
+          :style="type == 'wx' ? 'background-color:#55B76B' : null"
+          disabled="disabled"
+          v-else
+        >
+          下一步
+        </button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { Button, Row, Col, Search, Dialog } from 'vant'
-import API from '../../config/api.js'
-import { queryPayInfo, code } from '../../config/services.js'
+import { Button, Row, Col, Search, Dialog } from 'vant';
+import API from '../../config/api.js';
+import { queryPayInfo, code } from '../../config/services.js';
 export default {
   name: 'index_pay',
   components: {
@@ -80,78 +90,103 @@ export default {
       codeWarn: '',
       //按钮失效
       disabled: true,
+      //type判断是否微信
+      type: 'web',
       //uuid
       uuid: '',
-    }
+    };
   },
   created() {
     code().then((res) => {
       res.code === 0
         ? ((this.codeUrlT = 'data:image/gif;base64,' + res.data.img), (this.uuid = res.data.uuid))
-        : this.handleError(res)
-    })
+        : this.handleError(res);
+    });
   },
   methods: {
     // 改变验证码
     changeCode() {
-      var timestamp = new Date().valueOf()
+      var timestamp = new Date().valueOf();
       code({ timestamp: timestamp }).then((res) => {
         res.code === 0
           ? ((this.codeUrlT = 'data:image/gif;base64,' + res.data.img), (this.uuid = res.data.uuid))
-          : this.handleError(res)
-      })
+          : this.handleError(res);
+      });
     },
     //提交下一步
     submit() {
-      let that = this
-      this.warning()
+      let that = this;
+      this.warning();
       if (this.payCodeWarn == '' && this.payPeopleWarn == '' && this.codeWarn == '') {
-        that.disabled = false
+        that.disabled = false;
         queryPayInfo({
           payCode: this.payCode,
           payPeople: this.payPeople,
           code: this.code,
           uuid: this.uuid,
         }).then((res) => {
-          res.code === 0 ? this.handleSuccess(res) : this.handleError(res)
-        })
-      } else {
+          res.code === 0 ? this.handleSuccess(res) : this.handleError(res);
+        });
       }
     },
     // 提交成功
+
     handleSuccess(data) {
-      localStorage.setItem('data', JSON.stringify(data))
+      localStorage.setItem('data', JSON.stringify(data));
+      if (this.type == 'wx') {
+        localStorage.setItem('type', 'wx');
+      }
       this.$router.push({
         path: '/index_charge',
         name: 'index_charge',
-      })
+      });
     },
     // 提交失败1
     handleError(err) {
-      this.disabled = true
-      localStorage.removeItem('data')
+      this.disabled = true;
+      localStorage.removeItem('data');
       Dialog.alert({
         message: err.msg,
       }).then(() => {
         // on close
-      })
+      });
     },
     //验证方法
     warning() {
-      const regular = API.regular
-      console.log(regular)
+      const regular = API.regular;
+      console.log(regular);
       this.payCode == ''
         ? (this.payCodeWarn = '请输入缴款码')
         : this.payPeople == ''
         ? (this.payPeopleWarn = '请输入缴款人')
-        : (this.payPeopleWarn = '')
-      this.code == '' ? (this.codeWarn = '请输入验证码') : (this.codeWarn = '')
+        : (this.payPeopleWarn = '');
+      this.code == '' ? (this.codeWarn = '请输入验证码') : (this.codeWarn = '');
     },
   },
-}
+};
 </script>
 
 <style scoped lang="scss">
+@mixin button-org {
+  width: 94%;
+  height: 48px;
+  background: #5380e1;
+  border-radius: 4px;
+  border: 0px;
+  color: white;
+  font-size: 16px;
+}
+@mixin color-input {
+  input::-webkit-input-placeholder {
+    color: #c3c3c4;
+  }
+  input:-moz-placeholder {
+    color: #c3c3c4;
+  }
+  input:-ms-input-placeholder {
+    color: #c3c3c4;
+  }
+}
 .form {
   width: 100%;
   height: 100px;
@@ -159,18 +194,16 @@ export default {
 }
 .form_box {
   width: 100%;
-  height: 110px;
+  height: 100px;
 }
 .form_label {
-  img {
-    margin-left: 4%;
-    width: 25px;
-  }
   span {
-    margin-left: 5px;
+    margin-left: 5%;
     vertical-align: -3px;
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 17px;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: #999999;
   }
 }
 .form_input {
@@ -178,15 +211,15 @@ export default {
   width: 100%;
   text-align: center;
   input {
-    color: #999ea0;
-    font-size: 17px;
-    padding-left: 10px;
+    color: #333333;
+    font-size: 16px;
     height: 35px;
-    background-color: #f4f4f4;
+    background-color: transparent;
     border: 0px solid #ddd;
+    border-bottom: 1px solid #eeeef1;
     width: 90%;
-    border-radius: 4px;
   }
+  @include color-input;
 }
 .form_input_warn {
   width: 100%;
@@ -202,16 +235,16 @@ export default {
   margin-top: 10px;
   width: 100%;
   input {
-    color: #999ea0;
-    font-size: 17px;
-    padding-left: 10px;
+    color: #333333;
+    font-size: 16px;
     height: 35px;
-    background-color: #f4f4f4;
+    background-color: transparent;
     border: 0px solid #ddd;
+    border-bottom: 1px solid #eeeef1;
     width: 46%;
-    margin-left: 4%;
-    border-radius: 4px;
+    margin-left: 5%;
   }
+  @include color-input;
   img {
     vertical-align: -12px;
     width: 86px;
@@ -224,13 +257,13 @@ export default {
   margin-top: 20px;
   text-align: center;
   button {
-    width: 94%;
-    height: 44px;
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #4690ff), color-stop(100%, #556ffe));
-    border-radius: 4px;
-    border: 0px;
-    color: white;
-    font-size: 19px;
+    @include button-org;
   }
+}
+.footerc {
+  font-size: 14px;
+  color: #999ea0;
+  text-align: center;
+  // height:0.92rem;
 }
 </style>

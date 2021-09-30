@@ -28,7 +28,7 @@ class success extends React.Component {
   }
   // 点击查看电子票
   url = () => {
-    window.location.href = this.state.url;
+    indow.open(this.state.url);
   };
   // 返回
   cencel = () => {

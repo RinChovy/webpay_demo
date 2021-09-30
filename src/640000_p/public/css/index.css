@@ -1,17 +1,17 @@
-input,
-button,
-select,
-textarea {
+input, button, select, textarea {
   outline: none;
 }
+
 .body {
   background: #f1f7ff;
 }
+
 .home_span_warn {
   position: absolute;
   bottom: -40px;
   left: 46px;
 }
+
 .homeButton {
   width: 68px;
   height: 114px;
@@ -21,6 +21,7 @@ textarea {
   align-items: center;
   justify-content: center;
 }
+
 .outForm {
   position: relative;
   width: 1271px;
@@ -28,6 +29,7 @@ textarea {
   height: 470px;
   margin: 0 auto;
 }
+
 .outForm_pay {
   position: relative;
   width: 1500 px;
@@ -35,6 +37,7 @@ textarea {
   margin: 0 auto;
   padding-top: 50px;
 }
+
 .outForm_pay_ningxia {
   position: relative;
   width: 1270px;
@@ -42,6 +45,7 @@ textarea {
   margin: 0 auto;
   padding-top: 40px;
 }
+
 .outForm_pay_qingdao {
   position: relative;
   width: 100%;
@@ -49,6 +53,7 @@ textarea {
   background-size: cover;
   background: white;
 }
+
 .onForm {
   position: absolute;
   display: flex;
@@ -57,23 +62,27 @@ textarea {
   right: 10%;
   top: 25%;
 }
+
 .onForm_pay {
   margin-left: 4px;
   width: 100%;
   height: 600px;
   background: #f1f7ff;
 }
+
 .onForm_pay_top {
   width: 100%;
   height: 47px;
   background: white;
   box-shadow: 0px 2px 15px 3px rgba(167, 167, 167, 0.16);
 }
+
 .onForm_pay_top img {
   vertical-align: -7%;
   margin-left: 20px;
   line-height: 47px;
 }
+
 .onForm_pay_top span {
   font-size: 18px;
   font-family: PingFang SC;
@@ -81,20 +90,24 @@ textarea {
   margin-left: 10px;
   line-height: 47px;
 }
+
 .topSpan_pay {
   font-size: 22px;
   color: #e22721;
   font-weight: bold;
 }
+
 .middle_pay {
   margin: 0 auto;
   display: flex;
   height: 533px;
 }
+
 .middle_pay_charge {
   margin: 0 auto;
   display: flex;
 }
+
 .middle_pay_left {
   display: inline-block;
   vertical-align: top;
@@ -103,24 +116,29 @@ textarea {
   justify-content: center;
   align-items: center;
 }
+
 .middle_pay_right {
   display: inline-block;
   vertical-align: top;
   flex: 1;
 }
+
 .middle_pay_right_org {
   background: rgba(255, 255, 255, 1);
   padding-top: 118px;
 }
+
 .middle_pay_right_org_e {
   background: rgba(255, 255, 255, 1);
 }
+
 .middle_pay_right_org_top {
   width: 68%;
   height: 70px;
   margin: 30px 40px;
   display: flex;
 }
+
 .classNotHover {
   flex: 1;
   display: flex;
@@ -131,6 +149,7 @@ textarea {
   border-bottom: 1px solid #999999;
   cursor: pointer;
 }
+
 .classHover {
   flex: 1;
   display: flex;
@@ -147,6 +166,7 @@ textarea {
   width: 84%;
   margin: 0 auto;
 }
+
 .left_image {
   position: absolute;
   top: 15px;
@@ -155,6 +175,7 @@ textarea {
   height: 304px;
   /*background: blue;*/
 }
+
 .box_top {
   margin-top: 20px;
   margin-bottom: 10px;
@@ -169,6 +190,7 @@ textarea {
   color: #ffffff;
   padding-left: 13px;
 }
+
 .box {
   cursor: pointer;
   margin-top: 2px;
@@ -183,6 +205,7 @@ textarea {
   border: 0px solid #3461b1;
   background: #f8f8f8;
 }
+
 .box_hover {
   cursor: pointer;
   position: relative;
@@ -198,6 +221,7 @@ textarea {
   padding-left: 13px;
   border: 1px solid #3461b1;
 }
+
 .box_hover .logo {
   position: absolute;
   top: 13px;
@@ -206,6 +230,7 @@ textarea {
   height: 23px;
   background: #3461b1;
 }
+
 .box_on {
   margin: 0 auto;
   width: 128px;
@@ -216,14 +241,17 @@ textarea {
   text-align: center;
   cursor: pointer;
 }
+
 .box_on:hover {
   width: 138px;
   height: 138px;
 }
+
 .img-size {
   width: 96px;
   height: 96px;
 }
+
 .img-span {
   font-size: 16px;
   display: block;
@@ -239,15 +267,18 @@ textarea {
   padding-left: 23px;
   padding-top: 16px;
 }
+
 .span_pay {
   font-size: 18px;
   padding: 20px;
 }
+
 .button_submit {
   width: 153px;
   height: 40px;
   /* background: #e22721 !important; */
 }
+
 .button_clear {
   margin-left: 20px;
   width: 153px;
@@ -256,15 +287,18 @@ textarea {
   color: #ffffff !important;
   border: 0px solid #ffffff !important;
 }
+
 .verificationCode {
   width: 100px;
   height: 37px;
   margin-left: 15px;
   margin-top: 2px;
 }
+
 p {
   margin-bottom: 4px !important;
 }
+
 .middle_payInfo {
   position: relative;
   width: 1190px;
@@ -272,6 +306,7 @@ p {
   padding-top: 20px;
   margin: 10px auto;
 }
+
 .bottom_payInfo {
   /* border: 1px solid #ccc; */
   width: 1104px;
@@ -279,16 +314,19 @@ p {
   margin: 10px auto;
   text-align: right;
 }
+
 .title_t {
   text-align: center;
   font-size: 18px;
 }
+
 .title-ti span {
   font-size: 12px;
   margin-left: 44px;
   color: black;
   text-decoration: none;
 }
+
 .form_f {
   text-align: center;
   text-align: -moz-center;
@@ -297,6 +335,7 @@ p {
   height: 250px;
   margin: 14px auto;
 }
+
 .url_button {
   width: 148px;
   height: 36px;
@@ -308,9 +347,11 @@ p {
   font-weight: 500;
   color: #375ea1;
 }
+
 .url_button:nth-child(n + 2) {
   margin-left: 20px;
 }
+
 .url_button_clear {
   margin-left: 20px;
   width: 148px;
@@ -323,11 +364,13 @@ p {
   font-weight: 500;
   color: #375ea1;
 }
+
 .row {
   height: 300px;
   text-align: center;
   background-color: white;
 }
+
 .row_p {
   font-size: 20px;
   font-family: PingFang SC;
@@ -336,6 +379,7 @@ p {
   text-align: center;
   margin-top: 30px;
 }
+
 .row_w {
   font-size: 16px;
   font-family: PingFang SC;
@@ -344,21 +388,25 @@ p {
   text-align: center;
   margin-top: 30px;
 }
+
 .input_ningxia {
   border: 1px solid #cecece !important;
   height: 40px;
   border-radius: 0;
 }
+
 .input_ningxia_hover {
   border: 1px solid #2d5da6 !important;
   height: 40px;
   border-radius: 0;
 }
+
 .button_ningxia {
   width: 153px;
   border: 1px solid #2d5da6 !important;
   background: #2d5da6 !important;
 }
+
 .button_dianzi {
   color: white !important;
   border: 1px solid #2d5da6 !important;
@@ -367,6 +415,7 @@ p {
   width: 157px !important;
   height: 41px !important;
 }
+
 .input_icon {
   width: 40px;
   height: 40px;
@@ -377,6 +426,7 @@ p {
   justify-content: center;
   align-items: center;
 }
+
 .input_icon_2 {
   background-color: #375ea1;
   border: 1px solid #375ea1;
@@ -387,16 +437,19 @@ p {
   justify-content: center;
   align-items: center;
 }
+
 .input_icon img {
   width: 23px;
   height: 23px;
 }
+
 .home_div {
   margin: 0 auto;
   width: 1490px;
   height: 340px;
   display: flex;
 }
+
 .home_div_LR {
   flex: 1;
   /* background-color: #e22721; */
@@ -405,11 +458,13 @@ p {
   align-items: center;
   cursor: pointer;
 }
+
 .home_div_middle {
   flex: 12;
   max-width: 1285px;
   overflow: hidden;
 }
+
 .home_div_middle_nei {
   position: relative;
   width: 100%;
@@ -417,6 +472,7 @@ p {
   display: flex;
   align-items: center;
 }
+
 @keyframes go_animation_1 {
   0% {
     left: 0px;
@@ -425,6 +481,7 @@ p {
     left: -320px;
   }
 }
+
 @keyframes go_animation_2 {
   0% {
     left: -320px;
@@ -433,16 +490,19 @@ p {
     left: -640px;
   }
 }
+
 .go_1 {
   left: -320px;
   animation-name: go_animation_1;
   animation-duration: 0.2s;
 }
+
 .go_2 {
   left: -640px;
   animation-name: go_animation_2;
   animation-duration: 0.2s;
 }
+
 @keyframes out_animation_1 {
   0% {
     left: -320px;
@@ -451,6 +511,7 @@ p {
     left: 0px;
   }
 }
+
 @keyframes out_animation_2 {
   0% {
     left: -640px;
@@ -459,16 +520,19 @@ p {
     left: -320px;
   }
 }
+
 .out_1 {
   left: 0px;
   animation-name: out_animation_1;
   animation-duration: 0.2s;
 }
+
 .out_2 {
   left: -320px;
   animation-name: out_animation_2;
   animation-duration: 0.2s;
 }
+
 .home_box {
   min-width: 300px;
   height: 300px;
@@ -481,9 +545,11 @@ p {
   margin-left: 10px;
   cursor: pointer;
 }
+
 .home_box img {
   width: 134px;
 }
+
 .home_box p {
   font-size: 19px;
   font-family: PingFang SC;
@@ -491,15 +557,18 @@ p {
   color: #464a4c;
   text-align: center;
 }
+
 .home_box:nth-child(n + 2) {
   margin-left: 20px;
 }
+
 .background-t {
   position: relative;
   width: 100%;
   height: 100%;
   background: rgba(43, 95, 152, 0.56);
 }
+
 li {
   display: flex;
   justify-content: center;
@@ -511,15 +580,19 @@ li {
   height: 20%;
   list-style-type: none;
 }
+
 li:hover {
   color: #ffc444;
   cursor: pointer;
 }
+
 .table {
   width: 95%;
   margin: 40px auto;
 }
+
 /*table样式*/
+
 table.gridtable {
   width: 100%;
   font-family: verdana, arial, sans-serif;
@@ -529,6 +602,7 @@ table.gridtable {
   border-color: #9b9a9a;
   border-collapse: collapse;
 }
+
 table.gridtable th {
   font-size: 14px;
   text-align: center;
@@ -537,6 +611,7 @@ table.gridtable th {
   border-style: solid;
   background-color: #f5faff;
 }
+
 table.gridtable td {
   font-size: 14px;
   text-align: center;
@@ -545,12 +620,19 @@ table.gridtable td {
   padding: 8px;
   border-style: solid;
 }
+
 table span {
   font-size: 14px;
   font-family: PingFang SC;
   color: #0090ff;
   cursor: pointer;
 }
+
 tr {
   height: 48px;
+}
+
+p:hover {
+  color: #1E6BCC;
+  cursor: pointer;
 }

@@ -14,13 +14,13 @@ class Home extends React.Component {
       },
       {
         itemCode: '1',
-        modelPicture: require('../../public/images/caiz.png'),
+        modelPicture: require('../../public/images/caizheng.png'),
         itemName: '财政票据查询',
         modelUrl: 'http://www.czj.dl.gov.cn/billcheck/html/index.html',
       },
       {
-        itemCode: '0',
-        modelPicture: require('../../public/images/jiaok.png'),
+        itemCode: '00',
+        modelPicture: require('../../public/images/jiaokuan.png'),
         itemName: '缴款凭证查询',
         modelUrl: 'index_pay',
       },
@@ -28,19 +28,20 @@ class Home extends React.Component {
     yunwei: '由博思致新提供技术支持 技术服务热线：0411-82569885', //运维信息
   };
 
-  componentDidMount() {}
+  componentDidMount() { }
 
   router = (url, code) => {
     if (code === '1') {
       window.location.href = url;
     } else {
+      code === '0' ? localStorage.setItem("isPayCode", 'true') : localStorage.setItem("isPayCode", 'false')
       let data = { itemCode: code };
       this.props.history.push({ pathname: `/${url}`, query: data });
     }
   };
 
   render() {
-    const { list, yunwei } = this.state;
+    const { list } = this.state;
     const listModel = list.map((v, k) => {
       return (
         <div className="box" key={k}>
@@ -53,7 +54,6 @@ class Home extends React.Component {
             )}
           >
             <img className="img-size" src={list[k].modelPicture} />
-            <span className="img-span">{list[k].itemName}</span>
           </div>
         </div>
       );
@@ -61,11 +61,11 @@ class Home extends React.Component {
     return (
       <div>
         <div className="outForm">
+          <div className="home_top">
+            <span>统一支付平台</span>
+          </div>
           <div className="onForm">
             {listModel}
-            <div className="home_span_warn">
-              <span>{yunwei}</span>
-            </div>
           </div>
         </div>
       </div>

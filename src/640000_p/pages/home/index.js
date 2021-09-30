@@ -1,4 +1,5 @@
 import React from 'react';
+import pdf from '../../public/xls/one.pdf'
 import { queryPayInfo, getCo } from '../../service/services';
 import style from '../../public/css/index.css';
 
@@ -17,32 +18,33 @@ class home extends React.Component {
     },
   };
 
-  componentDidMount() {}
+  componentDidMount() {
+  }
   // 点击左侧按钮
   left = () => {
     const { classBox } = this.state;
     classBox == 'go_1' || classBox == 'out_2'
       ? this.setState({
-          classBox: 'out_1',
-        })
+        classBox: 'out_1',
+      })
       : classBox == 'go_2'
-      ? this.setState({
+        ? this.setState({
           classBox: 'out_2',
         })
-      : null;
+        : null;
   };
   // 点击右侧按钮
   right = (e) => {
     const { classBox } = this.state;
     classBox == '' || classBox == 'out_1'
       ? this.setState({
-          classBox: 'go_1',
-        })
+        classBox: 'go_1',
+      })
       : classBox == 'go_1' || classBox == 'out_2'
-      ? this.setState({
+        ? this.setState({
           classBox: 'go_2',
         })
-      : null;
+        : null;
   };
   button = (e) => {
     e.stopPropagation(); //阻止冒泡事件
@@ -50,6 +52,12 @@ class home extends React.Component {
       classButton: true,
     });
   };
+  //查看pdf文件页面
+  handlePdf = () => {
+    this.props.history.push({
+      pathname: '/index_pdf',
+    });
+  }
   //非税缴款
   indexPay = () => {
     this.props.history.push({
@@ -78,6 +86,9 @@ class home extends React.Component {
     return (
       <div className="body" onClick={this.body}>
         <div className="outForm_pay">
+          <div style={{ width: '1390px', height: 20, margin: '0 auto', position: 'relative', color: '#1E6BCC', fontSize: 22 }}>
+            <span style={{ position: 'absolute', right: 10 }} onClick={this.handlePdf}>收费依据</span>
+          </div>
           <div className="home_div">
             <div className="home_div_LR">
               <div className="homeButton" onClick={this.left}>
@@ -155,6 +166,11 @@ class home extends React.Component {
               </div>
             </div>
           </div>
+          {/* <div>
+            <a href={pdf} target="_blank">
+              <button>wwd</button>
+            </a>
+          </div> */}
           <div>
             <img
               style={{ width: '100%' }}

@@ -7,6 +7,7 @@ import Success from '../pages/success/index.js';
 import Fail from '../pages/fail/index.js';
 import Education from '../pages/index_pay_education/index.js';
 import Index_pay_idcard from '../pages/index_pay_idcard/index.js';
+import Index_pdf from '../pages/index_pdf/index.js'
 function App() {
   return (
     // <Router>
@@ -19,6 +20,7 @@ function App() {
         <Route path="/education" component={Education} />
         <Route path="/index_door" component={Home} />
         <Route path="/index_door.do" component={Home} />
+        <Route path="/index_pdf" component={Index_pdf} />
         <Route path="/index_pay" component={Index_pay} />
         <Route path="/index_pay_idcard" component={Index_pay_idcard} />
         <Route path="/index_pay.do" component={Index_pay} />

@@ -1,7 +1,9 @@
 <template>
   <div class="mainwrap">
     <div class="headern">
-      <div></div>
+      <div>
+        <van-search style="opacity: 0.8" shape="round" background="transparent" placeholder="查找服务" />
+      </div>
       <div class="middle">
         <div class="middle_box">
           <div class="box" @click="indexPay">
@@ -23,11 +25,12 @@
           <span>推荐服务</span>
         </div>
         <div class="footer_box">
-          <img src="../../public/images/jiaoyu_bottom.png" alt="" />
+          <img src="../../public/images/phone_box_bottom.png" alt="" />
         </div>
       </div>
       <div class="bottom_span">
-        <span>{{ bottom_span }}</span>
+        <img src="../../public/images/bosssoft_logo.png" alt="" />
+        <span>{{ bottom_span }}<br /></span>
         <!-- <span>{{ bottom_span2 }}</span> -->
       </div>
     </div>
@@ -64,34 +67,52 @@ export default {
   },
 }
 </script>
-
 <style scoped lang="scss">
 .headern {
   width: 100%;
   background: url('../../public/images/phone_background.png') no-repeat;
   background-size: 100%;
   height: 640px;
-  padding-top: 50%;
 }
 .middle {
   width: 100%;
-  height: 140px;
+  height: 236px;
+  margin-top: 94px;
   .middle_box {
     width: 94%;
     background: white;
-    height: 140px;
+    height: 236px;
     margin: 0 auto;
     border-radius: 20px;
+    box-shadow: 0px 0px 30px 0px rgba(146, 146, 146, 0.18);
     display: flex;
+    flex-wrap: wrap;
+    .box:first-child {
+      border-right: 1px solid #f2f3f5;
+      border-bottom: 1px solid #f2f3f5;
+    }
+    .box:nth-child(2) {
+      border-bottom: 1px solid #f2f3f5;
+    }
+    .box:nth-child(3) {
+      border-right: 1px solid #f2f3f5;
+    }
     .box {
       text-align: center;
-      flex: 1;
-      img {
+      width: 50%;
+      height: 118px;
+      div {
         margin-top: 10px;
-        width: 90px;
+      }
+      img {
+        margin-top: 15px;
+        width: 62px;
       }
       span {
-        font-size: 12px;
+        font-size: 14px;
+        font-family: PingFang SC;
+        font-weight: 400;
+        color: #464a4c;
       }
     }
   }
@@ -109,8 +130,8 @@ export default {
 .footer_span {
   margin-top: 20px;
   margin-left: 20px;
-  width: 75px;
-  font-size: 17px;
+  width: 78px;
+  font-size: 19px;
   font-weight: bold;
   color: #464a4c;
   background: url('../../public/images/span_background.png') no-repeat center bottom;
@@ -120,7 +141,7 @@ export default {
   text-align: center;
   padding-top: 20px;
   img {
-    width: 96%;
+    width: 100%;
   }
 }
 
@@ -130,7 +151,14 @@ export default {
   font-size: 12px;
   text-align: center;
   color: #999ea0;
-  display: flex;
-  justify-content: center;
+  // display: flex;
+  // justify-content: center;
+  img {
+    width: 16px;
+  }
+  span {
+    margin-left: 5px;
+    vertical-align: bottom;
+  }
 }
 </style>

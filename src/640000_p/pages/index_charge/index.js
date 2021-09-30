@@ -38,7 +38,7 @@ class NonTaxPayChange extends React.Component {
   };
   //电子票地址跳转
   einvoiceUrl = () => {
-    window.location.href = this.state.einvoice_url;
+    window.open(this.state.einvoice_url)
   };
   //收银台逻辑
   goCashier = () => {
@@ -46,12 +46,12 @@ class NonTaxPayChange extends React.Component {
     const query = JSON.parse(localStorage.getItem('data'));
     const queryJson = query.payBook;
     let subject = '';
-    queryItem.forEach((v)=>{
+    queryItem.forEach((v) => {
       // subject = subject.concat(v.itemName)
-      subject = subject+v.itemName+','
+      subject = subject + v.itemName + ','
     })
     // 删除subject最后一位
-    subject=subject.slice(0,subject.length-1)
+    subject = subject.slice(0, subject.length - 1)
     //收银台参数定义
     const widget_param = {
       paycode: queryJson.payCode,
