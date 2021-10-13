@@ -1,10 +1,27 @@
 <extends src="pc.html">
   <block name="title">西藏政务服务网</block>
   <block name="header">
+    <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
+    <style>
+      #top {
+        width: 100%;
+        height: 112px;
+        background: url(./public/images/background_top.jpg) no-repeat;
+        background-size: 100% 100%;
+      }
+
+      #bottom {
+        width: 100%;
+        height: 226px;
+        background: url(./public/images/background_bottom.jpg) no-repeat;
+        background-size: 100% 100%;
+      }
+    </style>
   </block>
   <block name="content">
-
+    <div id="top"></div>
     <div id="root"></div>
+    <div id="bottom"></div>
 
   </block>
   <block name="footer">

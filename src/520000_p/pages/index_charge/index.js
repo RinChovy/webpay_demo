@@ -87,6 +87,7 @@ class NonTaxPayChange extends React.Component {
           device_type: 'pc', //设备类型
           widget_param: {
             paycode: payCode,
+            regCode: payCode.substring(0, 6)
           }, //控件参数，常用来传递缴款服务所需定义的内容，如，非税paycode直缴或传入相关缴费信息生成缴款书
           charge_url: api.createCharge, //商户服务端创建charge时的controller地址
           charge_param: {

@@ -13,7 +13,7 @@ class Home extends React.Component {
     url: 'http://220.182.49.217:18686/billcheck/#/home', //票据查询地址
   };
 
-  componentDidMount() {}
+  componentDidMount() { }
   // 左侧按钮方法
   left = () => {
     this.setState({
@@ -60,9 +60,6 @@ class Home extends React.Component {
     };
     return (
       <div className="body">
-        <div className="body_icon">
-          <img src={require('../../public/images/icon_top.png')} />
-        </div>
         <div className="outForm_pay">
           <div className="img_pay">
             <div className="onForm_pay">
@@ -75,48 +72,26 @@ class Home extends React.Component {
                 </div>
                 <div className="home_right">
                   <div className="home_right_nei">
-                    <div className={topLeft} onClick={this.left}>
-                      <span>缴款</span>
+                    <div className="box_wai">
+                      <div className="box" onClick={this.NTpay}>
+                        <img
+                          src={require('../../public/images/xizang/feishui.png')}
+                        />
+                        <div {...marginTop}>
+                          <span>非税缴款</span>
+                        </div>
+                      </div>
+                      <div className="box" onClick={this.evURL}>
+                        <img
+                          src={require('../../public/images/xizang/jiaokuan.png')}
+                        />
+                        <div {...marginTop}>
+                          <span>缴款凭证查询</span>
+                        </div>
+                      </div>
                     </div>
-                    {/* <div className={topRight} onClick={this.right}>
-                      <span>缴款</span>
-                    </div> */}
-                    {leftOrRight === 'left' && (
-                      <div className="box_wai">
-                        <div className="box" onClick={this.NTpay}>
-                          <img
-                            src={require('../../public/images/xizang/feishui.png')}
-                          />
-                          <div {...marginTop}>
-                            <span>非税缴款</span>
-                          </div>
-                        </div>
-                        <div className="box" onClick={this.evURL}>
-                          <img
-                            src={require('../../public/images/xizang/caizheng.png')}
-                          />
-                          <div {...marginTop}>
-                            <span>票据查询</span>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-                    {/* {leftOrRight === "right" && (
-                      <div className="box_wai">
-                        <div className="box">
-                          <img
-                            src={require("../../public/images/xizang/caizheng.png")}
-                          />
-                          <div>
-                            <span>右侧</span>
-                          </div>
-                        </div>
-                      </div>
-                    )} */}
                   </div>
-                  <div {...center}>
-                    <span>{spanPay}</span>
-                  </div>
+
                 </div>
               </div>
             </div>

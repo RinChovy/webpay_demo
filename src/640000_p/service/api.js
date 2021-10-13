@@ -1,6 +1,6 @@
 import base from 'utils/baseURL';
 
-const callback = 'https://222.75.67.163:10087/webpay_640000/success'; //传给后台的回调地址
+const callback = 'http://222.75.67.163:10086/webpay_640000/success'; //传给后台的回调地址
 
 const region = '640000'; //区划号
 

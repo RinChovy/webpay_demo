@@ -87,7 +87,7 @@ class home extends React.Component {
       <div className="body" onClick={this.body}>
         <div className="outForm_pay">
           <div style={{ width: '1390px', height: 20, margin: '0 auto', position: 'relative', color: '#1E6BCC', fontSize: 22 }}>
-            <span style={{ position: 'absolute', right: 10 }} onClick={this.handlePdf}>收费依据</span>
+            <span style={{ position: 'absolute', left: 10, cursor: 'pointer' }} onClick={this.handlePdf}>收费依据</span>
           </div>
           <div className="home_div">
             <div className="home_div_LR">

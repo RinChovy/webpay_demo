@@ -152,6 +152,7 @@ export default {
       if ('' != typeof userId && typeof userId != 'undefined' && 'null' != typeof userId) {
         const widget_param = {
           paycode: queryJson.payCode,
+          regCode: queryJson.payCode.substring(0,6)
         }
         const widget_content = {
           merchant_no: query.merchant_no,
@@ -205,6 +206,7 @@ export default {
         })
         const widget_param = {
           paycode: queryJson.payCode,
+          regCode: queryJson.payCode.substring(0,6)
         }
         const widget_content = {
           merchant_no: query.merchant_no,
