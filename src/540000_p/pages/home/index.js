@@ -86,7 +86,7 @@ class Home extends React.Component {
                           src={require('../../public/images/xizang/jiaokuan.png')}
                         />
                         <div {...marginTop}>
-                          <span>缴款凭证查询</span>
+                          <span>财政票据查验</span>
                         </div>
                       </div>
                     </div>

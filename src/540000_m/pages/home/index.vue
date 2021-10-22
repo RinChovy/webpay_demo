@@ -7,9 +7,9 @@
             <img src="../../public/images/icon/feisui.png" alt="" />
             <div><span>一般非税缴款</span></div>
           </div>
-          <div class="box" @click="indexPay">
+          <div class="box" @click="evURL">
             <img src="../../public/images/icon/ping.png" alt="" />
-            <div><span>缴款凭证查询</span></div>
+            <div><span>财政票据查验</span></div>
           </div>
         </div>
       </div>
@@ -54,8 +54,8 @@ export default {
         path: '/index_pay',
       })
     },
-    indexUrl() {
-      window.location.href = 'http://pjcy.mof.gov.cn/#/home'
+    evURL() {
+      window.location.href = 'http://220.182.49.217:18686/billcheck/#/home'
     },
   },
 }
