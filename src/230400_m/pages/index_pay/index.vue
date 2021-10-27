@@ -43,22 +43,43 @@
         <button @click="submit" v-if="disabled == true">下一步</button>
         <button @click="submit" disabled="disabled" v-else>下一步</button>
       </div>
+      <div style="margin-top: 20px; text-align: center;">
+        <span>
+          阅读并接受<span style="color: rgb(24, 144, 255);" @click="show = true"
+            >《用户隐私声明》</span
+          >
+        </span>
+      </div>
     </div>
+    <van-overlay :show="show" @click="show = false">
+      <div class="wrapper">
+        <div class="wrapper_model">
+          <div class="icon">
+            <van-icon name="cross" size="30" @click="show = false" />
+          </div>
+          <privacy></privacy>
+        </div>
+      </div>
+    </van-overlay>
   </div>
 </template>
 
 <script>
-import { Button, Row, Col, Search, Dialog } from 'vant'
+import Privacy from '../components/privacy.vue';
+import { Button, Row, Col, Search, Dialog,Overlay, Icon } from 'vant'
 import API from '../../config/api.js'
 import { queryPayInfo, code } from '../../config/services.js'
 export default {
   name: 'index_pay',
   components: {
+      privacy: Privacy,
     'van-row': Row,
     'van-col': Col,
     'van-button': Button,
     'van-search': Search,
     'van-dialog': Dialog,
+      'van-overlay': Overlay,
+    'van-icon': Icon,
   },
   data() {
     return {
@@ -82,6 +103,8 @@ export default {
       disabled: true,
       //uuid
       uuid: '',
+         // 遮罩层元素
+      show: false,
     }
   },
   created() {
@@ -233,5 +256,28 @@ export default {
     color: white;
     font-size: 19px;
   }
+}
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+}
+.wrapper_model {
+  position: relative;
+  width: 90%;
+  max-height: 500px;
+  overflow-y: auto;
+  border-radius: 20px;
+  background-color: #fff;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+.icon {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  z-index: 2;
 }
 </style>

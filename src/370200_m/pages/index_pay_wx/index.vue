@@ -30,7 +30,7 @@
         <div class="form_input_code">
           <input placeholder="请输入验证码" v-model="code" />
           <img alt="" :src="codeUrlT" />
-          <span style="color: #4690ff" @click="changeCode">换一张</span>
+          <span style="color: #4690ff;" @click="changeCode">换一张</span>
         </div>
         <div class="form_input_warn">
           <span>{{ codeWarn }}</span>
@@ -40,28 +40,48 @@
         <button @click="submit" v-if="disabled == true">下一步</button>
         <button @click="submit" disabled="disabled" v-else>下一步</button>
       </div>
-      <div class="footerc" style="line-height: 20px; margin-top: 24px">
-        <span style="display: block">版本所有：青岛市财政局</span>
-        <span style="display: block">技术支持：福建博思软件股份有限公司</span>
-        <span style="display: block">支持电话：0532-85856831</span>
+      <div style="margin-top: 20px; text-align: center;">
+        <span>
+          阅读并接受<span style="color: rgb(24, 144, 255);" @click="show = true"
+            >《用户隐私声明》</span
+          >
+        </span>
+      </div>
+      <div class="footerc" style="line-height: 20px; margin-top: 24px;">
+        <span style="display: block;">版本所有：青岛市财政局</span>
+        <span style="display: block;">技术支持：福建博思软件股份有限公司</span>
+        <span style="display: block;">支持电话：0532-85856831</span>
       </div>
     </div>
+    <van-overlay :show="show" @click="show = false">
+      <div class="wrapper">
+        <div class="wrapper_model">
+          <div class="icon">
+            <van-icon name="cross" size="30" @click="show = false" />
+          </div>
+          <privacy></privacy>
+        </div>
+      </div>
+    </van-overlay>
   </div>
 </template>
 
-
 <script>
-import { Button, Row, Col, Search, Dialog } from 'vant'
-import API from '../../config/api.js'
-import { queryPayInfo, getOpenid, getOpenPlatformUserid } from '../../config/services.js'
+import Privacy from '../components/privacy.vue';
+import { Button, Row, Col, Search, Dialog, Overlay, Icon } from 'vant';
+import API from '../../config/api.js';
+import { queryPayInfo, getOpenid, getOpenPlatformUserid } from '../../config/services.js';
 export default {
   name: 'index_pay',
   components: {
+    privacy: Privacy,
     'van-row': Row,
     'van-col': Col,
     'van-button': Button,
     'van-search': Search,
     'van-dialog': Dialog,
+    'van-overlay': Overlay,
+    'van-icon': Icon,
   },
   data() {
     return {
@@ -83,7 +103,9 @@ export default {
       codeWarn: '',
       //按钮失效
       disabled: true,
-    }
+      // 遮罩层元素
+      show: false,
+    };
   },
   mounted() {
     if (navigator.userAgent.toLowerCase().indexOf('micromessenger') != -1) {
@@ -91,61 +113,61 @@ export default {
       // document.writeln('<script src="https://res.wx.qq.com/open/js/jweixin-1.3.2.js"' + '>' + '<' + '/' + 'script>');
       // util.loadScript("https://res.wx.qq.com/open/js/jweixin-1.3.2.js");
       //  处理微信小程序内 webview 页面监听状态的方法
-      const openid = localStorage.getItem('openid')
+      const openid = localStorage.getItem('openid');
       if (openid) {
         getOpenPlatformUserid({
           openid: openid,
         }).then((resData) => {
           if (resData.code === 0) {
-            localStorage.removeItem('userId')
-            localStorage.setItem('userId', resData.data.user_id)
+            localStorage.removeItem('userId');
+            localStorage.setItem('userId', resData.data.user_id);
           } else {
             Dialog.alert({
               message: resData.msg,
             }).then(() => {
               // on close
-            })
+            });
           }
-        })
+        });
       } else {
-        var url = location.href.split('#')[0]
-        let state = this.GetQueryValue('state')
-        console.log('url' + url)
-        console.log('start' + state)
+        var url = location.href.split('#')[0];
+        let state = this.GetQueryValue('state');
+        console.log('url' + url);
+        console.log('start' + state);
         if (typeof state != 'undefined' && '' != typeof state) {
           if (state == 'cityService') {
             // 验证是城市服务
             // 获取code
-            let code = this.GetQueryValue('code')
-            console.log('code' + code)
+            let code = this.GetQueryValue('code');
+            console.log('code' + code);
             getOpenid({
               code: code,
             }).then((data) => {
               if (data.code === 0) {
-                localStorage.removeItem('openid')
-                localStorage.setItem('openid', data.data.openid)
+                localStorage.removeItem('openid');
+                localStorage.setItem('openid', data.data.openid);
                 getOpenPlatformUserid({
                   openid: data.data.openid,
                 }).then((resData) => {
                   if (resData.code === 0) {
-                    localStorage.removeItem('userId')
-                    localStorage.setItem('userId', resData.data.user_id)
+                    localStorage.removeItem('userId');
+                    localStorage.setItem('userId', resData.data.user_id);
                   } else {
                     Dialog.alert({
                       message: resData.msg,
                     }).then(() => {
                       // on close
-                    })
+                    });
                   }
-                })
+                });
               } else {
                 Dialog.alert({
                   message: data.msg,
                 }).then(() => {
                   // on close
-                })
+                });
               }
-            })
+            });
           }
         }
       }
@@ -153,80 +175,80 @@ export default {
   },
   methods: {
     GetQueryValue(queryName) {
-      var reg = new RegExp('(^|&)' + queryName + '=([^&]*)(&|$)', 'i')
-      var r = window.location.search.substr(1).match(reg)
+      var reg = new RegExp('(^|&)' + queryName + '=([^&]*)(&|$)', 'i');
+      var r = window.location.search.substr(1).match(reg);
       if (r != null) {
-        return decodeURI(r[2])
+        return decodeURI(r[2]);
       } else {
-        return ''
+        return '';
       }
     },
     //验证码时间戳
     chgUrl(url) {
-      var timestamp = new Date().valueOf()
+      var timestamp = new Date().valueOf();
       // url = url.substring(0, 50);
       if (url.indexOf('&') >= 0) {
-        url = url + '×tamp=' + timestamp
+        url = url + '×tamp=' + timestamp;
       } else {
         // url = url + '?timestamp=' + timestamp;
-        url = url + '?timestamp=' + timestamp
+        url = url + '?timestamp=' + timestamp;
       }
-      return url
+      return url;
     },
     // 改变验证码
     changeCode() {
-      let newCode = this.chgUrl(this.codeUrl)
-      this.codeUrlT = newCode
+      let newCode = this.chgUrl(this.codeUrl);
+      this.codeUrlT = newCode;
     },
     //提交下一步
     submit() {
-      let that = this
-      this.warning()
+      let that = this;
+      this.warning();
       if (this.payCodeWarn == '' && this.payPeopleWarn == '' && this.codeWarn == '') {
-        that.disabled = false
+        that.disabled = false;
         queryPayInfo({
           payCode: this.payCode,
           payPeople: this.payPeople,
           code: this.code,
         }).then((res) => {
-          res.code === 0 ? this.handleSuccess(res) : this.handleError(res)
-        })
+          res.code === 0 ? this.handleSuccess(res) : this.handleError(res);
+        });
       }
     },
     // 提交成功
 
     handleSuccess(data) {
-      localStorage.setItem('data', JSON.stringify(data))
-      localStorage.setItem('type', 'wx')
+      localStorage.setItem('data', JSON.stringify(data));
+      localStorage.setItem('type', 'wx');
       this.$router.push({
         path: '/index_charge',
         name: 'index_charge',
-      })
+      });
     },
     // 提交失败1
     handleError(err) {
-      this.disabled = true
-      localStorage.removeItem('data')
+      this.disabled = true;
+      localStorage.removeItem('data');
       Dialog.alert({
         message: err.msg,
       }).then(() => {
         // on close
-      })
+      });
     },
     //验证方法
     warning() {
-      const regular = API.regular
-      console.log(regular)
+      const regular = API.regular;
+      console.log(regular);
       this.payCode == ''
         ? (this.payCodeWarn = '请输入缴款码')
         : eval(regular).test(this.payCode)
         ? (this.payCodeWarn = '')
-        : (this.payCodeWarn = API.regularText)
-      this.payPeople == '' ? (this.payPeopleWarn = '请输入缴款人') : (this.payPeopleWarn = '')
-      this.code == '' ? (this.codeWarn = '请输入验证码') : (this.codeWarn = '')
+        : (this.payCodeWarn = API.regularText);
+      this.payPeople == '' ? (this.payPeopleWarn = '请输入缴款人') : (this.payPeopleWarn = '');
+      this.code == '' ? (this.codeWarn = '请输入验证码') : (this.codeWarn = '');
     },
   },
-}
+};
 </script>
 
 <style scoped lang="scss">
@@ -330,5 +352,28 @@ export default {
   color: #999ea0;
   text-align: center;
   // height:0.92rem;
+}
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+}
+.wrapper_model {
+  position: relative;
+  width: 90%;
+  max-height: 500px;
+  overflow-y: auto;
+  border-radius: 20px;
+  background-color: #fff;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+.icon {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  z-index: 2;
 }
 </style>

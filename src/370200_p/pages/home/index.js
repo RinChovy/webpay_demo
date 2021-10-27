@@ -1,8 +1,9 @@
 import React from "react";
-import { Form, Input, Button, Row, Col, notification } from "antd";
+import { Form, Input, Button, Row, Col, notification, Modal } from "antd";
 import { queryPayInfo } from "../../service/services";
 import { api } from "../../service/api";
 import style from "../../public/css/index.css";
+import Privacy from '../components/privacy';
 
 class NonTaxPay extends React.Component {
   formRef = React.createRef();
@@ -10,6 +11,7 @@ class NonTaxPay extends React.Component {
     warnSpan: "“非税缴费技术服务电话 0532-85856831”",
     codeUrl: api.getCo, //验证码
     loadings: [], //等待时间
+    isModalVisible: false, // 遮罩控制
   };
 
   componentDidMount() {
@@ -84,8 +86,20 @@ class NonTaxPay extends React.Component {
   onFinishFailed = (values) => {
     console.log("fail:", values);
   };
+  // 打开遮罩
+  handleModel = () => {
+    this.setState({
+      isModalVisible: true
+    })
+  }
+  // 关闭遮罩
+  isHandleModel = () => {
+    this.setState({
+      isModalVisible: false
+    })
+  }
   render() {
-    const { codeUrl, warnSpan, loadings } = this.state;
+    const { codeUrl, warnSpan, loadings, isModalVisible } = this.state;
     const layout = {
       labelCol: {
         span: 8,
@@ -225,14 +239,29 @@ class NonTaxPay extends React.Component {
                         fontWeight: "bold",
                       }}
                     >
-                      <span>{warnSpan}</span>
+                      <div style={{ width: '100%', textAlign: "center", cursor: 'pointer' }}>
+                        <span>阅读并接受<span style={{ color: 'rgb(24, 144, 255)' }} onClick={this.handleModel}>《用户隐私声明》</span></span>
+                      </div>
+
                     </div>
                   </Form>
+                  <div style={{ marginTop: '10%', width: '100%', textAlign: "center", cursor: 'pointer' }}>
+                    <span>{warnSpan}</span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <Modal title="隐私授权声明" visible={isModalVisible} onCancel={this.isHandleModel} width='1000px' footer={[
+          <Button key="back" type="primary" onClick={this.isHandleModel}>
+            已阅读
+          </Button>,
+        ]}>
+          <div style={{ maxHeight: '500px', overflowY: 'scroll' }}>
+            <Privacy />
+          </div>
+        </Modal>
       </div>
     );
   }

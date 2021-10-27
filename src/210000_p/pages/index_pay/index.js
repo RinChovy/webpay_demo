@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Input, Button, Row, Col, notification, Popover } from 'antd';
+import { Form, Input, Button, Row, Col, notification, Modal } from 'antd';
 import { queryPayInfo, nontaxPage, getCo } from '../../service/services';
 import { api } from '../../service/api';
 import InputComponents from '../components/inputComponents';
@@ -10,6 +10,7 @@ import img3 from '../../public/images/paycode_3.png';
 import img_hover from '../../public/images/paycode_1_hover.png';
 import img_hover2 from '../../public/images/paycode_2_hover.png';
 import img_hover3 from '../../public/images/paycode_3_hover.png';
+import Privacy from '../components/privacy';
 
 class NonTaxPay extends React.Component {
   formRef = React.createRef();
@@ -18,6 +19,7 @@ class NonTaxPay extends React.Component {
     codeUrl: '', //验证码
     uuid: '', //uuid
     loadings: [], //等待时间
+    isModalVisible: false, // 遮罩控制
   };
 
   componentDidMount() {
@@ -36,9 +38,9 @@ class NonTaxPay extends React.Component {
     getCo().then((res) => {
       res.code === 0
         ? this.setState({
-            codeUrl: 'data:image/gif;base64,' + res.data.img,
-            uuid: res.data.uuid,
-          })
+          codeUrl: 'data:image/gif;base64,' + res.data.img,
+          uuid: res.data.uuid,
+        })
         : this.handleError(res.msg);
     });
   }
@@ -63,9 +65,9 @@ class NonTaxPay extends React.Component {
     getCo({ timestamp: timestamp }).then((res) => {
       res.code === 0
         ? this.setState({
-            codeUrl: 'data:image/gif;base64,' + res.data.img,
-            uuid: res.data.uuid,
-          })
+          codeUrl: 'data:image/gif;base64,' + res.data.img,
+          uuid: res.data.uuid,
+        })
         : this.handleError(res.msg);
     });
   };
@@ -136,8 +138,20 @@ class NonTaxPay extends React.Component {
       };
     });
   };
+  // 打开遮罩
+  handleModel = () => {
+    this.setState({
+      isModalVisible: true
+    })
+  }
+  // 关闭遮罩
+  isHandleModel = () => {
+    this.setState({
+      isModalVisible: false
+    })
+  }
   render() {
-    const { codeUrl, loadings } = this.state;
+    const { codeUrl, loadings, isModalVisible } = this.state;
     const layout = {
       labelCol: {
         span: 8,
@@ -239,12 +253,24 @@ class NonTaxPay extends React.Component {
                         </Button>
                       </Form.Item>
                     </Form>
+                    <div style={{ width: '100%', paddingLeft: '26%', cursor: 'pointer' }}>
+                      <span>阅读并接受<span style={{ color: 'rgb(24, 144, 255)' }} onClick={this.handleModel}>《用户隐私声明》</span></span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <Modal title="隐私授权声明" visible={isModalVisible} onCancel={this.isHandleModel} width='1000px' footer={[
+          <Button key="back" type="primary" onClick={this.isHandleModel}>
+            已阅读
+          </Button>,
+        ]}>
+          <div style={{ maxHeight: '500px', overflowY: 'scroll' }}>
+            <Privacy />
+          </div>
+        </Modal>
       </div>
     );
   }

@@ -1,11 +1,12 @@
 import React from 'react';
-import { Form, Input, Button, Row, Col, notification, Popover } from 'antd';
+import { Form, Input, Button, Row, Col, notification, Modal } from 'antd';
 import {
   queryPayInfo,
   getCo,
   queryPayInfoByIdentityCard,
 } from '../../service/services';
 import { api } from '../../service/api';
+import Privacy from '../components/privacy';
 
 class education extends React.Component {
   formRef = React.createRef();
@@ -24,17 +25,18 @@ class education extends React.Component {
     loadings: [], //等待时间
     classLeft: 'classHover', //左侧按钮
     classRight: 'classNotHover', //右侧按钮
+    isModalVisible: false, // 遮罩控制
   };
 
   componentDidMount() {
     getCo().then((res) => {
       res.code === 0
         ? this.setState({
-            codeUrl: 'data:image/gif;base64,' + res.data.img,
-            codeUrl2: 'data:image/gif;base64,' + res.data.img,
-            uuid: res.data.uuid,
-            uuid2: res.data.uuid,
-          })
+          codeUrl: 'data:image/gif;base64,' + res.data.img,
+          codeUrl2: 'data:image/gif;base64,' + res.data.img,
+          uuid: res.data.uuid,
+          uuid2: res.data.uuid,
+        })
         : this.handleError(res.msg);
     });
   }
@@ -67,9 +69,9 @@ class education extends React.Component {
     getCo({ timestamp: timestamp }).then((res) => {
       res.code === 0
         ? this.setState({
-            codeUrl: 'data:image/gif;base64,' + res.data.img,
-            uuid: res.data.uuid,
-          })
+          codeUrl: 'data:image/gif;base64,' + res.data.img,
+          uuid: res.data.uuid,
+        })
         : this.handleError(res.msg);
     });
   };
@@ -79,9 +81,9 @@ class education extends React.Component {
     getCo({ timestamp: timestamp }).then((res) => {
       res.code === 0
         ? this.setState({
-            codeUrl2: 'data:image/gif;base64,' + res.data.img,
-            uuid2: res.data.uuid,
-          })
+          codeUrl2: 'data:image/gif;base64,' + res.data.img,
+          uuid2: res.data.uuid,
+        })
         : this.handleError(res.msg);
     });
   };
@@ -179,6 +181,18 @@ class education extends React.Component {
   onFinishFailed = (values) => {
     console.log('fail:', values);
   };
+  // 打开遮罩
+  handleModel = () => {
+    this.setState({
+      isModalVisible: true
+    })
+  }
+  // 关闭遮罩
+  isHandleModel = () => {
+    this.setState({
+      isModalVisible: false
+    })
+  }
   render() {
     const {
       codeUrl,
@@ -187,6 +201,7 @@ class education extends React.Component {
       blurInput,
       classLeft,
       classRight,
+      isModalVisible
     } = this.state;
     const layout = {
       labelCol: {
@@ -596,12 +611,24 @@ class education extends React.Component {
                         </Form.Item>
                       </Form>
                     )}
+                    <div style={{ width: '100%', paddingLeft: '24%', cursor: 'pointer' }}>
+                      <span>阅读并接受<span style={{ color: 'rgb(24, 144, 255)' }} onClick={this.handleModel}>《用户隐私声明》</span></span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <Modal title="隐私授权声明" visible={isModalVisible} onCancel={this.isHandleModel} width='1000px' footer={[
+          <Button key="back" type="primary" onClick={this.isHandleModel}>
+            已阅读
+          </Button>,
+        ]}>
+          <div style={{ maxHeight: '400px', overflowY: 'scroll' }}>
+            <Privacy />
+          </div>
+        </Modal>
       </div>
     );
   }

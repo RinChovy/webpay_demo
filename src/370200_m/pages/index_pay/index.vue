@@ -44,28 +44,49 @@
           下一步
         </button>
       </div>
+        <div style="margin-top: 20px; text-align: center;">
+        <span>
+          阅读并接受<span style="color: rgb(24, 144, 255);" @click="show = true"
+            >《用户隐私声明》</span
+          >
+        </span>
+      </div>
       <div class="footerc" style="line-height: 20px; margin-top: 24px">
         <span style="display: block">版本所有：青岛市财政局</span>
         <span style="display: block">技术支持：福建博思软件股份有限公司</span>
         <span style="display: block">支持电话：0532-85856831</span>
       </div>
     </div>
+      <van-overlay :show="show" @click="show = false">
+      <div class="wrapper">
+        <div class="wrapper_model">
+          <div class="icon">
+            <van-icon name="cross" size="30" @click="show = false" />
+          </div>
+          <privacy></privacy>
+        </div>
+      </div>
+    </van-overlay>
   </div>
 </template>
 
 
 <script>
-import { Button, Row, Col, Search, Dialog } from 'vant'
+import Privacy from '../components/privacy.vue';
+import { Button, Row, Col, Search, Dialog, Overlay, Icon  } from 'vant'
 import API from '../../config/api.js'
 import { queryPayInfo, getOpenid, getOpenPlatformUserid } from '../../config/services.js'
 export default {
   name: 'index_pay',
   components: {
+    privacy: Privacy,
     'van-row': Row,
     'van-col': Col,
     'van-button': Button,
     'van-search': Search,
     'van-dialog': Dialog,
+    'van-overlay': Overlay,
+    'van-icon': Icon,
   },
   data() {
     return {
@@ -89,6 +110,8 @@ export default {
       disabled: true,
       //type判断是否微信
       type: 'web',
+        // 遮罩层元素
+      show: false,
     }
   },
   mounted() {
@@ -345,5 +368,28 @@ export default {
   color: #999ea0;
   text-align: center;
   // height:0.92rem;
+}
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+}
+.wrapper_model {
+  position: relative;
+  width: 90%;
+  max-height: 500px;
+  overflow-y: auto;
+  border-radius: 20px;
+  background-color: #fff;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+.icon {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  z-index: 2;
 }
 </style>
