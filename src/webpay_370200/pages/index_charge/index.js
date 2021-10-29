@@ -63,6 +63,7 @@ class NonTaxPayChange extends React.Component {
       effective_time: '1c',
       version_no: '1.1',
       subject: subject,
+      // body: 'body',
       device_type: 'pc',
       widget_param: widget_param,
     };

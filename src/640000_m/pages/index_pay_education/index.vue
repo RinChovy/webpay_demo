@@ -1,10 +1,16 @@
 <template>
   <div class="mainwrap">
     <div class="top">
-      <div :class="leftOrRight == 'left' ? 'top_box top_box_hover ' : 'top_box un_top_box_hover'" @click="leftButton">
+      <div
+        :class="leftOrRight == 'left' ? 'top_box top_box_hover ' : 'top_box un_top_box_hover'"
+        @click="leftButton"
+      >
         <span>按缴款码查询</span>
       </div>
-      <div :class="leftOrRight == 'right' ? 'top_box top_box_hover' : 'top_box un_top_box_hover'" @click="rightButton">
+      <div
+        :class="leftOrRight == 'right' ? 'top_box top_box_hover' : 'top_box un_top_box_hover'"
+        @click="rightButton"
+      >
         <span>按身份证号查询</span>
       </div>
     </div>
@@ -39,7 +45,7 @@
         <div class="form_input_code">
           <input placeholder="请输入验证码" v-model="code" />
           <img alt="" :src="codeUrlT" />
-          <span style="color: #4690ff" @click="changeCode">换一张</span>
+          <span style="color: #4690ff;" @click="changeCode">换一张</span>
         </div>
         <div class="form_input_warn">
           <span>{{ codeWarn }}</span>
@@ -48,6 +54,13 @@
       <div class="button_box">
         <button @click="submit" v-if="disabled == true">下一步</button>
         <button @click="submit" disabled="disabled" v-else>下一步</button>
+      </div>
+      <div style="margin-top: 20px; text-align: center;">
+        <span>
+          阅读并接受<span style="color: rgb(24, 144, 255);" @click="show = true"
+            >《用户隐私声明》</span
+          >
+        </span>
       </div>
     </div>
     <!-- 按身份证号查询 -->
@@ -81,7 +94,7 @@
         <div class="form_input_code">
           <input placeholder="请输入验证码" v-model="card_code" />
           <img alt="" :src="card_codeUrlT" />
-          <span style="color: #4690ff" @click="card_changeCode">换一张</span>
+          <span style="color: #4690ff;" @click="card_changeCode">换一张</span>
         </div>
         <div class="form_input_warn">
           <span>{{ card_codeWarn }}</span>
@@ -91,22 +104,44 @@
         <button @click="card_submit" v-if="card_disabled == true">下一步</button>
         <button @click="card_submit" disabled="disabled" v-else>下一步</button>
       </div>
+      <div style="margin-top: 20px; text-align: center;">
+        <span>
+          阅读并接受<span style="color: rgb(24, 144, 255);" @click="show = true"
+            >《用户隐私声明》</span
+          >
+        </span>
+      </div>
     </div>
+
+   <van-overlay :show="show" @click="show = false" :lock-scroll="false">
+      <div class="wrapper">
+        <div class="wrapper_model">
+          <div class="icon">
+            <van-icon name="cross" size="30" @click="show = false" />
+          </div>
+          <privacy></privacy>
+        </div>
+      </div>
+    </van-overlay>
   </div>
 </template>
 
 <script>
-import { Button, Row, Col, Search, Dialog } from 'vant'
-import API from '../../config/api.js'
-import { queryPayInfo, queryPayInfoByIdentityCard, code } from '../../config/services.js'
+import Privacy from '../components/privacy.vue';
+import { Button, Row, Col, Search, Dialog, Overlay, Icon } from 'vant';
+import API from '../../config/api.js';
+import { queryPayInfo, queryPayInfoByIdentityCard, code } from '../../config/services.js';
 export default {
   name: 'index_pay',
   components: {
+    privacy: Privacy,
     'van-row': Row,
     'van-col': Col,
     'van-button': Button,
     'van-search': Search,
     'van-dialog': Dialog,
+    'van-overlay': Overlay,
+    'van-icon': Icon,
   },
   data() {
     return {
@@ -154,7 +189,9 @@ export default {
       //uuid
       card_uuid: '',
       ///////////////////////////////////////////以上为身份证号缴款
-    }
+      // 遮罩层元素
+      show: false,
+    };
   },
   //初始生命周期
   created() {
@@ -164,116 +201,125 @@ export default {
           (this.card_codeUrlT = 'data:image/gif;base64,' + res.data.img),
           (this.uuid = res.data.uuid),
           (this.card_uuid = res.data.uuid))
-        : this.handleError(res)
-    })
+        : this.handleError(res);
+    });
   },
   methods: {
     //左右按钮
     leftButton() {
-      this.leftOrRight = 'left'
+      this.leftOrRight = 'left';
     },
     rightButton() {
-      this.leftOrRight = 'right'
+      this.leftOrRight = 'right';
     },
     // 改变验证码
     changeCode() {
-      var timestamp = new Date().valueOf()
+      var timestamp = new Date().valueOf();
       code({ timestamp: timestamp }).then((res) => {
         res.code === 0
           ? ((this.codeUrlT = 'data:image/gif;base64,' + res.data.img), (this.uuid = res.data.uuid))
-          : this.handleError(res)
-      })
+          : this.handleError(res);
+      });
     },
     card_changeCode() {
-      var timestamp = new Date().valueOf()
+      var timestamp = new Date().valueOf();
       code({ timestamp: timestamp }).then((res) => {
         res.code === 0
-          ? ((this.card_codeUrlT = 'data:image/gif;base64,' + res.data.img), (this.card_uuid = res.data.uuid))
-          : this.handleError(res)
-      })
+          ? ((this.card_codeUrlT = 'data:image/gif;base64,' + res.data.img),
+            (this.card_uuid = res.data.uuid))
+          : this.handleError(res);
+      });
     },
     //提交下一步_缴款码
     submit() {
-      let that = this
-      this.warning()
+      let that = this;
+      this.warning();
       if (this.payCodeWarn == '' && this.payPeopleWarn == '' && this.codeWarn == '') {
-        that.disabled = false
+        that.disabled = false;
         queryPayInfo({
           payCode: this.payCode,
           payPeople: this.payPeople,
           code: this.code,
           uuid: this.uuid,
         }).then((res) => {
-          res.code === 0 ? this.handleSuccess(res) : this.handleError(res)
-        })
+          res.code === 0 ? this.handleSuccess(res) : this.handleError(res);
+        });
       } else {
       }
     },
     //提交下一步_身份证号
     card_submit() {
-      let that = this
-      this.card_warning()
-      if (this.card_payCodeWarn == '' && this.card_payPeopleWarn == '' && this.card_codeWarn == '') {
-        that.card_disabled = false
+      let that = this;
+      this.card_warning();
+      if (
+        this.card_payCodeWarn == '' &&
+        this.card_payPeopleWarn == '' &&
+        this.card_codeWarn == ''
+      ) {
+        that.card_disabled = false;
         queryPayInfoByIdentityCard({
           idNumber: this.card_payCode,
           payPeople: this.card_payPeople,
           code: this.card_code,
           uuid: this.card_uuid,
         }).then((res) => {
-          res.code === 0 ? this.handleSuccess2(res) : this.handleError(res)
-        })
+          res.code === 0 ? this.handleSuccess2(res) : this.handleError(res);
+        });
       } else {
       }
     },
 
     // 提交成功
     handleSuccess(data) {
-      localStorage.setItem('data', JSON.stringify(data))
+      localStorage.setItem('data', JSON.stringify(data));
       this.$router.push({
         path: '/index_charge',
         name: 'index_charge',
-      })
+      });
     },
     // 提交成功
     handleSuccess2(data) {
-      localStorage.setItem('dataList', JSON.stringify(data))
+      localStorage.setItem('dataList', JSON.stringify(data));
       this.$router.push({
         path: '/index_pay_idcard',
         name: 'index_pay_idcard',
-      })
+      });
     },
     // 提交失败1
     handleError(err) {
-      this.disabled = true
-      this.card_disabled = true
-      localStorage.removeItem('data')
+      this.disabled = true;
+      this.card_disabled = true;
+      localStorage.removeItem('data');
       Dialog.alert({
         message: err.msg,
       }).then(() => {
         // on close
-      })
+      });
     },
     //验证方法
     warning() {
-      const regular = API.regular
-      console.log(regular)
+      const regular = API.regular;
+      console.log(regular);
       this.payCode == ''
         ? (this.payCodeWarn = '请输入缴款码')
         : eval(regular).test(this.payCode)
         ? (this.payCodeWarn = '')
-        : (this.payCodeWarn = API.regularText)
-      this.payPeople == '' ? (this.payPeopleWarn = '请输入缴款人') : (this.payPeopleWarn = '')
-      this.code == '' ? (this.codeWarn = '请输入验证码') : (this.codeWarn = '')
+        : (this.payCodeWarn = API.regularText);
+      this.payPeople == '' ? (this.payPeopleWarn = '请输入缴款人') : (this.payPeopleWarn = '');
+      this.code == '' ? (this.codeWarn = '请输入验证码') : (this.codeWarn = '');
     },
     //验证方法2
     card_warning() {
-      this.card_payCode == '' ? (this.card_payCodeWarn = '请输入身份证号') : (this.card_payCodeWarn = '')
-      this.card_payPeople == '' ? (this.card_payPeopleWarn = '请输入缴款人') : (this.card_payPeopleWarn = '')
-      this.card_code == '' ? (this.card_codeWarn = '请输入验证码') : (this.card_codeWarn = '')
+      this.card_payCode == ''
+        ? (this.card_payCodeWarn = '请输入身份证号')
+        : (this.card_payCodeWarn = '');
+      this.card_payPeople == ''
+        ? (this.card_payPeopleWarn = '请输入缴款人')
+        : (this.card_payPeopleWarn = '');
+      this.card_code == '' ? (this.card_codeWarn = '请输入验证码') : (this.card_codeWarn = '');
     },
   },
-}
+};
 </script>
 
 <style scoped lang="scss">
@@ -431,5 +477,28 @@ export default {
     color: white;
     font-size: 16px;
   }
+}
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+}
+.wrapper_model {
+  position: relative;
+  width: 90%;
+  max-height: 500px;
+  overflow-y: auto;
+  border-radius: 20px;
+  background-color: #fff;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+.icon {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  z-index: 2;
 }
 </style>

@@ -17,7 +17,9 @@ class NonTaxPay extends React.Component {
     isModalVisible: false, // 遮罩控制
   };
 
-  componentDidMount() { }
+  componentDidMount() {
+    console.log('2021-10-29')
+  }
   // 提示信息方法
   openNotificationWithIcon = (type, msg) => {
     notification[type]({
@@ -300,7 +302,7 @@ class NonTaxPay extends React.Component {
             </div>
           </div>
         </div>
-        <Modal title="隐私授权声明" visible={isModalVisible} onCancel={this.isHandleModel} width='1000px' footer={[
+        <Modal title="用户隐私声明" visible={isModalVisible} onCancel={this.isHandleModel} width='1000px' footer={[
           <Button key="back" type="primary" onClick={this.isHandleModel}>
             已阅读
           </Button>,

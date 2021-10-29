@@ -44,23 +44,44 @@
           下一步
         </button>
       </div>
+      <div style="margin-top: 20px; text-align: center;">
+        <span>
+          阅读并接受<span style="color: rgb(24, 144, 255);" @click="show = true"
+            >《用户隐私声明》</span
+          >
+        </span>
+      </div>
     </div>
+       <van-overlay :show="show" @click="show = false">
+      <div class="wrapper">
+        <div class="wrapper_model">
+          <div class="icon">
+            <van-icon name="cross" size="30" @click="show = false" />
+          </div>
+          <privacy></privacy>
+        </div>
+      </div>
+    </van-overlay>
   </div>
 </template>
 
 
 <script>
-import { Button, Row, Col, Search, Dialog } from 'vant'
+import Privacy from '../components/privacy.vue';
+import { Button, Row, Col, Search, Dialog, Overlay, Icon } from 'vant'
 import API from '../../config/api.js'
 import { queryPayInfo, code } from '../../config/services.js'
 export default {
   name: 'index_pay',
   components: {
+    privacy: Privacy,
     'van-row': Row,
     'van-col': Col,
     'van-button': Button,
     'van-search': Search,
     'van-dialog': Dialog,
+       'van-overlay': Overlay,
+    'van-icon': Icon,
   },
   data() {
     return {

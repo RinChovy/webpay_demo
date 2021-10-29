@@ -1,27 +1,24 @@
 import React from "react";
-import { Form, Input, Button, Row, Col, notification } from "antd";
-import { queryPayInfo, getCo } from "../../service/services";
+import { Form, Input, Button, Row, Col, notification, Modal } from "antd";
+import { queryPayInfo } from "../../service/services";
 import { api } from "../../service/api";
 import style from "../../public/css/index.css";
+import Privacy from '../components/privacy';
 
 class NonTaxPay extends React.Component {
   formRef = React.createRef();
   state = {
     warnSpan: "“非税缴费技术服务电话 0532-85856831”",
-    codeUrl: '', //验证码
-    uuid: '', //uuid
+    codeUrl: api.getCo, //验证码
     loadings: [], //等待时间
+    isModalVisible: false, // 遮罩控制
   };
 
   componentDidMount() {
-    getCo().then((res) => {
-      res.code === 0
-        ? this.setState({
-          codeUrl: 'data:image/gif;base64,' + res.data.img,
-          uuid: res.data.uuid,
-        })
-        : this.handleError(res.msg);
-    });
+    // alert(this.state.isReload);
+    // if (this.state.isReload) {
+    //   alert(this.state.isReload);
+    // }
   }
   // 提示信息方法
   openNotificationWithIcon = (type, msg) => {
@@ -36,14 +33,10 @@ class NonTaxPay extends React.Component {
   };
   // 验证码换一张
   changeImg = () => {
+    const { codeUrl } = this.state;
     const timestamp = new Date().valueOf();
-    getCo({ timestamp: timestamp }).then((res) => {
-      res.code === 0
-        ? this.setState({
-          codeUrl: 'data:image/gif;base64,' + res.data.img,
-          uuid: res.data.uuid,
-        })
-        : this.handleError(res.msg);
+    this.setState({
+      codeUrl: codeUrl.split("?")[0] + "?timestamp=" + timestamp,
     });
   };
 
@@ -62,7 +55,6 @@ class NonTaxPay extends React.Component {
       payCode: values.payCode,
       payPeople: values.payName,
       code: values.verificationCode,
-      uuid: this.state.uuid,
     }).then((res) => {
       res.code === 0 ? this.handleSuccess(res.data) : this.handleError(res.msg);
     });
@@ -89,22 +81,25 @@ class NonTaxPay extends React.Component {
         loadings: newLoadings,
       };
     });
-    //提交失败修改验证码
-    getCo().then((res) => {
-      res.code === 0
-        ? this.setState({
-          codeUrl: 'data:image/gif;base64,' + res.data.img,
-          uuid: res.data.uuid,
-        })
-        : this.handleError(res.msg);
-    });
   };
   //提交失败
   onFinishFailed = (values) => {
     console.log("fail:", values);
   };
+  // 打开遮罩
+  handleModel = () => {
+    this.setState({
+      isModalVisible: true
+    })
+  }
+  // 关闭遮罩
+  isHandleModel = () => {
+    this.setState({
+      isModalVisible: false
+    })
+  }
   render() {
-    const { codeUrl, warnSpan, loadings } = this.state;
+    const { codeUrl, warnSpan, loadings, isModalVisible } = this.state;
     const layout = {
       labelCol: {
         span: 8,
@@ -244,14 +239,29 @@ class NonTaxPay extends React.Component {
                         fontWeight: "bold",
                       }}
                     >
-                      <span>{warnSpan}</span>
+                      <div style={{ width: '100%', textAlign: "center", cursor: 'pointer' }}>
+                        <span>阅读并接受<span style={{ color: 'rgb(24, 144, 255)' }} onClick={this.handleModel}>《用户隐私声明》</span></span>
+                      </div>
+
                     </div>
                   </Form>
+                  <div style={{ marginTop: '10%', width: '100%', textAlign: "center", cursor: 'pointer' }}>
+                    <span>{warnSpan}</span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <Modal title="隐私授权声明" visible={isModalVisible} onCancel={this.isHandleModel} width='1000px' footer={[
+          <Button key="back" type="primary" onClick={this.isHandleModel}>
+            已阅读
+          </Button>,
+        ]}>
+          <div style={{ maxHeight: '500px', overflowY: 'scroll' }}>
+            <Privacy />
+          </div>
+        </Modal>
       </div>
     );
   }

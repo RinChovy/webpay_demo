@@ -53,7 +53,7 @@
         <span style="display: block;">支持电话：0532-85856831</span>
       </div>
     </div>
-    <van-overlay :show="show" @click="show = false">
+    <van-overlay :show="show" @click="show = false" :lock-scroll="false">
       <div class="wrapper">
         <div class="wrapper_model">
           <div class="icon">

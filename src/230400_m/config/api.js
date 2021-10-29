@@ -1,6 +1,6 @@
 import baseapi from 'utils/baseURL';
 
-const callback = 'https://api.epayservice.cn/230400_m/index.html#/success'; //传给后台的回调地址
+const callback = 'https://230400.epayservice.cn/230400_m/#/success'; //传给后台的回调地址
 const region = 230400; //区划号
 const regular = /^23\d{18}$/; //非税缴款正则表达式
 const regularText = '缴款码必须等于20位且23开头'; //非税缴款正则表达式提示信息

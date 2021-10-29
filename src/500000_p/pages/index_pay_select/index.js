@@ -1,9 +1,10 @@
 import React from 'react';
-import { Form, Input, Button, Row, Col, notification } from 'antd';
+import { Form, Input, Button, Row, Col, notification, Modal } from 'antd';
 import { queryPayInfo } from '../../service/services';
 import { api } from '../../service/api';
 import style from '../../public/css/index.css';
 import Left from '../components/left';
+import Privacy from '../components/privacy';
 
 class NonTaxPay extends React.Component {
   formRef = React.createRef();
@@ -12,6 +13,7 @@ class NonTaxPay extends React.Component {
     spanPay: '缴款码为执收单位开具的非税收入一般缴款书上的19位编码。',
     codeUrl: api.getCo, //验证码
     loadings: [], //等待时间
+    isModalVisible: false, // 遮罩控制
   };
 
   componentDidMount() {
@@ -84,8 +86,20 @@ class NonTaxPay extends React.Component {
   onFinishFailed = (values) => {
     console.log('fail:', values);
   };
+  // 打开遮罩
+  handleModel = () => {
+    this.setState({
+      isModalVisible: true
+    })
+  }
+  // 关闭遮罩
+  isHandleModel = () => {
+    this.setState({
+      isModalVisible: false
+    })
+  }
   render() {
-    const { spanPay, spanPayTop, codeUrl, loadings } = this.state;
+    const { spanPay, isModalVisible, codeUrl, loadings } = this.state;
     const layout = {
       labelCol: {
         span: 8,
@@ -226,6 +240,9 @@ class NonTaxPay extends React.Component {
                             </Button>
                           </Form.Item>
                         </Form>
+                        <div style={{ width: '100%', paddingLeft: '44%', cursor: 'pointer' }}>
+                          <span>阅读并接受<span style={{ color: 'rgb(24, 144, 255)' }} onClick={this.handleModel}>《用户隐私声明》</span></span>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -234,6 +251,15 @@ class NonTaxPay extends React.Component {
             </div>
           </div>
         </div>
+        <Modal title="隐私授权声明" visible={isModalVisible} onCancel={this.isHandleModel} width='1000px' footer={[
+          <Button key="back" type="primary" onClick={this.isHandleModel}>
+            已阅读
+          </Button>,
+        ]}>
+          <div style={{ maxHeight: '500px', overflowY: 'scroll' }}>
+            <Privacy />
+          </div>
+        </Modal>
       </div>
     );
   }
