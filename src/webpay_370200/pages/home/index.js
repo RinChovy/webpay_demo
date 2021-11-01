@@ -1,6 +1,6 @@
 import React from "react";
 import { Form, Input, Button, Row, Col, notification, Modal } from "antd";
-import { queryPayInfo } from "../../service/services";
+import { queryPayInfo, getCo } from "../../service/services";
 import { api } from "../../service/api";
 import style from "../../public/css/index.css";
 import Privacy from '../components/privacy';
@@ -9,16 +9,22 @@ class NonTaxPay extends React.Component {
   formRef = React.createRef();
   state = {
     warnSpan: "“非税缴费技术服务电话 0532-85856831”",
-    codeUrl: api.getCo, //验证码
+    codeUrl: '', //验证码
+    uuid: '', //uuid
     loadings: [], //等待时间
     isModalVisible: false, // 遮罩控制
   };
 
   componentDidMount() {
-    // alert(this.state.isReload);
-    // if (this.state.isReload) {
-    //   alert(this.state.isReload);
-    // }
+    getCo().then((res) => {
+      res.code === 0
+        ? this.setState({
+          codeUrl: 'data:image/gif;base64,' + res.data.img,
+          uuid: res.data.uuid,
+        })
+        : this.handleError(res.msg);
+    });
+
   }
   // 提示信息方法
   openNotificationWithIcon = (type, msg) => {
@@ -33,10 +39,14 @@ class NonTaxPay extends React.Component {
   };
   // 验证码换一张
   changeImg = () => {
-    const { codeUrl } = this.state;
     const timestamp = new Date().valueOf();
-    this.setState({
-      codeUrl: codeUrl.split("?")[0] + "?timestamp=" + timestamp,
+    getCo({ timestamp: timestamp }).then((res) => {
+      res.code === 0
+        ? this.setState({
+          codeUrl: 'data:image/gif;base64,' + res.data.img,
+          uuid: res.data.uuid,
+        })
+        : this.handleError(res.msg);
     });
   };
 
@@ -55,6 +65,7 @@ class NonTaxPay extends React.Component {
       payCode: values.payCode,
       payPeople: values.payName,
       code: values.verificationCode,
+      uuid: this.state.uuid,
     }).then((res) => {
       res.code === 0 ? this.handleSuccess(res.data) : this.handleError(res.msg);
     });
@@ -66,6 +77,15 @@ class NonTaxPay extends React.Component {
     this.props.history.push({
       pathname: "/index_charge",
       // query: res.data,
+    });
+    //提交失败修改验证码
+    getCo().then((res) => {
+      res.code === 0
+        ? this.setState({
+          codeUrl: 'data:image/gif;base64,' + res.data.img,
+          uuid: res.data.uuid,
+        })
+        : this.handleError(res.msg);
     });
   };
   // 提交失败1
@@ -253,7 +273,7 @@ class NonTaxPay extends React.Component {
             </div>
           </div>
         </div>
-        <Modal title="隐私授权声明" visible={isModalVisible} onCancel={this.isHandleModel} width='1000px' footer={[
+        <Modal title="用户隐私声明" visible={isModalVisible} onCancel={this.isHandleModel} width='1000px' footer={[
           <Button key="back" type="primary" onClick={this.isHandleModel}>
             已阅读
           </Button>,

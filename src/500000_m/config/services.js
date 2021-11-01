@@ -8,6 +8,7 @@ export async function queryPayInfo(params) {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       regionCode: Api.region,
+      codeUId: params.uuid,
     },
     data: stringify(params),
   });
@@ -15,6 +16,16 @@ export async function queryPayInfo(params) {
 // 成功回调接口
 export async function success(params) {
   return xFetch(Api.success, {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      regionCode: Api.region,
+    },
+    data: stringify(params),
+  });
+}
+// 验证码
+export async function code(params) {
+  return xFetch(Api.code, {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       regionCode: Api.region,

@@ -20,6 +20,7 @@ export async function queryPayInfo(params) {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       regionCode: api.region,
+      codeUId: params.uuid,
     },
     data: stringify(params),
   });
@@ -47,3 +48,16 @@ export async function createCashier(params) {
     data: stringify(params),
   });
 }
+
+//验证码接口
+export async function getCo(params) {
+  return xFetch(api.getCo, {
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      regionCode: api.region,
+    },
+    data: stringify(params),
+  });
+}
+

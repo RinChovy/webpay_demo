@@ -17,7 +17,7 @@ export default {
   // 导出
   exportInfo: `${baseapi}/record/exportInfo`,
   // 验证码
-  code: `${baseapi}/common/getCo`,
+  code: `${baseapi}/common/getCoCenter`,
   // 提交缴款书
   queryPayInfo: `${baseapi}/common/queryPayInfoNotVaildPayer.do`,
   // 缴费接口
