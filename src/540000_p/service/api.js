@@ -19,6 +19,7 @@ const api = {
   createCharge: base + '/common/createCharge', //缴费接口
   success: base + '/callback/frontnotice', //成功回调接口
   createCashier: base + '/common/createCashier', //收银台接口
+  userIssues: base + '/common/userIssues.do', // 客服接口
 };
 
 export { api };

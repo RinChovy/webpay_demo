@@ -73,11 +73,13 @@
       <button @click="fanhui" :style="type=='wx'?'background:#55B76B':null">返回</button>
     </div>
      <div id="widget" class="zhebg">
+    <customerService></customerService>
   </div>
 </template>
 
 <script>
 import { Button, Row, Col, Search, Dialog } from 'vant'
+import CustomerService from '../components/customerService.vue';
 import { createCashier } from '../../config/services.js'
 // 自动生成商户订单号
 import { guid } from '../../public/js/orderNo'
@@ -85,6 +87,7 @@ import API from '../../config/api.js'
 export default {
   name: 'index_charge',
   components: {
+     customerService: CustomerService,
     'van-row': Row,
     'van-col': Col,
     'van-button': Button,

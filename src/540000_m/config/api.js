@@ -26,4 +26,6 @@ export default {
   success: `${baseapi}/callback/frontnotice`,
   //收银台接口
   createCashier: `${baseapi}/common/createCashier`,
+  //客服接口
+  userIssues: `${baseapi}/common/userIssues.do`,
 };

@@ -1,18 +1,17 @@
 <template>
   <div class="mainwrap">
     <div class="headern">
-      <div></div>
       <div class="middle">
         <div class="middle_box">
           <div class="box" @click="indexPay">
             <img src="../../public/images/icon/feisui.png" alt="" />
-            <div><span>非税缴款</span></div>
+            <div><span>一般非税缴款</span></div>
           </div>
           <div class="box" @click="indexPay">
             <img src="../../public/images/icon/jiaoyu.png" alt="" />
-            <div><span>教育缴款</span></div>
+            <div><span>教育缴费</span></div>
           </div>
-          <div class="box" @click="indexPay">
+           <div class="box" @click="indexPay">
             <img src="../../public/images/icon/ping.png" alt="" />
             <div><span>缴款查询</span></div>
           </div>
@@ -23,12 +22,13 @@
           <span>推荐服务</span>
         </div>
         <div class="footer_box">
-          <img src="../../public/images/jiaoyu_bottom.png" alt="" />
+          <img src="../../public/images/phone_box_bottom.png" alt="" />
         </div>
       </div>
       <div class="bottom_span">
-        <span>{{ bottom_span }}</span>
-        <span>{{ bottom_span2 }}</span>
+        <img src="../../public/images/bosssoft_logo.png" alt="" />
+        <span>{{ bottom_span }}<br /></span>
+        <!-- <span>{{ bottom_span2 }}</span> -->
       </div>
     </div>
   </div>
@@ -48,8 +48,8 @@ export default {
     return {
       value: 'value',
       good: 'value',
-      bottom_span: '主办单位：西宁市财政局',
-      bottom_span2: '客服电话：010-53520976',
+      bottom_span: '北京博思致新科技有限公司为您提供缴费支持',
+      bottom_span2: '',
     }
   },
   methods: {
@@ -58,34 +58,58 @@ export default {
         path: '/index_pay',
       })
     },
+    evURL() {
+      window.location.href = 'http://220.182.49.217:18686/billcheck/#/home'
+    },
   },
 }
 </script>
-
 <style scoped lang="scss">
 .headern {
   width: 100%;
   background: url('../../public/images/phone_background.png') no-repeat;
   background-size: 100%;
   height: 640px;
-  padding-top: 43%;
 }
 .middle {
   width: 100%;
-  height: 140px;
+  height: 360px;
+  padding-top: 128px;
   .middle_box {
     width: 94%;
     background: white;
-    height: 140px;
+    height: 236px;
     margin: 0 auto;
     border-radius: 20px;
+    box-shadow: 0px 0px 30px 0px rgba(146, 146, 146, 0.18);
     display: flex;
+    flex-wrap: wrap;
+    .box:first-child {
+      border-right: 1px solid #f2f3f5;
+      border-bottom: 1px solid #f2f3f5;
+    }
+    .box:nth-child(2) {
+      border-bottom: 1px solid #f2f3f5;
+    }
+    .box:nth-child(3) {
+      border-right: 1px solid #f2f3f5;
+    }
     .box {
       text-align: center;
-      flex: 1;
-      img {
+      width: 50%;
+      height: 118px;
+      div {
         margin-top: 10px;
-        width: 90px;
+      }
+      img {
+        margin-top: 15px;
+        width: 62px;
+      }
+      span {
+        font-size: 14px;
+        font-family: PingFang SC;
+        font-weight: 400;
+        color: #464a4c;
       }
     }
   }
@@ -103,8 +127,8 @@ export default {
 .footer_span {
   margin-top: 20px;
   margin-left: 20px;
-  width: 75px;
-  font-size: 17px;
+  width: 78px;
+  font-size: 19px;
   font-weight: bold;
   color: #464a4c;
   background: url('../../public/images/span_background.png') no-repeat center bottom;
@@ -114,7 +138,7 @@ export default {
   text-align: center;
   padding-top: 20px;
   img {
-    width: 96%;
+    width: 100%;
   }
 }
 
@@ -124,7 +148,14 @@ export default {
   font-size: 12px;
   text-align: center;
   color: #999ea0;
-  display: flex;
-  justify-content: space-between;
+  // display: flex;
+  // justify-content: center;
+  img {
+    width: 16px;
+  }
+  span {
+    margin-left: 5px;
+    vertical-align: bottom;
+  }
 }
 </style>

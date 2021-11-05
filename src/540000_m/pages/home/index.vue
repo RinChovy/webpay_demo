@@ -27,14 +27,17 @@
         <!-- <span>{{ bottom_span2 }}</span> -->
       </div>
     </div>
+    <customerService></customerService>
   </div>
 </template>
 
 <script>
-import { Button, Row, Col, Search } from 'vant'
+import { Button, Row, Col, Search } from 'vant';
+import CustomerService from '../components/customerService.vue';
 export default {
   name: 'home',
   components: {
+    customerService: CustomerService,
     'van-row': Row,
     'van-col': Col,
     'van-button': Button,
@@ -46,19 +49,19 @@ export default {
       good: 'value',
       bottom_span: '北京博思致新科技有限公司为您提供缴费支持',
       bottom_span2: '',
-    }
+    };
   },
   methods: {
     indexPay() {
       this.$router.push({
         path: '/index_pay',
-      })
+      });
     },
     evURL() {
-      window.location.href = 'http://220.182.49.217:18686/billcheck/#/home'
+      window.location.href = 'http://220.182.49.217:18686/billcheck/#/home';
     },
   },
-}
+};
 </script>
 <style scoped lang="scss">
 .headern {

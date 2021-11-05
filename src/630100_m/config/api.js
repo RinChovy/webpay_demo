@@ -24,4 +24,6 @@ export default {
   createCharge: `${baseapi}/common/createCharge`,
   //成功回调接口
   success: `${baseapi}/callback/frontnotice`,
+  //收银台接口
+  createCashier: `${baseapi}/common/createCashier`,
 };

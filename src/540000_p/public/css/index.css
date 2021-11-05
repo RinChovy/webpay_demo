@@ -422,3 +422,9 @@ p {
 .ant-select-selector {
   border: 0 !important;
 }
+
+.qrcode_img {
+  position: fixed;
+  right: 0px;
+  bottom: 40%;
+}

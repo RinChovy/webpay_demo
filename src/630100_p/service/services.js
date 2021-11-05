@@ -48,3 +48,25 @@ export async function getCo(params) {
     data: stringify(params),
   });
 }
+//收银台接口
+export async function createCashier(params) {
+  return xFetch(api.createCashier, {
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      regionCode: api.region,
+    },
+    data: stringify(params),
+  });
+}
+//  客服接口
+// export async function userIssues(params) {
+//   return xFetch(api.userIssues, {
+//     credentials: 'include',
+//     headers: {
+//       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+//       regionCode: api.region,
+//     },
+//     data: stringify(params),
+//   });
+// }

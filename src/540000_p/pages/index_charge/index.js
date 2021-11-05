@@ -3,6 +3,7 @@ import { Form, Input, Button, Notification } from 'antd';
 import { api } from '../../service/api.js';
 import { createCashier } from '../../service/services';
 import { Arabia_to_Chinese as money, guid } from 'utils/utils';
+import CustomerService from '../components/customerService';
 
 class NonTaxPayChange extends React.Component {
   state = {
@@ -196,6 +197,7 @@ class NonTaxPayChange extends React.Component {
       );
     return (
       <div className="body">
+        <CustomerService />
         <div className="outForm_pay_ningxia" style={{ height: 680 }}>
           <div className="onForm_pay">
             <div className="outForm_pay_qingdao">

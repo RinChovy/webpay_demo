@@ -1,8 +1,9 @@
 import React from 'react';
 import { Form, Input, Button, Row, Col, notification } from 'antd';
-import { queryPayInfo } from '../../service/services';
+import { userIssues } from '../../service/services';
 import { api } from '../../service/api';
 import style from '../../public/css/index.css';
+import CustomerService from '../components/customerService';
 
 class Home extends React.Component {
   state = {
@@ -13,7 +14,9 @@ class Home extends React.Component {
     url: 'http://220.182.49.217:18686/billcheck/#/home', //票据查询地址
   };
 
-  componentDidMount() { }
+  componentDidMount() {
+
+  }
   // 左侧按钮方法
   left = () => {
     this.setState({
@@ -60,6 +63,7 @@ class Home extends React.Component {
     };
     return (
       <div className="body">
+        <CustomerService />
         <div className="outForm_pay">
           <div className="img_pay">
             <div className="onForm_pay">
