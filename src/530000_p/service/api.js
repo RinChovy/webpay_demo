@@ -1,12 +1,12 @@
 import base from 'utils/baseURL';
 
-const callback = 'https://640000.epayservice.cn/success'; //传给后台的回调地址
+const callback = 'https://210200.epayservice.cn/success'; //传给后台的回调地址
 
-const region = '640000'; //区划号
+const region = '210200'; //区划号
 
-const regular = /^64\d{18}$/; //非税缴款正则表达式
+const regular = /^21\d{18}$/; //非税缴款正则表达式
 
-const regularText = '缴款码必须等于20位且64开头'; //非税缴款正则表达式提示信息
+const regularText = '缴款码必须等于20位且21开头'; //非税缴款正则表达式提示信息
 
 const api = {
   callback: callback, //传给后台的回调地址

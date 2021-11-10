@@ -48,7 +48,7 @@ export async function getCo(params) {
     data: stringify(params),
   });
 }
-//收银台
+//收银台接口
 export async function createCashier(params) {
   return xFetch(api.createCashier, {
     credentials: 'include',

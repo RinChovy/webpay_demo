@@ -15,8 +15,10 @@ export default class customerService extends React.Component {
     render() {
         const { href } = this.state
         const content = (
-            <div style={{ width: 120 }}>
-                <Qrcode value={href} size="60" />
+            <div style={{ width: 140 }}>
+                <div style={{ width: '100%', textAlign: 'center' }}>
+                    <Qrcode value={href} />
+                </div>
                 <div>
                     <span>关注微信小程序时时关注问题反馈</span>
                 </div>

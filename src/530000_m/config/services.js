@@ -33,7 +33,7 @@ export async function code(params) {
     data: stringify(params),
   });
 }
-// 收银台支付
+//收银台接口
 export async function createCashier(params) {
   return xFetch(Api.createCashier, {
     headers: {

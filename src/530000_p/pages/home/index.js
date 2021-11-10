@@ -1,125 +1,71 @@
 import React from 'react';
-import { Form, Input, Button, Row, Col, notification } from 'antd';
-import { queryPayInfo } from '../../service/services';
-import { api } from '../../service/api';
 import style from '../../public/css/index.css';
+
+import { queryHomelist } from '../../service/services';
 
 class Home extends React.Component {
   state = {
-    spanPay: '客服热线电话:18686617479', //温馨提示
-    topLeft: 'home_right_topLeft active', //左侧按钮class
-    rightLeft: 'home_right_topRight', //右侧按钮class
-    leftOrRight: 'left', //控制显示隐藏参数
-    url: 'http://220.182.49.217:18686/billcheck/#/home', //票据查询地址
+    list: [
+      {
+        itemCode: '0',
+        modelPicture: require('../../public/images/feisui.png'),
+        itemName: '一般非税缴款',
+        modelUrl: 'index_pay',
+      },
+      {
+        itemCode: '1',
+        modelPicture: require('../../public/images/caizheng.png'),
+        itemName: '财政票据查询',
+        modelUrl: 'http://www.czj.dl.gov.cn/billcheck/html/index.html',
+      },
+      {
+        itemCode: '00',
+        modelPicture: require('../../public/images/jiaokuan.png'),
+        itemName: '缴款凭证查询',
+        modelUrl: 'index_pay',
+      },
+    ],
+    yunwei: '由博思致新提供技术支持 技术服务热线：0411-82569885', //运维信息
   };
 
-  componentDidMount() {}
-  // 左侧按钮方法
-  left = () => {
-    this.setState({
-      topLeft: 'home_right_topLeft active',
-      topRight: 'home_right_topRight',
-      leftOrRight: 'left',
-    });
+  componentDidMount() { }
+
+  router = (url, code) => {
+    if (code === '1') {
+      window.location.href = url;
+    } else {
+      code === '0' ? localStorage.setItem("isPayCode", 'true') : localStorage.setItem("isPayCode", 'false')
+      let data = { itemCode: code };
+      this.props.history.push({ pathname: `/${url}`, query: data });
+    }
   };
-  // 右侧按钮方法
-  right = () => {
-    this.setState({
-      topLeft: 'home_right_topLeft',
-      topRight: 'home_right_topRight active',
-      leftOrRight: 'right',
-    });
-  };
-  // 非税缴款
-  NTpay = () => {
-    this.props.history.push({
-      pathname: '/index_pay',
-    });
-  };
-  // 票据查询
-  evURL = () => {
-    window.location.href = this.state.url;
-  };
+
   render() {
-    const { spanPay, topLeft, rightLeft, leftOrRight } = this.state;
-    const margin = {
-      style: {
-        marginLeft: '50px',
-      },
-    };
-    const marginTop = {
-      style: {
-        marginTop: '10px',
-      },
-    };
-    const center = {
-      style: {
-        width: '500px',
-        textAlign: 'center',
-      },
-    };
-    return (
-      <div className="body">
-        <div className="body_icon">
-          <img src={require('../../public/images/icon_top.png')} />
+    const { list } = this.state;
+    const listModel = list.map((v, k) => {
+      return (
+        <div className="box" key={k}>
+          <div
+            className="box_on"
+            onClick={this.router.bind(
+              this,
+              `${list[k].modelUrl}`,
+              `${list[k].itemCode}`
+            )}
+          >
+            <img className="img-size" src={list[k].modelPicture} />
+          </div>
         </div>
-        <div className="outForm_pay">
-          <div className="img_pay">
-            <div className="onForm_pay">
-              <div className="home">
-                <div className="home_left">
-                  <img
-                    {...margin}
-                    src={require('../../public/images/xizang/left.png')}
-                  />
-                </div>
-                <div className="home_right">
-                  <div className="home_right_nei">
-                    <div className={topLeft} onClick={this.left}>
-                      <span>缴款</span>
-                    </div>
-                    {/* <div className={topRight} onClick={this.right}>
-                      <span>缴款</span>
-                    </div> */}
-                    {leftOrRight === 'left' && (
-                      <div className="box_wai">
-                        <div className="box" onClick={this.NTpay}>
-                          <img
-                            src={require('../../public/images/xizang/feishui.png')}
-                          />
-                          <div {...marginTop}>
-                            <span>非税缴款</span>
-                          </div>
-                        </div>
-                        <div className="box" onClick={this.evURL}>
-                          <img
-                            src={require('../../public/images/xizang/caizheng.png')}
-                          />
-                          <div {...marginTop}>
-                            <span>票据查询</span>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-                    {/* {leftOrRight === "right" && (
-                      <div className="box_wai">
-                        <div className="box">
-                          <img
-                            src={require("../../public/images/xizang/caizheng.png")}
-                          />
-                          <div>
-                            <span>右侧</span>
-                          </div>
-                        </div>
-                      </div>
-                    )} */}
-                  </div>
-                  <div {...center}>
-                    <span>{spanPay}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
+      );
+    });
+    return (
+      <div>
+        <div className="outForm">
+          <div className="home_top">
+            <span>统一支付平台</span>
+          </div>
+          <div className="onForm">
+            {listModel}
           </div>
         </div>
       </div>
