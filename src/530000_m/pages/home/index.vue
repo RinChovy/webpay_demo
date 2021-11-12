@@ -1,9 +1,6 @@
 <template>
   <div class="mainwrap">
     <div class="headern">
-      <div>
-        <van-search style="opacity: 0.8" shape="round" background="transparent" placeholder="查找服务" />
-      </div>
       <div class="middle">
         <div class="middle_box">
           <div class="box" @click="indexPay">
@@ -38,7 +35,7 @@
 </template>
 
 <script>
-import { Button, Row, Col, Search } from 'vant'
+import { Button, Row, Col, Search } from 'vant';
 export default {
   name: 'home',
   components: {
@@ -51,21 +48,21 @@ export default {
     return {
       value: 'value',
       good: 'value',
-      bottom_span: '主办单位：大连市财政局',
+      bottom_span: '主办单位：云南省财政厅',
       bottom_span2: '',
-    }
+    };
   },
   methods: {
     indexPay() {
       this.$router.push({
         path: '/index_pay',
-      })
+      });
     },
     indexUrl() {
-      window.location.href = 'http://pjcy.mof.gov.cn/#/home'
+      window.location.href = 'http://pjcy.mof.gov.cn/#/home';
     },
   },
-}
+};
 </script>
 <style scoped lang="scss">
 .headern {
@@ -73,11 +70,11 @@ export default {
   background: url('../../public/images/phone_background.png') no-repeat;
   background-size: 100%;
   height: 640px;
+  padding-top: 124px;
 }
 .middle {
   width: 100%;
   height: 236px;
-  margin-top: 94px;
   .middle_box {
     width: 94%;
     background: white;

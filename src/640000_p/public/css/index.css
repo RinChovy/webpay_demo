@@ -51,7 +51,6 @@ input, button, select, textarea {
   width: 100%;
   margin: 20px auto 0;
   background-size: cover;
-  background: white;
 }
 
 .onForm {
@@ -589,6 +588,7 @@ li:hover {
 .table {
   width: 95%;
   margin: 40px auto;
+  background: white;
 }
 
 /*table样式*/

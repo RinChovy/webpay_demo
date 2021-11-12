@@ -49,7 +49,7 @@ class Index_pay_idcard extends React.Component {
           <td>{v.exeAgencyName}</td>
           <td>{v.itemNames}</td>
           <td>{v.fillDate}</td>
-          <td>{v.totalAmount}元</td>
+          <td>{parseFloat(v.totalAmount / 100).toFixed(2)}元</td>
           <td>
             {v.payStatus == 1 && (
               <span onClick={() => this.details(v.payCode, v.payer)}>

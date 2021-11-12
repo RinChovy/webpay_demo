@@ -9,20 +9,20 @@ class Home extends React.Component {
       {
         itemCode: '0',
         modelPicture: require('../../public/images/feisui.png'),
-        itemName: '一般非税缴款',
+        itemName: '非税缴款',
+        modelUrl: 'index_pay',
+      },
+      {
+        itemCode: '00',
+        modelPicture: require('../../public/images/jiaokuan.png'),
+        itemName: '缴款查询',
         modelUrl: 'index_pay',
       },
       {
         itemCode: '1',
         modelPicture: require('../../public/images/caizheng.png'),
         itemName: '财政票据查询',
-        modelUrl: 'http://www.czj.dl.gov.cn/billcheck/html/index.html',
-      },
-      {
-        itemCode: '00',
-        modelPicture: require('../../public/images/jiaokuan.png'),
-        itemName: '缴款凭证查询',
-        modelUrl: 'index_pay',
+        modelUrl: 'http://222.172.224.34:18003/billcheck/#/home',
       },
     ],
     yunwei: '由博思致新提供技术支持 技术服务热线：0411-82569885', //运维信息
@@ -54,6 +54,7 @@ class Home extends React.Component {
             )}
           >
             <img className="img-size" src={list[k].modelPicture} />
+            <p>{list[k].itemName}</p>
           </div>
         </div>
       );
@@ -61,12 +62,15 @@ class Home extends React.Component {
     return (
       <div>
         <div className="outForm">
-          <div className="home_top">
-            <span>统一支付平台</span>
+          <div className="outForm_left">
+            <img src={require('../../public/images/background_left.jpg')} style={{ width: 620 }} />
           </div>
-          <div className="onForm">
-            {listModel}
+          <div className="outForm_right">
+            <div className="onForm">
+              {listModel}
+            </div>
           </div>
+
         </div>
       </div>
     );

@@ -18,9 +18,10 @@ input, button, select, textarea {
 
 .outForm {
   position: relative;
+  display: flex;
   width: 1340px;
   background: #ffffff;
-  height: 490px;
+  height: 600px;
   margin: 0 auto;
 }
 
@@ -31,12 +32,22 @@ input, button, select, textarea {
   margin: 0 auto;
 }
 
+.outForm_left {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.outForm_right {
+  flex: 1;
+}
+
 .onForm {
-  margin: 0 auto;
+  margin: 60px auto 0;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  width: 1200px;
+  width: 500px
 }
 
 .onForm_top {
@@ -62,9 +73,6 @@ input, button, select, textarea {
 .onForm_pay_top {
   width: 100%;
   height: 47px;
-  background: #EFF8FF;
-  margin-top: 35px;
-  /* box-shadow: 0px 2px 15px 3px rgba(167, 167, 167, 0.16); */
 }
 
 .onForm_pay_top img {
@@ -76,8 +84,9 @@ input, button, select, textarea {
 .onForm_pay_top span {
   font-size: 18px;
   font-family: PingFang SC;
-  font-weight: 500;
-  margin-left: 10px;
+  font-weight: 400;
+  color: #272727;
+  margin-left: 33px;
   line-height: 47px;
 }
 
@@ -99,7 +108,6 @@ input, button, select, textarea {
 .middle_pay {
   margin: 0 auto;
   display: flex;
-  height: 560px;
 }
 
 .middle_pay_charge {
@@ -140,7 +148,7 @@ input, button, select, textarea {
 
 .img-size {
   margin-top: 30px;
-  width: 363px;
+  width: 124px;
 }
 
 .img-span {
@@ -211,8 +219,8 @@ p {
   position: relative;
   width: 1190px;
   /* height: 430px; */
-  padding-top: 20px;
-  margin: 10px auto;
+  /* padding-top: 20px; */
+  margin: 0px auto;
 }
 
 .bottom_payInfo {
@@ -256,7 +264,7 @@ p {
   color: #375ea1;
 }
 
-.url_button:nth-child(n + 2) {
+.url_button:nth-child(n+2) {
   margin-left: 20px;
 }
 
@@ -355,7 +363,6 @@ p {
 .outForm_pay_ningxia {
   position: relative;
   width: 1340px;
-  height: 620px;
   margin: 0 auto;
 }
 
@@ -389,4 +396,17 @@ p {
 
 .ant-select-selector {
   border: 0 !important;
+}
+
+.box {
+  text-align: center;
+  width: 200px;
+}
+
+.box p {
+  text-align: center;
+  font-size: 26px;
+  font-family: PingFang SC;
+  font-weight: 500;
+  color: #000000;
 }

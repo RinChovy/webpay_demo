@@ -143,7 +143,6 @@ class NonTaxPay extends React.Component {
           <div className="onForm_pay">
             <div className="outForm_pay_qingdao">
               <div className="onForm_pay_top">
-                <img src={require('../../public/images/top_icon.png')} />
                 <span>您当前位置: 统一公共支付 {'>>'} {isPayCode === 'true' ? '非税缴款' : '缴款凭证查询'}</span>
               </div>
               <div className="middle_pay">
