@@ -3,7 +3,7 @@
     <div class="headern">
       <div>
         <van-search
-          style="opacity: 0.8"
+          style="opacity: 0.8;"
           shape="round"
           background="transparent"
           placeholder="查找服务"
@@ -13,7 +13,7 @@
         <div class="middle_box">
           <div class="box" @click="indexPay">
             <img src="../../public/images/icon/feisui.png" alt="" />
-            <div><span>非税缴款</span></div>
+            <div><span>一般非税缴款</span></div>
           </div>
           <div class="box" @click="indexUrl">
             <img src="../../public/images/icon/jiaoyu.png" alt="" />
@@ -45,9 +45,9 @@
 </template>
 
 <script>
-import { Button, Row, Col, Search, Dialog } from 'vant'
-import API from '../../config/api.js'
-import { getAliUserId, getOpenPlatformUserid } from '../../config/services.js'
+import { Button, Row, Col, Search, Dialog } from 'vant';
+import API from '../../config/api.js';
+import { getAliUserId, getOpenPlatformUserid } from '../../config/services.js';
 export default {
   name: 'home',
   components: {
@@ -64,11 +64,11 @@ export default {
       bottom_span: '主办单位：贵州省财政厅',
       // bottom_span2: '服务电话：0532-85856831',
       // bottom_span3: '服务时间：法定工作日，09:00-17:00',
-    }
+    };
   },
   mounted() {
-    const user_id = localStorage.getItem('userId')
-    let appId = localStorage.getItem('appId')
+    const user_id = localStorage.getItem('userId');
+    let appId = localStorage.getItem('appId');
     if (!user_id || appId !== '2021002148681851') {
       ap &&
         ap.getAuthCode(
@@ -77,7 +77,7 @@ export default {
             scopes: ['auth_base'],
           },
           function (res) {
-            console.log(res, 'res')
+            console.log(res, 'res');
             getAliUserId({
               authCode: res.authCode,
             }).then((data) => {
@@ -86,53 +86,52 @@ export default {
                   aliUserId: data.data.aliUserId,
                 }).then((resData) => {
                   if (resData.code === 0) {
-                    localStorage.removeItem('userId')
-                    localStorage.setItem('userId', resData.data.user_id)
-                    localStorage.removeItem('appId')
-                    localStorage.setItem('appId', '2021002148681851')
+                    localStorage.removeItem('userId');
+                    localStorage.setItem('userId', resData.data.user_id);
+                    localStorage.removeItem('appId');
+                    localStorage.setItem('appId', '2021002148681851');
                   } else {
                     Dialog.alert({
                       message: resData.msg,
                     }).then(() => {
                       // on close
-                    })
+                    });
                   }
-                })
+                });
               } else {
                 Dialog.alert({
                   message: data.msg,
                 }).then(() => {
                   // on close
-                })
+                });
               }
-            })
+            });
           }
-        )
+        );
     }
   },
   methods: {
     indexPay() {
       this.$router.push({
         name: 'index_pay',
-      })
+      });
     },
     indexUrl() {
       this.$router.push({
         path: '/order_record',
-      })
+      });
     },
     index_url() {
-      window.location.href = "http://fs.guizhou.gov.cn/billcheck";
+      window.location.href = 'http://fs.guizhou.gov.cn/billcheck';
     },
   },
-}
+};
 </script>
 
 <style scoped lang="scss">
-
 .headern {
   width: 100%;
-  background: url('../../public/images/phone_background.png') no-repeat, ;
+  background: url('../../public/images/phone_background.png') no-repeat;
   background-size: 100%;
   height: 640px;
 }
@@ -214,4 +213,3 @@ export default {
   color: #999ea0;
 }
 </style>
-

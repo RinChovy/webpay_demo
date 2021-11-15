@@ -19,8 +19,8 @@
 </template>
 
 <script>
-import { Button, Row, Col, Search } from 'vant'
-import { success } from '../../config/services.js'
+import { Button, Row, Col, Search } from 'vant';
+import { success } from '../../config/services.js';
 export default {
   name: 'success',
   components: {
@@ -34,42 +34,42 @@ export default {
       merchant_order_no: '',
       spanPay: '缴款成功',
       url: '', //电子票地址
-    }
+    };
   },
   //加载生命周期
   created() {
-    let url = location.href
-    let rsa = url.substring(url.indexOf('=') + 1)
-    console.log(rsa)
+    let url = location.href;
+    let rsa = url.substring(url.indexOf('=') + 1);
+    console.log(rsa);
     success({
       rsa: rsa,
     }).then((res) => {
       if (res.code === 0) {
-        console.log(res)
-        ;(this.url = res.data.einvoice_url), (this.merchant_order_no = res.data.merchant_order_no)
+        console.log(res);
+        (this.url = res.data.einvoice_url), (this.merchant_order_no = res.data.merchant_order_no);
       } else {
         this.$router.push({
           path: '/fail',
-        })
+        });
       }
-    })
+    });
   },
   methods: {
     indexPay() {
       this.$router.push({
         path: '/index_pay',
-      })
+      });
     },
     einvoice_url() {
-      window.location.href = this.url
+      window.location.href = this.url;
     },
     home() {
       this.$router.push({
         path: '/home',
-      })
+      });
     },
   },
-}
+};
 </script>
 
 <style scoped lang="scss">
@@ -83,7 +83,7 @@ export default {
   button {
     width: 70%;
     height: 44px;
-    background: linear-gradient(90deg, #5380e1, #83aaff);
+    background: linear-gradient(90deg, #0e3ea9, #3075d3);
     border-radius: 35px;
     font-size: 16px;
     font-family: PingFang SC;

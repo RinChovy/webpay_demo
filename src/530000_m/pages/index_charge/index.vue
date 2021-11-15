@@ -219,7 +219,7 @@ export default {
   button {
     width: 90%;
     height: 46px;
-    background: linear-gradient(90deg, #5380E1, #83AAFF);
+    background: linear-gradient(90deg, #0E3EA9, #3075D3);
     border-radius: 4px;
     font-size: 16px;
     font-family: PingFang SC;

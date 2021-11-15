@@ -3,7 +3,7 @@
     <div class="headern">
       <div>
         <van-search
-          style="opacity: 0.8"
+          style="opacity: 0.8;"
           shape="round"
           background="transparent"
           placeholder="查找服务"
@@ -13,7 +13,7 @@
         <div class="middle_box">
           <div class="box" @click="indexPay">
             <img src="../../public/images/icon/feisui.png" alt="" />
-            <div><span>非税缴款</span></div>
+            <div><span>一般非税缴款</span></div>
           </div>
           <div class="box" @click="indexPayTraffic">
             <img src="../../public/images/icon/gongan.jpg" alt="" />
@@ -45,46 +45,45 @@
 </template>
 
 <script>
-import { Button, Row, Col, Search } from "vant";
+import { Button, Row, Col, Search } from 'vant';
 export default {
-  name: "home",
+  name: 'home',
   components: {
-    "van-row": Row,
-    "van-col": Col,
-    "van-button": Button,
-    "van-search": Search,
+    'van-row': Row,
+    'van-col': Col,
+    'van-button': Button,
+    'van-search': Search,
   },
   data() {
     return {
-      value: "value",
-      good: "value",
-      bottom_span: "主办单位：贵州省财政厅",
-      bottom_span2: "",
+      value: 'value',
+      good: 'value',
+      bottom_span: '主办单位：贵州省财政厅',
+      bottom_span2: '',
     };
   },
   methods: {
     indexPay() {
       this.$router.push({
-        path: "/index_pay",
+        path: '/index_pay',
       });
     },
     indexPayTraffic() {
       this.$router.push({
-        path: "/index_pay_traffic",
+        path: '/index_pay_traffic',
       });
     },
     index_url() {
-      window.location.href = "http://fs.guizhou.gov.cn/billcheck";
+      window.location.href = 'http://fs.guizhou.gov.cn/billcheck';
     },
   },
 };
 </script>
 
 <style scoped lang="scss">
-
 .headern {
   width: 100%;
-  background: url('../../public/images/phone_background.png') no-repeat, ;
+  background: url('../../public/images/phone_background.png') no-repeat;
   background-size: 100%;
   height: 640px;
 }

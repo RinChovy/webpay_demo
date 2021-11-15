@@ -1,4 +1,3 @@
-
 <template>
   <div class="box">
     <img class="top" src="../../public/images/icon/icon.png" />
@@ -17,7 +16,7 @@
 </template>
 
 <script>
-import { Button, Row, Col, Search } from 'vant'
+import { Button, Row, Col, Search } from 'vant';
 export default {
   name: 'success',
   components: {
@@ -31,16 +30,16 @@ export default {
       value: 'value',
       good: 'value',
       bottom_span: '主办单位：鹤岗市财政局',
-    }
+    };
   },
   methods: {
     home() {
       this.$router.push({
         path: '/home',
-      })
+      });
     },
   },
-}
+};
 </script>
 
 <style scoped lang="scss">
@@ -54,7 +53,7 @@ export default {
   button {
     width: 70%;
     height: 44px;
-    background: linear-gradient(90deg, #5380e1, #83aaff);
+    background: linear-gradient(90deg, #0e3ea9, #3075d3);
     border-radius: 35px;
     font-size: 16px;
     font-family: PingFang SC;
@@ -111,7 +110,3 @@ export default {
   }
 }
 </style>
-
-
-
-
