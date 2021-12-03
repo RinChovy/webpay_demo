@@ -2,7 +2,12 @@
   <div class="mainwrap">
     <div class="headern">
       <div>
-        <van-search style="opacity: 0.8" shape="round" background="transparent" placeholder="查找服务" />
+        <van-search
+          style="opacity: 0.8;"
+          shape="round"
+          background="transparent"
+          placeholder="查找服务"
+        />
       </div>
       <div class="middle">
         <div class="middle_box">
@@ -10,12 +15,11 @@
             <img src="../../public/images/icon/feisui.png" alt="" />
             <div><span>一般非税缴款</span></div>
           </div>
-         
+
           <div class="box" @click="indexUrl">
             <img src="../../public/images/icon/caizheng.png" alt="" />
             <div><span>财政票据查询</span></div>
           </div>
-        
         </div>
       </div>
       <div class="footer">
@@ -36,7 +40,7 @@
 </template>
 
 <script>
-import { Button, Row, Col, Search } from 'vant'
+import { Button, Row, Col, Search } from 'vant';
 export default {
   name: 'home',
   components: {
@@ -50,22 +54,23 @@ export default {
       value: 'value',
       good: 'value',
       bottom_span: '北京博思致新科技有限公司为您提供缴费支持',
-      bottom_span2: '客服电话：010-0001001',
-    }
+      bottom_span2: '客服电话：010-83010910',
+    };
   },
   methods: {
     indexPay() {
       this.$router.push({
         path: '/index_pay',
-      })
+      });
     },
     indexUrl() {
-      this.$router.push({
-        path: '/index_payEn',
-      })
-    }
+      // this.$router.push({
+      //   path: '/index_payEn',
+      // });
+      window.location.href = 'http://36.189.17.11:18006/billcheck/html/index.html#/home';
+    },
   },
-}
+};
 </script>
 
 <style scoped lang="scss">
@@ -74,14 +79,14 @@ html {
 }
 .headern {
   width: 100%;
-  background: url('../../public/images/phone_background.jpg') no-repeat, ;
+  background: url('../../public/images/phone_background.jpg') no-repeat;
   background-size: 100%;
   height: 640px;
 }
 .middle {
   width: 100%;
   // height: 236px;
-  margin-top: 156px;
+  margin-top: 130px;
   .middle_box {
     width: 94%;
     background: white;
@@ -96,7 +101,7 @@ html {
       // border-bottom: 1px solid #f2f3f5;
     }
     // .box:nth-child(2) {
-      // border-bottom: 1px solid #f2f3f5;
+    // border-bottom: 1px solid #f2f3f5;
     // }
     .box:nth-child(3) {
       border-right: 1px solid #f2f3f5;

@@ -3,6 +3,6 @@
     "region":"210000",
     "callback":"http://210000.epayservice.cn/success",
     "regularText":"缴款码必须等于20位且21开头",
-    "baseURL":"https://api.epayservice.cn/webpay_new"
+    "baseURL":"http://192.168.62.13:8701/webpay_new"
 }
 

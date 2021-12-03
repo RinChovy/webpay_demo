@@ -196,7 +196,7 @@ class NonTaxPayChange extends React.Component {
       );
     return (
       <div className="body">
-        <div className="outForm_pay_ningxia" style={{ height: 680 }}>
+        <div className="outForm_pay_ningxia" >
           <div className="onForm_pay">
             <div className="outForm_pay_qingdao">
               <div className="onForm_pay_top">
@@ -225,7 +225,7 @@ class NonTaxPayChange extends React.Component {
                     <tbody>
                       <tr>
                         <td width="23" rowSpan="3">
-                          <center>付款人</center>
+                          <center>付{<br />}款{<br />}人</center>
                         </td>
                         <td width="73">
                           <center>全&nbsp;&nbsp;称</center>
@@ -235,7 +235,7 @@ class NonTaxPayChange extends React.Component {
                         </td>
 
                         <td width="23" rowSpan="3">
-                          <center>收款人</center>
+                          <center>收{<br />}款{<br />}人</center>
                         </td>
                         <td width="73">
                           <center>全&nbsp;&nbsp;称</center>

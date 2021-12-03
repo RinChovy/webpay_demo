@@ -12,12 +12,12 @@ class Home extends React.Component {
         itemName: '非税缴款',
         modelUrl: 'index_pay',
       },
-      {
-        itemCode: '00',
-        modelPicture: require('../../public/images/jiaokuan.png'),
-        itemName: '缴款查询',
-        modelUrl: 'index_pay',
-      },
+      // {
+      //   itemCode: '00',
+      //   modelPicture: require('../../public/images/jiaokuan.png'),
+      //   itemName: '缴款查询',
+      //   modelUrl: 'index_pay',
+      // },
       {
         itemCode: '1',
         modelPicture: require('../../public/images/caizheng.png'),
@@ -28,7 +28,8 @@ class Home extends React.Component {
     yunwei: '由博思致新提供技术支持 技术服务热线：0411-82569885', //运维信息
   };
 
-  componentDidMount() { }
+  componentDidMount() {
+  }
 
   router = (url, code) => {
     if (code === '1') {

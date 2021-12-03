@@ -5,7 +5,7 @@ const callback = "https://demo.epayservice.cn/420000_p/success"; //传给后台�
 
 const region = '420000'; //区划号
 
-const regular = /^37\d{18}$/; //非税缴款正则表达式
+const regular = /^42\d{18}$/; //非税缴款正则表达式
 
 const regularText = '缴款码必须等于20位且42开头'; //非税缴款正则表达式提示信息
 

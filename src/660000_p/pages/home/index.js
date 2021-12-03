@@ -47,9 +47,10 @@ class Home extends React.Component {
   };
   // 票据查询
   evURL = () => {
-    this.props.history.push({
-      pathname: '/index_payEn',
-    });
+    // this.props.history.push({
+    //   pathname: '/index_payEn',
+    // });
+    window.location.href = 'http://36.189.17.11:18006/billcheck/html/index.html#/home'
   };
 
   render() {
@@ -71,7 +72,7 @@ class Home extends React.Component {
       },
     };
     return (
-      <div className="body">
+      <div className="body" style={{ padding: '100px 0' }}>
         <div className="outForm_pay">
           <div className="img_pay">
             <div className="onForm_pay">

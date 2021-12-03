@@ -11,10 +11,10 @@
             <img src="../../public/images/icon/caizheng.png" alt="" />
             <div><span>财政票据查询</span></div>
           </div>
-          <div class="box" @click="indexPay">
+          <!-- <div class="box" @click="indexPay">
             <img src="../../public/images/icon/ping.png" alt="" />
             <div><span>缴款凭证查询</span></div>
-          </div>
+          </div> -->
         </div>
       </div>
       <div class="footer">
@@ -74,11 +74,11 @@ export default {
 }
 .middle {
   width: 100%;
-  height: 236px;
+  height: 118px;
   .middle_box {
     width: 94%;
     background: white;
-    height: 236px;
+    height: 118px;
     margin: 0 auto;
     border-radius: 20px;
     box-shadow: 0px 0px 30px 0px rgba(146, 146, 146, 0.18);
@@ -86,14 +86,14 @@ export default {
     flex-wrap: wrap;
     .box:first-child {
       border-right: 1px solid #f2f3f5;
-      border-bottom: 1px solid #f2f3f5;
+      // border-bottom: 1px solid #f2f3f5;
     }
-    .box:nth-child(2) {
-      border-bottom: 1px solid #f2f3f5;
-    }
-    .box:nth-child(3) {
-      border-right: 1px solid #f2f3f5;
-    }
+    // .box:nth-child(2) {
+    //   border-bottom: 1px solid #f2f3f5;
+    // }
+    // .box:nth-child(3) {
+    //   border-right: 1px solid #f2f3f5;
+    // }
     .box {
       text-align: center;
       width: 50%;
