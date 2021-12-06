@@ -19,7 +19,7 @@ input, button, select, textarea {
 
 .outForm_pay {
   position: relative;
-  width: 1440px;
+  /* width: 1440px; */
   /* height: 470px; */
   margin: 0 auto;
 }
@@ -360,7 +360,7 @@ p {
 
 .outForm_pay_ningxia {
   position: relative;
-  width: 1340px;
+  width: 1200px;
   /* height: 620px; */
   margin: 0 auto;
 }

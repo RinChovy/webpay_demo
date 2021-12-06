@@ -57,7 +57,8 @@ class Home extends React.Component {
     const { spanPay, topLeft, rightLeft, leftOrRight } = this.state;
     const margin = {
       style: {
-        marginLeft: '50px',
+        width: '100%',
+        // marginLeft: '50px',
       },
     };
     const marginTop = {
