@@ -1,9 +1,7 @@
 import React from 'react';
-import { Form, Input, Button, Row, Modal, notification } from 'antd';
+import { Form, Button, Modal, notification } from 'antd';
 import { queryPayInfo, getCo } from '../../service/services';
-import { api } from '../../service/api';
 import InputComponents from '../components/inputComponents';
-import style from '../../public/css/index.css';
 import img from '../../public/images/paycode_1.png';
 import img2 from '../../public/images/paycode_2.png';
 import img3 from '../../public/images/paycode_3.png';
