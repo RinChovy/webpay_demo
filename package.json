@@ -10,7 +10,7 @@
     "start": "cross-env NODE_ENV=development ailjc-service server",
     "build": "npm run prebuild && cross-env NODE_ENV=development ailjc-service build",
     "build:pro": "npm run prebuild && cross-env NODE_ENV=production ailjc-service build",
-    "build:pro2": "cross-env NODE_ENV=development ailjc-service build",
+    "build:pro2": "cross-env NODE_ENV=production ailjc-service build",
     "prebuild": "rimraf ./dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
