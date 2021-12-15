@@ -2,6 +2,7 @@ import React from 'react';
 import style from '../../public/css/index.css';
 
 import { queryHomelist } from '../../service/services';
+import CustomerService from '../components/customerService';
 
 class Home extends React.Component {
   state = {
@@ -63,6 +64,7 @@ class Home extends React.Component {
     return (
       <div>
         <div className="outForm">
+          <CustomerService />
           <div className="outForm_left">
             <img src={require('../../public/images/background_left.jpg')} style={{ width: 620 }} />
           </div>

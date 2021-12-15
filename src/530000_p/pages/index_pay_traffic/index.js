@@ -3,6 +3,7 @@ import { Form, Input, Button, Row, Col, notification } from 'antd';
 import { queryPayInfo, getCo } from '../../service/services';
 import { api } from '../../service/api';
 import style from '../../public/css/index.css';
+import CustomerService from '../components/customerService';
 
 class NonTaxPay extends React.Component {
   formRef = React.createRef();
@@ -19,9 +20,9 @@ class NonTaxPay extends React.Component {
     getCo().then((res) => {
       res.code === 0
         ? this.setState({
-            codeUrl: 'data:image/gif;base64,' + res.data.img,
-            uuid: res.data.uuid,
-          })
+          codeUrl: 'data:image/gif;base64,' + res.data.img,
+          uuid: res.data.uuid,
+        })
         : this.handleError(res.msg);
     });
   }
@@ -42,9 +43,9 @@ class NonTaxPay extends React.Component {
     getCo({ timestamp: timestamp }).then((res) => {
       res.code === 0
         ? this.setState({
-            codeUrl: 'data:image/gif;base64,' + res.data.img,
-            uuid: res.data.uuid,
-          })
+          codeUrl: 'data:image/gif;base64,' + res.data.img,
+          uuid: res.data.uuid,
+        })
         : this.handleError(res.msg);
     });
   };
@@ -116,6 +117,7 @@ class NonTaxPay extends React.Component {
     };
     return (
       <div>
+        <CustomerService />
         <div className="body_icon">
           <img src={require('../../public/images/icon_top.png')} />
         </div>

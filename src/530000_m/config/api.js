@@ -1,9 +1,9 @@
 import baseapi from 'utils/baseURL';
 
-const callback = 'https://210200.epayservice.cn/success'; //传给后台的回调地址
-const region = '210200'; //区划号
-const regular = /^21\d{18}$/; //非税缴款正则表达式
-const regularText = '缴款码必须等于20位且21开头'; //非税缴款正则表达式提示信息
+const callback = 'http://222.172.224.34:18008/success'; //传给后台的回调地址
+const region = '530000'; //区划号
+const regular = /^53\d{18}$/; //非税缴款正则表达式
+const regularText = '缴款码必须等于20位且53开头'; //非税缴款正则表达式提示信息
 
 export default {
   //非税缴款正则表达式
@@ -26,4 +26,6 @@ export default {
   success: `${baseapi}/callback/frontnotice`,
   //收银台接口
   createCashier: `${baseapi}/common/createCashier`,
+  //客服接口
+  userIssues: `${baseapi}/common/userIssues.do`,
 };

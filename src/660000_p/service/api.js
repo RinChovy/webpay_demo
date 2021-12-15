@@ -21,6 +21,7 @@ const api = {
   success: base + '/callback/frontnotice', //成功回调接口
   queryEinvoiceUrl: base + '/660000/queryEinvoiceUrl', //直接查电子票地址
   createCashier: base + '/common/createCashier', //收银台接口
+  userIssues: base + '/common/userIssues.do', // 客服接口
 };
 
 export { api };

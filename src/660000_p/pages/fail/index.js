@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "antd";
 import { api } from "../../service/api.js";
+import CustomerService from '../components/customerService';
 
 class fail extends React.Component {
   state = {
@@ -16,6 +17,7 @@ class fail extends React.Component {
     const { spanPay } = this.state;
     return (
       <div className="body">
+        <CustomerService />
         <div className="outForm_pay_ningxia">
           <div className="onForm_pay">
             <div className="outForm_pay_qingdao">

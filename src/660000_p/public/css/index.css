@@ -249,6 +249,15 @@ p {
   width: 1105px;
   height: 340px;
   margin: 14px auto;
+  border: 1px solid #000000 !important;
+}
+
+.form_f tr {
+  border: 1px solid #000000 !important;
+}
+
+.form_f td {
+  border: 1px solid #000000 !important;
 }
 
 .url_button {
@@ -428,4 +437,11 @@ p {
   flex: 1;
   display: flex;
   align-items: center;
+}
+
+.qrcode_img {
+  position: fixed;
+  right: 10px;
+  bottom: 40%;
+  z-index: 10;
 }

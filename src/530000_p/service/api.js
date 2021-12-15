@@ -1,6 +1,6 @@
 import base from 'utils/baseURL';
 
-const callback = 'https://530000.epayservice.cn/success'; //传给后台的回调地址
+const callback = 'http:/222.172.224.34:18008/success'; //传给后台的回调地址
 
 const region = '530000'; //区划号
 
@@ -19,6 +19,7 @@ const api = {
   createCharge: base + '/common/createCharge', //缴费接口
   success: base + '/callback/frontnotice', //成功回调接口
   createCashier: base + '/common/createCashier', //收银台接口
+  userIssues: base + '/common/userIssues.do', // 客服接口
 };
 
 export { api };

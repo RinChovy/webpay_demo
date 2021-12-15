@@ -1,4 +1,3 @@
-
 <template>
   <div class="box">
     <img class="top" src="../../public/images/icon/icon.png" />
@@ -13,14 +12,17 @@
         <button class="cencel" @click="home">返回首页</button>
       </div>
     </div>
+    <customerService></customerService>
   </div>
 </template>
 
 <script>
-import { Button, Row, Col, Search } from 'vant'
+import { Button, Row, Col, Search } from 'vant';
+import CustomerService from '../components/customerService.vue';
 export default {
   name: 'success',
   components: {
+    customerService: CustomerService,
     'van-row': Row,
     'van-col': Col,
     'van-button': Button,
@@ -31,16 +33,16 @@ export default {
       value: 'value',
       good: 'value',
       bottom_span: '主办单位：鹤岗市财政局',
-    }
+    };
   },
   methods: {
     home() {
       this.$router.push({
         path: '/home',
-      })
+      });
     },
   },
-}
+};
 </script>
 
 <style scoped lang="scss">
@@ -111,7 +113,3 @@ export default {
   }
 }
 </style>
-
-
-
-

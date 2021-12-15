@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "antd";
 import { successs } from "../../service/services";
+import CustomerService from '../components/customerService';
 
 class success extends React.Component {
   state = {
@@ -35,9 +36,10 @@ class success extends React.Component {
     this.props.history.push({ pathname: "/home", query: "" });
   };
   render() {
-    const { url} = this.state;
+    const { url } = this.state;
     return (
       <div className="body">
+        <CustomerService />
         <div className="outForm_pay_ningxia">
           <div className="onForm_pay">
             <div className="outForm_pay_qingdao">
@@ -45,33 +47,33 @@ class success extends React.Component {
                 <img src={require('../../public/images/top_icon.png')} />
                 <span>您当前位置: 统一公共支付 {'>>'} 非税缴款</span>
               </div>
-              <div className="middle_pay" style={{justifyContent:'center'}}>
-              <div className="row">
-                    <img
-                      style={{ marginTop: 100 }}
-                      src={require('../../public/images/successn.png')}
-                    />
-                    <p className="row_p">缴款成功</p>
-                    <p className="row_w">如需换开纸质票据，请联系执收单位</p>
-                    <div style={{ marginTop: 30 }}>
-                      {url != '' && (
-                        <input
-                          className="url_button"
-                          type="button"
-                          value="查看电子票"
-                          onClick={this.url}
-                        />
-                      )}
+              <div className="middle_pay" style={{ justifyContent: 'center' }}>
+                <div className="row">
+                  <img
+                    style={{ marginTop: 100 }}
+                    src={require('../../public/images/successn.png')}
+                  />
+                  <p className="row_p">缴款成功</p>
+                  <p className="row_w">如需换开纸质票据，请联系执收单位</p>
+                  <div style={{ marginTop: 30 }}>
+                    {url != '' && (
                       <input
-                        className={
-                          url != '' ? 'url_button_clear' : 'url_button'
-                        }
+                        className="url_button"
                         type="button"
-                        value="返回"
-                        onClick={this.cencel}
+                        value="查看电子票"
+                        onClick={this.url}
                       />
-                    </div>
+                    )}
+                    <input
+                      className={
+                        url != '' ? 'url_button_clear' : 'url_button'
+                      }
+                      type="button"
+                      value="返回"
+                      onClick={this.cencel}
+                    />
                   </div>
+                </div>
               </div>
             </div>
           </div>

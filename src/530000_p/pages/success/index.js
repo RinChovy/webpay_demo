@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "antd";
 import { successs } from "../../service/services";
+import CustomerService from '../components/customerService';
 
 class success extends React.Component {
   state = {
@@ -38,6 +39,7 @@ class success extends React.Component {
     const { url } = this.state;
     return (
       <div className="body">
+        <CustomerService />
         <div className="outForm_pay_ningxia">
           <div className="onForm_pay">
             <div className="outForm_pay_qingdao">

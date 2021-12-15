@@ -1,7 +1,7 @@
 import React from 'react';
 import { api } from '../../service/api';
 import style from '../../public/css/index.css';
-
+import CustomerService from '../components/customerService';
 
 class Home extends React.Component {
   state = {
@@ -74,6 +74,7 @@ class Home extends React.Component {
     };
     return (
       <div className="body" style={{ padding: '100px 0' }}>
+        <CustomerService />
         <div className="outForm_pay">
           <div className="img_pay">
             <div className="onForm_pay">

@@ -71,6 +71,7 @@
         </div>
       </div>
     </van-overlay>
+    <customerService></customerService>
   </div>
 </template>
 
@@ -79,9 +80,11 @@ import Privacy from '../components/privacy.vue';
 import { Button, Row, Col, Search, Dialog, Overlay, Icon } from 'vant';
 import API from '../../config/api.js';
 import { queryEinvoiceUrl, code } from '../../config/services.js';
+import CustomerService from '../components/customerService.vue';
 export default {
   name: 'index_payEn',
   components: {
+    customerService: CustomerService,
     privacy: Privacy,
     'van-row': Row,
     'van-col': Col,

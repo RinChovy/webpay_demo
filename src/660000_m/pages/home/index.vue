@@ -36,14 +36,17 @@
         <span>{{ bottom_span2 }}</span>
       </div>
     </div>
+    <customerService></customerService>
   </div>
 </template>
 
 <script>
 import { Button, Row, Col, Search } from 'vant';
+import CustomerService from '../components/customerService.vue';
 export default {
   name: 'home',
   components: {
+    customerService: CustomerService,
     'van-row': Row,
     'van-col': Col,
     'van-button': Button,

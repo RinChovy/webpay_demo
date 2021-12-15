@@ -410,3 +410,10 @@ p {
   font-weight: 500;
   color: #000000;
 }
+
+.qrcode_img {
+  position: fixed;
+  right: 10px;
+  bottom: 40%;
+  z-index: 10;
+}
