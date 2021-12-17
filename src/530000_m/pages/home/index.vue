@@ -11,10 +11,10 @@
             <img src="../../public/images/icon/caizheng.png" alt="" />
             <div><span>财政票据查询</span></div>
           </div>
-          <!-- <div class="box" @click="indexPay">
-            <img src="../../public/images/icon/ping.png" alt="" />
-            <div><span>缴款凭证查询</span></div>
-          </div> -->
+          <div class="box" @click="indexUrl2">
+            <img src="../../public/images/icon/yuxi.jpg" alt="" />
+            <div><span>玉溪不动产缴费</span></div>
+          </div>
         </div>
       </div>
       <div class="footer">
@@ -51,7 +51,7 @@ export default {
     return {
       value: 'value',
       good: 'value',
-      bottom_span: '主办单位：云南省财政厅',
+      bottom_span: '主办单位：玉溪市非税收入管理局',
       bottom_span2: '',
     };
   },
@@ -62,7 +62,10 @@ export default {
       });
     },
     indexUrl() {
-      window.location.href = 'http://pjcy.mof.gov.cn/#/home';
+      window.location.href = 'http://222.172.224.34:18003/billcheck/#/home';
+    },
+    indexUrl2() {
+      window.location.href = 'https://ipp.epayservice.cn/h5/bdcPay/index?vde=53000001';
     },
   },
 };
@@ -70,18 +73,18 @@ export default {
 <style scoped lang="scss">
 .headern {
   width: 100%;
-  background: url('../../public/images/phone_background.png') no-repeat;
+  background: url('../../public/images/phone_background.jpg') no-repeat;
   background-size: 100%;
   height: 640px;
   padding-top: 124px;
 }
 .middle {
   width: 100%;
-  height: 118px;
+  height: 236px;
   .middle_box {
     width: 94%;
     background: white;
-    height: 118px;
+    height: 236px;
     margin: 0 auto;
     border-radius: 20px;
     box-shadow: 0px 0px 30px 0px rgba(146, 146, 146, 0.18);
@@ -89,14 +92,14 @@ export default {
     flex-wrap: wrap;
     .box:first-child {
       border-right: 1px solid #f2f3f5;
-      // border-bottom: 1px solid #f2f3f5;
+      border-bottom: 1px solid #f2f3f5;
     }
-    // .box:nth-child(2) {
-    //   border-bottom: 1px solid #f2f3f5;
-    // }
-    // .box:nth-child(3) {
-    //   border-right: 1px solid #f2f3f5;
-    // }
+    .box:nth-child(2) {
+      border-bottom: 1px solid #f2f3f5;
+    }
+    .box:nth-child(3) {
+      border-right: 1px solid #f2f3f5;
+    }
     .box {
       text-align: center;
       width: 50%;

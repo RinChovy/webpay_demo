@@ -13,17 +13,17 @@ class Home extends React.Component {
         itemName: '非税缴款',
         modelUrl: 'index_pay',
       },
-      // {
-      //   itemCode: '00',
-      //   modelPicture: require('../../public/images/jiaokuan.png'),
-      //   itemName: '缴款查询',
-      //   modelUrl: 'index_pay',
-      // },
       {
         itemCode: '1',
         modelPicture: require('../../public/images/caizheng.png'),
         itemName: '财政票据查询',
         modelUrl: 'http://222.172.224.34:18003/billcheck/#/home',
+      },
+      {
+        itemCode: '1',
+        modelPicture: require('../../public/images/yuxi.jpg'),
+        itemName: '玉溪不动产缴费',
+        modelUrl: 'https://ipp.epayservice.cn/h5/bdcPay/index?vde=53000001',
       },
     ],
     yunwei: '由博思致新提供技术支持 技术服务热线：0411-82569885', //运维信息
