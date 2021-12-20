@@ -76,7 +76,7 @@ export default {
   background: url('../../public/images/phone_background.jpg') no-repeat;
   background-size: 100%;
   height: 640px;
-  padding-top: 124px;
+  padding-top: 146px;
 }
 .middle {
   width: 100%;

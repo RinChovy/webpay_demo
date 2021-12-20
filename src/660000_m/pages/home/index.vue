@@ -70,7 +70,8 @@ export default {
       // this.$router.push({
       //   path: '/index_payEn',
       // });
-      window.location.href = 'http://36.189.17.11:18006/billcheck/html/index.html#/home';
+      // window.location.href = 'http://36.189.17.11:18006/billcheck/html/index.html#/home';
+      window.location.href = 'http://49.119.98.106:18005/billcheck/html/index.html#/home';
     },
   },
 };
