@@ -8,7 +8,7 @@ import Success from "../pages/success/index.js";
 import Fail from "../pages/fail/index.js";
 function App() {
   return (
-    <Router basename='660000'>
+    <Router basename='/'>
       <Switch>
         <Route path="/" exact={true} component={Home} />
         {/* 非税缴款 */}

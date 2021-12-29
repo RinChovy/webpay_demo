@@ -68,12 +68,17 @@ class Home extends React.Component {
       );
     });
     return (
-      <div>
+      <div className='body_hubei'>
         <div className="outForm">
           <div className="onForm_top">
-            <div></div>
+            <div>
+              <span>湖北省非税收入管理平台</span>
+            </div>
           </div>
           <div className="onForm_bottom">
+            <div className='onForm_left'>
+              <img style={{ width: 400 }} src={require('../../public/images/background_left_image.png')} />
+            </div>
             <div className="onForm">
               {listModel}
               <div className="home_span_warn">

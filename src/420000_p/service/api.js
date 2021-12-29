@@ -1,6 +1,6 @@
 import base from 'utils/baseURL';
 
-const callback = "https://demo.epayservice.cn/420000_p/success"; //传给后台的回调地址
+const callback = "https://221.232.224.111:18899/420000_p/success"; //传给后台的回调地址
 // const callback = 'https://120000.epayservice.cn/#/success'; //传给后台的回调地址
 
 const region = '420000'; //区划号

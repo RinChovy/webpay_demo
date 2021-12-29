@@ -1,0 +1,213 @@
+<extends src="pc.html">
+  <block name="title">陕西政务服务网(省级)</block>
+  <block name="header">
+    <style>
+      /* #top {
+        min-width: 1400px;
+        width: 100%;
+        height: 180px;
+        background-image: url(./public/images/background_top.jpg), url(./public/images/background_top.jpg);
+        background-size: auto 100%;
+        background-position: center;
+        margin-bottom: 5px;
+      } */
+      /* 
+      #bottom {
+        min-width: 1400px;
+        width: 100%;
+        height: 290px;
+        background-image: url(./public/images/background_bottom.jpg), url(./public/images/background_bottom.jpg);
+        background-size: auto 100%;
+        background-position: center;
+        margin-top: 10px;
+      } */
+      #root {
+        background-color: white;
+      }
+
+      .copyRight {
+        width: 100%;
+        height: 140px;
+        background-color: #1a6bc6;
+        overflow: hidden;
+        text-align: center !important;
+        margin: 0 auto !important;
+      }
+
+      .copyRight * {
+        margin: 0 auto !important;
+      }
+    </style>
+  </block>
+  <block name="content">
+    <div id="top">
+      <div class="topbar-201709162244">
+        <div class="container">
+          <ul class="list-inline pull-left">
+            <li><a href="http://www.shaanxi.gov.cn" target="_blank"><img src="./public/images/shanxi/201709182059.png"
+                  style="margin-top: -3px;" alt=""> 陕西省人民政府</a>
+            </li>
+            <li><span class="text-muted">|</span></li>
+            <li onmouseout="hiddenPic()" onmousemove="showPic()"><a
+                href="http://zw.xixianxinqu.gov.cn/icity/govservice/other/weixin"><img
+                  src="./public/images/shanxi/201801231122.png"> 微信公众号</a>
+              <div id="otherImg" style="display:none;position:absolute;z-index:1;"></div>
+            </li>
+          </ul>
+          <ul class="list-inline pull-right">
+
+            <li>欢迎来到陕西政务服务网，请</li>
+            <li><a href="#" onclick="doLogin();">登录</a></li>
+            <li><a href="#" onclick="register();">注册</a></li>
+
+          </ul>
+        </div>
+      </div>
+      <header class="masthead-201709162334">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-4" style="width:39%">
+              <img id="logo" src="" height="80" alt="">
+              <div style="float:right;width:52px;margin-top:50px;display:none;">(试运行)</div>
+            </div>
+            <div class="col-xs-4 pl-0" style="width:27%">
+
+              <div class="btn-group dropdown-hover mt-2 sitemap-201709180104">
+                <button onmouseover="kk();" type="button" class="btn btn-link btn-lg dropdown-toggle"
+                  data-toggle="dropdown">
+                  <i class="nc-icon-glyph location_pin text-warning"></i>&nbsp;省级
+                </button>
+
+                <div id="ceshi" style="display:none;" class="dropdown-menu p-1l" onmouseleave="leave();">
+                  <script id="SxLink" type="text/javascript" src="./public/js/shanxi/do.js" token="" usertype=""
+                    nameCode="sj">
+
+                    </script>
+                </div>
+              </div>
+              <script type="text/javascript">
+                function kk() {
+                  $("#ceshi").css("display", "block");
+                }
+                function leave() {
+                  $("#ceshi").hide();
+                }
+
+              </script>
+            </div>
+            <div class="col-xs-4">
+              <div class="input-group mt-2l">
+                <input type="text" class="form-control key" placeholder="请输入关键字">
+                <span class="input-group-btn">
+                  <button class="btn btn-primary" type="button" onclick="searchX();">查询</button>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+      <nav class="navigation-201709151505">
+        <div class="container">
+          <ul class="nav nav-justified" id="headertopbar">
+            <li><a href="http://zwfw.shaanxi.gov.cn/icity/public/index">首页</a></li>
+            <li><a href="http://zwfw.shaanxi.gov.cn/icity/person">个人办事</a></li>
+            <li><a href="http://zwfw.shaanxi.gov.cn/icity/ent">法人办事</a></li>
+            <li><a href="http://tzxm.shaanxi.gov.cn?accessToken=" target="_blank">投资服务</a></li>
+            <li><a href="http://www.shaanxi.gov.cn/fw.htm" target="_blank">便民服务</a></li>
+            <li><a href="http://zwfw.shaanxi.gov.cn/icity/icity/serviceDept">部门分厅</a></li>
+            <!--<li><a href="/icity/convenience">便民服务</a></li>-->
+            <li style="display:none;"><a href="/icity/govservice/notice">新闻公告</a></li>
+            <li><a href="http://zwfw.shaanxi.gov.cn/icity/icity/list/powerlist">事项清单</a></li>
+            <li><a href="http://113.200.80.234:8001/webpay/index_door">公共支付</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div id="root"></div>
+    <div id="bottom">
+      <!-- <footer class="footer-201709162224">
+        <div class="container">
+
+          <div style="margin:0 auto;width:720px;height:80px;line-height:82px;">
+
+            <div class="text-center pull-left" style="float:left;margin-top:2px;width:70px;border:0px solid black;">
+              <div class="red ">
+                <script type="text/javascript">
+                  document.write(unescape("%3Cspan id='_ideConac' %3E%3C/span%3E%3Cscript src='http://dcs.conac.cn/js/27/000/0000/40705256/CA270000000407052560004.js' type='text/javascript'%3E%3C/script%3E"));
+                </script>
+
+              </div>
+            </div>
+            <div class="text-center pull-left"
+              style="float:left;line-height:41px;margin-left:0px;border:0px solid black;width:540px;">
+
+              <p style="line-height:150%">主办：陕西省人民政府办公厅 &nbsp;&nbsp;&nbsp;承办：陕西省信息中心&nbsp;&nbsp;&nbsp; </p>
+              <p style="line-height:150%"><a href="http://www.beian.miit.gov.cn"
+                  target="_blank">陕ICP备10004160号</a>&nbsp;&nbsp;&nbsp; <a
+                  href="http://zwfw.shaanxi.gov.cn/icity//icity/about/about" target="_blank">关于陕西政务服务网</a></p>
+              <p style="line-height:150%">业务咨询电话：029-89312345&nbsp;&nbsp;&nbsp;技术支持电话：029-63918256、029-63918201</p>
+              <p style="line-height:150%"><a
+                  href="http://zwfw.shaanxi.gov.cn/icity/govservice/contact">陕西省政务服务中心地址：西安市长安北路14号朱雀广场内</a></p>
+              <p style="line-height:150%">建议使用1366*768分辨率访问达到最佳效果 <br />支持IE9.0以上、火狐、谷歌和360浏览器正常访问</p>
+              <!--            <p>建议使用1366x768分辨率/IE9.0或以上浏览器访问达到最佳效果</p>-->
+      <!-- </div>
+            <div class="text-center pull-right"
+              style="float:right;width:110px; height: 55px;margin-right:0px;border:0px solid black;">
+              <script id="_jiucuo_" sitecode="6100000017" src="./public/js/shanxi/jiucuo.js"></script>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div> --> -->
+  </block>
+  <block name="footer">
+    <script src="./index.js"></script>
+    <!-- <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="./public/js/shanxi/c1f95306026741a6820291743f3a90a9.js"></script>
+    <script type="text/javascript" src="./public/js/shanxi/common.js"></script>
+    <script type="text/javascript">
+      var __webPath = "/icity/";
+      var __signature = "e565171557819613873";
+      var signupUrl = "/icity/uc/register";
+    </script> -->
+    <!-- <script type="text/javascript">
+      plugin.add('dialog', {
+        path: '/icity/public/scripts/dialog/a?t=js&m=jquery.artDialog.js,plugins/iframeTools.js',
+        type: 'js',
+        charset: 'utf-8',
+        rely: ['dialog_css']
+      });
+      plugin.add('dialog_css', {
+        path: '/icity/public/scripts/dialog/skins/simple.css',
+        type: 'css',
+        charset: 'utf-8'
+      });
+      plugin.add('tree', {
+        path: '/icity/public/scripts/zTreeStyle/jquery.ztree.js',
+        type: 'js',
+        charset: 'utf-8',
+        rely: ['tree_css']
+      });
+      plugin.add('tree_css', {
+        path: '/icity/public/scripts/zTreeStyle/zTreeStyle.css',
+        type: 'css',
+        charset: 'utf-8'
+      });
+      plugin.add('calendar', {
+        path: '/icity/public/scripts/calendar/calendar-min.js',
+        type: 'js',
+        charset: 'utf-8',
+        rely: ['calendar_css']
+      });
+      plugin.add('calendar_css', {
+        path: '/icity/public/scripts/calendar/calendar-min.css',
+        type: 'css',
+        charset: 'utf-8'
+      });
+    </script> -->
+    <!-- <script src="./public/js/shanxi/jquery.caroufredsel.packed.js"></script>
+    <link href="./public/css/shanxi/nucleo-outline.css" rel="stylesheet">
+    <link href="./public/css/shanxi/nucleo-glyph.css" rel="stylesheet"> -->
+    <!-- <link href="./public/css/shanxi/custom.css" rel="stylesheet"> -->
+  </block>
+</extends>
