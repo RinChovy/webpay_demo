@@ -7,11 +7,11 @@ export default class inputComponents extends React.Component {
       payname: false,
       code: false,
     },
-    spanPay: '缴款码为执收单位开具的非税收入一般缴款书上的20位编码。',
+    spanPay: '缴款码为执收单位开具的湖北省非税收入缴款通知书上的20位编码。',
   };
 
   // 焦点获取;
-  focusInput = (e) => {
+  focusInput = e => {
     this.setState(({ blurInput }) => {
       let newJson = blurInput;
       newJson[e] = true;
@@ -21,7 +21,7 @@ export default class inputComponents extends React.Component {
     });
   };
   //焦点丢失
-  blurInput = (e) => {
+  blurInput = e => {
     this.setState(({ blurInput }) => {
       let newJson = blurInput;
       newJson[e] = false;
@@ -35,16 +35,7 @@ export default class inputComponents extends React.Component {
   };
   render() {
     const { spanPay, blurInput } = this.state;
-    const {
-      name,
-      label,
-      blur,
-      haveSpanPay,
-      img,
-      img_hover,
-      isVecode,
-      codeUrl,
-    } = this.props;
+    const { name, label, blur, haveSpanPay, img, img_hover, isVecode, codeUrl } = this.props;
     return (
       <>
         {isVecode ? (
@@ -76,20 +67,14 @@ export default class inputComponents extends React.Component {
                     onFocus={() => this.focusInput(blur)}
                     onBlur={() => this.blurInput(blur)}
                     placeholder={'请输入' + label}
-                    className={
-                      blurInput[blur] ? 'input_ningxia_hover' : 'input_ningxia'
-                    }
+                    className={blurInput[blur] ? 'input_ningxia_hover' : 'input_ningxia'}
                     size="large"
                     style={{ width: 230 }}
                   />
                 </Form.Item>
               </Col>
               <Col span={12}>
-                <img
-                  className={'verificationCode'}
-                  alt="验证码"
-                  src={codeUrl}
-                />
+                <img className={'verificationCode'} alt="验证码" src={codeUrl} />
                 <span
                   style={{
                     marginLeft: 10,
@@ -132,19 +117,13 @@ export default class inputComponents extends React.Component {
                     onFocus={() => this.focusInput(blur)}
                     onBlur={() => this.blurInput(blur)}
                     placeholder={'请输入' + label}
-                    className={
-                      blurInput[blur] ? 'input_ningxia_hover' : 'input_ningxia'
-                    }
+                    className={blurInput[blur] ? 'input_ningxia_hover' : 'input_ningxia'}
                     size="large"
                     style={{ width: 420, borderRadius: 0 }}
                   />
                 </Form.Item>
                 {haveSpanPay && (
-                  <Popover
-                    placement="bottomLeft"
-                    content={spanPay}
-                    trigger="click"
-                  >
+                  <Popover placement="bottomLeft" content={spanPay} trigger="click">
                     <img
                       style={{
                         position: 'absolute',

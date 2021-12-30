@@ -2,42 +2,40 @@ import React from 'react';
 import { api } from '../../service/api';
 import style from '../../public/css/index.css';
 
-
 class Home extends React.Component {
   state = {
     yunwei: '', //运维信息
     list: [
       {
-        "deviceType": "pc",
+        deviceType: 'pc',
         modelPicture: require('../../public/images/code_icon.jpg'),
-        "itemName": "一般非税缴款",
-        "siteCode": "webpay",
-        "cityCode": "210000",
-        "provinceCode": "210000",
-        "itemCode": "21000001",
-        "id": "0001",
-        "provinceName": "辽宁省",
-        "modelUrl": "index_pay",
-        "channelCode": "2101002020042801"
+        itemName: '一般非税缴款',
+        siteCode: 'webpay',
+        cityCode: '210000',
+        provinceCode: '210000',
+        itemCode: '21000001',
+        id: '0001',
+        provinceName: '辽宁省',
+        modelUrl: 'index_pay',
+        channelCode: '2101002020042801',
       },
       {
-        "deviceType": "pc",
+        deviceType: 'pc',
         modelPicture: require('../../public/images/kaipiao.jpg'),
-        "itemName": "电子票据查询",
-        "siteCode": "webpay",
-        "cityCode": "210000",
-        "provinceCode": "210000",
-        "itemCode": "002",
-        "id": "0002",
-        "provinceName": "辽宁省",
-        "modelUrl": "index_payEn",
-        "channelCode": "2101002020042801"
+        itemName: '电子票据查询',
+        siteCode: 'webpay',
+        cityCode: '210000',
+        provinceCode: '210000',
+        itemCode: '002',
+        id: '0002',
+        provinceName: '辽宁省',
+        modelUrl: 'index_payEn',
+        channelCode: '2101002020042801',
       },
-    ]
+    ],
   };
 
-  componentDidMount() {
-  }
+  componentDidMount() {}
 
   router = (url, code) => {
     if (url.startsWith('http')) {
@@ -55,11 +53,7 @@ class Home extends React.Component {
         <div className="box" key={k}>
           <div
             className="box_on"
-            onClick={this.router.bind(
-              this,
-              `${list[k].modelUrl}`,
-              `${list[k].itemCode}`
-            )}
+            onClick={this.router.bind(this, `${list[k].modelUrl}`, `${list[k].itemCode}`)}
           >
             <img className="img-size" src={list[k].modelPicture} />
             <span className="img-span">{list[k].itemName}</span>
@@ -68,7 +62,7 @@ class Home extends React.Component {
       );
     });
     return (
-      <div className='body_hubei'>
+      <div className="body_hubei">
         <div className="outForm">
           <div className="onForm_top">
             <div>
@@ -76,8 +70,11 @@ class Home extends React.Component {
             </div>
           </div>
           <div className="onForm_bottom">
-            <div className='onForm_left'>
-              <img style={{ width: 400 }} src={require('../../public/images/background_left_image.png')} />
+            <div className="onForm_left">
+              <img
+                style={{ width: 400 }}
+                src={require('../../public/images/background_left_image.png')}
+              />
             </div>
             <div className="onForm">
               {listModel}

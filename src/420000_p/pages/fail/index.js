@@ -1,16 +1,16 @@
-import React from "react";
-import { Button } from "antd";
-import { api } from "../../service/api.js";
+import React from 'react';
+import { Button } from 'antd';
+import { api } from '../../service/api.js';
 
 class fail extends React.Component {
   state = {
-    spanPay: "缴款失败",
+    spanPay: '缴款失败',
   };
 
-  componentDidMount() { }
+  componentDidMount() {}
   // 返回
   cencel = () => {
-    this.props.history.push({ pathname: "/home", query: "" });
+    this.props.history.push({ pathname: '/index_pay', query: '' });
   };
   render() {
     const { spanPay } = this.state;
@@ -25,10 +25,7 @@ class fail extends React.Component {
               </div>
               <div className="middle_pay" style={{ justifyContent: 'center' }}>
                 <div className="row">
-                  <img
-                    style={{ marginTop: 100 }}
-                    src={require('../../public/images/failn.png')}
-                  />
+                  <img style={{ marginTop: 100 }} src={require('../../public/images/failn.png')} />
                   <p className="row_p">缴款失败</p>
                   <div style={{ marginTop: 30 }}>
                     <input

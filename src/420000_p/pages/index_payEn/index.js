@@ -17,7 +17,7 @@ class NonTaxPay extends React.Component {
   formRef = React.createRef();
   state = {
     spanPayTop: '温馨提示',
-    spanPay: '缴款码为执收单位开具的非税收入一般缴款书上的20位编码。',
+    spanPay: '缴款码为执收单位开具的湖北省非税收入一般缴款书上的20位编码。',
     codeUrl: '', //验证码
     uuid: '', //uuid
     loadings: [], //等待时间
@@ -25,12 +25,12 @@ class NonTaxPay extends React.Component {
   };
 
   componentDidMount() {
-    getCo().then((res) => {
+    getCo().then(res => {
       res.code === 0
         ? this.setState({
-          codeUrl: 'data:image/gif;base64,' + res.data.img,
-          uuid: res.data.uuid,
-        })
+            codeUrl: 'data:image/gif;base64,' + res.data.img,
+            uuid: res.data.uuid,
+          })
         : this.handleError(res.msg);
     });
   }
@@ -49,18 +49,18 @@ class NonTaxPay extends React.Component {
   // 验证码换一张
   changeImg = () => {
     const timestamp = new Date().valueOf();
-    getCo({ timestamp: timestamp }).then((res) => {
+    getCo({ timestamp: timestamp }).then(res => {
       res.code === 0
         ? this.setState({
-          codeUrl: 'data:image/gif;base64,' + res.data.img,
-          uuid: res.data.uuid,
-        })
+            codeUrl: 'data:image/gif;base64,' + res.data.img,
+            uuid: res.data.uuid,
+          })
         : this.handleError(res.msg);
     });
   };
 
   // 提交
-  handleFormSubmit = (values) => {
+  handleFormSubmit = values => {
     //防止重复点击
     const { loadings, uuid } = this.state;
     this.setState(({ loadings }) => {
@@ -74,16 +74,16 @@ class NonTaxPay extends React.Component {
       payCode: values.payCode,
       payPeople: values.payName,
       code: values.verificationCode,
-    }).then((res) => {
+    }).then(res => {
       res.code === 0 ? this.handleSuccess(res.data) : this.handleError(res.msg);
     });
   };
   // 提交成功
-  handleSuccess = (data) => {
+  handleSuccess = data => {
     window.location.href = data.message;
   };
   // 提交失败1
-  handleError = (err) => {
+  handleError = err => {
     localStorage.removeItem('data');
     this.openNotificationWithIcon('error', err);
     const { loadings } = this.state;
@@ -97,21 +97,21 @@ class NonTaxPay extends React.Component {
     });
   };
   // 提交失败
-  onFinishFailed = (values) => {
+  onFinishFailed = values => {
     console.log('fail:', values);
   };
   // 打开遮罩
   handleModel = () => {
     this.setState({
-      isModalVisible: true
-    })
-  }
+      isModalVisible: true,
+    });
+  };
   // 关闭遮罩
   isHandleModel = () => {
     this.setState({
-      isModalVisible: false
-    })
-  }
+      isModalVisible: false,
+    });
+  };
   render() {
     const { spanPay, isModalVisible, codeUrl, loadings } = this.state;
     const layout = {
@@ -143,10 +143,7 @@ class NonTaxPay extends React.Component {
                 </div>
                 <div className="middle_pay_right">
                   <div className="middle_pay_right_org_e">
-                    <div
-                      className="middle_pay_right_org_top"
-                      style={{ width: 130 }}
-                    >
+                    <div className="middle_pay_right_org_top" style={{ width: 130 }}>
                       <div className="classHover">
                         <span>按缴款码查询</span>
                       </div>
@@ -203,17 +200,18 @@ class NonTaxPay extends React.Component {
                         >
                           下一步
                         </Button>
-                        <Button
-                          className="button_clear"
-                          size="large"
-                          onClick={this.onReset}
-                        >
+                        <Button className="button_clear" size="large" onClick={this.onReset}>
                           清空
                         </Button>
                       </Form.Item>
                     </Form>
                     <div style={{ width: '100%', paddingLeft: '24%', cursor: 'pointer' }}>
-                      <span>阅读并接受<span style={{ color: 'rgb(24, 144, 255)' }} onClick={this.handleModel}>《用户隐私声明》</span></span>
+                      <span>
+                        阅读并接受
+                        <span style={{ color: 'rgb(24, 144, 255)' }} onClick={this.handleModel}>
+                          《用户隐私声明》
+                        </span>
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -221,11 +219,17 @@ class NonTaxPay extends React.Component {
             </div>
           </div>
         </div>
-        <Modal title="隐私授权声明" visible={isModalVisible} onCancel={this.isHandleModel} width='1000px' footer={[
-          <Button key="back" type="primary" onClick={this.isHandleModel}>
-            已阅读
-          </Button>,
-        ]}>
+        <Modal
+          title="隐私授权声明"
+          visible={isModalVisible}
+          onCancel={this.isHandleModel}
+          width="1000px"
+          footer={[
+            <Button key="back" type="primary" onClick={this.isHandleModel}>
+              已阅读
+            </Button>,
+          ]}
+        >
           <div style={{ maxHeight: '500px', overflowY: 'scroll' }}>
             <Privacy />
           </div>
