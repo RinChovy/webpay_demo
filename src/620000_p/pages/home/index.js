@@ -7,7 +7,6 @@ import icon_jiaoyu from '../../public/images/xizang/jiaoyu.png';
 import icon_caizheng from '../../public/images/xizang/caizheng.png';
 import icon_zhengce from '../../public/images/xizang/zhengce.png';
 
-
 class Home extends React.Component {
   state = {
     spanPay: '', //温馨提示
@@ -17,7 +16,7 @@ class Home extends React.Component {
     url: 'http://220.182.49.217:18686/billcheck/html/index.html', //票据查询地址
   };
 
-  componentDidMount() { }
+  componentDidMount() {}
   // 左侧按钮方法
   left = () => {
     this.setState({
@@ -98,15 +97,19 @@ class Home extends React.Component {
         <div className="outForm_pay">
           <div className="img_pay">
             <div className="onForm_pay" style={{ paddingTop: 10 }}>
-              {/* <div style={{ width: '96%', margin: '0 auto' }}>
+              <div style={{ width: '96%', margin: '0 auto' }}>
                 <Alert
                   message={<span style={{ color: 'red' }}>公告</span>}
-                  description={<span style={{ color: "red" }}>通告：因系统维护升级，现暂停统一公共支付平台缴款业务和票据查询打印功能。缴款人可通过银行柜面现金、转账缴款，也可登录网银手机银行或执收单位缴款通知书上的二维码等渠道缴款。给您带来不便，敬请谅解！</span>}
+                  description={
+                    <span style={{ color: 'red' }}>
+                      通告：因系统维护升级，现暂停统一公共支付平台缴款业务办理，关闭时间2021年12月31日10时至2022年1月1日6时。给您带来不便，敬请谅解！
+                    </span>
+                  }
                   type="warning"
                   showIcon
                   closable
                 />
-              </div> */}
+              </div>
               <div className="home">
                 <div className="home_left">
                   <img
