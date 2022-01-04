@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, Input, Button, Row, Col, notification, Modal } from 'antd';
-import { queryPayInfo, getCo } from '../../service/services';
+import { queryPayInfo } from '../../service/services';
 import { api } from '../../service/api';
 import style from '../../public/css/index.css';
 import Privacy from '../components/privacy';
@@ -127,6 +127,7 @@ class NonTaxPay extends React.Component {
         fontSize: '17px',
         textAlign: 'center',
         fontWeight: 'bold',
+        marginLeft: 90,
       },
     };
     return (

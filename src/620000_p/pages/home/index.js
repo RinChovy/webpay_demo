@@ -1,6 +1,7 @@
 import React from 'react';
 import pdf from '../../public/jk.pdf';
 import style from '../../public/css/index.css';
+import { notice } from '../../service/services';
 import { Alert } from 'antd';
 import icon_feishui from '../../public/images/xizang/feishui.png';
 import icon_jiaoyu from '../../public/images/xizang/jiaoyu.png';
@@ -16,7 +17,7 @@ class Home extends React.Component {
     url: 'http://220.182.49.217:18686/billcheck/html/index.html', //票据查询地址
   };
 
-  componentDidMount() {}
+  componentDidMount() { }
   // 左侧按钮方法
   left = () => {
     this.setState({

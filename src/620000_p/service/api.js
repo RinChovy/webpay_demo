@@ -22,6 +22,7 @@ const api = {
   searchPolicyDocument: base + '/620000/searchPolicyDocument.do', //查询政策文件
   downLoadPolicyDocument: base + '/620000/downLoadPolicyDocument.do', //下载政策文件
   queryEinvoiceUrl: base + '/620000/queryEinvoiceUrl', //直接查电子票地址
+  notice: base + '/620000/queryEinvoiceUrl', //公告判断接口
 };
 
 export { api, base };

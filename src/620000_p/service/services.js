@@ -61,6 +61,17 @@ export async function searchPolicyDocument(params) {
     data: stringify({ key: encrypt(JSON.stringify(params)) }),
   });
 }
+//公告接口
+export async function notice(params) {
+  return xFetch(api.notice, {
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      regionCode: api.region,
+    },
+    data: stringify({ key: encrypt(JSON.stringify(params)) }),
+  });
+}
 //直接查电子票地址
 export async function queryEinvoiceUrl(params) {
   return xFetch(api.queryEinvoiceUrl, {
