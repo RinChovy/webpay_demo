@@ -44,8 +44,8 @@
 </template>
 
 <script>
-import { Button, Row, Col, Search, Dialog } from 'vant'
-import { getAliUserId, getOpenPlatformUserid } from '../../config/services.js'
+import { Button, Row, Col, Search, Dialog } from 'vant';
+import { getAliUserId, getOpenPlatformUserid, notice } from '../../config/services.js';
 export default {
   name: 'home',
   components: {
@@ -61,18 +61,21 @@ export default {
       good: 'value',
       bottom_span: '主办单位：甘肃省财政厅',
       bottom_span2: '客服电话：4008885699',
-    }
+    };
   },
   created() {
     //进来提示
-    Dialog.alert({
-      message:
-        '通告：因系统维护升级，现暂停统一公共支付平台缴款业务办理，关闭时间2021年12月31日10时至2022年1月1日6时。给您带来不便，敬请谅解！',
-    }).then(() => {})
+    notice().then((res) => {
+      res.code === 0 &&
+        res.data.status == '1' &&
+        Dialog.alert({
+          message: res.data.noticeInfo,
+        }).then(() => {});
+    });
   },
   mounted() {
-    const user_id = localStorage.getItem('userId')
-    let appId = localStorage.getItem('appId')
+    const user_id = localStorage.getItem('userId');
+    let appId = localStorage.getItem('appId');
     if (!user_id || appId !== '2021002150607946') {
       ap &&
         ap.getAuthCode(
@@ -89,55 +92,55 @@ export default {
                   aliUserId: data.data.aliUserId,
                 }).then((resData) => {
                   if (resData.code === 0) {
-                    localStorage.removeItem('userId')
-                    localStorage.setItem('userId', resData.data.user_id)
-                    localStorage.removeItem('appId')
-                    localStorage.setItem('appId', '2021002150607946')
+                    localStorage.removeItem('userId');
+                    localStorage.setItem('userId', resData.data.user_id);
+                    localStorage.removeItem('appId');
+                    localStorage.setItem('appId', '2021002150607946');
                   } else {
                     Dialog.alert({
                       message: resData.msg,
                     }).then(() => {
                       // on close
-                    })
+                    });
                   }
-                })
+                });
               } else {
                 Dialog.alert({
                   message: data.msg,
                 }).then(() => {
                   // on close
-                })
+                });
               }
-            })
+            });
           }
-        )
+        );
     }
   },
   methods: {
     indexPay() {
       this.$router.push({
         path: '/index_pay',
-      })
+      });
     },
     policy() {
-      localStorage.removeItem('sessionPage')
-      localStorage.removeItem('sessionItemName')
+      localStorage.removeItem('sessionPage');
+      localStorage.removeItem('sessionItemName');
       this.$router.push({
         path: '/policy',
-      })
+      });
     },
     indexUrl() {
       this.$router.push({
         path: '/order_record',
-      })
+      });
     },
     indexPayEn() {
       this.$router.push({
         path: '/index_payEn',
-      })
+      });
     },
   },
-}
+};
 </script>
 
 <style scoped lang="scss">

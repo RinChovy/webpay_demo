@@ -24,6 +24,16 @@ export async function queryEinvoiceUrl(params) {
     data: stringify({ key: encrypt(JSON.stringify(params)) }),
   });
 }
+// 公告接口
+export async function notice(params) {
+  return xFetch(Api.notice, {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      regionCode: Api.region,
+    },
+    data: stringify({ key: encrypt(JSON.stringify(params)) }),
+  });
+}
 // 成功回调接口
 export async function success(params) {
   return xFetch(Api.success, {

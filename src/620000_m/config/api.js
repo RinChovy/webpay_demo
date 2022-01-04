@@ -32,6 +32,8 @@ export default {
   downLoadPolicyDocument: `${baseapi}/620000/downLoadPolicyDocument.do`,
   //直接查电子票地址
   queryEinvoiceUrl: `${baseapi}/620000/queryEinvoiceUrl`,
+  //公告接口
+  notice: `${baseapi}/620000/getNoticeInfo`,
 
   /////////////////////////以下是城市服务////////////////////////
   //支付宝接口1

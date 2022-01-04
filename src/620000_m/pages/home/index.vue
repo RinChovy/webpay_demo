@@ -40,7 +40,8 @@
 </template>
 
 <script>
-import { Button, Row, Col, Search, Dialog } from 'vant'
+import { Button, Row, Col, Search, Dialog } from 'vant';
+import { notice } from '../../config/services.js';
 export default {
   name: 'home',
   components: {
@@ -56,35 +57,38 @@ export default {
       good: 'value',
       bottom_span: '主办单位：甘肃省财政厅',
       bottom_span2: '客服电话：4008885699',
-    }
+    };
   },
   created() {
     //进来提示
-    Dialog.alert({
-      message:
-        '通告：因系统维护升级，现暂停统一公共支付平台缴款业务办理，关闭时间2021年12月31日10时至2022年1月1日6时。给您带来不便，敬请谅解！',
-    }).then(() => {})
+    notice().then((res) => {
+      res.code === 0 &&
+        res.data.status == '1' &&
+        Dialog.alert({
+          message: res.data.noticeInfo,
+        }).then(() => {});
+    });
   },
   methods: {
     indexPay() {
       this.$router.push({
         path: '/index_pay',
-      })
+      });
     },
     policy() {
-      localStorage.removeItem('sessionPage')
-      localStorage.removeItem('sessionItemName')
+      localStorage.removeItem('sessionPage');
+      localStorage.removeItem('sessionItemName');
       this.$router.push({
         path: '/policy',
-      })
+      });
     },
     indexPayEn() {
       this.$router.push({
         path: '/index_payEn',
-      })
+      });
     },
   },
-}
+};
 </script>
 
 <style scoped lang="scss">

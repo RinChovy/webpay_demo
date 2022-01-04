@@ -2,7 +2,7 @@ import React from 'react';
 import pdf from '../../public/jk.pdf';
 import style from '../../public/css/index.css';
 import { notice } from '../../service/services';
-import { Alert } from 'antd';
+import { Alert, notification } from 'antd';
 import icon_feishui from '../../public/images/xizang/feishui.png';
 import icon_jiaoyu from '../../public/images/xizang/jiaoyu.png';
 import icon_caizheng from '../../public/images/xizang/caizheng.png';
@@ -15,9 +15,26 @@ class Home extends React.Component {
     topRight: 'home_right_topRight', //右侧按钮class
     leftOrRight: 'left', //控制显示隐藏参数
     url: 'http://220.182.49.217:18686/billcheck/html/index.html', //票据查询地址
+    noticeType: '0',  //公告是否显示 0代表无 1代表有
+    noticeText: '通告：因系统维护升级，现暂停统一公共支付平台缴款业务办理，关闭时间2021年12月31日10时至2022年1月1日6时。给您带来不便，敬请谅解！', //公告信息
   };
 
-  componentDidMount() { }
+  componentDidMount() {
+    // 验证公告信息
+    notice().then(res => {
+      if (res.code === 0) {
+        this.setState({
+          noticeType: res.data.status,
+          noticeText: res.data.noticeInfo
+        })
+      } else {
+        notification[type]({
+          message: '查询错误',
+          description: res.msg,
+        });
+      }
+    });
+  }
   // 左侧按钮方法
   left = () => {
     this.setState({
@@ -58,7 +75,7 @@ class Home extends React.Component {
   };
 
   render() {
-    const { spanPay, topLeft, topRight, leftOrRight } = this.state;
+    const { spanPay, topLeft, topRight, leftOrRight, noticeType, noticeText } = this.state;
     const span1 = {
       style: {
         marginLeft: 50,
@@ -99,17 +116,19 @@ class Home extends React.Component {
           <div className="img_pay">
             <div className="onForm_pay" style={{ paddingTop: 10 }}>
               <div style={{ width: '96%', margin: '0 auto' }}>
-                <Alert
-                  message={<span style={{ color: 'red' }}>公告</span>}
-                  description={
-                    <span style={{ color: 'red' }}>
-                      通告：因系统维护升级，现暂停统一公共支付平台缴款业务办理，关闭时间2021年12月31日10时至2022年1月1日6时。给您带来不便，敬请谅解！
-                    </span>
-                  }
-                  type="warning"
-                  showIcon
-                  closable
-                />
+                {noticeType == '1' &&
+                  <Alert
+                    message={<span style={{ color: 'red' }}>公告</span>}
+                    description={
+                      <span style={{ color: 'red' }}>
+                        {noticeText}
+                      </span>
+                    }
+                    type="warning"
+                    showIcon
+                    closable
+                  />
+                }
               </div>
               <div className="home">
                 <div className="home_left">
