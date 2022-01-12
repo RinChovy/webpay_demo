@@ -83,8 +83,7 @@ export async function queryOrderRecord(params) {
   return xFetch(Api.queryOrderRecord, {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-      // regionCode: Api.region,
-      regionCode: '620000',
+      regionCode: Api.region,
     },
     data: stringify(params),
   });

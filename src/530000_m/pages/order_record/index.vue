@@ -88,8 +88,7 @@ export default {
   mounted() {
     //加载完成执行
     let that = this
-    // let userId = localStorage.getItem('userId')
-    let userId = '2088702500239208'
+    let userId = localStorage.getItem('userId')
     console.log('userId...', userId)
     if (userId) {
       console.log('queryOederRecord')
@@ -183,8 +182,7 @@ export default {
       })
     },
     list() {
-      let userId = '2088702500239208'
-      // let userId = localStorage.getItem('userId')
+      let userId = localStorage.getItem('userId')
       let that = this
       queryOrderRecord({
         date_end: this.titleValue2 == '9999' ? '20301230' : this.titleValue2 + '1230',
