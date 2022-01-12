@@ -140,7 +140,7 @@ export default {
       const dateString = JSON.parse(localStorage.getItem('data'))
       const query = dateString.data
       const queryJson = query.payBook
-      const merchant_order_no = guid();
+      const merchant_order_no = guid()
       let subject = ''
       this.queryItem.forEach((v) => {
         // subject = subject.concat(v.itemName)
@@ -152,7 +152,7 @@ export default {
       if ('' != typeof userId && typeof userId != 'undefined' && 'null' != typeof userId) {
         const widget_param = {
           paycode: queryJson.payCode,
-          regCode: queryJson.payCode.substring(0,6)
+          regCode: queryJson.payCode.substring(0, 6),
         }
         const widget_content = {
           merchant_no: query.merchant_no,
@@ -185,28 +185,28 @@ export default {
           res.code === 0 ? that.showCashier(res.msg) : that.handleError(res.msg)
         })
       } else {
-        thirdpay_widget.init({
-          container: 'widget', //挂件在当前页面放置的控件ID
-          merchant_no: this.merchant_no, //分配的商户号
-          merchant_order_no: merchant_order_no, //订单在商户系统中的订单号
-          amount: this.totalAmount_fen, //订单价格，单位：人民币 分
-          effective_time: '1c',
-          device_type: 'phone', //设备类型
-          widget_param: {
-            paycode: this.payCode,
-          }, //控件参数，常用来传递缴款服务所需定义的内容，如，非税paycode直缴或传入相关缴费信息生成缴款书
-          charge_url: API.createCharge, //商户服务端创建charge时的controller地址
-          charge_param: {
-            payCode: this.payCode,
-            paymentName: this.payer,
-            regionCode: API.region,
-            frontCallBackUrl: API.callback,
-          }, //(可选，用户自定义参数，若存在自定义参数则会通过 POST 方法透传给 charge_url
-          version_no: '1.1',
-        })
+        // thirdpay_widget.init({
+        //   container: 'widget', //挂件在当前页面放置的控件ID
+        //   merchant_no: this.merchant_no, //分配的商户号
+        //   merchant_order_no: merchant_order_no, //订单在商户系统中的订单号
+        //   amount: this.totalAmount_fen, //订单价格，单位：人民币 分
+        //   effective_time: '1c',
+        //   device_type: 'phone', //设备类型
+        //   widget_param: {
+        //     paycode: this.payCode,
+        //   }, //控件参数，常用来传递缴款服务所需定义的内容，如，非税paycode直缴或传入相关缴费信息生成缴款书
+        //   charge_url: API.createCharge, //商户服务端创建charge时的controller地址
+        //   charge_param: {
+        //     payCode: this.payCode,
+        //     paymentName: this.payer,
+        //     regionCode: API.region,
+        //     frontCallBackUrl: API.callback,
+        //   }, //(可选，用户自定义参数，若存在自定义参数则会通过 POST 方法透传给 charge_url
+        //   version_no: '1.1',
+        // })
         const widget_param = {
           paycode: queryJson.payCode,
-          regCode: queryJson.payCode.substring(0,6)
+          regCode: queryJson.payCode.substring(0, 6),
         }
         const widget_content = {
           merchant_no: query.merchant_no,
@@ -274,7 +274,7 @@ export default {
   button {
     width: 80%;
     height: 46px;
-    background: #57B8BD;
+    background: #57b8bd;
     border-radius: 35px;
     font-size: 16px;
     font-family: PingFang SC;

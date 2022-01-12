@@ -43,12 +43,48 @@ export async function createCashier(params) {
     data: stringify(params),
   });
 }
+
+// 身份证订单查询
+export async function queryPayInfoByIdentityCard(params) {
+  return xFetch(Api.queryPayInfoByIdentityCard, {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      // regionCode: Api.region,
+      regionCode: '640000',
+      codeUId: params.uuid,
+    },
+    data: stringify(params),
+  });
+}
+// 身份证传递接口
+export async function queryPayInfoNoCode(params) {
+  return xFetch(Api.queryPayInfoNoCode, {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      // regionCode: Api.region,
+      regionCode: '640000',
+
+    },
+    data: stringify(params),
+  });
+}
 //客服接口
 export async function userIssues(params) {
   return xFetch(Api.userIssues, {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       regionCode: Api.region,
+    },
+    data: stringify(params),
+  });
+}
+// 内部查询接口
+export async function queryOrderRecord(params) {
+  return xFetch(Api.queryOrderRecord, {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      // regionCode: Api.region,
+      regionCode: '620000',
     },
     data: stringify(params),
   });

@@ -30,35 +30,22 @@
         <div class="form_input_code">
           <input placeholder="请输入验证码" v-model="code" />
           <img alt="" :src="codeUrlT" />
-          <span style="color: #4690ff;" @click="changeCode">换一张</span>
+          <span style="color: #4690ff" @click="changeCode">换一张</span>
         </div>
         <div class="form_input_warn">
           <span>{{ codeWarn }}</span>
         </div>
       </div>
       <div class="button_box">
-        <button
-          @click="submit"
-          :style="type == 'wx' ? 'background-color:#55B76B' : null"
-          v-if="disabled == true"
-        >
+        <button @click="submit" :style="type == 'wx' ? 'background-color:#55B76B' : null" v-if="disabled == true">
           下一步
         </button>
-        <button
-          @click="submit"
-          :style="type == 'wx' ? 'background-color:#55B76B' : null"
-          disabled="disabled"
-          v-else
-        >
+        <button @click="submit" :style="type == 'wx' ? 'background-color:#55B76B' : null" disabled="disabled" v-else>
           下一步
         </button>
       </div>
-      <div style="margin-top: 20px; text-align: center;">
-        <span>
-          阅读并接受<span style="color: rgb(24, 144, 255);" @click="show = true"
-            >《用户隐私声明》</span
-          >
-        </span>
+      <div style="margin-top: 20px; text-align: center">
+        <span> 阅读并接受<span style="color: rgb(24, 144, 255)" @click="show = true">《用户隐私声明》</span> </span>
       </div>
     </div>
     <van-overlay :show="show" @click="show = false" :lock-scroll="false">
@@ -71,16 +58,16 @@
         </div>
       </div>
     </van-overlay>
-    <customerService></customerService>
+    <customerService v-if="!isWxEnv"></customerService>
   </div>
 </template>
 
 <script>
-import Privacy from '../components/privacy.vue';
-import { Button, Row, Col, Search, Dialog, Overlay, Icon } from 'vant';
-import API from '../../config/api.js';
-import { queryPayInfo, code } from '../../config/services.js';
-import CustomerService from '../components/customerService.vue';
+import Privacy from '../components/privacy.vue'
+import { Button, Row, Col, Search, Dialog, Overlay, Icon } from 'vant'
+import API from '../../config/api.js'
+import { queryPayInfo, code } from '../../config/services.js'
+import CustomerService from '../components/customerService.vue'
 export default {
   name: 'index_pay',
   components: {
@@ -120,76 +107,119 @@ export default {
       uuid: '',
       // 遮罩层元素
       show: false,
-    };
+      isWxEnv: false,
+    }
   },
   created() {
+    let that = this
+    var ua = window.navigator.userAgent.toLowerCase()
+    if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+      wx.miniProgram.getEnv(function (res) {
+        if (res.miniprogram) {
+          // 微信小程序
+          console.log('---微信小程序')
+          that.isWxEnv = true
+          const url = location.href
+          if (url.indexOf('openid=') != -1) {
+            const openid = that.GetQueryValue('openid')
+            console.log('openid为' + openid)
+            if (openid != '' && openid != null) {
+              localStorage.removeItem('openid')
+              localStorage.setItem('openid', openid)
+            }
+          }
+          if (url.indexOf('userId=') != -1) {
+            const userId = that.GetQueryValue('userId')
+            console.log('userId' + userId)
+            if (userId != '' && userId != null) {
+              localStorage.removeItem('userId')
+              localStorage.setItem('userId', userId)
+            }
+          }
+        } else {
+          //微信环境
+          console.log('---微信环境')
+        }
+      })
+    }
+
     code().then((res) => {
       res.code === 0
         ? ((this.codeUrlT = 'data:image/gif;base64,' + res.data.img), (this.uuid = res.data.uuid))
-        : this.handleError(res);
-    });
+        : this.handleError(res)
+    })
   },
   methods: {
+    GetQueryValue(queryName) {
+      var reg = new RegExp('(^|&)' + queryName + '=([^&]*)(&|$)', 'i')
+      var r = window.location.search.substr(1).match(reg)
+      if (r != null) {
+        return decodeURI(r[2])
+      } else {
+        return ''
+      }
+    },
     // 改变验证码
     changeCode() {
-      var timestamp = new Date().valueOf();
+      var timestamp = new Date().valueOf()
       code({ timestamp: timestamp }).then((res) => {
         res.code === 0
           ? ((this.codeUrlT = 'data:image/gif;base64,' + res.data.img), (this.uuid = res.data.uuid))
-          : this.handleError(res);
-      });
+          : this.handleError(res)
+      })
     },
     //提交下一步
     submit() {
-      let that = this;
-      this.warning();
+      let that = this
+      this.warning()
       if (this.payCodeWarn == '' && this.payPeopleWarn == '' && this.codeWarn == '') {
-        that.disabled = false;
+        that.disabled = false
+        console.log('00000--', this.payCode, this.payPeople, this.code, this.uuid)
         queryPayInfo({
           payCode: this.payCode,
           payPeople: this.payPeople,
           code: this.code,
           uuid: this.uuid,
         }).then((res) => {
-          res.code === 0 ? this.handleSuccess(res) : this.handleError(res);
-        });
+          res.code === 0 ? this.handleSuccess(res) : this.handleError(res)
+        })
       }
     },
     // 提交成功
 
     handleSuccess(data) {
-      localStorage.setItem('data', JSON.stringify(data));
+      localStorage.setItem('data', JSON.stringify(data))
       if (this.type == 'wx') {
-        localStorage.setItem('type', 'wx');
+        localStorage.setItem('type', 'wx')
       }
       this.$router.push({
         path: '/index_charge',
         name: 'index_charge',
-      });
+      })
     },
     // 提交失败1
     handleError(err) {
-      this.disabled = true;
-      localStorage.removeItem('data');
+      this.disabled = true
+      localStorage.removeItem('data')
       Dialog.alert({
         message: err.msg,
       }).then(() => {
         // on close
-      });
+      })
     },
     //验证方法
     warning() {
-      const regular = API.regular;
-      console.log(regular);
+      const regular = API.regular
+      console.log(regular)
       this.payCode == ''
         ? (this.payCodeWarn = '请输入缴款码')
         : this.payPeople == ''
         ? (this.payPeopleWarn = '请输入缴款人')
-        : (this.payPeopleWarn = '');
-      this.code == '' ? (this.codeWarn = '请输入验证码') : (this.codeWarn = '');
+        : (this.payPeopleWarn = '')
+      this.code == '' ? (this.codeWarn = '请输入验证码') : (this.codeWarn = '')
     },
   },
-};
+}
 </script>
 
 <style scoped lang="scss">

@@ -28,4 +28,11 @@ export default {
   createCashier: `${baseapi}/common/createCashier`,
   //客服接口
   userIssues: `${baseapi}/common/userIssues.do`,
+  //身份证查询信息(列表)
+  queryPayInfoByIdentityCard: `${baseapi}/common/queryPayInfoByIdentityCard.do`,
+  //身份证验证(详情)
+  queryPayInfoNoCode: `${baseapi}/common/queryPayInfoNoCode.do`,
+  //内部查询订单接口
+  queryOrderRecord: `${baseapi}/common/queryOrderRecord`,
+
 };
