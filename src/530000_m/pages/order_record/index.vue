@@ -89,9 +89,7 @@ export default {
     //加载完成执行
     let that = this
     let userId = localStorage.getItem('userId')
-    console.log('userId...', userId)
     if (userId) {
-      console.log('queryOederRecord')
       that.queryRecordList(userId)
     } else {
       var ua = window.navigator.userAgent.toLowerCase()
@@ -99,11 +97,9 @@ export default {
         wx.miniProgram.getEnv(function (res) {
           if (res.miniprogram) {
             // 微信小程序
-            console.log('---微信小程序')
             const url = location.href
             if (url.indexOf('openid=') != -1) {
               const openid = that.GetQueryValue('openid')
-              console.log('openid为' + openid)
               if (openid != '' && openid != null) {
                 localStorage.removeItem('openid')
                 localStorage.setItem('openid', openid)
@@ -111,7 +107,6 @@ export default {
             }
             if (url.indexOf('userId=') != -1) {
               const userId = that.GetQueryValue('userId')
-              console.log('userId' + userId)
               if (userId != '' && userId != null) {
                 localStorage.removeItem('userId')
                 localStorage.setItem('userId', userId)
@@ -120,7 +115,6 @@ export default {
             }
           } else {
             //微信环境
-            console.log('---微信环境')
           }
         })
       }
@@ -137,7 +131,6 @@ export default {
         user_id: userId,
         // user_id: "fb1457e5680e1c80a97076976fae0764",
       }).then((data) => {
-        console.log('data---', data)
         if (data.code === 0) {
           let a = JSON.parse(data.data.orderInfos)
           this.model = a.details

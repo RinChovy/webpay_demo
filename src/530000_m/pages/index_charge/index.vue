@@ -133,7 +133,6 @@ export default {
       wx.miniProgram.getEnv(function (res) {
         if (res.miniprogram) {
           // 微信小程序
-          console.log('---微信小程序')
           that.isWxEnv = true
         }
       })
@@ -207,7 +206,6 @@ export default {
               regionCode: API.region,
               frontCallBackUrl: API.callback,
             }
-            console.log('参数收银台', widget_param, widget_content, charge_param)
             createCashier({
               charge_param: JSON.stringify(charge_param),
               widget_content: JSON.stringify(widget_content),

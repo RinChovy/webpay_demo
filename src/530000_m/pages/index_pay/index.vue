@@ -117,12 +117,10 @@ export default {
       wx.miniProgram.getEnv(function (res) {
         if (res.miniprogram) {
           // 微信小程序
-          console.log('---微信小程序')
           that.isWxEnv = true
           const url = location.href
           if (url.indexOf('openid=') != -1) {
             const openid = that.GetQueryValue('openid')
-            console.log('openid为' + openid)
             if (openid != '' && openid != null) {
               localStorage.removeItem('openid')
               localStorage.setItem('openid', openid)
@@ -130,7 +128,6 @@ export default {
           }
           if (url.indexOf('userId=') != -1) {
             const userId = that.GetQueryValue('userId')
-            console.log('userId' + userId)
             if (userId != '' && userId != null) {
               localStorage.removeItem('userId')
               localStorage.setItem('userId', userId)
@@ -138,7 +135,6 @@ export default {
           }
         } else {
           //微信环境
-          console.log('---微信环境')
         }
       })
     }
@@ -174,7 +170,6 @@ export default {
       this.warning()
       if (this.payCodeWarn == '' && this.payPeopleWarn == '' && this.codeWarn == '') {
         that.disabled = false
-        console.log('00000--', this.payCode, this.payPeople, this.code, this.uuid)
         queryPayInfo({
           payCode: this.payCode,
           payPeople: this.payPeople,
@@ -210,7 +205,6 @@ export default {
     //验证方法
     warning() {
       const regular = API.regular
-      console.log(regular)
       this.payCode == ''
         ? (this.payCodeWarn = '请输入缴款码')
         : eval(regular).test(this.payCode)

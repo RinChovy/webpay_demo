@@ -187,12 +187,10 @@ export default {
       wx.miniProgram.getEnv(function (res) {
         if (res.miniprogram) {
           // 微信小程序
-          console.log('---微信小程序')
           that.isWxEnv = true
           const url = location.href
           if (url.indexOf('openid=') != -1) {
             const openid = that.GetQueryValue('openid')
-            console.log('openid为' + openid)
             if (openid != '' && openid != null) {
               localStorage.removeItem('openid')
               localStorage.setItem('openid', openid)
@@ -200,7 +198,6 @@ export default {
           }
           if (url.indexOf('userId=') != -1) {
             const userId = that.GetQueryValue('userId')
-            console.log('userId' + userId)
             if (userId != '' && userId != null) {
               localStorage.removeItem('userId')
               localStorage.setItem('userId', userId)
@@ -208,7 +205,6 @@ export default {
           }
         } else {
           //微信环境
-          console.log('---微信环境')
         }
       })
     }
@@ -261,7 +257,6 @@ export default {
       let that = this
       this.warning()
       if (this.payCodeWarn == '' && this.payPeopleWarn == '' && this.codeWarn == '') {
-        console.log('----', this.payCode, this.payPeople, this.code, this.uuid)
         that.disabled = false
         queryPayInfo({
           payCode: this.payCode,
@@ -278,11 +273,7 @@ export default {
     card_submit() {
       let that = this
       this.card_warning()
-      console.log('----', this.card_payCode, this.card_payPeople, this.card_code, this.card_uuid)
-
       if (this.card_payCodeWarn == '' && this.card_payPeopleWarn == '' && this.card_codeWarn == '') {
-        console.log('----', this.card_payCode, this.card_payPeople, this.card_code, this.card_uuid)
-
         that.card_disabled = false
         queryPayInfoByIdentityCard({
           idNumber: this.card_payCode,
@@ -326,7 +317,6 @@ export default {
     //验证方法
     warning() {
       const regular = API.regular
-      console.log(regular)
       this.payCode == ''
         ? (this.payCodeWarn = '请输入缴款码')
         : eval(regular).test(this.payCode)

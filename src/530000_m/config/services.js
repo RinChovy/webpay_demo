@@ -49,8 +49,7 @@ export async function queryPayInfoByIdentityCard(params) {
   return xFetch(Api.queryPayInfoByIdentityCard, {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-      // regionCode: Api.region,
-      regionCode: '640000',
+      regionCode: Api.region,
       codeUId: params.uuid,
     },
     data: stringify(params),
@@ -61,8 +60,7 @@ export async function queryPayInfoNoCode(params) {
   return xFetch(Api.queryPayInfoNoCode, {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-      // regionCode: Api.region,
-      regionCode: '640000',
+      regionCode: Api.region,
 
     },
     data: stringify(params),

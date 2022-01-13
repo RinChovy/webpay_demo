@@ -47,7 +47,6 @@ export default {
   mounted() {
     //加载完成执行
     const dateString = JSON.parse(localStorage.getItem('dataList'))
-    console.log(dateString.data.payBookList)
     this.model = dateString.data.payBookList
   },
   methods: {
