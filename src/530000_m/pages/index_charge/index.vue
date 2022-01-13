@@ -197,7 +197,9 @@ export default {
               device_type: 'miniProgramH5',
               widget_param: widget_param,
               //适用于开放平台的订单字段
-              userId: userId,
+              user_id: userId,
+              payment_name: that.exeAgencyName,
+              item_name_set: that.queryItem,
             }
             const charge_param = {
               payCode: that.payCode,
