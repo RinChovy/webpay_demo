@@ -213,9 +213,10 @@ export default {
       console.log(regular)
       this.payCode == ''
         ? (this.payCodeWarn = '请输入缴款码')
-        : this.payPeople == ''
-        ? (this.payPeopleWarn = '请输入缴款人')
-        : (this.payPeopleWarn = '')
+        : eval(regular).test(this.payCode)
+        ? (this.payCodeWarn = '')
+        : (this.payCodeWarn = API.regularText)
+      this.payPeople == '' ? (this.payPeopleWarn = '请输入缴款人') : (this.payPeopleWarn = '')
       this.code == '' ? (this.codeWarn = '请输入验证码') : (this.codeWarn = '')
     },
   },

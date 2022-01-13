@@ -337,7 +337,14 @@ export default {
     },
     //验证方法2
     card_warning() {
-      this.card_payCode == '' ? (this.card_payCodeWarn = '请输入身份证号') : (this.card_payCodeWarn = '')
+      let reg = /(^\d{15}$)|(^\d{17}([0-9]|X)$)/
+
+      this.card_payCode == ''
+        ? (this.card_payCodeWarn = '请输入身份证号')
+        : eval(reg).test(this.card_payCode)
+        ? (this.card_payCodeWarn = '')
+        : (this.card_payCodeWarn = '身份证格式不正确')
+
       this.card_payPeople == '' ? (this.card_payPeopleWarn = '请输入缴款人') : (this.card_payPeopleWarn = '')
       this.card_code == '' ? (this.card_codeWarn = '请输入验证码') : (this.card_codeWarn = '')
     },

@@ -183,6 +183,7 @@ export default {
             console.log('---走微信小程序收银台')
             //收银台参数定义
             const widget_param = {
+              openid: openid,
               paycode: queryJson.payCode,
               regCode: queryJson.payCode.substring(0, 6),
             }
@@ -193,19 +194,18 @@ export default {
               effective_time: '1c',
               version_no: '1.1',
               subject: subject,
-              device_type: 'phone',
+              device_type: 'miniProgramH5',
               widget_param: widget_param,
               //适用于开放平台的订单字段
               userId: userId,
             }
             const charge_param = {
-              openid: openid,
-              b: 'b',
               payCode: that.payCode,
               paymentName: that.payer,
               regionCode: API.region,
               frontCallBackUrl: API.callback,
             }
+            console.log('参数收银台', widget_param, widget_content, charge_param)
             createCashier({
               charge_param: JSON.stringify(charge_param),
               widget_content: JSON.stringify(widget_content),
