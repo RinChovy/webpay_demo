@@ -17,7 +17,7 @@
           <span>缴款人</span>
         </div>
         <div class="form_input">
-          <input placeholder="请输入缴款人" v-model="payPeople" />
+          <input placeholder="请输入缴款人" v-model="payPeople" maxlength="20" />
         </div>
         <div class="form_input_warn">
           <span>{{ payPeopleWarn }}</span>
@@ -211,6 +211,12 @@ export default {
         ? (this.payCodeWarn = '')
         : (this.payCodeWarn = API.regularText)
       this.payPeople == '' ? (this.payPeopleWarn = '请输入缴款人') : (this.payPeopleWarn = '')
+      // this.payPeople == ''
+      //   ? (this.payPeopleWarn = '请输入缴款人')
+      //   : this.payPeople.length > 20
+      //   ? (this.payPeopleWarn = '缴款人最多20位')
+      //   : (this.payPeopleWarn = '')
+
       this.code == '' ? (this.codeWarn = '请输入验证码') : (this.codeWarn = '')
     },
   },

@@ -20,9 +20,9 @@
 </template>
 
 <script>
-import { Button, Row, Col, Search } from 'vant';
-import { success } from '../../config/services.js';
-import CustomerService from '../components/customerService.vue';
+import { Button, Row, Col, Search } from 'vant'
+import { success } from '../../config/services.js'
+import CustomerService from '../components/customerService.vue'
 export default {
   name: 'success',
   components: {
@@ -37,42 +37,64 @@ export default {
       merchant_order_no: '',
       spanPay: '缴款成功',
       url: '', //电子票地址
-    };
+    }
   },
   //加载生命周期
   created() {
-    let url = location.href;
-    let rsa = url.substring(url.indexOf('=') + 1);
-    console.log(rsa);
+    let url = location.href
+    let rsa = url.substring(url.indexOf('=') + 1)
+    console.log(rsa)
     success({
       rsa: rsa,
     }).then((res) => {
       if (res.code === 0) {
-        console.log(res);
-        (this.url = res.data.einvoice_url), (this.merchant_order_no = res.data.merchant_order_no);
+        ;(this.url = res.data.einvoice_url), (this.merchant_order_no = res.data.merchant_order_no)
       } else {
         this.$router.push({
           path: '/fail',
-        });
+        })
       }
-    });
+    })
   },
   methods: {
     indexPay() {
       this.$router.push({
         path: '/index_pay',
-      });
+      })
     },
     einvoice_url() {
-      window.location.href = this.url;
+      window.location.href = this.url
     },
     home() {
-      this.$router.push({
-        path: '/home',
-      });
+      const that = this
+      const ua = window.navigator.userAgent.toLowerCase()
+      //通过正则表达式匹配ua中是否含有MicroMessenger字符串
+      if (ua.indexOf('alipay') != -1) {
+        my.getEnv(function (res) {
+          if (res.miniprogram) {
+            my.reLaunch({
+              url: '/pages/index/index',
+            })
+          }
+        })
+      } else if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+        wx.miniProgram.getEnv(function (res) {
+          if (res.miniprogram) {
+            wx.miniProgram.reLaunch({ url: '/pages/index/index' })
+          } else {
+            that.$router.push({
+              path: '/home',
+            })
+          }
+        })
+      } else {
+        that.$router.push({
+          path: '/home',
+        })
+      }
     },
   },
-};
+}
 </script>
 
 <style scoped lang="scss">

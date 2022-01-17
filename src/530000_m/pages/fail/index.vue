@@ -17,8 +17,8 @@
 </template>
 
 <script>
-import { Button, Row, Col, Search } from 'vant';
-import CustomerService from '../components/customerService.vue';
+import { Button, Row, Col, Search } from 'vant'
+import CustomerService from '../components/customerService.vue'
 export default {
   name: 'success',
   components: {
@@ -33,16 +33,40 @@ export default {
       value: 'value',
       good: 'value',
       bottom_span: '主办单位：鹤岗市财政局',
-    };
+    }
   },
   methods: {
     home() {
-      this.$router.push({
-        path: '/home',
-      });
+      const that = this
+      const ua = window.navigator.userAgent.toLowerCase()
+      //通过正则表达式匹配ua中是否含有MicroMessenger字符串
+      if (ua.indexOf('alipay') != -1) {
+        my.getEnv(function (res) {
+          console.log(res.miniprogram) //true
+          if (res.miniprogram) {
+            my.reLaunch({
+              url: '/pages/index/index',
+            })
+          }
+        })
+      } else if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+        wx.miniProgram.getEnv(function (res) {
+          if (res.miniprogram) {
+            wx.miniProgram.reLaunch({ url: '/pages/index/index' })
+          } else {
+            that.$router.push({
+              path: '/home',
+            })
+          }
+        })
+      } else {
+        that.$router.push({
+          path: '/home',
+        })
+      }
     },
   },
-};
+}
 </script>
 
 <style scoped lang="scss">

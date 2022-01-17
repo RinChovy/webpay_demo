@@ -26,7 +26,7 @@
           <span>缴款人</span>
         </div>
         <div class="form_input">
-          <input placeholder="请输入缴款人" v-model="payPeople" />
+          <input placeholder="请输入缴款人" v-model="payPeople" maxlength="20" />
         </div>
         <div class="form_input_warn">
           <span>{{ payPeopleWarn }}</span>
@@ -71,7 +71,7 @@
           <span>缴款人</span>
         </div>
         <div class="form_input">
-          <input placeholder="请输入缴款人" v-model="card_payPeople" />
+          <input placeholder="请输入缴款人" v-model="card_payPeople" maxlength="20" />
         </div>
         <div class="form_input_warn">
           <span>{{ card_payPeopleWarn }}</span>
