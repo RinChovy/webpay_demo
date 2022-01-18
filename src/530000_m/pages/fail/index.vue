@@ -47,6 +47,17 @@ export default {
         false
       )
     }
+    var ua = window.navigator.userAgent.toLowerCase()
+    if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+      wx.miniProgram.getEnv(function (res) {
+        if (res.miniprogram) {
+          // 微信小程序
+          that.isWxEnv = true
+        } else {
+          //微信环境
+        }
+      })
+    }
   },
   methods: {
     home() {
