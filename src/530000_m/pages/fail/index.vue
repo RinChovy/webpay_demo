@@ -12,7 +12,7 @@
         <button class="cencel" @click="home">返回首页</button>
       </div>
     </div>
-    <customerService></customerService>
+    <customerService v-if="!isWxEnv"></customerService>
   </div>
 </template>
 
@@ -32,7 +32,7 @@ export default {
     return {
       value: 'value',
       good: 'value',
-      bottom_span: '主办单位：鹤岗市财政局',
+      isWxEnv: false,
     }
   },
   created() {

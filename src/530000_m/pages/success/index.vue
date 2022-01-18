@@ -15,7 +15,7 @@
         <button class="cencel" @click="home">返回首页</button>
       </div>
     </div>
-    <customerService></customerService>
+    <customerService v-if="!isWxEnv"></customerService>
   </div>
 </template>
 
@@ -37,6 +37,7 @@ export default {
       merchant_order_no: '',
       spanPay: '缴款成功',
       url: '', //电子票地址
+      isWxEnv: false,
     }
   },
   //加载生命周期
