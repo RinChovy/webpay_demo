@@ -89,6 +89,7 @@ export default {
     //加载完成执行
     let that = this
     let userId = localStorage.getItem('userId')
+    // let userId = '111fe30de8ed4a9c7500664152996605-wxmini'
     if (userId) {
       that.queryRecordList(userId)
     } else {

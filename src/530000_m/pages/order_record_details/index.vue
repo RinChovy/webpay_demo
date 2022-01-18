@@ -72,6 +72,12 @@
           </div>
         </div>
       </div>
+
+      <div class="bottomV" v-if="url !== ''">
+        <div class="div_button">
+          <button @click="einvoice_url">查看电子票据</button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -79,6 +85,7 @@
 <script>
 import { DropdownMenu, DropdownItem, Dialog } from 'vant'
 import API from '../../config/api.js'
+import { queryRealTime } from '../../config/services.js'
 
 export default {
   //   name: "wx_charge",
@@ -89,13 +96,41 @@ export default {
   },
   data() {
     return {
+      url: '',
       model: JSON.parse(this.$route.params.item), //数据状态
     }
   },
   mounted() {
     console.log(this.model)
+    if (
+      this.model.order_status == '1' ||
+      this.model.order_status == '2' ||
+      this.model.order_status == '3' ||
+      this.model.order_status == '4'
+    ) {
+      // 缴款成功 需查看电子票
+
+      if (this.model.merchant_no == '5304002021121301') {
+        // 门户
+        const order_no = this.model.order_no
+        queryRealTime({
+          merchant_order_no: order_no,
+        }).then((res) => {
+          if (res.code === 0) {
+            console.log(res)
+            this.url = res.data.einvoice_url
+          }
+        })
+      } else {
+        // 不动产
+      }
+    }
   },
-  methods: {},
+  methods: {
+    einvoice_url() {
+      window.location.href = this.url
+    },
+  },
 }
 </script>
 <style scoped lang="scss">
@@ -187,6 +222,39 @@ export default {
   .xian {
     width: 100%;
     border-top: 1px dashed #f3f3f3;
+  }
+  .bottomV {
+    width: 100%;
+    // height: 200px;
+    padding-bottom: 20px;
+    border-top: 1px dotted #e5e5e5;
+    .div_button {
+      width: 100%;
+      margin: 30px auto;
+      text-align: center;
+      button {
+        width: 70%;
+        height: 44px;
+        background: linear-gradient(90deg, #0e3ea9, #3075d3);
+        border-radius: 35px;
+        font-size: 16px;
+        font-family: PingFang SC;
+        font-weight: 500;
+        color: #ffffff;
+        border: 0;
+      }
+      button.cencel {
+        width: 70%;
+        height: 44px;
+        background: white;
+        border-radius: 35px;
+        font-size: 16px;
+        font-family: PingFang SC;
+        font-weight: 500;
+        color: black;
+        border: 1px solid #5380e1;
+      }
+    }
   }
 }
 </style>

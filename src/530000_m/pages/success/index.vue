@@ -53,14 +53,16 @@ export default {
         false
       )
     }
-
     var ua = window.navigator.userAgent.toLowerCase()
     if (ua.match(/MicroMessenger/i) == 'micromessenger') {
       wx.miniProgram.getEnv(function (res) {
         if (res.miniprogram) {
+          console.log('微信小程序走查询')
           // 微信小程序
           that.isWxEnv = true
           const order_no = that.GetQueryValue('merchant_order_no')
+          // const order_no = '220118150941032411'
+
           queryRealTime({
             merchant_order_no: order_no,
           }).then((res) => {
@@ -73,22 +75,12 @@ export default {
               })
             }
           })
+        } else {
+          that.goSuccess()
         }
       })
     } else {
-      let url = location.href
-      console.log('rsa---', rsa)
-      success({
-        rsa: rsa,
-      }).then((res) => {
-        if (res.code === 0) {
-          ;(that.url = res.data.einvoice_url), (that.merchant_order_no = res.data.merchant_order_no)
-        } else {
-          that.$router.push({
-            path: '/fail',
-          })
-        }
-      })
+      that.goSuccess()
     }
 
     // let rsa = url.substring(url.indexOf('=') + 1)
@@ -98,6 +90,21 @@ export default {
     // let rsa = '220118150941032411'
   },
   methods: {
+    goSuccess() {
+      let url = location.href
+      console.log('rsa---', rsa)
+      success({
+        rsa: rsa,
+      }).then((res) => {
+        if (res.code === 0) {
+          ;(this.url = res.data.einvoice_url), (this.merchant_order_no = res.data.merchant_order_no)
+        } else {
+          this.$router.push({
+            path: '/fail',
+          })
+        }
+      })
+    },
     GetQueryValue(queryName) {
       var reg = new RegExp('(^|&)' + queryName + '=([^&]*)(&|$)', 'i')
       var r = window.location.search.substr(1).match(reg)
