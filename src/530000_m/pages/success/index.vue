@@ -62,7 +62,6 @@ export default {
           that.isWxEnv = true
           const order_no = that.GetQueryValue('merchant_order_no')
           // const order_no = '220118150941032411'
-
           queryRealTime({
             merchant_order_no: order_no,
           }).then((res) => {
@@ -82,16 +81,12 @@ export default {
     } else {
       that.goSuccess()
     }
-
-    // let rsa = url.substring(url.indexOf('=') + 1)
-    // 下边是失败的
-    // let rsa = '220118145303056498&merchant_no=5304002021121301'
-    // 下边是成功的
-    // let rsa = '220118150941032411'
   },
   methods: {
     goSuccess() {
       let url = location.href
+      let rsa = url.substring(url.indexOf('=') + 1)
+      // let rsa = '220118145303056498&merchant_no=5304002021121301'
       console.log('rsa---', rsa)
       success({
         rsa: rsa,

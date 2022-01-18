@@ -172,8 +172,8 @@ export default {
         that.disabled = false
         queryPayInfo({
           payCode: this.payCode,
-          payPeople: this.payPeople,
-          code: this.code,
+          payPeople: this.payPeople.trim(),
+          code: this.code.trim(),
           uuid: this.uuid,
         }).then((res) => {
           res.code === 0 ? this.handleSuccess(res) : this.handleError(res)
@@ -204,6 +204,7 @@ export default {
     },
     //验证方法
     warning() {
+      this.payCode = this.payCode.trim()
       const regular = API.regular
       this.payCode == ''
         ? (this.payCodeWarn = '请输入缴款码')

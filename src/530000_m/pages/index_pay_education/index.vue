@@ -260,8 +260,8 @@ export default {
         that.disabled = false
         queryPayInfo({
           payCode: this.payCode,
-          payPeople: this.payPeople,
-          code: this.code,
+          payPeople: this.payPeople.trim(),
+          code: this.code.trim(),
           uuid: this.uuid,
         }).then((res) => {
           res.code === 0 ? this.handleSuccess(res) : this.handleError(res)
@@ -277,8 +277,8 @@ export default {
         that.card_disabled = false
         queryPayInfoByIdentityCard({
           idNumber: this.card_payCode,
-          payPeople: this.card_payPeople,
-          code: this.card_code,
+          payPeople: this.card_payPeople.trim(),
+          code: this.card_code.trim(),
           uuid: this.card_uuid,
         }).then((res) => {
           res.code === 0 ? this.handleSuccess2(res) : this.handleError(res)
@@ -316,6 +316,7 @@ export default {
     },
     //验证方法
     warning() {
+      this.payCode = this.payCode.trim()
       const regular = API.regular
       this.payCode == ''
         ? (this.payCodeWarn = '请输入缴款码')
@@ -327,6 +328,8 @@ export default {
     },
     //验证方法2
     card_warning() {
+      this.card_payCode = this.card_payCode.trim()
+
       let reg = /(^\d{15}$)|(^\d{17}([0-9]|X)$)/
 
       this.card_payCode == ''
