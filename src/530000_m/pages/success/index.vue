@@ -55,6 +55,17 @@ export default {
         })
       }
     })
+    const that = this
+    if (window.addEventListener) {
+      console.log('addlistener--success--')
+      window.addEventListener(
+        'popstate',
+        function (e) {
+          that.home()
+        },
+        false
+      )
+    }
   },
   methods: {
     indexPay() {

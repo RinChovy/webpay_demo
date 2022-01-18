@@ -35,6 +35,19 @@ export default {
       bottom_span: '主办单位：鹤岗市财政局',
     }
   },
+  created() {
+    const that = this
+    if (window.addEventListener) {
+      console.log('addlistener--failed')
+      window.addEventListener(
+        'popstate',
+        function (e) {
+          that.home()
+        },
+        false
+      )
+    }
+  },
   methods: {
     home() {
       const that = this
