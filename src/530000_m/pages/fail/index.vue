@@ -53,8 +53,6 @@ export default {
         if (res.miniprogram) {
           // 微信小程序
           that.isWxEnv = true
-        } else {
-          //微信环境
         }
       })
     }

@@ -21,7 +21,7 @@
 
 <script>
 import { Button, Row, Col, Search } from 'vant'
-import { success } from '../../config/services.js'
+import { success, queryRealTime } from '../../config/services.js'
 import CustomerService from '../components/customerService.vue'
 export default {
   name: 'success',
@@ -42,23 +42,9 @@ export default {
   },
   //加载生命周期
   created() {
-    let url = location.href
-    let rsa = url.substring(url.indexOf('=') + 1)
-    console.log(rsa)
-    success({
-      rsa: rsa,
-    }).then((res) => {
-      if (res.code === 0) {
-        ;(this.url = res.data.einvoice_url), (this.merchant_order_no = res.data.merchant_order_no)
-      } else {
-        this.$router.push({
-          path: '/fail',
-        })
-      }
-    })
     const that = this
+    // 监听小程序中返回按钮
     if (window.addEventListener) {
-      console.log('addlistener--success--')
       window.addEventListener(
         'popstate',
         function (e) {
@@ -74,13 +60,53 @@ export default {
         if (res.miniprogram) {
           // 微信小程序
           that.isWxEnv = true
+          const order_no = that.GetQueryValue('merchant_order_no')
+          queryRealTime({
+            merchant_order_no: order_no,
+          }).then((res) => {
+            if (res.code === 0) {
+              console.log(res)
+              ;(that.url = res.data.einvoice_url), (that.merchant_order_no = res.data.merchant_order_no)
+            } else {
+              that.$router.push({
+                path: '/fail',
+              })
+            }
+          })
+        }
+      })
+    } else {
+      let url = location.href
+      console.log('rsa---', rsa)
+      success({
+        rsa: rsa,
+      }).then((res) => {
+        if (res.code === 0) {
+          ;(that.url = res.data.einvoice_url), (that.merchant_order_no = res.data.merchant_order_no)
         } else {
-          //微信环境
+          that.$router.push({
+            path: '/fail',
+          })
         }
       })
     }
+
+    // let rsa = url.substring(url.indexOf('=') + 1)
+    // 下边是失败的
+    // let rsa = '220118145303056498&merchant_no=5304002021121301'
+    // 下边是成功的
+    // let rsa = '220118150941032411'
   },
   methods: {
+    GetQueryValue(queryName) {
+      var reg = new RegExp('(^|&)' + queryName + '=([^&]*)(&|$)', 'i')
+      var r = window.location.search.substr(1).match(reg)
+      if (r != null) {
+        return decodeURI(r[2])
+      } else {
+        return ''
+      }
+    },
     indexPay() {
       this.$router.push({
         path: '/index_pay',

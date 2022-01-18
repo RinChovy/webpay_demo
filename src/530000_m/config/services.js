@@ -23,6 +23,17 @@ export async function success(params) {
     data: stringify(params),
   });
 }
+// 查询城市、小程序支付是否成功
+export async function queryRealTime(params) {
+  return xFetch(Api.queryRealTime, {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      regionCode: Api.region,
+    },
+    data: stringify(params),
+  });
+}
+
 // 验证码
 export async function code(params) {
   return xFetch(Api.code, {

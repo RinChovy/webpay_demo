@@ -129,11 +129,11 @@ export default {
         page_number: 1,
         page_size: '999',
         user_id: userId,
-        // user_id: "fb1457e5680e1c80a97076976fae0764",
       }).then((data) => {
         if (data.code === 0) {
           let a = JSON.parse(data.data.orderInfos)
           this.model = a.details
+          console.log('list---', this.model)
           a.details.length < 1 &&
             Dialog.alert({
               message: '暂无订单记录',
@@ -184,7 +184,6 @@ export default {
         page_number: 1,
         page_size: '999',
         user_id: userId,
-        // user_id: "1ea47231118ef8d82554fd04e1b6e8de",
       }).then((data) => {
         if (data.code === 0) {
           let a = JSON.parse(data.data.orderInfos)

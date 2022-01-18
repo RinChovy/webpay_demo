@@ -29,6 +29,12 @@
       </div>
       <div class="box_nei">
         <div class="top">
+          <span class="left">缴款人</span>
+          <span class="left_two">{{ model.payer_name }}</span>
+        </div>
+      </div>
+      <div class="box_nei">
+        <div class="top">
           <span class="left">缴款时间</span>
           <span class="left_two">{{ model.create_time }}</span>
         </div>
@@ -56,12 +62,11 @@
         <div class="box_nei">
           <div class="top">
             <!-- <img src="../../public/images/phone/shoufeih.png" /> -->
-            <span class="left">缴款项目</span>
-            <span class="left_two">金额</span>
+            <span class="left">项目信息</span>
           </div>
         </div>
         <div class="box_nei" style="padding-bottom: 10px">
-          <div class="item_box" v-for="i in JSON.parse(model.item_name_set)" :key="i">
+          <div class="item_box" v-for="i in JSON.parse(model.item_name_set)" :key="i.itemIdCode">
             <span class="left">{{ i.itemName }}</span>
             <span class="right">{{ i.amt }}元</span>
           </div>

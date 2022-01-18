@@ -1,6 +1,7 @@
 import baseapi from 'utils/baseURL';
 
-const callback = 'http://222.172.224.34:18008/success'; //传给后台的回调地址
+// const callback = 'http://222.172.224.34:18008/success'; //传给后台的回调地址
+const callback = 'https://demo.epayservice.cn/530000_m/success'; //传给后台的回调地址
 const region = '530000'; //区划号
 const regular = /^53\d{18}$/; //非税缴款正则表达式
 const regularText = '缴款码必须等于20位且53开头'; //非税缴款正则表达式提示信息
@@ -34,5 +35,6 @@ export default {
   queryPayInfoNoCode: `${baseapi}/common/queryPayInfoNoCode.do`,
   //内部查询订单接口
   queryOrderRecord: `${baseapi}/common/queryOrderRecord`,
-
+  //成功页回调接口_wx
+  queryRealTime: `${baseapi}/common/queryRealTime.do`,
 };
