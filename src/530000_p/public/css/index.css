@@ -417,3 +417,53 @@ p {
   bottom: 40%;
   z-index: 10;
 }
+.table {
+  width: 95%;
+  margin: 40px auto;
+  background: white;
+}
+/*table样式*/
+
+table.gridtable {
+  width: 100%;
+  font-family: verdana, arial, sans-serif;
+  font-size: 11px;
+  color: #333333;
+  border-width: 1px;
+  border-color: #9b9a9a;
+  border-collapse: collapse;
+}
+
+table.gridtable th {
+  font-size: 14px;
+  text-align: center;
+  border: 1px solid #c9c9c9;
+  padding: 8px;
+  border-style: solid;
+  background-color: #f5faff;
+}
+
+table.gridtable td {
+  font-size: 14px;
+  text-align: center;
+  color: #666666;
+  border: 1px solid #c9c9c9;
+  padding: 8px;
+  border-style: solid;
+}
+
+table span {
+  font-size: 14px;
+  font-family: PingFang SC;
+  color: #0090ff;
+  cursor: pointer;
+}
+
+tr {
+  height: 48px;
+}
+
+p:hover {
+  color: #1E6BCC;
+  cursor: pointer;
+}

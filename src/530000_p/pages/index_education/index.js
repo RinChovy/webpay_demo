@@ -1,6 +1,6 @@
 import React from 'react';
-import { Form, Button, Row, Modal, notification } from 'antd';
-import { queryPayInfo, getCo } from '../../service/services';
+import { Form, Input, Button, Row, Modal, notification } from 'antd';
+import { queryPayInfoByIdentityCard, getCo } from '../../service/services';
 import InputComponents from '../components/inputComponents';
 import img from '../../public/images/paycode_1.png';
 import img2 from '../../public/images/paycode_2.png';
@@ -16,7 +16,7 @@ class NonTaxPay extends React.Component {
   state = {
     isPayCode: 'true', //是否为非税缴款页面 不是则为缴款凭证查询
     spanPayTop: '温馨提示',
-    spanPay: '缴款码为执收单位开具的非税收入一般缴款书上的20位编码。',
+    spanPay: '请输入身份证号缴款',
     codeUrl: '', //验证码
     uuid: '', //uuid
     loadings: [], //等待时间
@@ -72,8 +72,8 @@ class NonTaxPay extends React.Component {
         loadings: newLoadings,
       };
     });
-    queryPayInfo({
-      payCode: values.payCode,
+    queryPayInfoByIdentityCard({
+      idNumber: values.idNumber,
       payPeople: values.payName,
       code: values.verificationCode,
       uuid: uuid,
@@ -85,7 +85,7 @@ class NonTaxPay extends React.Component {
   handleSuccess = (data) => {
     localStorage.setItem('data', JSON.stringify(data));
     this.props.history.push({
-      pathname: '/index_charge',
+      pathname: '/index_pay_idcard',
       // query: res.data,
     });
   };
@@ -143,7 +143,7 @@ class NonTaxPay extends React.Component {
           <div className="onForm_pay">
             <div className="outForm_pay_qingdao">
               <div className="onForm_pay_top">
-                <span>您当前位置: 统一公共支付 {'>>'} {isPayCode === 'true' ? '非税缴款' : '缴款凭证查询'}</span>
+                <span>您当前位置: 统一公共支付 {'>>'} {isPayCode === 'true' ? '教育缴费' : '缴款凭证查询'}</span>
               </div>
               <div className="middle_pay">
                 <div className="middle_pay_left">
@@ -157,7 +157,7 @@ class NonTaxPay extends React.Component {
                       style={{ width: 130 }}
                     >
                       <div className="classHover">
-                        <span>{isPayCode === 'true' ? '非税缴款' : '缴款凭证查询'}</span>
+                        <span>{isPayCode === 'true' ? '教育缴费' : '缴款凭证查询'}</span>
                       </div>
                     </div>
                     <Form
@@ -172,11 +172,11 @@ class NonTaxPay extends React.Component {
                     >
                       <div className="middle_box">
                         <InputComponents
-                          name="payCode" //FROM名称
+                          name="idNumber" //FROM名称
                           blur="paycode" //blur绑定参数
                           img={img} //图片1
                           img_hover={img_hover} //图片2
-                          label="缴款码" //label名称
+                          label="身份证号" //label名称
                           haveSpanPay={true} //是否含有感叹号提示信息
                           isVecode={false} //是否属于验证码
                         />

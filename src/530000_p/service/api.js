@@ -2,7 +2,7 @@ import base from 'utils/baseURL';
 
 const callback = 'http:/222.172.224.34:18008/success'; //传给后台的回调地址
 
-const region = '530000'; //区划号
+const region = '640000'; //区划号
 
 const regular = /^53\d{18}$/; //非税缴款正则表达式
 
@@ -20,6 +20,8 @@ const api = {
   success: base + '/callback/frontnotice', //成功回调接口
   createCashier: base + '/common/createCashier', //收银台接口
   userIssues: base + '/common/userIssues.do', // 客服接口
+  queryPayInfoByIdentityCard: base + '/common/queryPayInfoByIdentityCard.do', //身份证接口
+  queryPayInfoNoCode: base + '/common/queryPayInfoNoCode.do', //身份证验证列表
 };
 
 export { api };

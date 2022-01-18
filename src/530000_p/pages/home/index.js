@@ -25,6 +25,12 @@ class Home extends React.Component {
         itemName: '玉溪不动产缴费',
         modelUrl: 'https://ipp.epayservice.cn/h5/bdcPay/index?vde=53000001',
       },
+      {
+        itemCode: '0',
+        modelPicture: require('../../public/images/yuxi.jpg'),
+        itemName: '教育缴费',
+        modelUrl: 'index_education',
+      },
     ],
     yunwei: '由博思致新提供技术支持 技术服务热线：0411-82569885', //运维信息
   };

@@ -6,6 +6,8 @@ import Index_pay_traffic from '../pages/Index_pay_traffic/index.js';
 import NTpayChange from '../pages/index_charge/index.js';
 import Success from '../pages/success/index.js';
 import Fail from '../pages/fail/index.js';
+import Index_education from '../pages/index_education/index.js';
+import Index_pay_idcard from '../pages/index_pay_idcard/index.js';
 function App() {
   return (
     <Router basename="/">
@@ -17,6 +19,10 @@ function App() {
         <Route path="/home" component={Home} />
         <Route path="/index_pay" component={Index_pay} />
         <Route path="/index_pay.do" component={Index_pay} />
+        {/* 教育缴费 */}
+        <Route path="/index_education" component={Index_education} />
+        {/* 教育缴费列表页面 */}
+        <Route path="/index_pay_idcard" component={Index_pay_idcard} />
         <Route path="/index_pay_traffic" component={Index_pay_traffic} />
         {/* 非税缴款缴款书界面 */}
         <Route path="/index_charge" component={NTpayChange} />
