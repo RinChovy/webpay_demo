@@ -73,7 +73,7 @@
         </div>
       </div>
 
-      <div class="bottomV" v-if="url !== ''">
+      <div class="bottomV" v-if="url !== '' && url != null">
         <div class="div_button">
           <button @click="einvoice_url">查看电子票据</button>
         </div>
