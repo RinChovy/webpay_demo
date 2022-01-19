@@ -27,7 +27,7 @@ class Home extends React.Component {
       },
       {
         itemCode: '0',
-        modelPicture: require('../../public/images/yuxi.jpg'),
+        modelPicture: require('../../public/images/jiaoyu.jpg'),
         itemName: '教育缴费',
         modelUrl: 'index_education',
       },
@@ -72,7 +72,7 @@ class Home extends React.Component {
         <div className="outForm">
           <CustomerService />
           <div className="outForm_left">
-            <img src={require('../../public/images/background_left.jpg')} style={{ width: 620 }} />
+            <img src={require('../../public/images/background_left.png')} style={{ width: 620, marginLeft: '30%' }} />
           </div>
           <div className="outForm_right">
             <div className="onForm">

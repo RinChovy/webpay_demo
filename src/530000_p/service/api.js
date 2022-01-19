@@ -1,6 +1,6 @@
 import base from 'utils/baseURL';
 
-const callback = 'http:/222.172.224.34:18008/success'; //传给后台的回调地址
+const callback = 'http:/222.172.224.34:18008/success'; //传给后台的回调地址 正式
 
 const region = '640000'; //区划号
 

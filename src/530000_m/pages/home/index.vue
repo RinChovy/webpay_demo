@@ -15,6 +15,10 @@
             <img src="../../public/images/icon/yuxi.jpg" alt="" />
             <div><span>玉溪不动产缴费</span></div>
           </div>
+          <div class="box" @click="indexEdu">
+            <img src="../../public/images/icon/jiaoyu_phone.jpg" alt="" />
+            <div><span>教育缴费</span></div>
+          </div>
         </div>
       </div>
       <div class="footer">
@@ -59,6 +63,11 @@ export default {
     indexPay() {
       this.$router.push({
         path: '/index_pay',
+      });
+    },
+    indexEdu() {
+      this.$router.push({
+        path: '/education',
       });
     },
     indexUrl() {
