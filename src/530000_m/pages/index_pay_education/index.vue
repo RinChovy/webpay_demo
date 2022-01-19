@@ -109,6 +109,7 @@
         </div>
       </div>
     </van-overlay>
+    <customerService v-if="!isWxEnv"></customerService>
   </div>
 </template>
 
@@ -117,9 +118,12 @@ import Privacy from '../components/privacy.vue'
 import { Button, Row, Col, Search, Dialog, Overlay, Icon } from 'vant'
 import API from '../../config/api.js'
 import { queryPayInfo, queryPayInfoByIdentityCard, code } from '../../config/services.js'
+import CustomerService from '../components/customerService.vue'
+
 export default {
   name: 'index_pay',
   components: {
+    customerService: CustomerService,
     privacy: Privacy,
     'van-row': Row,
     'van-col': Col,
@@ -177,6 +181,7 @@ export default {
       ///////////////////////////////////////////以上为身份证号缴款
       // 遮罩层元素
       show: false,
+      isWxEnv: false,
     }
   },
   //初始生命周期

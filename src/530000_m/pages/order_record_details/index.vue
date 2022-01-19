@@ -111,7 +111,7 @@ export default {
       // 缴款成功 需查看电子票
 
       if (this.model.merchant_no == '5304002021121301') {
-        // 门户
+        // 门户 商户号： 5304002021121301
         const order_no = this.model.order_no
         queryRealTime({
           merchant_order_no: order_no,
@@ -122,7 +122,7 @@ export default {
           }
         })
       } else {
-        // 不动产
+        // 不动产 商户号： 5304212021122801
       }
     }
   },
