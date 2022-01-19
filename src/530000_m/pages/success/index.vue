@@ -2,13 +2,15 @@
   <div class="box">
     <img class="top" src="../../public/images/icon/icon.png" />
     <div class="middle">
-      <img src="../../public/images/phone/success.png" />
+      <img v-if="spanPay == '缴款成功'" src="../../public/images/phone/success.png" />
+      <img v-if="spanPay == '缴款失败'" src="../../public/images/phone/fail.png" />
+
       <div>
-        <span>缴款成功</span>
+        <span>{{ spanPay }}</span>
       </div>
     </div>
     <div class="bottom">
-      <div class="div_button" v-if="url != null">
+      <div class="div_button" v-if="url != '' && url != null">
         <button @click="einvoice_url">查看电子票据</button>
       </div>
       <div class="div_button">
@@ -35,7 +37,7 @@ export default {
   data() {
     return {
       merchant_order_no: '',
-      spanPay: '缴款成功',
+      spanPay: '',
       url: '', //电子票地址
       isWxEnv: false,
     }
@@ -62,16 +64,20 @@ export default {
           that.isWxEnv = true
           const order_no = that.GetQueryValue('merchant_order_no')
           // const order_no = '220118150941032411'
+          // const order_no = '2201181509410324110'
           queryRealTime({
             merchant_order_no: order_no,
           }).then((res) => {
             if (res.code === 0) {
               console.log(res)
-              ;(that.url = res.data.einvoice_url), (that.merchant_order_no = res.data.merchant_order_no)
+              ;(that.url = res.data.einvoice_url),
+                (that.merchant_order_no = res.data.merchant_order_no),
+                (that.spanPay = '缴款成功')
             } else {
-              that.$router.push({
-                path: '/fail',
-              })
+              that.spanPay = '缴款失败'
+              // that.$router.push({
+              //   path: '/fail',
+              // })
             }
           })
         } else {
@@ -92,11 +98,14 @@ export default {
         rsa: rsa,
       }).then((res) => {
         if (res.code === 0) {
-          ;(this.url = res.data.einvoice_url), (this.merchant_order_no = res.data.merchant_order_no)
+          ;(this.url = res.data.einvoice_url),
+            (this.merchant_order_no = res.data.merchant_order_no),
+            (this.spanPay = '缴款成功')
         } else {
-          this.$router.push({
-            path: '/fail',
-          })
+          this.spanPay = '缴款失败'
+          // this.$router.push({
+          //   path: '/fail',
+          // })
         }
       })
     },
