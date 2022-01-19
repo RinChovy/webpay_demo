@@ -16,11 +16,17 @@
         <div @click="details" :data-item="JSON.stringify(k)">
           <div class="box_nei">
             <div class="top">
-              <span class="left"
-                ><span class="left_two_ts" v-for="(m, n) in JSON.parse(k.item_name_set)" :key="n">
+              <span class="left" v-if="k.item_name_set != '' && k.item_name_set != null">
+                <span class="left_two_ts" v-for="(m, n) in JSON.parse(k.item_name_set)" :key="n">
                   <span>{{ JSON.parse(k.item_name_set)[0].itemName }}...</span>
-                </span></span
-              >
+                </span>
+              </span>
+
+              <span class="left" v-else>
+                <span class="left_two_ts">
+                  <span>玉溪不动产缴费</span>
+                </span>
+              </span>
 
               <span class="left_two" style="color: #333333; font-weight: 600">￥{{ k.fmat }}</span>
             </div>
@@ -69,6 +75,7 @@ export default {
       title2: '缴款年份', //缴款年份title
       // titleValue1: '0,1,-1,2,3,4,5,6', //缴款状态value
       titleValue1: '1,2,3,4,5,6', //缴款状态value
+
       titleValue2: '9999', //缴款年份value
       value1: '0,1,-1,2,3,4,5,6',
       value2: '9999',

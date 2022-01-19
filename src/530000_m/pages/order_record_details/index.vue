@@ -65,10 +65,21 @@
             <span class="left">项目信息</span>
           </div>
         </div>
-        <div class="box_nei" style="padding-bottom: 10px">
+        <div
+          v-if="model.item_name_set != '' && model.item_name_set != null"
+          class="box_nei"
+          style="padding-bottom: 10px"
+        >
           <div class="item_box" v-for="i in JSON.parse(model.item_name_set)" :key="i.itemIdCode">
             <span class="left">{{ i.itemName }}</span>
             <span class="right">{{ i.amt }}元</span>
+          </div>
+        </div>
+
+        <div v-else class="box_nei" style="padding-bottom: 10px">
+          <div class="item_box">
+            <span class="left">玉溪不动产缴费</span>
+            <span class="right">{{ model.fmat }}元</span>
           </div>
         </div>
       </div>
@@ -85,7 +96,7 @@
 <script>
 import { DropdownMenu, DropdownItem, Dialog } from 'vant'
 import API from '../../config/api.js'
-import { queryRealTime } from '../../config/services.js'
+import { queryRealTime, qeryBill } from '../../config/services.js'
 
 export default {
   //   name: "wx_charge",
@@ -123,8 +134,28 @@ export default {
         })
       } else {
         // 不动产 商户号： 5304212021122801
+        qeryBill({
+          // orderNo: '681202453061914624',
+          orderNo: this.model.order_no,
+        }).then((res) => {
+          console.log(res, 'res---')
+          if (res.code === 1000) {
+            this.url = res.result.billUrl
+          }
+        })
       }
     }
+
+    // else {
+    //   qeryBill({
+    //     orderNo: '681202453061914624',
+    //   }).then((res) => {
+    //     console.log(res, 'res---')
+    //     if (res.code === 1000) {
+    //       this.url = res.result.billUrl
+    //     }
+    //   })
+    // }
   },
   methods: {
     einvoice_url() {

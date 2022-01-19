@@ -37,4 +37,6 @@ export default {
   queryOrderRecord: `${baseapi}/common/queryOrderRecord`,
   //成功页回调接口_wx
   queryRealTime: `${baseapi}/common/queryRealTime.do`,
+  // 玉溪不动产添加电子票查询
+  qeryBill: `http://api.bosssoftcq.com.cn:8008/api/v1/bill/qeryBill`,
 };

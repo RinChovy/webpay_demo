@@ -98,3 +98,14 @@ export async function queryOrderRecord(params) {
   });
 }
 
+// 玉溪不动产添加电子票查询
+export async function qeryBill(params) {
+  return xFetch(Api.qeryBill, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      regionCode: Api.region,
+    },
+    params: params,
+  });
+}
