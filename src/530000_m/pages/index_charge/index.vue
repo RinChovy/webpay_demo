@@ -73,14 +73,14 @@
       <button @click="fanhui" :style="type=='wx'?'background:#55B76B':null">返回</button>
     </div>
      <div id="widget" class="zhebg">
-    <customerService></customerService>
+    <customerService v-if="!isWxEnv"></customerService>
   </div>
 </template>
 
 <script>
 import { Button, Row, Col, Search, Dialog } from 'vant'
 import { createCashier } from '../../config/services.js'
-import CustomerService from '../components/customerService.vue';
+import CustomerService from '../components/customerService.vue'
 // 自动生成商户订单号
 import { guid } from '../../public/js/orderNo'
 import API from '../../config/api.js'
@@ -94,7 +94,7 @@ export default {
     'van-search': Search,
     'van-dialog': Dialog,
   },
-  inject: ['reload'],
+  // inject: ['reload'],
   data() {
     return {
       //商户号
@@ -121,11 +121,22 @@ export default {
       einvoice_url: '',
       //type状态
       type: '',
+      isWxEnv: false,
     }
   },
 
   //初始生命周期
   created() {
+    let that = this
+    var ua = window.navigator.userAgent.toLowerCase()
+    if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+      wx.miniProgram.getEnv(function (res) {
+        if (res.miniprogram) {
+          // 微信小程序
+          that.isWxEnv = true
+        }
+      })
+    }
     //判断是否从微信进入
     this.type = localStorage.getItem('type')
     //赋值给data
@@ -154,6 +165,8 @@ export default {
       const dateString = JSON.parse(localStorage.getItem('data'))
       const query = dateString.data
       const queryJson = query.payBook
+      const merchant_order_no = guid()
+
       let subject = ''
       this.queryItem.forEach((v) => {
         // subject = subject.concat(v.itemName)
@@ -161,12 +174,80 @@ export default {
       })
       // 删除subject最后一位
       subject = subject.slice(0, subject.length - 1)
-      //收银台参数定义
-      const widget_param = {
-        paycode: queryJson.payCode,
-      }
-      const merchant_order_no = guid()
-         const widget_content = {
+      let ua = window.navigator.userAgent.toLowerCase()
+      if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+        wx.miniProgram.getEnv(function (res) {
+          if (res.miniprogram) {
+            // 微信小程序
+            console.log('---走微信小程序收银台')
+            //收银台参数定义
+            const widget_param = {
+              openid: openid,
+              paycode: queryJson.payCode,
+              regCode: queryJson.payCode.substring(0, 6),
+            }
+            const widget_content = {
+              merchant_no: query.merchant_no,
+              merchant_order_no: merchant_order_no,
+              amount: queryJson.totalAmount,
+              effective_time: '1c',
+              version_no: '1.1',
+              subject: subject,
+              device_type: 'miniProgramH5',
+              widget_param: widget_param,
+              //适用于开放平台的订单字段
+              user_id: userId,
+              payment_name: that.exeAgencyName,
+              item_name_set: that.queryItem,
+            }
+            const charge_param = {
+              payCode: that.payCode,
+              paymentName: that.payer,
+              regionCode: API.region,
+              frontCallBackUrl: API.callback,
+            }
+            createCashier({
+              charge_param: JSON.stringify(charge_param),
+              widget_content: JSON.stringify(widget_content),
+              frontCallBackUrl: API.callback,
+              merchantOrderNo: merchant_order_no,
+            }).then((res) => {
+              res.code === 0 ? that.showCashier(res.msg) : that.handleError(res.msg)
+            })
+          } else {
+            //微信环境
+            console.log('---微信环境')
+            //收银台参数定义
+            const widget_param = {
+              paycode: queryJson.payCode,
+            }
+            const widget_content = {
+              merchant_no: query.merchant_no,
+              merchant_order_no: merchant_order_no,
+              amount: queryJson.totalAmount,
+              effective_time: '1c',
+              version_no: '1.1',
+              subject: subject,
+              device_type: 'phone',
+              widget_param: widget_param,
+            }
+            const charge_param = { payCode: that.payCode, paymentName: that.payer }
+            createCashier({
+              charge_param: JSON.stringify(charge_param),
+              widget_content: JSON.stringify(widget_content),
+              frontCallBackUrl: API.callback,
+              merchantOrderNo: merchant_order_no,
+            }).then((res) => {
+              res.code === 0 ? that.showCashier(res.msg) : that.handleError(res.msg)
+            })
+          }
+        })
+      } else {
+        //收银台参数定义
+        const widget_param = {
+          paycode: queryJson.payCode,
+        }
+        const widget_content = {
           merchant_no: query.merchant_no,
           merchant_order_no: merchant_order_no,
           amount: queryJson.totalAmount,
@@ -176,7 +257,7 @@ export default {
           device_type: 'phone',
           widget_param: widget_param,
         }
-        const charge_param = { payCode: this.payCode, paymentName: this.payer }
+        const charge_param = { payCode: that.payCode, paymentName: that.payer }
         createCashier({
           charge_param: JSON.stringify(charge_param),
           widget_content: JSON.stringify(widget_content),
@@ -185,6 +266,7 @@ export default {
         }).then((res) => {
           res.code === 0 ? that.showCashier(res.msg) : that.handleError(res.msg)
         })
+      }
     },
     showCashier(pageParams) {
       document.write(pageParams)
@@ -222,7 +304,7 @@ export default {
   button {
     width: 90%;
     height: 46px;
-    background: linear-gradient(90deg, #0E3EA9, #3075D3);
+    background: linear-gradient(90deg, #0e3ea9, #3075d3);
     border-radius: 4px;
     font-size: 16px;
     font-family: PingFang SC;

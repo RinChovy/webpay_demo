@@ -12,13 +12,13 @@
         <button class="cencel" @click="home">返回首页</button>
       </div>
     </div>
-    <customerService></customerService>
+    <customerService v-if="!isWxEnv"></customerService>
   </div>
 </template>
 
 <script>
-import { Button, Row, Col, Search } from 'vant';
-import CustomerService from '../components/customerService.vue';
+import { Button, Row, Col, Search } from 'vant'
+import CustomerService from '../components/customerService.vue'
 export default {
   name: 'success',
   components: {
@@ -32,17 +32,63 @@ export default {
     return {
       value: 'value',
       good: 'value',
-      bottom_span: '主办单位：鹤岗市财政局',
-    };
+      isWxEnv: false,
+    }
+  },
+  created() {
+    const that = this
+    if (window.addEventListener) {
+      console.log('addlistener--failed')
+      window.addEventListener(
+        'popstate',
+        function (e) {
+          that.home()
+        },
+        false
+      )
+    }
+    var ua = window.navigator.userAgent.toLowerCase()
+    if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+      wx.miniProgram.getEnv(function (res) {
+        if (res.miniprogram) {
+          // 微信小程序
+          that.isWxEnv = true
+        }
+      })
+    }
   },
   methods: {
     home() {
-      this.$router.push({
-        path: '/home',
-      });
+      const that = this
+      const ua = window.navigator.userAgent.toLowerCase()
+      //通过正则表达式匹配ua中是否含有MicroMessenger字符串
+      if (ua.indexOf('alipay') != -1) {
+        my.getEnv(function (res) {
+          console.log(res.miniprogram) //true
+          if (res.miniprogram) {
+            my.reLaunch({
+              url: '/pages/index/index',
+            })
+          }
+        })
+      } else if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+        wx.miniProgram.getEnv(function (res) {
+          if (res.miniprogram) {
+            wx.miniProgram.reLaunch({ url: '/pages/index/index' })
+          } else {
+            that.$router.push({
+              path: '/home',
+            })
+          }
+        })
+      } else {
+        that.$router.push({
+          path: '/home',
+        })
+      }
     },
   },
-};
+}
 </script>
 
 <style scoped lang="scss">

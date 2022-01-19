@@ -15,14 +15,14 @@
         <button class="cencel" @click="home">返回首页</button>
       </div>
     </div>
-    <customerService></customerService>
+    <customerService v-if="!isWxEnv"></customerService>
   </div>
 </template>
 
 <script>
-import { Button, Row, Col, Search } from 'vant';
-import { success } from '../../config/services.js';
-import CustomerService from '../components/customerService.vue';
+import { Button, Row, Col, Search } from 'vant'
+import { success, queryRealTime } from '../../config/services.js'
+import CustomerService from '../components/customerService.vue'
 export default {
   name: 'success',
   components: {
@@ -37,42 +37,116 @@ export default {
       merchant_order_no: '',
       spanPay: '缴款成功',
       url: '', //电子票地址
-    };
+      isWxEnv: false,
+    }
   },
   //加载生命周期
   created() {
-    let url = location.href;
-    let rsa = url.substring(url.indexOf('=') + 1);
-    console.log(rsa);
-    success({
-      rsa: rsa,
-    }).then((res) => {
-      if (res.code === 0) {
-        console.log(res);
-        (this.url = res.data.einvoice_url), (this.merchant_order_no = res.data.merchant_order_no);
-      } else {
-        this.$router.push({
-          path: '/fail',
-        });
-      }
-    });
+    const that = this
+    // 监听小程序中返回按钮
+    if (window.addEventListener) {
+      window.addEventListener(
+        'popstate',
+        function (e) {
+          that.home()
+        },
+        false
+      )
+    }
+    var ua = window.navigator.userAgent.toLowerCase()
+    if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+      wx.miniProgram.getEnv(function (res) {
+        if (res.miniprogram) {
+          console.log('微信小程序走查询')
+          // 微信小程序
+          that.isWxEnv = true
+          const order_no = that.GetQueryValue('merchant_order_no')
+          // const order_no = '220118150941032411'
+          queryRealTime({
+            merchant_order_no: order_no,
+          }).then((res) => {
+            if (res.code === 0) {
+              console.log(res)
+              ;(that.url = res.data.einvoice_url), (that.merchant_order_no = res.data.merchant_order_no)
+            } else {
+              that.$router.push({
+                path: '/fail',
+              })
+            }
+          })
+        } else {
+          that.goSuccess()
+        }
+      })
+    } else {
+      that.goSuccess()
+    }
   },
   methods: {
+    goSuccess() {
+      let url = location.href
+      let rsa = url.substring(url.indexOf('=') + 1)
+      // let rsa = '220118145303056498&merchant_no=5304002021121301'
+      console.log('rsa---', rsa)
+      success({
+        rsa: rsa,
+      }).then((res) => {
+        if (res.code === 0) {
+          ;(this.url = res.data.einvoice_url), (this.merchant_order_no = res.data.merchant_order_no)
+        } else {
+          this.$router.push({
+            path: '/fail',
+          })
+        }
+      })
+    },
+    GetQueryValue(queryName) {
+      var reg = new RegExp('(^|&)' + queryName + '=([^&]*)(&|$)', 'i')
+      var r = window.location.search.substr(1).match(reg)
+      if (r != null) {
+        return decodeURI(r[2])
+      } else {
+        return ''
+      }
+    },
     indexPay() {
       this.$router.push({
         path: '/index_pay',
-      });
+      })
     },
     einvoice_url() {
-      window.location.href = this.url;
+      window.location.href = this.url
     },
     home() {
-      this.$router.push({
-        path: '/home',
-      });
+      const that = this
+      const ua = window.navigator.userAgent.toLowerCase()
+      //通过正则表达式匹配ua中是否含有MicroMessenger字符串
+      if (ua.indexOf('alipay') != -1) {
+        my.getEnv(function (res) {
+          if (res.miniprogram) {
+            my.reLaunch({
+              url: '/pages/index/index',
+            })
+          }
+        })
+      } else if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+        wx.miniProgram.getEnv(function (res) {
+          if (res.miniprogram) {
+            wx.miniProgram.reLaunch({ url: '/pages/index/index' })
+          } else {
+            that.$router.push({
+              path: '/home',
+            })
+          }
+        })
+      } else {
+        that.$router.push({
+          path: '/home',
+        })
+      }
     },
   },
-};
+}
 </script>
 
 <style scoped lang="scss">
