@@ -75,7 +75,6 @@ export default {
       title2: '缴款年份', //缴款年份title
       // titleValue1: '0,1,-1,2,3,4,5,6', //缴款状态value
       titleValue1: '1,2,3,4,5,6', //缴款状态value
-
       titleValue2: '9999', //缴款年份value
       value1: '0,1,-1,2,3,4,5,6',
       value2: '9999',
