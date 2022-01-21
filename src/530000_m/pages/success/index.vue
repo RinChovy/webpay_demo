@@ -59,7 +59,7 @@ export default {
     if (ua.match(/MicroMessenger/i) == 'micromessenger') {
       wx.miniProgram.getEnv(function (res) {
         if (res.miniprogram) {
-          console.log('微信小程序走查询')
+          console.log('走微信小程序查询新---！！')
           // 微信小程序
           that.isWxEnv = true
           const order_no = that.GetQueryValue('merchant_order_no')
@@ -97,7 +97,7 @@ export default {
       let url = location.href
       let rsa = url.substring(url.indexOf('=') + 1)
       // let rsa = '220118145303056498&merchant_no=5304002021121301'
-      console.log('rsa---', rsa)
+      console.log('----rsa---', rsa)
       success({
         rsa: rsa,
       }).then((res) => {
@@ -105,16 +105,16 @@ export default {
           this.url = res.data.einvoice_url
           this.merchant_order_no = res.data.merchant_order_no
           this.spanPay = '缴款成功'
-          this.$router.push({
-            name: 'fail',
-            params: { spanPay: this.spanPay, url: this.url },
+          // this.$router.push({
+          //   name: 'fail',
+          //   params: { spanPay: this.spanPay, url: this.url },
           })
         } else {
           this.spanPay = '缴款失败'
-          this.$router.push({
-            name: 'fail',
-            params: { spanPay: this.spanPay, url: this.url },
-          })
+          // this.$router.push({
+          //   name: 'fail',
+          //   params: { spanPay: this.spanPay, url: this.url },
+          // })
         }
       })
     },

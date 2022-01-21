@@ -42,7 +42,7 @@ export default {
   },
   created() {
     const that = this
-    console.log('---000', that.$route.params)
+    console.log('---000新---', that.$route.params)
     let info = that.$route.params
     if (info.hasOwnProperty('spanPay')) {
       localStorage.removeItem('spanPay')
