@@ -69,15 +69,19 @@ export default {
             merchant_order_no: order_no,
           }).then((res) => {
             if (res.code === 0) {
-              console.log(res)
-              ;(that.url = res.data.einvoice_url),
-                (that.merchant_order_no = res.data.merchant_order_no),
-                (that.spanPay = '缴款成功')
+              that.url = res.data.einvoice_url
+              that.merchant_order_no = res.data.merchant_order_no
+              that.spanPay = '缴款成功'
+              that.$router.push({
+                name: 'fail',
+                params: { spanPay: that.spanPay, url: that.url },
+              })
             } else {
               that.spanPay = '缴款失败'
-              // that.$router.push({
-              //   path: '/fail',
-              // })
+              that.$router.push({
+                name: 'fail',
+                params: { spanPay: that.spanPay, url: that.url },
+              })
             }
           })
         } else {
@@ -98,14 +102,19 @@ export default {
         rsa: rsa,
       }).then((res) => {
         if (res.code === 0) {
-          ;(this.url = res.data.einvoice_url),
-            (this.merchant_order_no = res.data.merchant_order_no),
-            (this.spanPay = '缴款成功')
+          this.url = res.data.einvoice_url
+          this.merchant_order_no = res.data.merchant_order_no
+          this.spanPay = '缴款成功'
+          this.$router.push({
+            name: 'fail',
+            params: { spanPay: this.spanPay, url: this.url },
+          })
         } else {
           this.spanPay = '缴款失败'
-          // this.$router.push({
-          //   path: '/fail',
-          // })
+          this.$router.push({
+            name: 'fail',
+            params: { spanPay: this.spanPay, url: this.url },
+          })
         }
       })
     },
