@@ -108,7 +108,7 @@ export default {
           // this.$router.push({
           //   name: 'fail',
           //   params: { spanPay: this.spanPay, url: this.url },
-          })
+          // })
         } else {
           this.spanPay = '缴款失败'
           // this.$router.push({
