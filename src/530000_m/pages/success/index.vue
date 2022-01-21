@@ -44,12 +44,14 @@ export default {
   },
   //加载生命周期
   created() {
+    console.log('支付成功页面 对呀-----')
     const that = this
     // 监听小程序中返回按钮
     if (window.addEventListener) {
       window.addEventListener(
         'popstate',
         function (e) {
+          console.log('走这里了不是吗---')
           that.home()
         },
         false
@@ -105,16 +107,16 @@ export default {
           this.url = res.data.einvoice_url
           this.merchant_order_no = res.data.merchant_order_no
           this.spanPay = '缴款成功'
-          // this.$router.push({
-          //   name: 'fail',
-          //   params: { spanPay: this.spanPay, url: this.url },
-          // })
+          this.$router.push({
+            name: 'fail',
+            params: { spanPay: this.spanPay, url: this.url },
+          })
         } else {
           this.spanPay = '缴款失败'
-          // this.$router.push({
-          //   name: 'fail',
-          //   params: { spanPay: this.spanPay, url: this.url },
-          // })
+          this.$router.push({
+            name: 'fail',
+            params: { spanPay: this.spanPay, url: this.url },
+          })
         }
       })
     },
@@ -126,11 +128,6 @@ export default {
       } else {
         return ''
       }
-    },
-    indexPay() {
-      this.$router.push({
-        path: '/index_pay',
-      })
     },
     einvoice_url() {
       window.location.href = this.url
@@ -152,6 +149,7 @@ export default {
           if (res.miniprogram) {
             wx.miniProgram.reLaunch({ url: '/pages/index/index' })
           } else {
+            console.log('对呀，是走这里了---')
             that.$router.push({
               path: '/home',
             })
