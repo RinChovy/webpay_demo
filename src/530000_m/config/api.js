@@ -37,4 +37,6 @@ export default {
   queryOrderRecord: `${baseapi}/common/queryOrderRecord`,
   //成功页回调接口_wx
   queryRealTime: `${baseapi}/common/queryRealTime.do`,
+  //隐私授权接口
+  getPrivacyAuthInfo: `${baseapi}/common/getPrivacyAuthInfo.do`,
 };

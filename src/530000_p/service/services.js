@@ -95,3 +95,16 @@ export async function queryPayInfoNoCode(params) {
   });
 }
 
+//隐私授权接口与
+export async function getPrivacyAuthInfo(params) {
+  return xFetch(api.getPrivacyAuthInfo, {
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      regionCode: api.region,
+    },
+    data: stringify(params),
+  });
+}
+
+

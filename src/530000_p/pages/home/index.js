@@ -1,7 +1,6 @@
 import React from 'react';
 import style from '../../public/css/index.css';
 
-import { queryHomelist } from '../../service/services';
 import CustomerService from '../components/customerService';
 
 class Home extends React.Component {
