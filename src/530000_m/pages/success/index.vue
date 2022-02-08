@@ -44,12 +44,14 @@ export default {
   },
   //加载生命周期
   created() {
+    console.log('支付成功页面 对呀-----')
     const that = this
     // 监听小程序中返回按钮
     if (window.addEventListener) {
       window.addEventListener(
         'popstate',
         function (e) {
+          console.log('走这里了不是吗---')
           that.home()
         },
         false
@@ -59,7 +61,7 @@ export default {
     if (ua.match(/MicroMessenger/i) == 'micromessenger') {
       wx.miniProgram.getEnv(function (res) {
         if (res.miniprogram) {
-          console.log('微信小程序走查询')
+          console.log('走微信小程序查询新---！！')
           // 微信小程序
           that.isWxEnv = true
           const order_no = that.GetQueryValue('merchant_order_no')
@@ -69,15 +71,19 @@ export default {
             merchant_order_no: order_no,
           }).then((res) => {
             if (res.code === 0) {
-              console.log(res)
-              ;(that.url = res.data.einvoice_url),
-                (that.merchant_order_no = res.data.merchant_order_no),
-                (that.spanPay = '缴款成功')
+              that.url = res.data.einvoice_url
+              that.merchant_order_no = res.data.merchant_order_no
+              that.spanPay = '缴款成功'
+              that.$router.push({
+                name: 'fail',
+                params: { spanPay: that.spanPay, url: that.url },
+              })
             } else {
               that.spanPay = '缴款失败'
-              // that.$router.push({
-              //   path: '/fail',
-              // })
+              that.$router.push({
+                name: 'fail',
+                params: { spanPay: that.spanPay, url: that.url },
+              })
             }
           })
         } else {
@@ -93,19 +99,24 @@ export default {
       let url = location.href
       let rsa = url.substring(url.indexOf('=') + 1)
       // let rsa = '220118145303056498&merchant_no=5304002021121301'
-      console.log('rsa---', rsa)
+      console.log('----rsa---', rsa)
       success({
         rsa: rsa,
       }).then((res) => {
         if (res.code === 0) {
-          ;(this.url = res.data.einvoice_url),
-            (this.merchant_order_no = res.data.merchant_order_no),
-            (this.spanPay = '缴款成功')
+          this.url = res.data.einvoice_url
+          this.merchant_order_no = res.data.merchant_order_no
+          this.spanPay = '缴款成功'
+          this.$router.push({
+            name: 'fail',
+            params: { spanPay: this.spanPay, url: this.url },
+          })
         } else {
           this.spanPay = '缴款失败'
-          // this.$router.push({
-          //   path: '/fail',
-          // })
+          this.$router.push({
+            name: 'fail',
+            params: { spanPay: this.spanPay, url: this.url },
+          })
         }
       })
     },
@@ -117,11 +128,6 @@ export default {
       } else {
         return ''
       }
-    },
-    indexPay() {
-      this.$router.push({
-        path: '/index_pay',
-      })
     },
     einvoice_url() {
       window.location.href = this.url
@@ -143,6 +149,7 @@ export default {
           if (res.miniprogram) {
             wx.miniProgram.reLaunch({ url: '/pages/index/index' })
           } else {
+            console.log('对呀，是走这里了---')
             that.$router.push({
               path: '/home',
             })

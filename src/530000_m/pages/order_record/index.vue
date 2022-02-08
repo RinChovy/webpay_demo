@@ -1,13 +1,13 @@
 <template>
   <div>
     <van-dropdown-menu active-color="#4690FF">
-      <van-dropdown-item
+      <!-- <van-dropdown-item
         v-model="value1"
         :options="option1"
         :lazy-render="false"
         get-container="body"
         @change="change"
-      />
+      /> -->
       <!-- 挂载点 -->
       <van-dropdown-item v-model="value2" :options="option2" get-container="body" @change="change2" />
     </van-dropdown-menu>
@@ -16,11 +16,17 @@
         <div @click="details" :data-item="JSON.stringify(k)">
           <div class="box_nei">
             <div class="top">
-              <span class="left"
-                ><span class="left_two_ts" v-for="(m, n) in JSON.parse(k.item_name_set)" :key="n">
+              <span class="left" v-if="k.item_name_set != '' && k.item_name_set != null">
+                <span class="left_two_ts" v-for="(m, n) in JSON.parse(k.item_name_set)" :key="n">
                   <span>{{ JSON.parse(k.item_name_set)[0].itemName }}...</span>
-                </span></span
-              >
+                </span>
+              </span>
+
+              <span class="left" v-else>
+                <span class="left_two_ts">
+                  <span>玉溪不动产缴费</span>
+                </span>
+              </span>
 
               <span class="left_two" style="color: #333333; font-weight: 600">￥{{ k.fmat }}</span>
             </div>
@@ -67,14 +73,15 @@ export default {
       model: [], //数据状态
       title1: '缴款状态', //缴款状态title
       title2: '缴款年份', //缴款年份title
-      titleValue1: '0,1,-1,2,3,4,5,6', //缴款状态value
+      // titleValue1: '0,1,-1,2,3,4,5,6', //缴款状态value
+      titleValue1: '1,2,3,4,5,6', //缴款状态value
       titleValue2: '9999', //缴款年份value
       value1: '0,1,-1,2,3,4,5,6',
       value2: '9999',
       option1: [
         { text: '全部状态', value: '0,1,-1,2,3,4,5,6' },
         { text: '缴款成功', value: '1,2,3,4' },
-        { text: '处理中', value: '0,-1' },
+        // { text: '处理中', value: '0,-1' },
         { text: '退款', value: '5,6' },
       ],
       option2: [
@@ -126,7 +133,7 @@ export default {
       queryOrderRecord({
         date_end: '20300101',
         date_start: '20200101',
-        order_status: '0,1,-1,2,3,4,5,6',
+        order_status: this.titleValue1,
         page_number: 1,
         page_size: '999',
         user_id: userId,
@@ -142,6 +149,7 @@ export default {
               // on close
             })
         } else {
+          this.model = []
           Dialog.alert({
             message: data.msg,
           }).then(() => {
@@ -196,6 +204,7 @@ export default {
               // on close
             })
         } else {
+          this.model = []
           Dialog.alert({
             message: data.msg,
           }).then(() => {

@@ -2,12 +2,17 @@
   <div class="box">
     <img class="top" src="../../public/images/icon/icon.png" />
     <div class="middle">
-      <img src="../../public/images/phone/fail.png" />
+      <img v-if="spanPay == '缴款成功'" src="../../public/images/phone/success.png" />
+      <img v-if="spanPay == '缴款失败'" src="../../public/images/phone/fail.png" />
+
       <div>
-        <span>缴款失败</span>
+        <span>{{ spanPay }}</span>
       </div>
     </div>
     <div class="bottom">
+      <div class="div_button" v-if="url != '' && url != null">
+        <button @click="einvoice_url">查看电子票据</button>
+      </div>
       <div class="div_button">
         <button class="cencel" @click="home">返回首页</button>
       </div>
@@ -30,15 +35,28 @@ export default {
   },
   data() {
     return {
-      value: 'value',
-      good: 'value',
+      spanPay: '',
+      url: '', //电子票地址
       isWxEnv: false,
     }
   },
   created() {
     const that = this
+    console.log('---000新---', that.$route.params)
+    let info = that.$route.params
+    if (info.hasOwnProperty('spanPay')) {
+      localStorage.removeItem('spanPay')
+      localStorage.removeItem('spanUrl')
+      localStorage.setItem('spanPay', that.$route.params.spanPay)
+      localStorage.setItem('spanUrl', that.$route.params.url)
+      that.spanPay = localStorage.getItem('spanPay')
+      that.url = localStorage.getItem('spanUrl')
+    } else {
+      that.spanPay = localStorage.getItem('spanPay')
+      that.url = localStorage.getItem('spanUrl')
+    }
+
     if (window.addEventListener) {
-      console.log('addlistener--failed')
       window.addEventListener(
         'popstate',
         function (e) {
@@ -64,7 +82,6 @@ export default {
       //通过正则表达式匹配ua中是否含有MicroMessenger字符串
       if (ua.indexOf('alipay') != -1) {
         my.getEnv(function (res) {
-          console.log(res.miniprogram) //true
           if (res.miniprogram) {
             my.reLaunch({
               url: '/pages/index/index',
@@ -86,6 +103,9 @@ export default {
           path: '/home',
         })
       }
+    },
+    einvoice_url() {
+      window.location.href = this.url
     },
   },
 }
