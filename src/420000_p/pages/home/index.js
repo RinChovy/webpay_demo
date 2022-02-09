@@ -2,6 +2,8 @@ import React from 'react';
 import { api } from '../../service/api';
 import style from '../../public/css/index.css';
 
+import CustomerService from '../components/customerService';
+
 class Home extends React.Component {
   state = {
     yunwei: '', //运维信息
@@ -35,7 +37,7 @@ class Home extends React.Component {
     ],
   };
 
-  componentDidMount() {}
+  componentDidMount() { }
 
   router = (url, code) => {
     if (url.startsWith('http')) {
@@ -64,6 +66,7 @@ class Home extends React.Component {
     return (
       <div className="body_hubei">
         <div className="outForm">
+          <CustomerService />
           <div className="onForm_top">
             <div>
               <span>湖北省非税收入管理平台</span>

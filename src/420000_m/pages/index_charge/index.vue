@@ -1,15 +1,15 @@
 <template>
   <div>
     <div class="box">
-      <img v-if="type=='wx'" src="../../public/images/phone/icon_wx.png" />
+      <img v-if="type == 'wx'" src="../../public/images/phone/icon_wx.png" />
       <img v-else src="../../public/images/phone/icon_2.png" />
       <div class="box_nei">
         <div class="top_logo">
           <span>{{ totalAmount }}元</span>
         </div>
         <div class="top_logo">
-          <span style="color: #ee8835" v-if="status == '0'">等待缴款</span>
-          <span style="color: #666666" v-else>已缴款</span>
+          <span style="color: #ee8835;" v-if="status == '0'">等待缴款</span>
+          <span style="color: #666666;" v-else>已缴款</span>
         </div>
       </div>
       <div class="box_nei">
@@ -22,7 +22,7 @@
         <div class="top">
           <span class="left">缴款人</span>
           <span class="left_two">{{ payer }}</span>
-        </div> 
+        </div>
       </div>
       <div class="box_nei">
         <div class="top">
@@ -64,27 +64,31 @@
       </div>
     </div>
     <div class="button" v-if="status == 0">
-      <button @click="submit" :style="type=='wx'?'background:#55B76B':null">确认支付</button>
+      <button @click="submit" :style="type == 'wx' ? 'background:#55B76B' : null">确认支付</button>
     </div>
     <div class="button" v-else-if="einvoice_url != null">
-      <button @click="einvoiceUrl" :style="type=='wx'?'background:#55B76B':null">电子票地址</button>
+      <button @click="einvoiceUrl" :style="type == 'wx' ? 'background:#55B76B' : null">
+        电子票地址
+      </button>
     </div>
     <div class="button" v-else>
-      <button @click="fanhui" :style="type=='wx'?'background:#55B76B':null">返回</button>
+      <button @click="fanhui" :style="type == 'wx' ? 'background:#55B76B' : null">返回</button>
     </div>
-     <div id="widget" class="zhebg">
+    <customerService></customerService>
   </div>
 </template>
 
 <script>
-import { Button, Row, Col, Search, Dialog } from 'vant'
-import { createCashier } from '../../config/services.js'
+import { Button, Row, Col, Search, Dialog } from 'vant';
+import { createCashier } from '../../config/services.js';
+import CustomerService from '../components/customerService.vue';
 // 自动生成商户订单号
-import { guid } from '../../public/js/orderNo'
-import API from '../../config/api.js'
+import { guid } from '../../public/js/orderNo';
+import API from '../../config/api.js';
 export default {
   name: 'index_charge',
   components: {
+    customerService: CustomerService,
     'van-row': Row,
     'van-col': Col,
     'van-button': Button,
@@ -118,25 +122,25 @@ export default {
       einvoice_url: '',
       //type状态
       type: '',
-    }
+    };
   },
 
   //初始生命周期
   created() {
     //判断是否从微信进入
-    this.type = localStorage.getItem('type')
+    this.type = localStorage.getItem('type');
     //赋值给data
-    const dateString = JSON.parse(localStorage.getItem('data'))
-    this.merchant_no = dateString.data.merchant_no
-    this.payCode = dateString.data.payBook.payCode
-    this.payer = dateString.data.payBook.payer
-    this.exeAgencyName = dateString.data.payBook.exeAgencyName
-    this.queryItem = JSON.parse(dateString.data.itemDetails)
-    this.fillDate = this.time(dateString.data.payBook.fillDate)
-    this.totalAmount = parseFloat(dateString.data.payBook.totalAmount / 100).toFixed(2)
-    this.totalAmount_fen = dateString.data.payBook.totalAmount
-    this.status = dateString.data.status
-    this.einvoice_url = dateString.data.einvoice_url
+    const dateString = JSON.parse(localStorage.getItem('data'));
+    this.merchant_no = dateString.data.merchant_no;
+    this.payCode = dateString.data.payBook.payCode;
+    this.payer = dateString.data.payBook.payer;
+    this.exeAgencyName = dateString.data.payBook.exeAgencyName;
+    this.queryItem = JSON.parse(dateString.data.itemDetails);
+    this.fillDate = this.time(dateString.data.payBook.fillDate);
+    this.totalAmount = parseFloat(dateString.data.payBook.totalAmount / 100).toFixed(2);
+    this.totalAmount_fen = dateString.data.payBook.totalAmount;
+    this.status = dateString.data.status;
+    this.einvoice_url = dateString.data.einvoice_url;
   },
 
   // mounted() {
@@ -145,67 +149,68 @@ export default {
 
   methods: {
     submit() {
-      let that = this
-      let userId = localStorage.getItem('userId')
-      let openid = localStorage.getItem('openid')
-      const dateString = JSON.parse(localStorage.getItem('data'))
-      const query = dateString.data
-      const queryJson = query.payBook
-      let subject = ''
+      let that = this;
+      let userId = localStorage.getItem('userId');
+      let openid = localStorage.getItem('openid');
+      const dateString = JSON.parse(localStorage.getItem('data'));
+      const query = dateString.data;
+      const queryJson = query.payBook;
+      let subject = '';
       this.queryItem.forEach((v) => {
         // subject = subject.concat(v.itemName)
-        subject = subject + v.itemName + ','
-      })
+        subject = subject + v.itemName + ',';
+      });
       // 删除subject最后一位
-      subject = subject.slice(0, subject.length - 1)
+      subject = subject.slice(0, subject.length - 1);
       //收银台参数定义
       const widget_param = {
         paycode: queryJson.payCode,
-      }
-      const merchant_order_no = guid()
-         const widget_content = {
-          merchant_no: query.merchant_no,
-          merchant_order_no: merchant_order_no,
-          amount: queryJson.totalAmount,
-          effective_time: '1c',
-          version_no: '1.1',
-          subject: subject,
-          device_type: 'phone',
-          widget_param: widget_param,
-        }
-        const charge_param = { payCode: this.payCode, paymentName: this.payer }
-        createCashier({
-          charge_param: JSON.stringify(charge_param),
-          widget_content: JSON.stringify(widget_content),
-          frontCallBackUrl: API.callback,
-          merchantOrderNo: merchant_order_no,
-        }).then((res) => {
-          res.code === 0 ? that.showCashier(res.msg) : that.handleError(res.msg)
-        })
+      };
+      const merchant_order_no = guid();
+      const widget_content = {
+        merchant_no: query.merchant_no,
+        merchant_order_no: merchant_order_no,
+        amount: queryJson.totalAmount,
+        effective_time: '1c',
+        version_no: '1.1',
+        subject: subject,
+        device_type: 'phone',
+        widget_param: widget_param,
+      };
+      const charge_param = { payCode: this.payCode, paymentName: this.payer };
+      createCashier({
+        charge_param: JSON.stringify(charge_param),
+        widget_content: JSON.stringify(widget_content),
+        frontCallBackUrl: API.callback,
+        merchantOrderNo: merchant_order_no,
+      }).then((res) => {
+        res.code === 0 ? that.showCashier(res.msg) : that.handleError(res.msg);
+      });
     },
     showCashier(pageParams) {
-      document.write(pageParams)
+      document.write(pageParams);
     },
     // 失败提示
     handleError(err) {
       Dialog.alert({
         message: err,
-      }).then(() => {})
+      }).then(() => {});
     },
     fanhui() {
-      window.history.go(-1)
+      window.history.go(-1);
     },
     einvoiceUrl() {
-      window.location.href = this.einvoice_url
+      window.location.href = this.einvoice_url;
     },
     // 填制日期格式化
     time(date) {
-      var fillDate = date
-      var fillDateStr = fillDate.substr(0, 4) + '-' + fillDate.substr(4, 2) + '-' + fillDate.substr(6, 2)
-      return fillDateStr
+      var fillDate = date;
+      var fillDateStr =
+        fillDate.substr(0, 4) + '-' + fillDate.substr(4, 2) + '-' + fillDate.substr(6, 2);
+      return fillDateStr;
     },
   },
-}
+};
 </script>
 
 <style scoped lang="scss">
@@ -219,7 +224,7 @@ export default {
   button {
     width: 90%;
     height: 46px;
-    background: linear-gradient(90deg, #5380E1, #83AAFF);
+    background: linear-gradient(90deg, #5380e1, #83aaff);
     border-radius: 4px;
     font-size: 16px;
     font-family: PingFang SC;

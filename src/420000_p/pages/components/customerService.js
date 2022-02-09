@@ -1,7 +1,7 @@
 import React from 'react';
 import Qrcode from 'qrcode.react';
 import { userIssues } from '../../service/services';
-import { Popover, Button } from 'antd';
+import { Popover } from 'antd';
 
 export default class customerService extends React.Component {
     state = {

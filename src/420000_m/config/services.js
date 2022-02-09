@@ -53,4 +53,27 @@ export async function createCashier(params) {
     data: stringify(params),
   });
 }
+//客服接口
+export async function userIssues(params) {
+  return xFetch(Api.userIssues, {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      regionCode: Api.region,
+    },
+    data: stringify(params),
+  });
+}
+//隐私授权接口
+export async function getPrivacyAuthInfo(params) {
+  return xFetch(Api.getPrivacyAuthInfo, {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      regionCode: Api.region,
+    },
+    data: stringify(params),
+  });
+}
+
+
+
 

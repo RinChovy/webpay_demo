@@ -81,3 +81,14 @@ export async function userIssues(params) {
     data: stringify(params),
   });
 }
+//隐私授权接口
+export async function getPrivacyAuthInfo(params) {
+  return xFetch(api.getPrivacyAuthInfo, {
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      regionCode: api.region,
+    },
+    data: stringify(params),
+  });
+}

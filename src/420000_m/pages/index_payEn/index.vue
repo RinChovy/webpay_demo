@@ -71,6 +71,7 @@
         </div>
       </div>
     </van-overlay>
+    <customerService></customerService>
   </div>
 </template>
 

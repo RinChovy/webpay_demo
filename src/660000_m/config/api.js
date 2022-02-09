@@ -31,4 +31,6 @@ export default {
   createCashier: `${baseapi}/common/createCashier`,
   //客服接口
   userIssues: `${baseapi}/common/userIssues.do`,
+  //隐私授权接口
+  getPrivacyAuthInfo: `${baseapi}/common/getPrivacyAuthInfo.do`,
 };
