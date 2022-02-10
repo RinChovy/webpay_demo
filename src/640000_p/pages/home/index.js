@@ -1,7 +1,6 @@
 import React from 'react';
-import pdf from '../../public/xls/one.pdf'
-import { queryPayInfo, getCo } from '../../service/services';
 import style from '../../public/css/index.css';
+import CustomerService from '../components/customerService';
 
 class home extends React.Component {
   state = {
@@ -85,6 +84,7 @@ class home extends React.Component {
     const { classBox, classButton, url_1, url_2, url_3 } = this.state;
     return (
       <div className="body" onClick={this.body}>
+        <CustomerService />
         <div className="outForm_pay">
           <div style={{ width: '1390px', height: 20, margin: '0 auto', position: 'relative', color: '#1E6BCC', fontSize: 22 }}>
             <span style={{ position: 'absolute', left: 10, cursor: 'pointer' }} onClick={this.handlePdf}>收费依据</span>

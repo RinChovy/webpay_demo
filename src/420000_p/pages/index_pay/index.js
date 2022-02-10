@@ -10,6 +10,7 @@ import img_hover from '../../public/images/paycode_1_hover.png';
 import img_hover2 from '../../public/images/paycode_2_hover.png';
 import img_hover3 from '../../public/images/paycode_3_hover.png';
 import Privacy from '../components/privacy';
+import CustomerService from '../components/customerService';
 
 class NonTaxPay extends React.Component {
   formRef = React.createRef();
@@ -26,9 +27,9 @@ class NonTaxPay extends React.Component {
     getCo().then(res => {
       res.code === 0
         ? this.setState({
-            codeUrl: 'data:image/gif;base64,' + res.data.img,
-            uuid: res.data.uuid,
-          })
+          codeUrl: 'data:image/gif;base64,' + res.data.img,
+          uuid: res.data.uuid,
+        })
         : this.handleError(res.msg);
     });
   }
@@ -50,9 +51,9 @@ class NonTaxPay extends React.Component {
     getCo({ timestamp: timestamp }).then(res => {
       res.code === 0
         ? this.setState({
-            codeUrl: 'data:image/gif;base64,' + res.data.img,
-            uuid: res.data.uuid,
-          })
+          codeUrl: 'data:image/gif;base64,' + res.data.img,
+          uuid: res.data.uuid,
+        })
         : this.handleError(res.msg);
     });
   };
@@ -133,6 +134,7 @@ class NonTaxPay extends React.Component {
     };
     return (
       <div className="body">
+        <CustomerService />
         <div className="outForm_pay_ningxia">
           <div className="onForm_pay">
             <div className="outForm_pay_qingdao">

@@ -9,6 +9,7 @@ import Fail from "../pages/fail/index.js";
 function App() {
   return (
     <Router basename='420000_p'>
+      {/* <Router basename='420000'> */}
       <Switch>
         <Route path="/" exact={true} component={Home} />
         {/* 非税缴款 */}

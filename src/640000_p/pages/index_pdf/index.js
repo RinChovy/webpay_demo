@@ -5,16 +5,18 @@ import style from '../../public/css/index.css';
 import one from '../../public/xls/one.pdf';
 import two from '../../public/xls/two.pdf';
 import three from '../../public/xls/three.pdf';
+import CustomerService from '../components/customerService';
 
 class Pdf extends React.Component {
   state = {
     blurInput: '',
   };
 
-  componentDidMount() {}
+  componentDidMount() { }
   render() {
     return (
       <div className="body">
+        <CustomerService />
         <div className="outForm_pay_ningxia">
           <div className="onForm_pay">
             <div className="onForm_pay_top">

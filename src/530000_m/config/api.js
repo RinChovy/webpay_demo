@@ -37,6 +37,8 @@ export default {
   queryOrderRecord: `${baseapi}/common/queryOrderRecord`,
   //成功页回调接口_wx
   queryRealTime: `${baseapi}/common/queryRealTime.do`,
+  //隐私授权接口
+  getPrivacyAuthInfo: `${baseapi}/common/getPrivacyAuthInfo.do`,
   // 玉溪不动产添加电子票查询
   // qeryBill: `https://ipp.epayservice.cn/api/v1/bill/qeryBill`,
   qeryBill: `https://ipp.bosssoftcq.com.cn/api/v1/bill/qeryBill`,

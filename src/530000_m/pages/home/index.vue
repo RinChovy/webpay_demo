@@ -66,9 +66,10 @@ export default {
       });
     },
     indexEdu() {
-      this.$router.push({
-        path: '/education',
-      });
+      window.location.href = 'https://ipp.epayservice.cn/h5/?vde=530400105001';
+      // this.$router.push({
+      //   path: '/education',
+      // });
     },
     indexUrl() {
       window.location.href = 'http://222.172.224.34:18003/billcheck/#/home';

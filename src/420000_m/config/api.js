@@ -29,4 +29,8 @@ export default {
   queryEinvoiceUrl: `${baseapi}/420000/queryEinvoiceUrl`,
   //收银台接口
   createCashier: `${baseapi}/common/createCashier`,
+  //客服接口
+  userIssues: `${baseapi}/common/userIssues.do`,
+  //收银台接口
+  getPrivacyAuthInfo: `${baseapi}/common/getPrivacyAuthInfo.do`,
 };

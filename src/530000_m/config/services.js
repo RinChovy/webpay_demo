@@ -97,6 +97,16 @@ export async function queryOrderRecord(params) {
     data: stringify(params),
   });
 }
+// 隐私授权接口
+export async function getPrivacyAuthInfo(params) {
+  return xFetch(Api.getPrivacyAuthInfo, {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      regionCode: Api.region,
+    },
+    data: stringify(params),
+  });
+}
 
 // 玉溪不动产添加电子票查询
 export async function qeryBill(params) {

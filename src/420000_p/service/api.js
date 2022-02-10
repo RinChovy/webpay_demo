@@ -1,7 +1,7 @@
 import base from 'utils/baseURL';
 
-// const callback = "https://221.232.224.111:18899/420000_p/success"; //传给后台的回调地址 正式
-const callback = 'https://221.232.224.111:8899/420000_p/success'; //传给后台的回调地址 测试
+const callback = "https://221.232.224.111:18899/420000_p/success"; //传给后台的回调地址 正式
+// const callback = 'https://221.232.224.111:8899/420000_p/success'; //传给后台的回调地址 测试
 
 const region = '420000'; //区划号
 
@@ -20,7 +20,9 @@ const api = {
   createCharge: base + '/common/createCharge', //缴费接口
   success: base + '/callback/frontnotice', //成功回调接口
   queryEinvoiceUrl: base + '/420000/queryEinvoiceUrl', //直接查电子票地址
-  createCashier: base + '/common/createCashier', //收银台接口
+  createCashier: base + '/common/createCashier', //收银台接口 
+  userIssues: base + '/common/userIssues.do', // 客服接口
+  getPrivacyAuthInfo: base + '/common/getPrivacyAuthInfo.do', //隐私授权接口
 };
 
 export { api };

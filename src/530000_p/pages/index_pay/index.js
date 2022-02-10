@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Button, Row, Modal, notification } from 'antd';
+import { Form, Button, Modal, notification } from 'antd';
 import { queryPayInfo, getCo } from '../../service/services';
 import InputComponents from '../components/inputComponents';
 import img from '../../public/images/paycode_1.png';

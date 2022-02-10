@@ -2,6 +2,7 @@ import React from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
 import { api } from '../../service/api.js';
 import { createCashier } from '../../service/services';
+import CustomerService from '../components/customerService';
 import { Arabia_to_Chinese as money, guid } from 'utils/utils';
 
 class NonTaxPayChange extends React.Component {
@@ -196,6 +197,7 @@ class NonTaxPayChange extends React.Component {
       );
     return (
       <div className="body">
+        <CustomerService />
         <div className="outForm_pay_ningxia" style={{ height: 680 }}>
           <div className="onForm_pay">
             <div className="outForm_pay_qingdao">
