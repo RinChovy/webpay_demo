@@ -128,7 +128,7 @@ input, button, select, textarea {
 }
 
 .middle_pay_right_org_e {
-  background: rgba(255, 255, 255, 1);
+  /* background: rgba(255, 255, 255, 1); */
 }
 
 .middle_pay_right_org_top {
@@ -190,6 +190,12 @@ input, button, select, textarea {
   padding-left: 13px;
 }
 
+.qrcode_img {
+  position: fixed;
+  right: 10px;
+  bottom: 40%;
+  z-index: 10;
+}
 .box {
   cursor: pointer;
   margin-top: 2px;
@@ -367,7 +373,7 @@ p {
 .row {
   height: 300px;
   text-align: center;
-  background-color: white;
+  /* background-color: white; */
 }
 
 .row_p {

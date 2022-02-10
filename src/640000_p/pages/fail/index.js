@@ -1,13 +1,14 @@
 import React from 'react';
 import { Button } from 'antd';
 import { api } from '../../service/api.js';
+import CustomerService from '../components/customerService';
 
 class fail extends React.Component {
   state = {
     spanPay: '缴款失败',
   };
 
-  componentDidMount() {}
+  componentDidMount() { }
   // 返回
   cencel = () => {
     this.props.history.push({ pathname: '/home', query: '' });
@@ -16,6 +17,7 @@ class fail extends React.Component {
     const { spanPay } = this.state;
     return (
       <div className="body">
+        <CustomerService />
         <div className="outForm_pay_ningxia">
           <div className="onForm_pay">
             <div className="onForm_pay_top">

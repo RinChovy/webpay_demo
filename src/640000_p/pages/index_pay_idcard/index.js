@@ -3,6 +3,7 @@ import { Form, Input, Button, Row, Col, notification, Popover } from 'antd';
 import { queryPayInfoNoCode } from '../../service/services';
 import { api } from '../../service/api';
 import style from '../../public/css/index.css';
+import CustomerService from '../components/customerService';
 
 class Index_pay_idcard extends React.Component {
   state = {
@@ -67,6 +68,7 @@ class Index_pay_idcard extends React.Component {
     });
     return (
       <div className="body">
+        <CustomerService />
         <div className="outForm_pay_ningxia">
           <div className="onForm_pay">
             <div className="onForm_pay_top">

@@ -4,6 +4,7 @@ import { queryPayInfo, getCo } from '../../service/services';
 import { api } from '../../service/api';
 import style from '../../public/css/index.css';
 import Privacy from '../components/privacy';
+import CustomerService from '../components/customerService';
 
 class NonTaxPay extends React.Component {
   formRef = React.createRef();
@@ -150,6 +151,7 @@ class NonTaxPay extends React.Component {
     };
     return (
       <div className="body">
+        <CustomerService />
         <div className="outForm_pay_ningxia">
           <div className="onForm_pay">
             <div className="onForm_pay_top">

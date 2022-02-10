@@ -7,6 +7,7 @@ import {
 } from '../../service/services';
 import { api } from '../../service/api';
 import Privacy from '../components/privacy';
+import CustomerService from '../components/customerService';
 
 class education extends React.Component {
   formRef = React.createRef();
@@ -219,6 +220,7 @@ class education extends React.Component {
     };
     return (
       <div className="body">
+        <CustomerService />
         <div className="outForm_pay_ningxia">
           <div className="onForm_pay">
             <div className="onForm_pay_top">

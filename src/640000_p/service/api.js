@@ -22,6 +22,8 @@ const api = {
   createCashier: base + '/common/createCashier', //收银台接口
   queryPayInfoByIdentityCard: base + '/common/queryPayInfoByIdentityCard.do', //身份证验证列表
   queryPayInfoNoCode: base + '/common/queryPayInfoNoCode.do', //身份证验证列表
+  userIssues: base + '/common/userIssues.do', // 客服接口
+  getPrivacyAuthInfo: base + '/common/getPrivacyAuthInfo.do', //隐私授权接口
 };
 
 export { api };
