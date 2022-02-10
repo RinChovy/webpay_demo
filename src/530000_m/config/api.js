@@ -38,5 +38,6 @@ export default {
   //成功页回调接口_wx
   queryRealTime: `${baseapi}/common/queryRealTime.do`,
   // 玉溪不动产添加电子票查询
-  qeryBill: `https://ipp.epayservice.cn/api/v1/bill/qeryBill`,
+  // qeryBill: `https://ipp.epayservice.cn/api/v1/bill/qeryBill`,
+  qeryBill: `https://ipp.bosssoftcq.com.cn/api/v1/bill/qeryBill`,
 };
