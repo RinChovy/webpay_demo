@@ -88,8 +88,8 @@ const routes = [
 ];
 const router = new VueRouter({
   mode: 'history',
-  base: '/530000_m',
-  // base: '/530000',
+  // base: '/530000_m', //生产
+  base: '/530000', //测试
   routes,
 });
 

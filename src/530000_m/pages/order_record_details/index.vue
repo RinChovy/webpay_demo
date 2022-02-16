@@ -22,13 +22,13 @@
         </div>
       </div>
       <div class="box_nei">
-        <div class="top">
+        <div class="top" v-if="!isMerge">
           <span class="left">缴款码</span>
           <span class="left_two">{{ model.pay_code }}</span>
         </div>
       </div>
       <div class="box_nei">
-        <div class="top">
+        <div class="top" v-if="!isMerge">
           <span class="left">缴款人</span>
           <span class="left_two">{{ model.payer_name }}</span>
         </div>
@@ -58,7 +58,8 @@
           <span class="left_two">{{ model.payment_name }}</span>
         </div>
       </div>
-      <div class="xian">
+      <!-- 非合单 -->
+      <div class="xian" v-if="!isMerge">
         <div class="box_nei">
           <div class="top">
             <!-- <img src="../../public/images/phone/shoufeih.png" /> -->
@@ -66,7 +67,7 @@
           </div>
         </div>
         <div
-          v-if="model.item_name_set != '' && model.item_name_set != null"
+          v-if="model.item_name_set != '' && model.item_name_set != null && model.item_name_set != 'null'"
           class="box_nei"
           style="padding-bottom: 10px"
         >
@@ -78,15 +79,57 @@
 
         <div v-else class="box_nei" style="padding-bottom: 10px">
           <div class="item_box">
-            <span class="left">玉溪不动产缴费</span>
+            <span class="left">教育缴费</span>
             <span class="right">{{ model.fmat }}元</span>
           </div>
         </div>
-      </div>
 
-      <div class="bottomV" v-if="url !== '' && url != null">
-        <div class="div_button">
-          <button @click="einvoice_url">查看电子票据</button>
+        <div class="bottomV" v-if="url !== '' && url != null">
+          <div class="div_button">
+            <button @click="einvoice_url(url)">查看电子票据</button>
+          </div>
+        </div>
+      </div>
+      <!-- 合单 -->
+      <div v-if="isMerge" style="padding-bottom: 10px">
+        <div class="box_nei" style="border-bottom: 3px solid #f3f3f3">
+          <div class="top">
+            <!-- <img src="../../public/images/phone/shoufeih.png" /> -->
+            <span class="left">订单信息</span>
+          </div>
+        </div>
+        <div class="box_nei" v-for="(i, id) in billList" :key="i.noticeNo">
+          <div
+            :style="
+              id == billList.length - 1 && !(i.billUrl !== '' && i.billUrl != null && i.billUrl != 'null')
+                ? ''
+                : 'border-bottom: 1px dashed #f3f3f3'
+            "
+          >
+            <div class="item_box">
+              <span class="left">证件号</span>
+              <span class="right">{{ i.idCard }}</span>
+            </div>
+            <div class="item_box">
+              <span class="left">缴款人</span>
+              <span class="right">{{ i.paymentUnit }}</span>
+            </div>
+
+            <div class="item_box" v-for="(it, index) in i.items" :key="index">
+              <span class="left">{{ it.itemName }}</span>
+              <span class="right">¥{{ it.actualAmt }}元</span>
+            </div>
+          </div>
+
+          <div
+            v-if="i.billUrl !== '' && i.billUrl != null && i.billUrl != 'null'"
+            style="padding: 10px 0px; text-align: right"
+            :style="id == billList.length - 1 ? '' : 'border-bottom: 3px solid #f3f3f3;'"
+          >
+            <button @click="einvoice_url(i.billUrl)" style="border: 1px solid #999; border-radius: 3px">
+              查看电子票据
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -109,6 +152,8 @@ export default {
     return {
       url: '',
       model: JSON.parse(this.$route.params.item), //数据状态
+      isMerge: false, // 非税缴费默认false
+      billList: [],
     }
   },
   mounted() {
@@ -140,7 +185,14 @@ export default {
         }).then((res) => {
           console.log(res, 'res---')
           if (res.code === 1000) {
-            this.url = res.result.billUrl
+            this.isMerge = res.result.isMerge
+            if (res.result.isMerge) {
+              // 合单
+              this.billList = res.result.billList
+            } else {
+              // 非合单
+              this.url = res.result.billUrl
+            }
           }
         })
       }
@@ -158,8 +210,9 @@ export default {
     // }
   },
   methods: {
-    einvoice_url() {
-      window.location.href = this.url
+    einvoice_url(url) {
+      console.log('---====---', url)
+      window.location.href = url
     },
   },
 }

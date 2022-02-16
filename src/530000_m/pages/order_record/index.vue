@@ -16,7 +16,7 @@
         <div @click="details" :data-item="JSON.stringify(k)">
           <div class="box_nei">
             <div class="top">
-              <span class="left" v-if="k.item_name_set != '' && k.item_name_set != null">
+              <span class="left" v-if="k.item_name_set != '' && k.item_name_set != null && k.item_name_set != 'null'">
                 <span class="left_two_ts" v-for="(m, n) in JSON.parse(k.item_name_set)" :key="n">
                   <span>{{ JSON.parse(k.item_name_set)[0].itemName }}...</span>
                 </span>
@@ -24,7 +24,7 @@
 
               <span class="left" v-else>
                 <span class="left_two_ts">
-                  <span>玉溪不动产缴费</span>
+                  <span>教育缴费</span>
                 </span>
               </span>
 
@@ -96,6 +96,7 @@ export default {
     //加载完成执行
     let that = this
     let userId = localStorage.getItem('userId')
+    // let userId = '8540c809963088a1ca0ef00243f9bb9c-wxmini'
     // let userId = '111fe30de8ed4a9c7500664152996605-wxmini'
     if (userId) {
       that.queryRecordList(userId)
