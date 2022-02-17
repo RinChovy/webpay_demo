@@ -126,9 +126,7 @@
             style="padding: 10px 0px; text-align: right"
             :style="id == billList.length - 1 ? '' : 'border-bottom: 3px solid #f3f3f3;'"
           >
-            <button @click="einvoice_url(i.billUrl)" style="border: 1px solid #999; border-radius: 3px">
-              查看电子票据
-            </button>
+            <button @click="einvoice_url(i.billUrl)" class="rightBtn">查看电子票据</button>
           </div>
         </div>
       </div>
@@ -339,6 +337,12 @@ export default {
         border: 1px solid #5380e1;
       }
     }
+  }
+  .rightBtn {
+    border: none;
+    background: white;
+    font-size: 13px;
+    color: #487cdb;
   }
 }
 </style>
