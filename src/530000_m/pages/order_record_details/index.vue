@@ -61,7 +61,7 @@
       <!-- 非合单 -->
       <div class="xian" v-if="!isMerge">
         <div class="box_nei">
-          <div class="top">
+          <div class="top" style="border-top: 1px dashed #f3f3f3">
             <!-- <img src="../../public/images/phone/shoufeih.png" /> -->
             <span class="left">项目信息</span>
           </div>
@@ -303,10 +303,11 @@ export default {
   }
   .xian {
     width: 100%;
-    border-top: 1px dashed #f3f3f3;
+    // border-top: 1px dashed #f3f3f3;
   }
   .bottomV {
-    width: 100%;
+    width: 92%;
+    margin: 0 auto;
     // height: 200px;
     padding-bottom: 20px;
     border-top: 1px dotted #e5e5e5;
@@ -339,9 +340,10 @@ export default {
     }
   }
   .rightBtn {
+    padding-right: 0px;
     border: none;
     background: white;
-    font-size: 13px;
+    font-size: 15px;
     color: #487cdb;
   }
 }
