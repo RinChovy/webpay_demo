@@ -1,5 +1,6 @@
 import React from 'react';
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Button, notification } from 'antd';
+import { createCashier } from '../../service/services';
 import { api } from '../../service/api.js';
 import { Arabia_to_Chinese as money, guid } from 'utils/utils';
 
@@ -35,6 +36,63 @@ class NonTaxPayChange extends React.Component {
   //电子票地址跳转
   einvoiceUrl = () => {
     window.location.href = this.state.einvoice_url;
+  };
+  //收银台逻辑
+  goCashier = () => {
+    const { queryItem } = this.state
+    const query = JSON.parse(localStorage.getItem('data'));
+    const queryJson = query.payBook;
+    let subject = '';
+    queryItem.forEach((v) => {
+      // subject = subject.concat(v.itemName)
+      subject = subject + v.itemName + ','
+    })
+    // 删除subject最后一位
+    subject = subject.slice(0, subject.length - 1)
+    //收银台参数定义
+    const widget_param = {
+      paycode: queryJson.payCode,
+      paymentName: queryJson.payer,
+      regCode: api.region,
+    };
+    const merchant_order_no = guid();
+    const widget_content = {
+      merchant_no: query.merchant_no,
+      merchant_order_no: merchant_order_no,
+      amount: queryJson.totalAmount,
+      effective_time: '1c',
+      version_no: '1.1',
+      subject: subject,
+      device_type: 'pc',
+      widget_param: widget_param,
+    };
+    const charge_param = {
+      payCode: queryJson.payCode,
+      paymentName: queryJson.payer,
+    };
+    createCashier({
+      charge_param: JSON.stringify(charge_param),
+      widget_content: JSON.stringify(widget_content),
+      frontCallBackUrl: api.callback,
+      merchantOrderNo: merchant_order_no,
+    }).then((res) => {
+      res.code === 0 ? this.showCashier(res.msg) : this.handleError(res.msg);
+    });
+  };
+  showCashier = (pageParams) => {
+    document.write(pageParams);
+  };
+  handleError = (err) => {
+    localStorage.removeItem('data');
+    this.openNotificationWithIcon('error', err);
+    //防止重复点击解开按钮限制
+  };
+  // 提示信息方法
+  openNotificationWithIcon = (type, msg) => {
+    notification[type]({
+      message: '查询错误',
+      description: msg,
+    });
   };
   componentDidMount() {
     const query = JSON.parse(localStorage.getItem('data'));
@@ -74,31 +132,6 @@ class NonTaxPayChange extends React.Component {
       status: status,
       einvoice_url: einvoice_url,
     });
-    // 挂件调用
-
-    setTimeout(() => {
-      thirdpay_widget &&
-        thirdpay_widget.init({
-          container: 'widget', //挂件在当前页面放置的控件ID
-          merchant_no: query.merchant_no, //分配的商户号
-          merchant_order_no: guid(), //订单在商户系统中的订单号
-          amount: queryJson.totalAmount, //订单价格，单位：人民币 分
-          effective_time: '1c',
-          device_type: 'pc', //设备类型
-          widget_param: {
-            paycode: payCode,
-            regCode: payCode.substring(0, 6)
-          }, //控件参数，常用来传递缴款服务所需定义的内容，如，非税paycode直缴或传入相关缴费信息生成缴款书
-          charge_url: api.createCharge, //商户服务端创建charge时的controller地址
-          charge_param: {
-            payCode: queryJson.payCode,
-            paymentName: queryJson.payer,
-            regionCode: api.region,
-            frontCallBackUrl: api.callback,
-          }, //(可选，用户自定义参数，若存在自定义参数则会通过 POST 方法透传给 charge_url
-          version_no: '1.1',
-        });
-    }, 100);
   }
   // 页面销毁生命周期
   componentWillUnmount() {
@@ -146,14 +179,16 @@ class NonTaxPayChange extends React.Component {
     // 挂件
     const thirdpay = (
       <div className="bottom_payInfo">
-        <p id="widget"></p>
+        <Button onClick={this.goCashier} className="button_dianzi">
+          去支付
+        </Button>
       </div>
     );
     // 电子票查验地址
     const thirdpayOk =
       einvoice_url != '' && einvoice_url != null ? (
         <div className="bottom_payInfo">
-          <Button onClick={this.einvoiceUrl}>电子票查验</Button>
+          <Button onClick={this.einvoiceUrl} className="button_dianzi">电子票查验</Button>
         </div>
       ) : null;
     // 已交款字段
@@ -273,7 +308,10 @@ class NonTaxPayChange extends React.Component {
                     </table>
                   </div>
                 </div>
-                <div className="middle_pay" style={{ overflow: 'hidden' }}>
+                <div
+                  className="middle_pay_charge"
+                  style={{ overflow: 'hidden' }}
+                >
                   {status == 0 ? thirdpay : thirdpayOk}
                 </div>
               </div>

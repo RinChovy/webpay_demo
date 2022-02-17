@@ -1,8 +1,6 @@
 import React from 'react';
 import { Form, Input, Button, Row, Col, notification, Modal } from 'antd';
-import { queryPenaltyDecisionInfo } from '../../service/services';
-import { api } from '../../service/api';
-import style from '../../public/css/index.css';
+import { queryPenaltyDecisionInfo, getCo } from '../../service/services';
 import Privacy from '../components/privacy';
 
 class NonTaxPay extends React.Component {
@@ -11,12 +9,22 @@ class NonTaxPay extends React.Component {
     spanPayTop: '温馨提示',
     spanPay:
       '处罚决定书编号为执收单位开具的非税收入电子缴款通知书上的16位处罚决定书编号',
-    codeUrl: api.getCo, //验证码
+    codeUrl: '', //验证码
+    uuid: '', //uuid
     loadings: [], //等待时间
     isModalVisible: false, // 遮罩控制
   };
 
-  componentDidMount() { }
+  componentDidMount() {
+    getCo().then((res) => {
+      res.code === 0
+        ? this.setState({
+          codeUrl: 'data:image/gif;base64,' + res.data.img,
+          uuid: res.data.uuid,
+        })
+        : this.handleError(res.msg);
+    });
+  }
   // 提示信息方法
   openNotificationWithIcon = (type, msg) => {
     notification[type]({
@@ -30,10 +38,14 @@ class NonTaxPay extends React.Component {
   };
   // 验证码换一张
   changeImg = () => {
-    const { codeUrl } = this.state;
     const timestamp = new Date().valueOf();
-    this.setState({
-      codeUrl: codeUrl.split('?')[0] + '?timestamp=' + timestamp,
+    getCo({ timestamp: timestamp }).then((res) => {
+      res.code === 0
+        ? this.setState({
+          codeUrl: 'data:image/gif;base64,' + res.data.img,
+          uuid: res.data.uuid,
+        })
+        : this.handleError(res.msg);
     });
   };
   //提交成功
@@ -50,6 +62,7 @@ class NonTaxPay extends React.Component {
     queryPenaltyDecisionInfo({
       payCode: values.payCode,
       code: values.verificationCode,
+      uuid: this.state.uuid,
     }).then((res) => {
       res.code === 0 ? this.handleSuccess(res.data) : this.handleError(res.msg);
     });

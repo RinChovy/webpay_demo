@@ -13,6 +13,17 @@ export async function queryHomelist(params) {
   });
 }
 
+//验证码接口接口
+export async function getCo(params) {
+  return xFetch(api.getCo, {
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      regionCode: api.region,
+    },
+    data: stringify(params),
+  });
+}
 // 非税缴费提交
 export async function queryPayInfo(params) {
   return xFetch(api.queryPayInfo, {
@@ -20,6 +31,7 @@ export async function queryPayInfo(params) {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       regionCode: api.region,
+      codeUId: params.uuid,
     },
     data: stringify(params),
   });
@@ -39,6 +51,18 @@ export async function successs(params) {
 //交罚缴款
 export async function queryPenaltyDecisionInfo(params) {
   return xFetch(api.queryPenaltyDecisionInfo, {
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      regionCode: api.region,
+      codeUId: params.uuid,
+    },
+    data: stringify(params),
+  });
+}
+//收银台接口
+export async function createCashier(params) {
+  return xFetch(api.createCashier, {
     credentials: 'include',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',

@@ -245,3 +245,15 @@ p {
   width: 1440px;
   margin: 15px auto;
 }
+.middle_pay_charge {
+  margin: 0 auto;
+  display: flex;
+}
+.button_dianzi {
+  color: white !important;
+  border: 1px solid #2d5da6 !important;
+  background: #2d5da6 !important;
+  border-radius: 4px !important;
+  width: 157px !important;
+  height: 41px !important;
+}
