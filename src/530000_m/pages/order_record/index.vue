@@ -17,9 +17,10 @@
           <div class="box_nei">
             <div class="top">
               <span class="left" v-if="k.item_name_set != '' && k.item_name_set != null && k.item_name_set != 'null'">
-                <span class="left_two_ts" v-for="(m, n) in JSON.parse(k.item_name_set)" :key="n">
-                  <span>{{ JSON.parse(k.item_name_set)[0].itemName }}...</span>
-                </span>
+                <span v-if="JSON.parse(k.item_name_set).length > 1"
+                  >{{ JSON.parse(k.item_name_set)[0].itemName }}...</span
+                >
+                <span v-else>{{ JSON.parse(k.item_name_set)[0].itemName }}</span>
               </span>
 
               <span class="left" v-else>
