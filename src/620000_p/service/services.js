@@ -1,6 +1,6 @@
 import xFetch from '../../utils/xFetch';
 import request from '../../utils/requestStream';
-import { encrypt } from 'utils/utils';
+import { encrypt } from '@ailjc/aes';
 import { stringify } from 'qs';
 import { api, base } from './api.js';
 
