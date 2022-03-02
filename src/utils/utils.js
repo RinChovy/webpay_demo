@@ -1,5 +1,3 @@
-import CryptoJS from 'crypto-js';
-
 const guid = () => {
   let chars = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
   let res = '';
@@ -39,9 +37,7 @@ const guid = () => {
 const urlredirect = () => {
   const ua = navigator.userAgent.toLowerCase();
   let thisUrl = window.location.href;
-  if (
-    ua.match(/(ipod|iphone os|midp|ucweb|android|windows ce|windows mobile)/i)
-  ) {
+  if (ua.match(/(ipod|iphone os|midp|ucweb|android|windows ce|windows mobile)/i)) {
     window.location.href = thisUrl.replace('_p', '_m');
   }
   window.location.href = thisUrl.replace('_m', '_p');
@@ -49,18 +45,7 @@ const urlredirect = () => {
 
 const Arabia_to_Chinese = money => {
   //汉字的数字
-  var cnNums = new Array(
-    '零',
-    '壹',
-    '贰',
-    '叁',
-    '肆',
-    '伍',
-    '陆',
-    '柒',
-    '捌',
-    '玖'
-  );
+  var cnNums = new Array('零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖');
   //基本单位
   var cnIntRadice = new Array('', '拾', '佰', '仟');
   //对应整数部分扩展单位
@@ -146,29 +131,4 @@ const Arabia_to_Chinese = money => {
   return chineseStr;
 };
 
-/**
- * 前后端加密
- * 秘钥 key, iv 16位需保持一致
- */
-
-const key = CryptoJS.enc.Utf8.parse('Itsniceofyou_Key');
-const iv = CryptoJS.enc.Utf8.parse('Itsniceofyou_KTV');
-// 加密
-const encrypt = pass => {
-  const password = CryptoJS.enc.Utf8.parse(pass);
-  return CryptoJS.AES.encrypt(password, key, {
-    mode: CryptoJS.mode.CBC,
-    iv: iv,
-    padding: CryptoJS.pad.Pkcs7,
-  }).toString();
-};
-// 解密
-const decrypt = pass => {
-  return CryptoJS.AES.decrypt(pass, key, {
-    mode: CryptoJS.mode.CBC,
-    iv: iv,
-    padding: CryptoJS.pad.Pkcs7,
-  }).toString(CryptoJS.enc.Utf8);
-};
-
-export { Arabia_to_Chinese, guid, urlredirect, encrypt, decrypt };
+export { Arabia_to_Chinese, guid, urlredirect };
