@@ -1,0 +1,62 @@
+<extends src="pc.html">
+  <block name="title">湖北统一支付平台</block>
+  <block name="header">
+    <style>
+      .tianjin {
+        padding-top: 70px;
+        min-width: 1400px;
+        width: 100%;
+        height: 250px;
+        background: url(./public/images/background_top.png)no-repeat, url(./public/images/top_else.png);
+        /* background-size: auto 100%; */
+        background-position: center;
+        /* margin-bottom: 5px; */
+      }
+
+      .tianjin div {
+        /* position: absolute; */
+        /* top: 100px; */
+        margin-top: 100px;
+        width: 1200px;
+        margin: 0 auto;
+      }
+
+      #bottom {
+        min-width: 1400px;
+        width: 100%;
+        height: 333px;
+        background: url(./public/images/background_bottom.jpg)no-repeat, #3a3a3a;
+        background-size: auto 100%;
+        background-position: center;
+        /* margin-top: 10px; */
+      }
+
+      .copyRight {
+        width: 100%;
+        height: 140px;
+        background-color: #1a6bc6;
+        overflow: hidden;
+        text-align: center !important;
+        margin: 0 auto !important;
+      }
+
+      .copyRight * {
+        margin: 0 auto !important;
+      }
+    </style>
+  </block>
+  <block name="content">
+    <!-- <div class="tianjin">
+      <div>
+        <img src='./public/images/logo.jpg' />
+      </div>
+    </div> -->
+    <div id="root"></div>
+    <!-- <div id="bottom">
+
+    </div> -->
+  </block>
+  <block name="footer">
+    <script src="./index.js"></script>
+  </block>
+</extends>
