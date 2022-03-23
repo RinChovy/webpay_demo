@@ -17,7 +17,7 @@ if (process.env.NODE_ENV === 'development') {
   // baseURL = 'https://370200.epayservice.cn/webpay_new'; //青岛现场地址
 } else if (process.env.NODE_ENV === 'production') {
   // baseURL = 'https://debug.epayservice.cn/webpay_new';
-  baseURL = 'https://api.epayservice.cn/webpay_new';
+  // baseURL = 'https://api.epayservice.cn/webpay_new';
   // baseURL = 'https://370200.epayservice.cn/webpay_new'; //青岛现场地址
   // baseURL = 'http://192.168.1.120:8091/webpay_new'; //任雪健后台
   // baseURL = 'http://fsjf.czt.guizhou.gov.cn/webpay_new'; //贵州现场地址
@@ -27,6 +27,8 @@ if (process.env.NODE_ENV === 'development') {
   // baseURL = 'https://tyggzf.zwfw.nx.gov.cn:10087'; //宁夏tomcat现场地址 https
   // baseURL = 'https://fssj.czt.jl.gov.cn/webpay_new'; //吉林现场地址
   // baseURL = 'http://192.168.12.128:8080/webpay_new'; //云南现场地址
+  baseURL = 'http://test.epayservice.cn/webpay_new'; //测试test
+
 }
 
 export default baseURL;
