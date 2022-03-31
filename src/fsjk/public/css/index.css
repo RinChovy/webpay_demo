@@ -38,7 +38,7 @@ input, button, select, textarea {
   position: absolute;
   display: flex;
   flex-wrap: wrap;
-  width: 400px;
+  width: 500px;
   left: 190px;
   top: 30px;
 }

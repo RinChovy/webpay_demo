@@ -1,0 +1,135 @@
+<extends src="pc.html">
+  <block name="title">云南统一支付平台</block>
+  <meta name="referrer" content="no-referrer-when-downgrade">
+  <block name="header">
+    <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
+    <style>
+      .banner {
+        min-height: 150px;
+      }
+
+      .carousel-inner {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+      }
+
+      #root {
+        background: url(./public/images/background.jpg);
+        background-size: 100%;
+      }
+    </style>
+  </block>
+  <block name="content">
+    <link href="http://czt.yn.gov.cn/style/reset.css" rel="stylesheet" type="text/css">
+    <link href="http://czt.yn.gov.cn/style/public.css?v=1002019012" rel="stylesheet" type="text/css">
+    <link href="http://czt.yn.gov.cn/modules/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <script src="http://czt.yn.gov.cn/modules/bootstrap/bootstrap.min.js" type="text/javascript"></script>
+    <div id="top">
+      <div class="header d-none d-xl-block">
+        <!-- 高清大图 开始-->
+        <div id="carouselExampleFade" class="carousel slide carousel-fade banner" data-ride="carousel"
+          data-interval="4000">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="http://czt.yn.gov.cn/style/image/header_006.png"
+                data-src="http://czt.yn.gov.cn/style/image/header_006.png" class="d-block w-100 async-img">
+            </div>
+            <div class="carousel-item">
+              <img src="http://czt.yn.gov.cn/style/image/header_005.png"
+                data-src="http://czt.yn.gov.cn/style/image/header_005.png" class="d-block w-100 async-img">
+            </div>
+            <div class="carousel-item">
+              <img src="http://czt.yn.gov.cn/style/image/header_004.png"
+                data-src="http://czt.yn.gov.cn/style/image/header_004.png" class="d-block w-100 async-img">
+            </div>
+            <div class="carousel-item">
+              <img src="http://czt.yn.gov.cn/style/image/header_003.png"
+                data-src=".http://czt.yn.gov.cn/style/image/header_003.png" class="d-block w-100 async-img">
+            </div>
+            <div class="carousel-item">
+              <img src="http://czt.yn.gov.cn/style/image/header_002.png"
+                data-src="http://czt.yn.gov.cn/style/image/header_002.png" class="d-block w-100 async-img">
+            </div>
+            <div class="carousel-item">
+              <img src="http://czt.yn.gov.cn/style/image/header_001.png"
+                data-src="http://czt.yn.gov.cn/style/image/header_001.png" class="d-block w-100 async-img">
+            </div>
+          </div>
+        </div>
+        <!-- 高清大图 结束-->
+      </div>
+      <div class="nav">
+        <div class="nav-wrap wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+          <ul>
+            <li class="nav-item"><a href="http://czt.yn.gov.cn/index.html" title="网站首页">网站首页</a></li>
+            <li class="nav-item"><a id="A02" href="http://czt.yn.gov.cn/about.html" title="机构概况">机构概况</a></li>
+            <li class="nav-item"><a id="A03" href="http://czt.yn.gov.cn/center.html?id=1210116836744146945"
+                title="资讯中心">资讯中心</a>
+            </li>
+            <li class="nav-item"><a id="A05" href="http://czt.yn.gov.cn/zfxxgk.html?id=1229679889177300993"
+                title="政府信息公开">政府信息公开</a>
+            </li>
+            <li><a
+                href="https://zwfw.yn.gov.cn/portal/#/work-service/department-matters?orgCode=530000000000_1153000001510032XA"
+                title="政务服务">政务服务</a></li>
+            <li class="nav-item"><a id="A06" href="http://czt.yn.gov.cn/hudong.html" title="公众互动">公众互动</a></li>
+            <li class="nav-item"><a id="A07" href="http://czt.yn.gov.cn/ztzl.html" title="专题专栏">专题专栏</a></li>
+            <li class="nav-item"><a id="A08" href="http://czt.yn.gov.cn/zaixianfuwu.html" title="在线服务">在线服务</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div id="root"></div>
+    <div id="bottom">
+      <div class="footer_warp">
+
+        <div class="footer">
+          <div class="middle">
+            <div class="col-xl-2 col-12 float-left d-none d-xl-block">
+              <img src="http://czt.yn.gov.cn/style/image/haochaping.jpg" width="200" height="200" class="ff">
+            </div>
+            <div class="col-xl-8 col-12 float-left pt-3">
+              <div style="display: flex; justify-content: center;">
+                <a class="mr-3 mr-xl-5" style="width: 110px;"
+                  href="http://bszs.conac.cn/sitename?method=show&amp;id=0719CD3A1E936B65E053022819AC5AE3">
+                  <img src="http://czt.yn.gov.cn/style/image/dz.png" alt="党政机关">
+                </a>
+                <div>
+                  <p><a href="http://czt.yn.gov.cn/map.html">网站地图</a></p>
+                  <p>主办：云南省财政厅</p>
+                </div>
+
+                <a class="ml-3 ml-xl-5" href="http://czt.yn.gov.cn/zhaocuo/index.html">
+                  <img src="http://czt.yn.gov.cn/style/image/fp1.jpg" alt="云南省政府曝光台">
+                </a>
+                <a class="ml-3 ml-xl-5"
+                  href="https://zfwzgl.www.gov.cn/exposure/jiucuo.html?site_code=5300000033&amp;url=http%3A%2F%2Fwww.yn.gov.cn%2F">
+                  <img src="http://czt.yn.gov.cn/style/image/zfwzzc.png" alt="政府网站找错">
+                </a>
+              </div>
+              <p>办公地点：云南省昆明市五华山省财政厅办公楼 云南省昆明市华山南路130号</p>
+              <p>滇ICP备05003296号-3 网站标识码：5300000015 <a href="#" class="icp">滇公网安备 53010202000668号</a></p>
+              <p>技术支持：云南省财政厅财政数据网络中心</p>
+              <p>运行维护：0871-63627234 会计类业务咨询电话：0871-63957215 政务热线：0871-12345</p>
+              <p>云南省财政厅 版权所有，如需转载，请注明来源</p>
+            </div>
+            <div class="col-xl-2 col-12 float-left pt-3 pt-xl-0 d-none d-xl-block"
+              style="display: flex; flex-direction: column; justify-content: space-between;">
+              <a href="https://zwfw.yn.gov.cn/ynjg/module/duchareport.html">
+                <img src="http://czt.yn.gov.cn/style/image/yns_hlw_jd.png" width="206" height="91">
+              </a>
+              <div>
+                <img src="http://czt.yn.gov.cn/style/image/yncz.png" width="206" height="116" style="margin-top: 10px;">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </block>
+  <block name="footer">
+    <script src="./index.js"></script>
+  </block>
+</extends>

@@ -1,14 +1,6 @@
 <template>
   <div class="mainwrap">
     <div class="headern">
-      <div>
-        <van-search
-          style="opacity: 0.8;"
-          shape="round"
-          background="transparent"
-          placeholder="查找服务"
-        />
-      </div>
       <div class="middle">
         <div class="middle_box">
           <div class="box" @click="indexPay">
@@ -67,9 +59,7 @@ export default {
       });
     },
     indexUrl() {
-      this.$router.push({
-        path: '/index_payEn',
-      });
+      window.location.href = 'http://221.232.224.111:8086/billcheck';
     },
   },
 };
@@ -88,11 +78,11 @@ html {
 .middle {
   width: 100%;
   // height: 236px;
-  margin-top: 156px;
+  padding-top: 195px;
   .middle_box {
     width: 94%;
     background: white;
-    height: 128px;
+    height: 180px;
     margin: 0 auto;
     border-radius: 20px;
     box-shadow: 0px 0px 30px 0px rgba(146, 146, 146, 0.18);
@@ -111,16 +101,16 @@ html {
     .box {
       text-align: center;
       width: 50%;
-      height: 128px;
+      height: 180px;
       div {
-        margin-top: 10px;
+        margin-top: 20px;
       }
       img {
-        margin-top: 15px;
-        width: 62px;
+        margin-top: 20px;
+        width: 92px;
       }
       span {
-        font-size: 14px;
+        font-size: 20px;
         font-family: PingFang SC;
         font-weight: 400;
         color: #464a4c;
@@ -158,7 +148,7 @@ html {
 
 .bottom_span {
   margin-top: 20px;
-  font-size: 12px;
+  font-size: 14px;
   text-align: center;
   color: #999ea0;
 }

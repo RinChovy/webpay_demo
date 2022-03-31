@@ -1,0 +1,469 @@
+input, button, select, textarea {
+  outline: none;
+}
+
+.home_span_warn {
+  position: absolute;
+  bottom: -40px;
+  left: 150px;
+}
+
+.home_top {
+  text-align: center;
+  font-size: 24px;
+  font-family: PingFang SC;
+  font-weight: 500;
+  color: #000000;
+}
+
+.outForm {
+  position: relative;
+  display: flex;
+  width: 1340px;
+  background: #ffffff;
+  height: 600px;
+  margin: 0 auto;
+}
+
+.outForm_pay {
+  position: relative;
+  width: 1440px;
+  /* height: 470px; */
+  margin: 0 auto;
+}
+
+.outForm_left {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.outForm_right {
+  flex: 1;
+}
+
+.onForm {
+  margin: 150px auto 0;
+  display: flex;
+  flex-wrap: wrap;
+  width: 500px
+}
+
+.onForm_top {
+  width: 100%;
+  /* background: linear-gradient(0deg, #f1f1f1 0%, #ffffff 60%); */
+  background: linear-gradient(0deg, #f1f1f1 0%, #ffffff 60%);
+  height: 53px;
+}
+
+.onForm_top div {
+  width: 244px;
+  height: 53px;
+  /* background: url(/public/images/logo_top.png); */
+}
+
+.onForm_pay {
+  margin-left: 4px;
+  width: 100%;
+  height: 600px;
+  background: #ffffff;
+}
+
+.onForm_pay_top {
+  width: 100%;
+  height: 47px;
+}
+
+.onForm_pay_top img {
+  vertical-align: -7%;
+  margin-left: 20px;
+  line-height: 47px;
+}
+
+.onForm_pay_top span {
+  font-size: 18px;
+  font-family: PingFang SC;
+  font-weight: 400;
+  color: #272727;
+  margin-left: 33px;
+  line-height: 47px;
+}
+
+.top_pay {
+  margin-top: 20px;
+  width: 92%;
+  height: 52px;
+  border-bottom: 1px solid #1890ff;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.topSpan_pay {
+  font-size: 22px;
+  color: #1890ff;
+  font-weight: bold;
+}
+
+.middle_pay {
+  margin: 0 auto;
+  display: flex;
+}
+
+.middle_pay_charge {
+  margin: 0 auto;
+  display: flex;
+}
+
+.middle_pay_left {
+  display: inline-block;
+  vertical-align: top;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.middle_pay_right {
+  display: inline-block;
+  vertical-align: top;
+  flex: 1;
+}
+
+.middle_pay_right_org {
+  background: rgba(255, 255, 255, 1);
+  padding-top: 118px;
+}
+
+.middle_pay_right_org_e {
+  background: rgba(255, 255, 255, 1);
+}
+
+.middle_pay_right_org_top {
+  width: 68%;
+  height: 70px;
+  margin: 50px 40px;
+  display: flex;
+}
+
+.img-size {
+  margin-top: 30px;
+  width: 170px;
+}
+
+.img-span {
+  margin-top: 14px;
+  display: block;
+  text-align: center;
+  font-size: 20px;
+  font-family: Microsoft YaHei;
+  font-weight: bold;
+  color: #418bc9;
+}
+
+.img_pay {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.span_pay_top {
+  font-size: 20px;
+  color: #ff9000;
+  font-weight: bold;
+  padding-left: 23px;
+  padding-top: 16px;
+}
+
+.span_pay {
+  font-size: 18px;
+  padding: 20px;
+}
+
+.button_submit {
+  background-color: #ff9900;
+  color: white;
+  width: 170px;
+  height: 40px;
+  font-size: 18px;
+  font-weight: bold;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 8px;
+  border: 0px;
+}
+
+.button_clear {
+  margin-left: 20px;
+  width: 153px;
+  height: 40px;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #FCD423 0%, #FCC31B 100%) !important;
+  color: #ffffff !important;
+  border: 0px solid #ffffff !important;
+}
+
+.verificationCode {
+  width: 100px;
+  height: 37px;
+  margin-left: 18px;
+  margin-top: 2px;
+}
+
+p {
+  margin-bottom: 4px !important;
+}
+
+.middle_payInfo {
+  position: relative;
+  width: 1190px;
+  /* height: 430px; */
+  /* padding-top: 20px; */
+  margin: 0px auto;
+}
+
+.bottom_payInfo {
+  /* border: 1px solid #ccc; */
+  width: 1104px;
+  padding-top: 8px;
+  margin: 10px auto;
+  text-align: right;
+}
+
+.title_t {
+  text-align: center;
+  font-size: 18px;
+}
+
+.title-ti span {
+  font-size: 12px;
+  margin-left: 44px;
+  color: black;
+  text-decoration: none;
+}
+
+.form_f {
+  text-align: center;
+  text-align: -moz-center;
+  text-align: -webkit-center;
+  width: 1105px;
+  height: 340px;
+  margin: 14px auto;
+}
+
+.url_button {
+  width: 148px;
+  height: 36px;
+  border: 1px solid #375ea1;
+  background: white;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: PingFang SC;
+  font-weight: 500;
+  color: #375ea1;
+}
+
+.url_button:nth-child(n+2) {
+  margin-left: 20px;
+}
+
+.url_button_clear {
+  margin-left: 20px;
+  width: 148px;
+  height: 36px;
+  border: 1px solid #375ea1;
+  background: white;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: PingFang SC;
+  font-weight: 500;
+  color: #375ea1;
+}
+
+.row {
+  height: 300px;
+  text-align: center;
+  background-color: white;
+}
+
+.row_p {
+  font-size: 20px;
+  font-family: PingFang SC;
+  font-weight: 500;
+  color: #2d5da6;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.row_w {
+  font-size: 16px;
+  font-family: PingFang SC;
+  font-weight: 400;
+  color: #2d5da6;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.input_icon {
+  width: 40px;
+  height: 40px;
+  margin-left: -12px;
+  background-color: #f1f1f1;
+  border: 1px solid #cecece;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input_icon_2 {
+  background-color: #337ec5;
+  border: 1px solid #337ec5;
+  width: 40px;
+  height: 40px;
+  margin-left: -12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input_icon img {
+  width: 23px;
+  height: 23px;
+}
+
+.input_ningxia {
+  border: 1px solid #cecece !important;
+  height: 40px;
+  border-radius: 0;
+}
+
+.input_ningxia_hover {
+  border: 1px solid #337ec5 !important;
+  height: 40px;
+  border-radius: 0;
+}
+
+.button_ningxia {
+  border-radius: 4px;
+  width: 153px;
+  border: 1px solid #2186DB !important;
+  background: #2186DB !important;
+}
+
+.button_dianzi {
+  color: white !important;
+  border: 1px solid #337ec5 !important;
+  background: #337ec5 !important;
+  border-radius: 4px !important;
+  width: 157px !important;
+  height: 41px !important;
+}
+
+.outForm_pay_ningxia {
+  position: relative;
+  width: 1340px;
+  margin: 0 auto;
+}
+
+.outForm_pay_qingdao {
+  position: relative;
+  width: 100%;
+  background-size: cover;
+  background: white;
+}
+
+.classHover {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  color: #337ec5;
+  border-bottom: 4px solid #337ec5;
+  cursor: pointer;
+}
+
+.middle_box {
+  padding-top: 30px;
+  width: 84%;
+  margin: 0 auto;
+}
+
+.select {
+  border: 1px solid #337ec5 !important;
+}
+
+.ant-select-selector {
+  border: 0 !important;
+}
+
+.box {
+  text-align: center;
+  width: 240px;
+}
+
+.box p {
+  text-align: center;
+  font-size: 26px;
+  font-family: PingFang SC;
+  font-weight: 500;
+  color: #000000;
+}
+
+.qrcode_img {
+  position: fixed;
+  right: 10px;
+  bottom: 40%;
+  z-index: 10;
+}
+.table {
+  width: 95%;
+  margin: 40px auto;
+  background: white;
+}
+/*table样式*/
+
+table.gridtable {
+  width: 100%;
+  font-family: verdana, arial, sans-serif;
+  font-size: 11px;
+  color: #333333;
+  border-width: 1px;
+  border-color: #9b9a9a;
+  border-collapse: collapse;
+}
+
+table.gridtable th {
+  font-size: 14px;
+  text-align: center;
+  border: 1px solid #c9c9c9;
+  padding: 8px;
+  border-style: solid;
+  background-color: #f5faff;
+}
+
+table.gridtable td {
+  font-size: 14px;
+  text-align: center;
+  color: #666666;
+  border: 1px solid #c9c9c9;
+  padding: 8px;
+  border-style: solid;
+}
+
+table span {
+  font-size: 14px;
+  font-family: PingFang SC;
+  color: #0090ff;
+  cursor: pointer;
+}
+
+tr {
+  height: 48px;
+}
+
+p:hover {
+  color: #1E6BCC;
+  cursor: pointer;
+}

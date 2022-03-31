@@ -1,0 +1,42 @@
+﻿/* 时间：2015-10-13
+ * 作者：喻鹏
+ * 描述：初始样式一旦确认任何情况下不可修改
+ */
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td, img {
+	margin: 0;
+	padding: 0;
+}
+body, button, input, select, textarea {
+	font-size: 12px;
+	font-family:"微软雅黑","黑体";
+	color: #333333;
+}
+h1, h2, h3, h4, h5, h6 {
+	font-size: 100%;
+}
+em {
+	font-style:normal;
+}
+ul, ol {
+	list-style: none;
+}
+img {
+	border:0px;
+}
+a {
+	text-decoration: none;
+	color:#333333;
+}
+a:link{ text-decoration:none;}
+a:hover {
+	color:#fb6e52; text-decoration:none;
+}
+.f_l{float: left;}
+.f_r{float: right;}
+.f_c{clear: both;}
+.b_n{border: none;}
+.t_l{text-align: left;}
+.t_c{text-align: center;}
+.t_r{text-align: right;}
+.auto{margin: 0 auto;}
+.clear{ clear:both;}

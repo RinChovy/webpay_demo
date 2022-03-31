@@ -24,14 +24,14 @@ class Home extends React.Component {
       {
         deviceType: 'pc',
         modelPicture: require('../../public/images/kaipiao.jpg'),
-        itemName: '电子票据查询',
+        itemName: '财政票据查询',
         siteCode: 'webpay',
         cityCode: '210000',
         provinceCode: '210000',
         itemCode: '002',
         id: '0002',
         provinceName: '辽宁省',
-        modelUrl: 'index_payEn',
+        modelUrl: 'http://221.232.224.111:8086/billcheck',
         channelCode: '2101002020042801',
       },
     ],
@@ -75,7 +75,7 @@ class Home extends React.Component {
           <div className="onForm_bottom">
             <div className="onForm_left">
               <img
-                style={{ width: 400 }}
+                style={{ width: 500 }}
                 src={require('../../public/images/background_left_image.png')}
               />
             </div>
