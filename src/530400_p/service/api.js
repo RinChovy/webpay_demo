@@ -2,7 +2,7 @@ import base from 'utils/baseURL';
 
 const callback = 'http:/222.172.224.34:18008/success'; //传给后台的回调地址 正式
 
-const region = '530000'; //区划号
+const region = '530400'; //区划号
 
 const regular = /^53\d{18}$/; //非税缴款正则表达式
 
